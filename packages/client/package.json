@@ -14,8 +14,7 @@
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "typescript": "^4.4.3",
-    "web-vitals": "^1.1.2",
-    "@crypto-dev-amigos/common": "*"
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
