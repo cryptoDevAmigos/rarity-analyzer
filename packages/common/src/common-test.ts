@@ -70,11 +70,13 @@ export function calculateRarity(metadata: INftMetadata[]) {
             const count = traitValues.filter(t => t === v).length;
             const ratioIfDefined = count / valuesCount;
             const ratio = count / metadata.length;
+            const ratioScore = 1 / ratio;
             return {
                 valueName,
                 count,
                 ratio,
                 ratioIfDefined,
+                ratioScore,
             }
         });
 
@@ -116,10 +118,14 @@ export function calculateRarity(metadata: INftMetadata[]) {
         })
         
         // attributeRarities.filter(a => a.traitType ===  )
+    })).map(x => ({
+        ...x,
+        rarityScore: x.attributeRarities.reduce((out,a) => { out += a.ratioScore ?? 0; return out; }, 0)
     }));
 
     console.log('calcRarity', { 
         nft: nftRarities[0].nft.id, 
+        rarityScore: nftRarities[0].rarityScore,
         rarities: nftRarities[0].attributeRarities,
     });
 
