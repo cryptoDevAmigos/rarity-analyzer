@@ -39,12 +39,39 @@ export async function getTestData(): Promise<INftMetadata[]> {
     }).ToList();
  ```
  */
-export function calculateRarity(metadata: INftMetadata[]) {
-    const allAttributes = metadata.flatMap(x => x.attributes).filter(x => !!x.value);
+export function calculateRarity(metadataRaw: INftMetadata[], options?: { includeTraitCount?: boolean }) {
+    const { includeTraitCount = true } = options ?? {};
+
+    const metadata = metadataRaw.map(x => ({
+        ...x,
+        attributes: [
+            ...x.attributes, 
+            ...includeTraitCount ? [{ trait_type: 'Trait Count', value: `${x.attributes.length}` }] : [] 
+        ],
+    }));
+
+    const allAttributesRaw = metadata.flatMap(x => x.attributes).filter(x => !!x.value);
 
     // type NftAttribute = INftMetadata['attributes'][number];
-    const allAttributesValuesMap = new Map(allAttributes.map(x=> [x.trait_type, [] as string[]]));
+    const allAttributesValuesMapRaw = new Map(allAttributesRaw.map(x=> [x.trait_type, [] as string[]]));
     // console.log('calcRarity', {allAttributesMap});
+
+    metadata.forEach(x => {
+
+        const traitTypes = [...allAttributesValuesMapRaw.keys()];
+        const missingTraits = traitTypes
+            .filter(a => !x.attributes.some(a2 => a2.trait_type === a))
+            .map(a => ({ trait_type: a, value: '[Missing]' }))
+            ;
+
+        x.attributes = [
+            ...x.attributes,
+            ...missingTraits,
+        ];
+    });
+
+    const allAttributes = metadata.flatMap(x => x.attributes).filter(x => !!x.value);
+    const allAttributesValuesMap = new Map(allAttributes.map(x=> [x.trait_type, [] as string[]]));
 
     allAttributes.forEach(x => {
         const values = allAttributesValuesMap.get(x.trait_type);
