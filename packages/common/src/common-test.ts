@@ -8,9 +8,12 @@ export const testHello = 'Hi!';
  * 
  * https://www.youtube.com/watch?v=O9TNz1-dI-Q
  */
+
+//TODO: Find a way to store ODP data and CP data.  jalil goes over how to get metadata from tokenuri https://www.youtube.com/watch?v=7SUgpK2u-Sk
+
 // C:\gitplay\rarity-analyzer\packages\data\odp-collection.json
 export async function getTestData(): Promise<INftMetadata[]> {
-    const content = await fs.readFile("./data/odp-collection.json", {encoding: 'utf-8' });
+    const content = await fs.readFile("../common/data/odp-collection.json", {encoding: 'utf-8' });
     const data = JSON.parse(content) as INftMetadata[];
     return data;
 };
@@ -39,7 +42,7 @@ export async function getTestData(): Promise<INftMetadata[]> {
     }).ToList();
  ```
  */
-export function calculateRarity(metadataRaw: INftMetadata[], options?: { includeTraitCount?: boolean }) {
+export async function calculateRarity(metadataRaw: INftMetadata[], options?: { includeTraitCount?: boolean }) {
     const { includeTraitCount = true } = options ?? {};
 
     const metadata = metadataRaw.map(x => ({
