@@ -2,6 +2,6 @@
     "name": "@crypto-dev-amigos/workspace",
     "private": true,
     "workspaces": [
-        "./packages/common"
+        "./packages/*"
     ]
 }
