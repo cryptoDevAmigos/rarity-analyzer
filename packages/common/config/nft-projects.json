@@ -1,0 +1,15 @@
+[
+    { 
+        "name": "One Day Punks",
+        "token": "ODP",
+        "contract": "0x5537d90A4A2DC9d9b37BAb49B490cF67D4C54E91",
+        "collectionMetadataFile": "../common/data/odp-collection.json",
+        "collectionRaritiesFile": "../common/data/odp-collection-rarities.json"
+    },{ 
+        "name": "Crypto Punks",
+        "token": "CP",
+        "contract": "0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb",
+        "collectionMetadataFile": "../common/data/odp-collection.json",
+        "collectionRaritiesFile": "../common/data/odp-collection-rarities.json"
+    }
+]
