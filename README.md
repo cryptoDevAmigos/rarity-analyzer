@@ -20,9 +20,9 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
     - Serverless: Precaculated static on Netlify    - 
 - [] The app has to be usable: Minimum requirement is that the rarity of each item in the collection can be queried / viewed
 - [] There must be easy to follow documentation for other developers on how to configure their own collection metadata and deploy it to a server.
-- "One quick note for all contestants - think about how to make the tool as widely usable as possible... Think of config options like "Project Logo / Name / Contract Address" etc." - jalil
-- "makes the data easily queried / viewed in a web interface or via a Discord bot (or both 😅) " -jalil
-- "As a good example of an easy to install and configure package check out this open source discord bot for OpenSea sales: https://github.com/0xEssential/opensea-discord-bot"
+- [] "One quick note for all contestants - think about how to make the tool as widely usable as possible... Think of config options like "Project Logo / Name / Contract Address" etc." - jalil
+- [] "makes the data easily queried / viewed in a web interface or via a Discord bot (or both 😅) " -jalil
+- [] "As a good example of an easy to install and configure package check out this open source discord bot for OpenSea sales: https://github.com/0xEssential/opensea-discord-bot"
 
 ## Serverless (using GitHub actions to pre-calculate rarity)
 
