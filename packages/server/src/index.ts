@@ -1,8 +1,16 @@
 import express from 'express';
-import { calculateRarity, getTestData } from '@crypto-dev-amigos/common';
+//QUESTION: This seems wrong to import all individually.  Also, a developer has no clue if this is a local function/method or not.  Not sure if it should be Common.calculateRarity(). 
+import { calculateRarity, getProjectMetadata, getTestData } from '@crypto-dev-amigos/common';
+import nftProjects from '@crypto-dev-amigos/common/config/nft-projects.json';
+//QUESTION: Not sure how to import all types
+import { INftProjects, INftRarity} from '@crypto-dev-amigos/common/src/types';
 
 const app = express();
 const PORT = 8080;
+const _nftProjects = [] as INftProjects[];
+const _nftProjectsRarities = [];
+
+bootstrapServer();
 
 //TODO: formalize api url like /api/v1/
 app.get('/', (req, res) => res.send('Express + TypeScript Server'));
@@ -12,9 +20,7 @@ app.get('/testNftRarities/', async (req, res) => {
     const data = await getTestData();
     calculateRarity(data).then(
         (nftRarities) => {
-            res.status(200).send(
-                nftRarities
-            );
+            res.status(200).send(nftRarities);
         }
     );    
 });
@@ -29,4 +35,24 @@ app.get('/testNftRarities/', async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
+  console.log(`⚡️[server]: Projects loaded ${_nftProjects.length}`);
 });
+
+function bootstrapServer() {    
+    loadProjects(nftProjects);
+}
+
+function loadProjects(nftProjects: INftProjects[]) {
+    //TODO: Keep duplicates out based on contract
+    nftProjects.forEach(async (project) => {
+        _nftProjects.push(project);
+
+        const data = await getProjectMetadata(project.collectionMetadataFile);
+        calculateRarity(data).then(
+            (nftRarities) => {
+                console.log(`NftRarity added for ${project.name}`)
+                _nftProjectsRarities.push(nftRarities);
+            }
+        );
+    });
+}
