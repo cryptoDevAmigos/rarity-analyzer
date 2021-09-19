@@ -20,7 +20,7 @@ export interface INftProjects {
     collectionRaritiesFile: string
 }
 
-export interface INftRarity{
+export interface INftRarity {
     nft: {
         attributes: {
             trait_type: string;

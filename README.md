@@ -11,3 +11,21 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
 3. Run `npm start` to start the development server.
 
 ## Testing
+
+
+## Tasks
+
+- Frontend
+    - load /tokenId.json files from api
+    - routing /projectKey/tokenId
+        - /project Pages - show list of tokens
+        - /token - show rarity details
+            - image: imageUrl.replace('ipfs://', 'https://gateway.pinata.cloud/ipfs/')
+            - external_url: [same as above]
+            - rarity data:
+                - trait: rarity value
+- Api
+    - Handling metadata requests
+        - routing /projectKey/tokenId
+    - 
+    

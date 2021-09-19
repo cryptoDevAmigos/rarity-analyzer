@@ -3,6 +3,7 @@
     "target": "ES5",
     "downlevelIteration": true,
     "sourceMap": true,
+    "declarationMap": true,
     "declaration": true,
     "lib": [
       "dom",

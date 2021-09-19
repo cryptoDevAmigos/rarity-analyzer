@@ -1,25 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
+import './CssReset.css';
 import './App.css';
-import {testHello} from '@crypto-dev-amigos/common';
+import { NftCard } from './components/nft-card';
+import { nftTestMetadata } from './components/nft-test-metadata';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          {testHello}
+          <NftCard nft={nftTestMetadata}/>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
     </div>
   );
 }

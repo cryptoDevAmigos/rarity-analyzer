@@ -2,9 +2,16 @@
     "name": "@crypto-dev-amigos/workspace",
     "private": true,
     "scripts": {
-        "build": "cwd ./packages/common && npx tsc"
+        "build": "cd ./packages/common && npx tsc",
+        "start": "npm run build && concurrently \"npm run start:client\" \"npm run start:server\"",
+        "start:client": "cd ./packages/client && npm start",
+        "start:server": "cd ./packages/server && npm start",
+        "//": "https://stackoverflow.com/questions/30950032/how-can-i-run-multiple-npm-scripts-in-parallel"
     },
     "workspaces": [
         "./packages/*"
-    ]
+    ],
+    "devDependencies": {
+        "concurrently": "^6.2.1"
+    }
 }
