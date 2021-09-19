@@ -177,5 +177,6 @@ export const nftTestMetadata = {
             "ratioScore": 1.0078613182826044
         }
     ],
-    "rarityScore": 125.04200944938964
+    "rarityScore": 125.04200944938964,
+    "rank": 42
 };

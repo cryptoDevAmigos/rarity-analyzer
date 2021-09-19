@@ -44,4 +44,5 @@ export interface INftRarity {
         ratioScore: number
     }[];
     rarityScore: number;
+    rank: number;
 }[]

@@ -1,9 +1,6 @@
 import express from 'express';
-//QUESTION: This seems wrong to import all individually.  Also, a developer has no clue if this is a local function/method or not.  Not sure if it should be Common.calculateRarity(). 
-import { calculateRarity, getProjectMetadata, getTestData } from '@crypto-dev-amigos/common';
+import { calculateRarity, getProjectMetadata, getTestData, INftProjects, INftRarity } from '@crypto-dev-amigos/common';
 import nftProjects from '@crypto-dev-amigos/common/config/nft-projects.json';
-//QUESTION: Not sure how to import all types
-import { INftProjects, INftRarity} from '@crypto-dev-amigos/common/src/types';
 
 const app = express();
 const PORT = 8080;
