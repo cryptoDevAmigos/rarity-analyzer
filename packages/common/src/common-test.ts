@@ -159,11 +159,11 @@ export async function calculateRarity(metadataRaw: INftMetadata[], options?: { i
         rarityScore: x.attributeRarities.reduce((out,a) => { out += a.ratioScore ?? 0; return out; }, 0)
     })) as INftRarity[];
 
-    // console.log('calcRarity', { 
-    //     nft: nftRarities[0].nft.id, 
-    //     rarityScore: nftRarities[0].rarityScore,
-    //     rarities: nftRarities[0].attributeRarities,
-    // });
+    console.log('calcRarity', { 
+        nft: nftRarities[0].nft.id, 
+        rarityScore: nftRarities[0].rarityScore,
+        rarities: nftRarities[0].attributeRarities,
+    });
 
     return nftRarities;
 } 

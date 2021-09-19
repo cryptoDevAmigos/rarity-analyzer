@@ -1,6 +1,9 @@
 {
     "name": "@crypto-dev-amigos/workspace",
     "private": true,
+    "scripts": {
+        "build": "cwd ./packages/common && npx tsc"
+    },
     "workspaces": [
         "./packages/*"
     ]
