@@ -32,9 +32,17 @@ export const NftCard = ({nft}:{ nft: INftRarity }) => {
                                 <div style={{flex: 1}}>
                                     <span style={x.value !== "[Missing]"?{fontWeight:'bold'}:{}}>{x.value}</span>
                                 </div>
-                                <div style={{flex: 1}}>
-                                    <div style={{position:'absolute'}}></div>
-                                    {`${(100 * x.ratio).toFixed(2)}%`}
+                                <div style={{flex: 1, position:'relative'}}>
+                                    <div className='bar-background' style={{
+                                        position:'absolute',
+                                        zIndex: 0,
+                                        width: `${(100 * x.ratio).toFixed(0)}%`,
+                                        height: '100%',
+                                        }}>
+                                    </div>
+                                    <div style={{color:'#FFFFFF', position:'relative', zIndex: 10}}>
+                                        {`${(100 * x.ratio).toFixed(2)}%`}
+                                    </div>
                                 </div>
                                 <div style={{flex: 1}}>{`${x.ratioScore.toFixed(2)}`}</div>                                
                             </div>

@@ -1,13 +1,23 @@
+:root {
+  --pink: #FF00AE;
+  --blue: #0062F9;
+}
+
 body {
   background-color: black;
-  color: #0062F9;
+  color: var(--blue);
 }
 span, div {
   font-family: 'Space Mono', monospace;
 }
 
+.bar-background {
+  background: var(--pink);
+  opacity: 0.5;
+}
+
 a {
-  color: #FF00AE;
+  color: var(--pink);
 }
 
 a:hover {
@@ -23,7 +33,7 @@ a:hover {
   margin: 16px;
   padding: 4;
   width: 300px;
-  border: 8px solid #FF00AE;
-  box-shadow: 5px 5px 0px #0062F9;
+  border: 8px solid var(--pink);
+  box-shadow: 5px 5px 0px var(--blue);
   /* box-shadow: 10px 5px 5px red; */
 }
