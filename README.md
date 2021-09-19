@@ -14,11 +14,10 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
 
 ## Requirements
 
-- [] Only OneDayPunk owners may participate in the hackathon
-- [] The app has to calculate a rarity score for each item in the given collection
+- [x] Only OneDayPunk owners may participate in the hackathon
+- [x] The app has to calculate a rarity score for each item in the given collection
 - [] The app has to be deployed on a live server (Heroku free tier or similar is fine)
-    - Serverless: Precaculated static on Netlify
-    - 
+    - Serverless: Precaculated static on Netlify    - 
 - [] The app has to be usable: Minimum requirement is that the rarity of each item in the collection can be queried / viewed
 - [] There must be easy to follow documentation for other developers on how to configure their own collection metadata and deploy it to a server.
 - "One quick note for all contestants - think about how to make the tool as widely usable as possible... Think of config options like "Project Logo / Name / Contract Address" etc." - jalil
@@ -28,7 +27,7 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
 ## Serverless (using GitHub actions to pre-calculate rarity)
 
 - Host website on Netlify (with continuous deploy from repo folder '/web/')
-- GitHub acations
+- GitHub actions
 - root of repo: /data/nft-projects-metadata/
 - To submit a new project, github PR to add a new .json to that folder
     - projectName-nfts.json
