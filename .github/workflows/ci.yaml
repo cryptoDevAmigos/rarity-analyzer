@@ -13,9 +13,6 @@ jobs:
       run: npm run build:rarities
     - name: Commit if changes
       run: |
-        # Check for changes & exit with success if none
-        git ls-files --modified
-
         if [[ `git status --porcelain` ]]; then
           # Changes
           echo "Commiting Changes"
