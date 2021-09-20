@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { INftProjectRarityDocument, INftRarity, MISSING_ATTRIBUTE_VALUE as MISSING_ATTRIBUTE_VALUE_TYPE } from '@crypto-dev-amigos/common';
 import { NftCard } from './nft-card';
 import { LazyList } from './lazy-list';
@@ -73,9 +73,11 @@ const loadProjectRarityData = (doc: INftProjectRarityDocument): INftProjectRarit
 export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, projectRarity:INftProjectRarityData}) => {
 
     const [tokenIds, setTokenIds] = useState(projectRarity.tokenIdsByRank);
+    const nftListRef = useRef(null as null | HTMLDivElement)
 
     const onSelect = (args: { traitType: string, value: string, tokens: number[] }) => {
         setTokenIds(args.tokens);
+        nftListRef.current?.scrollIntoView({behavior:'smooth'});
     };
 
     return (
@@ -83,7 +85,7 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
             <div>
                 <TraitTypesList projectRarity={projectRarity} onSelect={onSelect}/>
             </div>
-            <div className='nft-list'>
+            <div className='nft-list' ref={nftListRef}>
                 {projectRarity && (
                     <LazyList items={tokenIds} getItemKey={x=>`${x}`} ItemComponent={({item})=>(
                         <div onClick={()=>window.location.href=`${projectKey}/${item}`}>
