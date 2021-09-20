@@ -10,6 +10,11 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
 
 3. Run `npm start` to start the development server.
 
+### Notes
+
+- When debugging react make sure to copy `web/data` to `packages/client/public/data`
+
+
 ## Testing
 
 ## Requirements
@@ -59,3 +64,9 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
         - routing /projectKey/tokenId
     - 
     
+
+- [ ] Github action to build:rarities
+- [ ] Copy files from react/build to web in build script
+- [ ] Finish Web UI
+- [ ] Fix build path for common web/build
+

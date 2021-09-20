@@ -39,8 +39,8 @@ const run = async () => {
     const data = await generateRarityFiles({
         dataDirName:'../../data/',
         // For debug output to react folder
-        outDirName:'../../packages/client/build/data/',
-        // outDirName:'../../web/data/',
+        // outDirName:'../../packages/client/build/data/',
+        outDirName:'../../web/data/',
     });
 };
 run();
