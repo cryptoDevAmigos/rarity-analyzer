@@ -1,41 +1,76 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { delay } from '../helpers/delay';
+
+const debug_timeStart = Date.now();
+const globalRelayoutCallbacks = [] as (null | (()=>void))[];
+let activeNotifyRelayoutId = 0;
+const notifyRelayout = async () => {
+    // Cancellable
+    activeNotifyRelayoutId++;
+    let notifyRelayoutId = activeNotifyRelayoutId;
+    await delay(100);
+    
+    let i = 0;
+    while( i < globalRelayoutCallbacks.length 
+        && notifyRelayoutId === activeNotifyRelayoutId
+    ){
+        const callback = globalRelayoutCallbacks[i];
+        if(callback){
+            callback();
+            await delay(25);
+        }
+        i++;
+    }
+};
+window.addEventListener('scroll', notifyRelayout);
 
 export const LazyComponent = ({ 
     children,
 }:{ 
-    children: ReactNode
+    children: ReactNode,
  })=>{
 
     const placeholderRef = useRef(null as null | HTMLDivElement);
     const [shouldLoad, setShouldLoad] = useState(false);
+    const isDoneRef = useRef(false);
 
     useEffect(()=>{
+      
         const loadIfVisible = () => {
             if( !placeholderRef.current ){ return; }
+            if( isDoneRef.current ){return;}
 
             const div = placeholderRef.current;
             const divRect = div.getBoundingClientRect();
             const screenBottom = window.scrollY + window.innerHeight;
             const isOnScreen = divRect.top < screenBottom;
 
-            console.log(`isOnScreen`,{ divRect, screenBottom, isOnScreen });
-
             if(!isOnScreen){ return; }
-
-            // Load image
+            console.log(`isOnScreen`,{ time: Date.now() - debug_timeStart, iRelayout, divRect, screenBottom, isOnScreen });
+            
+            isDoneRef.current = true;
+            unsub();
             setShouldLoad(true);
-            window.removeEventListener('scroll',loadIfVisible);
+            notifyRelayout();
         };
 
-        window.addEventListener('scroll', loadIfVisible);
-        loadIfVisible();
+        const iRelayout = globalRelayoutCallbacks.length;
+        globalRelayoutCallbacks.push(loadIfVisible);
+        const unsub = ()=>{
+            globalRelayoutCallbacks[iRelayout] = null;
+        };
 
-        return () => window.removeEventListener('scroll',loadIfVisible);
+        notifyRelayout();
+
+        return () => {
+            isDoneRef.current = true;
+            unsub();
+        };
     },[]);
 
     return (
         <>  
-            {!shouldLoad && <div ref={placeholderRef}/>}
+            {!shouldLoad && <div ref={placeholderRef} style={{minWidth: 1000, minHeight: 1000}}/>}
             {shouldLoad && children}
         </>
     );

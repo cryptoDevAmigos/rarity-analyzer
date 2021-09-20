@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { INftRarityDocument } from '@crypto-dev-amigos/common';
-import { NftCard } from './nft-card';
+import { NftCard, NftCardPlaceholder } from './nft-card';
 import { getNftJsonUrl } from '../helpers/urls';
 
 export const NftLoader = ({ projectKey, tokenId }:{ projectKey:string, tokenId:string })=>{
@@ -19,6 +19,7 @@ export const NftLoader = ({ projectKey, tokenId }:{ projectKey:string, tokenId:s
 
     return (
         <>
+            {!nft && <NftCardPlaceholder />}
             {nft && <NftCard nft={nft}/>}
         </>
     );

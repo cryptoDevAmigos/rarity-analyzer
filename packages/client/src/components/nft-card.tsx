@@ -3,6 +3,15 @@ import { INftRarity } from '@crypto-dev-amigos/common';
 import { LazyComponent } from './lazy-component';
 import { getIpfsUrl } from '../helpers/urls';
 
+export const NftCardPlaceholder = (props:{})=>{
+    return (
+        <>
+            <div className={'nft-card'}>
+                <div style={{height: 300}}>Loading...</div>
+            </div>
+        </>
+    );
+}
 
 export const NftCard = ({nft}:{ nft: INftRarity }) => {
 

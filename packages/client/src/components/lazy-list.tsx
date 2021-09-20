@@ -14,7 +14,7 @@ export const LazyList = <T extends {}>({
     return (
         <>
             {items.map(x=>(
-                <LazyComponent key={getItemKey(x)} >
+                <LazyComponent key={getItemKey(x)}>
                     <ItemComponent item={x}/>
                 </LazyComponent>
             ))}
