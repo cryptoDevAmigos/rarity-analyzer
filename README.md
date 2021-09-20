@@ -65,7 +65,7 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
     - 
     
 
-- [ ] Github action to build:rarities
+- [x] Github action to build:rarities
 - [ ] Copy files from react/build to web in build script
 - [ ] Finish Web UI
 - [ ] Fix build path for common web/build

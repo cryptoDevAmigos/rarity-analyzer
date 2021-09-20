@@ -4,7 +4,7 @@
     "scripts": {
         "build": "npm run build:common && npm run build:client",
         "build:common": "cd ./packages/common && npx tsc",
-        "build:client": "cd ./packages/client && npm run build",
+        "build:client": "cd ./packages/client && npm run build && copyfiles -u 3 ./packages/client/build/**/* ./web",
         "build:rarities": "cd ./packages/common && npm run build:rarities",
         "build:output": "// copy react site & // generate nft rarity files",
         "test": "cd ./packages/common && npm run test",
@@ -17,6 +17,7 @@
         "./packages/*"
     ],
     "devDependencies": {
-        "concurrently": "^6.2.1"
+        "concurrently": "^6.2.1",
+        "copyfiles": "^2.4.1"
     }
 }
