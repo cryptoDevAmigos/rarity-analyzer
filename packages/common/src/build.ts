@@ -24,11 +24,11 @@ export async function generateRarityFiles({
 
             await fs.mkdir(path.join(outDirName, projectName), { recursive: true });
             
-            // Skip if not changed
-            const projectInputChangeTimeMs = (await fs.stat(fullProjectFileName)).ctimeMs;
-            const tokensInputChangeTimeMs = (await fs.stat(fullNftListFileName)).ctimeMs;
+            // Skip if not changed (use size instead of change time)
+            const projectInputFileSize = (await fs.stat(fullProjectFileName)).size;
+            const tokensInputFileSize = (await fs.stat(fullNftListFileName)).size;
 
-            const changehash = `${projectInputChangeTimeMs}${tokensInputChangeTimeMs}`
+            const changehash = `${projectInputFileSize}:${tokensInputFileSize}`
             const fullLastChangeHashFileName = path.join(outDirName, projectName, '.lastchangehash');
 
             try{
