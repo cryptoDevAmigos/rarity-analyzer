@@ -1,5 +1,4 @@
-import { INftMetadata, INftRarity } from "./types";
-import { promises as fs } from 'fs';
+import { INftMetadata, INftRarity, MISSING_ATTRIBUTE_VALUE } from "./types";
 
 /**
  * # Markdown!
@@ -54,7 +53,7 @@ export function calculateRarity(metadataRaw: INftMetadata[], options?: { include
         const traitTypes = [...allAttributesValuesMapRaw.keys()];
         const missingTraits = traitTypes
             .filter(a => !x.attributes.some(a2 => a2.trait_type === a))
-            .map(a => ({ trait_type: a, value: '[Missing]' }))
+            .map(a => ({ trait_type: a, value: MISSING_ATTRIBUTE_VALUE }))
             ;
 
         x.attributes = [
