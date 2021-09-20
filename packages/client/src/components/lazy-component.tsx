@@ -1,7 +1,29 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { delay } from '../helpers/delay';
 
-let nextLazyComponentId = 0;
+const debug_timeStart = Date.now();
+const globalRelayoutCallbacks = [] as (null | (()=>boolean))[];
+let activeNotifyRelayoutId = 0;
+const notifyRelayout = async () => {
+    // Cancellable
+    activeNotifyRelayoutId++;
+    let notifyRelayoutId = activeNotifyRelayoutId;
+    await delay(100);
+    
+    let i = 0;
+    while( i < globalRelayoutCallbacks.length 
+        && notifyRelayoutId === activeNotifyRelayoutId
+    ){
+        const callback = globalRelayoutCallbacks[i];
+        if(callback && callback()){
+            await delay(25);
+        }
+        i++;
+    }
+};
+window.addEventListener('scroll', notifyRelayout);
+const observer = new IntersectionObserver(notifyRelayout);
+
 export const LazyComponent = ({ 
     children,
 }:{ 
@@ -14,42 +36,38 @@ export const LazyComponent = ({
 
     useEffect(() => {
         if( !placeholderRef.current ){ return; }
-
-        const lazyComponentId = nextLazyComponentId++;
+        const placeholder = placeholderRef.current;
       
-        const loadComponent = () => {
-            if( !placeholderRef.current ){ return; }
-            if( isDoneRef.current ){return;}
+        const loadIfVisible = () => {
+            if( !placeholderRef.current ){ return false; }
+            if( isDoneRef.current ){return false;}
 
-            console.log(`loadComponent`, {lazyComponentId});
+            const divRect = placeholder.getBoundingClientRect();
+            const screenBottom = window.scrollY + window.innerHeight;
+            const isOnScreen = divRect.top < screenBottom;
+
+            if(!isOnScreen){ return false; }
+            console.log(`isOnScreen`,{ time: Date.now() - debug_timeStart, iRelayout, divRect, screenBottom, isOnScreen });
             
             isDoneRef.current = true;
+            unsub();
             setShouldLoad(true);
+            notifyRelayout();
+
+            return true;
         };
 
-
-        setTimeout(()=>{
-            if( !placeholderRef.current ){ return; }
-
-            const placeholder = placeholderRef.current;
-            const observer = new IntersectionObserver((entries, observer)=>{
-                if( !placeholderRef.current ){ 
-                    observer.unobserve(placeholder);
-                    return;
-                }
-
-                if(entries.some(x=>x.isIntersecting)){
-                    loadComponent();
-                    observer.unobserve(placeholder);
-                }
-            },{
-                threshold: 0.1,
-            });
-            observer.observe(placeholderRef.current);
-        }, 100);
+        const iRelayout = globalRelayoutCallbacks.length;
+        globalRelayoutCallbacks.push(loadIfVisible);
+        observer.observe(placeholder);
+        const unsub = ()=>{
+            globalRelayoutCallbacks[iRelayout] = null;
+            observer.unobserve(placeholder);
+        };
 
         return () => {
             isDoneRef.current = true;
+            unsub();
         };
     },[]);
 
