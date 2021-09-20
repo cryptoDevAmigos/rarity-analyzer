@@ -1,6 +1,6 @@
 import React from 'react';
 import { INftRarity } from '@crypto-dev-amigos/common';
-import { LazyImage } from './lazy-image';
+import { LazyComponent } from './lazy-component';
 
 const getNftUrl = (nftUrl:string) => nftUrl.replace('ipfs://', 'https://gateway.pinata.cloud/ipfs/');
 
@@ -17,7 +17,9 @@ export const NftCard = ({nft}:{ nft: INftRarity }) => {
                 </div>
 
                 <div className={'nft-card-image'}>
-                    <LazyImage alt='nft' src={getNftUrl(nft.nft.image)}/>
+                    <LazyComponent>
+                        <img alt='nft' src={getNftUrl(nft.nft.image)}/>
+                    </LazyComponent>
                 </div>
                 <div>
                     <div style={{ display:'flex', flexDirection:'row', fontSize:`0.8em`, color: 'white' }}>

@@ -1,9 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
-export const LazyImage = ({ src, alt }:{ src:string, alt:string })=>{
+export const LazyComponent = ({ 
+    children,
+}:{ 
+    children: ReactNode
+ })=>{
 
     const placeholderRef = useRef(null as null | HTMLDivElement);
-    const [imageSource, setImageSource] = useState(null as null | string);
+    const [shouldLoad, setShouldLoad] = useState(false);
 
     useEffect(()=>{
         const loadIfVisible = () => {
@@ -19,7 +23,7 @@ export const LazyImage = ({ src, alt }:{ src:string, alt:string })=>{
             if(!isOnScreen){ return; }
 
             // Load image
-            setImageSource(src);
+            setShouldLoad(true);
             window.removeEventListener('scroll',loadIfVisible);
         };
 
@@ -27,14 +31,12 @@ export const LazyImage = ({ src, alt }:{ src:string, alt:string })=>{
         loadIfVisible();
 
         return () => window.removeEventListener('scroll',loadIfVisible);
-    },[src]);
+    },[]);
 
     return (
         <>  
-            {!imageSource && <div ref={placeholderRef}/>}
-            {imageSource && (
-                <img alt={alt} src={imageSource}/>
-            )}
+            {!shouldLoad && <div ref={placeholderRef}/>}
+            {shouldLoad && children}
         </>
     );
 };

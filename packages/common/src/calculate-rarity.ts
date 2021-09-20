@@ -86,16 +86,16 @@ export function calculateRarity(metadataRaw: INftMetadata[], options?: { include
         const distinctCount = traitDistinctValues.length;
         const valueRarities = traitDistinctValues.map(v => {
             // i.e. Smile (value of Emotion)
-            const valueName = v;
+            const value = v;
             const count = traitValues.filter(t => t === v).length;
-            const ratioIfDefined = count / valuesCount;
+            // const ratioIfDefined = count / valuesCount;
             const ratio = count / metadata.length;
             const ratioScore = 1 / ratio;
             return {
-                valueName,
+                value,
                 count,
                 ratio,
-                ratioIfDefined,
+                // ratioIfDefined,
                 ratioScore,
             }
         });
@@ -130,7 +130,7 @@ export function calculateRarity(metadataRaw: INftMetadata[], options?: { include
         nft: x,
         attributeRarities: x.attributes.map(a => { 
             const traitRarity = attributeRarities.find(r => r.traitType === a.trait_type);
-            const valueRarity = traitRarity?.valueRarities.find(v=>v.valueName === a.value);
+            const valueRarity = traitRarity?.valueRarities.find(v=>v.value === a.value);
             if(!valueRarity){
                 return null;
             }

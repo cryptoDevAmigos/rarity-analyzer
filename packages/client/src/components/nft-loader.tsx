@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { INftRarity } from '@crypto-dev-amigos/common';
+import { INftRarityDocument } from '@crypto-dev-amigos/common';
 import { NftCard } from './nft-card';
 
 export const NftLoader = ({ nftUrl }:{ nftUrl:string })=>{
 
-    const [nft, setNft] = useState(null as null | INftRarity);
+    const [nft, setNft] = useState(null as null | INftRarityDocument);
 
     useEffect(() => {
         (async () => {
             console.log(nftUrl, {nftUrl});
             const result = await fetch(nftUrl);
-            const obj = await result.json() as INftRarity;
+            const obj = await result.json() as INftRarityDocument;
             setNft(obj);
         })();
     }, [nftUrl]);

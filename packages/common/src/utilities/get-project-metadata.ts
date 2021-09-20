@@ -1,8 +1,8 @@
-import { INftMetadata, INftRarity } from "../types";
+import { INftMetadataCollectionDocument } from "../types";
 import { promises as fs } from 'fs';
 
-export async function getProjectMetadata(location : string): Promise<INftMetadata[]> {
+export async function getProjectMetadata(location : string): Promise<INftMetadataCollectionDocument> {
     const content = await fs.readFile(location, {encoding: 'utf-8' });
-    const data = JSON.parse(content) as INftMetadata[];
+    const data = JSON.parse(content) as INftMetadataCollectionDocument;
     return data;
 };
