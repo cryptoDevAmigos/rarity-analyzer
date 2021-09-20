@@ -33,11 +33,14 @@ a:hover {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .nft-card {
   margin: 16px;
   padding: 4;
+  min-width: 240px;
+  max-width: 360px;
   width: calc(100% - 32px);
   border: 8px solid var(--pink);
   box-shadow: 5px 5px 0px var(--blue);

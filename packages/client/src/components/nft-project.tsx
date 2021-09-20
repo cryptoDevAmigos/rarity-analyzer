@@ -29,12 +29,13 @@ return (
 export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, projectRarity:INftProjectRarityDocument}) => {
     return (
         <>
-        
-            {projectRarity && (
-                <LazyList items={projectRarity.tokens} getItemKey={x=>`${x.tokenId}`} ItemComponent={({item})=>(
-                    <NftLoader projectKey={projectKey} tokenId={`${item.tokenId}`} />
-                )}/>
-            )}
+            <div className='nft-list'>
+                {projectRarity && (
+                    <LazyList items={projectRarity.tokens} getItemKey={x=>`${x.tokenId}`} ItemComponent={({item})=>(
+                        <NftLoader projectKey={projectKey} tokenId={`${item.tokenId}`} />
+                    )}/>
+                )}
+            </div>
         </>
     );
 };
