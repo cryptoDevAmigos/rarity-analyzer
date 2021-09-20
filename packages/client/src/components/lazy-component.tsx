@@ -28,25 +28,23 @@ export const LazyComponent = ({
         };
 
 
-        setTimeout(()=>{
-            if( !placeholderRef.current ){ return; }
+        if( !placeholderRef.current ){ return; }
 
-            const placeholder = placeholderRef.current;
-            const observer = new IntersectionObserver((entries, observer)=>{
-                if( !placeholderRef.current ){ 
-                    observer.unobserve(placeholder);
-                    return;
-                }
+        const placeholder = placeholderRef.current;
+        const observer = new IntersectionObserver((entries, observer)=>{
+            if( !placeholderRef.current ){ 
+                observer.unobserve(placeholder);
+                return;
+            }
 
-                if(entries.some(x=>x.isIntersecting)){
-                    loadComponent();
-                    observer.unobserve(placeholder);
-                }
-            },{
-                threshold: 0.1,
-            });
-            observer.observe(placeholderRef.current);
-        }, 100);
+            if(entries.some(x=>x.isIntersecting)){
+                loadComponent();
+                observer.unobserve(placeholder);
+            }
+        },{
+            threshold: 0.1,
+        });
+        observer.observe(placeholderRef.current);
 
         return () => {
             isDoneRef.current = true;
