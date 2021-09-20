@@ -11,13 +11,15 @@ jobs:
       run: cd packages/common && npm install
     - name: Build Rarities
       run: npm run build:rarities
-    - name: setup git config
+    - name: commit changes
       run: |
         # setup the username and email. 'GitHub Actions Bot' with no email
         git config user.name "GitHub Actions Bot"
         git config user.email "<>"
-    - name: commit
-      run: |
+
+        # Check for changes & exit with success if none
+        git ls-files --modified || exit 0
+
         # Stage the file, commit and push
         git add -A
         git commit -m "add build output"
