@@ -2,6 +2,7 @@ import React from 'react';
 import { INftRarity } from '@crypto-dev-amigos/common';
 import { LazyComponent } from './lazy-component';
 import { getIpfsUrl } from '../helpers/urls';
+import { BarGraphCell } from './bar-graph';
 
 export const NftCardPlaceholder = (props:{})=>{
     return (
@@ -44,17 +45,8 @@ export const NftCard = ({nft}:{ nft: INftRarity }) => {
                                 <div style={{flex: 1}}>
                                     <span style={x.value !== "[Missing]"?{fontWeight:'bold'}:{}}>{x.value}</span>
                                 </div>
-                                <div style={{flex: 1, position:'relative'}}>
-                                    <div className='bar-background' style={{
-                                        position:'absolute',
-                                        zIndex: 0,
-                                        width: `${(100 * x.ratio).toFixed(0)}%`,
-                                        height: '100%',
-                                        }}>
-                                    </div>
-                                    <div style={{color:'#FFFFFF', position:'relative', zIndex: 10}}>
-                                        {`${(100 * x.ratio).toFixed(2)}%`}
-                                    </div>
+                                <div style={{flex: 1}}>
+                                    <BarGraphCell ratio={x.ratio} />
                                 </div>
                                 <div style={{flex: 1}}>{`${x.ratioScore.toFixed(2)}`}</div>                                
                             </div>

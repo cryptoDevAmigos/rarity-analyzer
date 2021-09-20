@@ -4,6 +4,7 @@ import { NftCard } from './nft-card';
 import { LazyList } from './lazy-list';
 import { NftLoader } from './nft-loader';
 import { getNftJsonUrl, getProjectJsonUrl } from '../helpers/urls';
+import { BarGraphCell } from './bar-graph';
 
 // Workaround for importing implementation
 const MISSING_ATTRIBUTE_VALUE: typeof MISSING_ATTRIBUTE_VALUE_TYPE = `[Missing]`;
@@ -34,7 +35,9 @@ return (
 
 type INftProjectRarityData = {
     tokenIdsByRank: INftProjectRarityDocument['tokenIdsByRank']
-    tokenLookups: INftProjectRarityDocument['tokenLookups'],
+    tokenLookups: (INftProjectRarityDocument['tokenLookups'][number] & {
+        ratio: number;
+    })[],
     traitTypes: string[];
 };
 const loadProjectRarityData = (doc: INftProjectRarityDocument): INftProjectRarityData => {
@@ -65,7 +68,10 @@ const loadProjectRarityData = (doc: INftProjectRarityDocument): INftProjectRarit
 
     return {
         tokenIdsByRank: doc.tokenIdsByRank,
-        tokenLookups: doc.tokenLookups,
+        tokenLookups: doc.tokenLookups.map(x=>({
+            ...x,
+            ratio: x.tokenIds.length / doc.tokenIdsByRank.length,
+        })),
         traitTypes,
     };
 };
@@ -124,9 +130,7 @@ export const TraitValuesList = ({ traitType, projectRarity, onSelect }:{ traitTy
                 {traitTypeTokenLookups.map(x=>(
                     <React.Fragment key={`${x.trait_type}:${x.trait_value}`}>
                         <div className='nft-trait-value' onClick={()=>onSelect({traitType: x.trait_type, value: x.trait_value, tokens: x.tokenIds})}>
-                            <div>
-                                {x.trait_value}
-                            </div>
+                            <BarGraphCell ratio={x.ratio} text={x.trait_value}/>
                         </div>
                     </React.Fragment>
                 ))}

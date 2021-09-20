@@ -84,8 +84,7 @@ a:hover {
 
 .nft-trait-values {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .nft-trait-value {
