@@ -30,18 +30,24 @@ a:hover {
 }
 
 .nft-list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-gap: 1em 1em;
+  grid-auto-flow: row dense;
+}
+
+.nft-container-single {
+  margin:auto;
+  max-width: 400px;
 }
 
 .nft-card {
   margin: 16px;
   padding: 4;
   min-width: 240px;
-  max-width: 360px;
+  min-height: 240px;
   width: calc(100% - 32px);
+  height: calc(100% - 32px);
   border: 8px solid var(--pink);
   box-shadow: 5px 5px 0px var(--blue);
   /* box-shadow: 10px 5px 5px red; */

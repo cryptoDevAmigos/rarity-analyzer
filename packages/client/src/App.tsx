@@ -16,7 +16,7 @@ function App() {
   if(projectKey && tokenId){
     return (
       <div className="App">
-        <div className='nft-list'>
+        <div className='nft-container-single'>
           <NftLoader projectKey={projectKey} tokenId={tokenId}/>
         </div>
       </div>
