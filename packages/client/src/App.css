@@ -67,3 +67,30 @@ a:hover {
   width: 150px;
   height: 150px;
 }
+
+
+
+.nft-trait-types {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-gap: 1em 1em;
+  grid-auto-flow: row dense;
+}
+
+.nft-trait-type {
+  margin: 8px;
+  border: 8px solid var(--blue);
+}
+
+.nft-trait-values {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.nft-trait-value {
+  padding: 4px;
+}
+.nft-trait-value:hover {
+  color: white;
+}

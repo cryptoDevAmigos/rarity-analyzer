@@ -26,18 +26,22 @@ export const LazyList = <T extends {}>({
         if(index + NEAR_END_COUNT < loadCount){ return; }
 
         // Load more
-        console.log('# LazyList: loadMore', {loadCount});
+        // console.log('# LazyList: loadMore', {loadCount});
         setLoadCount(s=> s + PAGE_SIZE);
     }
 
     const itemsLoaded = items.slice(0, loadCount);
 
+    
+    // console.log('LazyList RENDER', {itemsLength: items.length, loadedLength: itemsLoaded.length});
     return (
         <>
             {itemsLoaded.map((x,index)=>(
-                <LazyComponent key={getItemKey(x)} onLoad={() => onLoaded(index)}>
-                    <ItemComponent item={x}/>
-                </LazyComponent>
+                <React.Fragment key={getItemKey(x)} >
+                    <LazyComponent onLoad={() => onLoaded(index)}>
+                        <ItemComponent item={x}/>
+                    </LazyComponent>
+                </React.Fragment>
             ))}
         </>
     );

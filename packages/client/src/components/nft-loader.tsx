@@ -10,13 +10,14 @@ export const NftLoader = ({ projectKey, tokenId }:{ projectKey:string, tokenId:s
     useEffect(() => {
         (async () => {
             const nftUrl = getNftJsonUrl(projectKey, tokenId);
-            console.log('NftLoader', {nftUrl});
+            // console.log('NftLoader', {nftUrl});
             const result = await fetch(nftUrl);
             const obj = await result.json() as INftRarityDocument;
             setNft(obj);
         })();
     }, [projectKey, tokenId]);
 
+    // console.log('NftLoader RENDER', {projectKey, tokenId});
     return (
         <>
             {!nft && <NftCardPlaceholder />}
