@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { delay } from '../helpers/delay';
 
 const debug_timeStart = Date.now();
-const globalRelayoutCallbacks = [] as (null | (()=>void))[];
+const globalRelayoutCallbacks = [] as (null | (()=>boolean))[];
 let activeNotifyRelayoutId = 0;
 const notifyRelayout = async () => {
     // Cancellable
@@ -15,8 +15,7 @@ const notifyRelayout = async () => {
         && notifyRelayoutId === activeNotifyRelayoutId
     ){
         const callback = globalRelayoutCallbacks[i];
-        if(callback){
-            callback();
+        if(callback && callback()){
             await delay(25);
         }
         i++;
@@ -37,21 +36,23 @@ export const LazyComponent = ({
     useEffect(()=>{
       
         const loadIfVisible = () => {
-            if( !placeholderRef.current ){ return; }
-            if( isDoneRef.current ){return;}
+            if( !placeholderRef.current ){ return false; }
+            if( isDoneRef.current ){return false;}
 
             const div = placeholderRef.current;
             const divRect = div.getBoundingClientRect();
             const screenBottom = window.scrollY + window.innerHeight;
             const isOnScreen = divRect.top < screenBottom;
 
-            if(!isOnScreen){ return; }
+            if(!isOnScreen){ return false; }
             console.log(`isOnScreen`,{ time: Date.now() - debug_timeStart, iRelayout, divRect, screenBottom, isOnScreen });
             
             isDoneRef.current = true;
             unsub();
             setShouldLoad(true);
             notifyRelayout();
+
+            return true;
         };
 
         const iRelayout = globalRelayoutCallbacks.length;
