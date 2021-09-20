@@ -84,7 +84,10 @@ const buildProjectRarityFiles = async ({
 
         // Output project json with token index
         const allTraitValueKeys = [...new Set(
-            rarityResult.flatMap(x=>x.attributeRarities).map(x=>`${x.trait_type}:::${x.value}`)
+            rarityResult
+            .flatMap(x=>x.attributeRarities)
+            .filter(x=>x.value !== MISSING_ATTRIBUTE_VALUE)
+            .map(x=>`${x.trait_type}:::${x.value}`)
         )].sort();
         const projectRarity : INftProjectRarityDocument = {
             project: projectMetadata,
