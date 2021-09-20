@@ -74,136 +74,106 @@
     {
       "trait_type": "type",
       "value": "Human",
-      "valueName": "Human",
       "count": 9879,
       "ratio": 0.9879,
-      "ratioIfDefined": 0.9879,
       "ratioScore": 1.0122482032594393
     },
     {
       "trait_type": "gender",
       "value": "Female",
-      "valueName": "Female",
       "count": 3840,
       "ratio": 0.384,
-      "ratioIfDefined": 0.384,
       "ratioScore": 2.6041666666666665
     },
     {
       "trait_type": "Face",
       "value": "Subpixel Mole",
-      "valueName": "Subpixel Mole",
       "count": 644,
       "ratio": 0.0644,
-      "ratioIfDefined": 0.0644,
       "ratioScore": 15.527950310559007
     },
     {
       "trait_type": "Lips",
       "value": "Black Lipstick",
-      "valueName": "Black Lipstick",
       "count": 617,
       "ratio": 0.0617,
-      "ratioIfDefined": 0.0617,
       "ratioScore": 16.207455429497568
     },
     {
       "trait_type": "Hair",
       "value": "Half Shaved",
-      "valueName": "Half Shaved",
       "count": 147,
       "ratio": 0.0147,
-      "ratioIfDefined": 0.0147,
       "ratioScore": 68.02721088435375
     },
     {
       "trait_type": "Trait Count",
       "value": "5",
-      "valueName": "5",
       "count": 4501,
       "ratio": 0.4501,
-      "ratioIfDefined": 0.4501,
       "ratioScore": 2.221728504776716
     },
     {
       "trait_type": "Eyes",
       "value": "[Missing]",
-      "valueName": "[Missing]",
       "count": 3928,
       "ratio": 0.3928,
-      "ratioIfDefined": 0.3928,
       "ratioScore": 2.5458248472505094
     },
     {
       "trait_type": "Ears",
       "value": "[Missing]",
-      "valueName": "[Missing]",
       "count": 7541,
       "ratio": 0.7541,
-      "ratioIfDefined": 0.7541,
       "ratioScore": 1.3260840737302746
     },
     {
       "trait_type": "Emotion",
       "value": "[Missing]",
-      "valueName": "[Missing]",
       "count": 9501,
       "ratio": 0.9501,
-      "ratioIfDefined": 0.9501,
       "ratioScore": 1.0525207872855489
     },
     {
       "trait_type": "Mouth",
       "value": "[Missing]",
-      "valueName": "[Missing]",
       "count": 8275,
       "ratio": 0.8275,
-      "ratioIfDefined": 0.8275,
       "ratioScore": 1.2084592145015105
     },
     {
       "trait_type": "Beard",
       "value": "[Missing]",
-      "valueName": "[Missing]",
       "count": 6497,
       "ratio": 0.6497,
-      "ratioIfDefined": 0.6497,
       "ratioScore": 1.5391719255040788
     },
     {
       "trait_type": "Nose",
       "value": "[Missing]",
-      "valueName": "[Missing]",
       "count": 9788,
       "ratio": 0.9788,
-      "ratioIfDefined": 0.9788,
       "ratioScore": 1.021659174499387
     },
     {
       "trait_type": "Neck",
       "value": "[Missing]",
-      "valueName": "[Missing]",
       "count": 9627,
       "ratio": 0.9627,
-      "ratioIfDefined": 0.9627,
       "ratioScore": 1.0387451958034695
     },
     {
       "trait_type": "Cheeks",
       "value": "[Missing]",
-      "valueName": "[Missing]",
       "count": 9872,
       "ratio": 0.9872,
-      "ratioIfDefined": 0.9872,
       "ratioScore": 1.012965964343598
     },
     {
       "trait_type": "Teeth",
       "value": "[Missing]",
-      "valueName": "[Missing]",
       "count": 9922,
       "ratio": 0.9922,
-      "ratioIfDefined": 0.9922,
       "ratioScore": 1.0078613182826044
     }
   ],
