@@ -66,7 +66,23 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
     
 
 - [x] Github action to build:rarities
-- [ ] Copy files from react/build to web in build script
+- [x] Copy files from react/build to web in build script
+- [x] Fix build path for common web/build
 - [ ] Finish Web UI
-- [ ] Fix build path for common web/build
+    - List all projects
+        - [ ] Add `web/data/projects.json` output
+        - [ ] Create ProjectsComponent
+    - List nfts for a project
+        - [ ] Add `web/data/one-day-punks/project.json` output
+        - [ ] Create ProjectNftsComponent
+    - [ ] Fix React favicons, title, etc.
 
+
+- [ ] Add Instructions for adding project
+    1. Create `/data/project-name.project.json` file with ContractUri json data
+    2. Create `/data/project-name.json` file with nft metadata (TokenUri json array) data
+    3. Submit a pull request
+        - Rarities will be calculated
+        - Website will be updated with results
+
+- [ ] Instructions for Forking and deploy to site provider (Netlify)
