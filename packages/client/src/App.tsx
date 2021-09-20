@@ -1,25 +1,34 @@
 import React from 'react';
 import logo from './logo.svg';
+import './CssReset.css';
 import './App.css';
-import {testHello} from '@crypto-dev-amigos/common';
+import { NftCard } from './components/nft-card';
+import { nftTestMetadata } from './components/nft-test-metadata';
+import { NftLoader } from './components/nft-loader';
 
 function App() {
+
+  const route = window.location.pathname.split('/');
+  const projectName = route[1] ?? undefined;
+  const tokenId = route[2] ?? undefined;
+
+  console.log('route', {route, projectName, tokenId});
+
+  if(projectName && tokenId){
+    return (
+      <div className="App">
+          <p>
+            <NftLoader nftUrl={`/data/${projectName}/${tokenId}.json`}/>
+          </p>
+      </div>
+    );
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          {testHello}
+          Empty 2
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
     </div>
   );
 }
