@@ -78,7 +78,7 @@ export const LazyComponent = ({
 
     return (
         <>  
-            {!shouldLoad && <div ref={placeholderRef} style={{minWidth: 1000, minHeight: 1000}}/>}
+            {!shouldLoad && <div ref={placeholderRef} style={{minWidth: 300, minHeight: 300}}/>}
             {shouldLoad && children}
         </>
     );
