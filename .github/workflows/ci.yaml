@@ -11,16 +11,24 @@ jobs:
       run: cd packages/common && npm install
     - name: Build Rarities
       run: npm run build:rarities
-    - name: commit changes
+    - name: Commit if changes
       run: |
-        # setup the username and email. 'GitHub Actions Bot' with no email
-        git config user.name "GitHub Actions Bot"
-        git config user.email "<>"
-
         # Check for changes & exit with success if none
-        git ls-files --modified || exit 0
+        git ls-files --modified
 
-        # Stage the file, commit and push
-        git add -A
-        git commit -m "add build output"
-        git push
+        if [[ `git status --porcelain` ]]; then
+          # Changes
+          echo "Commiting Changes"
+
+          # setup the username and email. 'GitHub Actions Bot' with no email
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+  
+          # Stage the file, commit and push
+          git add -A
+          git commit -m "add build output"
+          git push
+        else
+          # No changes
+          echo "No Changes"
+        fi
