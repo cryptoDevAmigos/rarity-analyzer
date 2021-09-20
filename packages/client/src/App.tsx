@@ -4,12 +4,30 @@ import './CssReset.css';
 import './App.css';
 import { NftCard } from './components/nft-card';
 import { nftTestMetadata } from './components/nft-test-metadata';
+import { NftLoader } from './components/nft-loader';
 
 function App() {
+
+  const route = window.location.pathname.split('/');
+  const projectName = route[1] ?? undefined;
+  const tokenId = route[2] ?? undefined;
+
+  console.log('route', {route, projectName, tokenId});
+
+  if(projectName && tokenId){
+    return (
+      <div className="App">
+          <p>
+            <NftLoader nftUrl={`/data/${projectName}/${tokenId}.json`}/>
+          </p>
+      </div>
+    );
+  }
+
   return (
     <div className="App">
         <p>
-          <NftCard nft={nftTestMetadata}/>
+          Empty 2
         </p>
     </div>
   );
