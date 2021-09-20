@@ -1,8 +1,8 @@
 import React from 'react';
 import { INftRarity } from '@crypto-dev-amigos/common';
 import { LazyComponent } from './lazy-component';
+import { getIpfsUrl } from '../helpers/urls';
 
-const getNftUrl = (nftUrl:string) => nftUrl.replace('ipfs://', 'https://gateway.pinata.cloud/ipfs/');
 
 export const NftCard = ({nft}:{ nft: INftRarity }) => {
 
@@ -13,19 +13,19 @@ export const NftCard = ({nft}:{ nft: INftRarity }) => {
                 <div><b>{nft.nft.name}</b></div>
                 <div><b>Rarity Score:</b> {nft.rarityScore.toFixed(2)}</div>
                 <div>
-                    <a href={getNftUrl(nft.nft.external_url)}>External Link</a>
+                    <a href={getIpfsUrl(nft.nft.external_url)}>External Link</a>
                 </div>
 
                 <div className={'nft-card-image'}>
                     <LazyComponent>
-                        <img alt='nft' src={getNftUrl(nft.nft.image)}/>
+                        <img alt='nft' src={getIpfsUrl(nft.nft.image)}/>
                     </LazyComponent>
                 </div>
                 <div>
                     <div style={{ display:'flex', flexDirection:'row', fontSize:`0.8em`, color: 'white' }}>
                                 <div style={{flex: 1}}>{'Content'}</div>
                                 <div style={{flex: 1}}>{'Attribute'}</div>
-                                <div style={{flex: 1}}>{'Percentile'}</div>
+                                <div style={{flex: 1}}>{'Commonality'}</div>
                                 <div style={{flex: 1}}>{'Rarity Score'}</div>
                     </div>
                     {nft.attributeRarities.map(x=>(
