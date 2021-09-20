@@ -1,10 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './CssReset.css';
 import './App.css';
 import { NftCard } from './components/nft-card';
 import { nftTestMetadata } from './components/nft-test-metadata';
 import { NftLoader } from './components/nft-loader';
+import { NftList, NftListLoader } from './components/nft-list';
 
 function App() {
 
@@ -17,9 +17,7 @@ function App() {
   if(projectName && tokenId){
     return (
       <div className="App">
-          <p>
-            <NftLoader nftUrl={`/data/${projectName}/${tokenId}.json`}/>
-          </p>
+        <NftLoader nftUrl={`/data/${projectName}/${tokenId}.json`}/>
       </div>
     );
   }
@@ -27,18 +25,14 @@ function App() {
   if(projectName){
     return (
       <div className="App">
-          <p>
-            TODO: Project Token List
-          </p>
+        <NftListLoader nftListUrl={`/data/${projectName}/collection-rarities.json`}/>
       </div>
     );
   }
 
   return (
     <div className="App">
-        <p>
           TODO: Projects List
-        </p>
     </div>
   );
 }

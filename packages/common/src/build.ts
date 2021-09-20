@@ -23,7 +23,7 @@ export async function generateRarityFiles({
 
         console.log();
 
-        const fullRarityFileName = fullProjectFileName.replace('.project.json', '.rarities.json');
+        const fullRarityFileName = path.join(outDirName, projectName, 'collection-rarities.json');
         await fs.writeFile(fullRarityFileName, JSON.stringify(rarityResult, null, 2));
 
         // Break apart the output into individual json files

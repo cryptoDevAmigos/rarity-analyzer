@@ -29,11 +29,27 @@ a:hover {
   text-align: center;
 }
 
+.nft-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .nft-card {
   margin: 16px;
   padding: 4;
-  width: 300px;
+  width: calc(100% - 32px);
   border: 8px solid var(--pink);
   box-shadow: 5px 5px 0px var(--blue);
   /* box-shadow: 10px 5px 5px red; */
+}
+
+.nft-card-image {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+}
+.nft-card-image img {
+  width: 150px;
+  height: 150px;
 }
