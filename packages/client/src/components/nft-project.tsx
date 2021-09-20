@@ -39,6 +39,7 @@ type INftProjectRarityData = {
         ratio: number;
     })[],
     traitTypes: string[];
+    contractAddress?: string;
 };
 const loadProjectRarityData = (doc: INftProjectRarityDocument): INftProjectRarityData => {
     const traitTypes = [...new Set(doc.tokenLookups.map(x=>x.trait_type))];
@@ -67,6 +68,7 @@ const loadProjectRarityData = (doc: INftProjectRarityDocument): INftProjectRarit
     });
 
     return {
+        contractAddress: doc.project.contract,
         tokenIdsByRank: doc.tokenIdsByRank,
         tokenLookups: doc.tokenLookups.map(x=>({
             ...x,
@@ -95,7 +97,7 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                 {projectRarity && (
                     <LazyList items={tokenIds} getItemKey={x=>`${x}`} ItemComponent={({item})=>(
                         <div onClick={()=>window.location.href=`${projectKey}/${item}`}>
-                            <NftLoader projectKey={projectKey} tokenId={`${item}`} />
+                            <NftLoader projectKey={projectKey} tokenId={`${item}`} contractAddress={projectRarity.contractAddress} />
                         </div>
                     )}/>
                 )}

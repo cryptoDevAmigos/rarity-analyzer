@@ -4,6 +4,26 @@ import { LazyComponent } from './lazy-component';
 import { getIpfsUrl } from '../helpers/urls';
 import { BarGraphCell } from './bar-graph';
 
+export type INftRarityWithExtra = INftRarity & {
+    openSeaLink?: string;
+    lastSell?: {
+        price: number;
+        symbol?: string;
+        priceUsd?: number;
+    },
+    listing?: {
+        price: number;
+        symbol?: string;
+        priceUsd?: number;
+    },
+};
+
+const formatPrice = (x?: {
+    price: number;
+    symbol?: string;
+    priceUsd?: number;
+}) => x ? `${x.price.toFixed(3)}${x.symbol??''}${x.priceUsd ? ` $${x.priceUsd.toFixed(2)}`:''}` : ' -?- '
+
 export const NftCardPlaceholder = (props:{})=>{
     return (
         <>
@@ -14,7 +34,7 @@ export const NftCardPlaceholder = (props:{})=>{
     );
 }
 
-export const NftCard = ({nft}:{ nft: INftRarity }) => {
+export const NftCard = ({nft}:{ nft: INftRarityWithExtra }) => {
 
     return (
         <>
@@ -22,8 +42,14 @@ export const NftCard = ({nft}:{ nft: INftRarity }) => {
                 {/* <div><b>Token ID:</b> {nft.nft.id}</div> */}
                 <div><b>{nft.nft.name}</b></div>
                 <div><b>Rarity Score:</b> {nft.rarityScore.toFixed(2)}</div>
+                <div><b>Listing:</b> {formatPrice(nft.listing)}</div>
+                <div><b>Last Sell:</b> {formatPrice(nft.lastSell)}</div>
                 <div>
                     <a href={getIpfsUrl(nft.nft.external_url)}>External Link</a>
+                </div>
+                <div>
+                    {!!nft.openSeaLink && <a href={nft.openSeaLink}>Open Sea</a>}
+                    {!nft.openSeaLink && <span>Open Sea - Not Found</span>}
                 </div>
 
                 <div className={'nft-card-image'}>
