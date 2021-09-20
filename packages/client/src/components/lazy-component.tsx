@@ -22,12 +22,18 @@ const notifyRelayout = async () => {
     }
 };
 window.addEventListener('scroll', notifyRelayout);
-const observer = new IntersectionObserver(notifyRelayout);
+window.addEventListener('load', ()=>{
+    const observer = new IntersectionObserver(notifyRelayout);
+    // Observe any element
+    observer.observe(document.getElementsByTagName('body')[0]);
+});
 
 export const LazyComponent = ({ 
     children,
+    onLoad,
 }:{ 
     children: ReactNode,
+    onLoad?: () => void,
  })=>{
 
     const placeholderRef = useRef(null as null | HTMLDivElement);
@@ -53,16 +59,15 @@ export const LazyComponent = ({
             unsub();
             setShouldLoad(true);
             notifyRelayout();
+            onLoad?.();
 
             return true;
         };
 
         const iRelayout = globalRelayoutCallbacks.length;
         globalRelayoutCallbacks.push(loadIfVisible);
-        observer.observe(placeholder);
         const unsub = ()=>{
             globalRelayoutCallbacks[iRelayout] = null;
-            observer.unobserve(placeholder);
         };
 
         return () => {
