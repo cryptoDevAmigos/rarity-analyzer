@@ -32,7 +32,9 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
             <div className='nft-list'>
                 {projectRarity && (
                     <LazyList items={projectRarity.tokens} getItemKey={x=>`${x.tokenId}`} ItemComponent={({item})=>(
-                        <NftLoader projectKey={projectKey} tokenId={`${item.tokenId}`} />
+                        <div onClick={()=>window.location.href=`${projectKey}/${item.tokenId}`}>
+                            <NftLoader projectKey={projectKey} tokenId={`${item.tokenId}`} />
+                        </div>
                     )}/>
                 )}
             </div>

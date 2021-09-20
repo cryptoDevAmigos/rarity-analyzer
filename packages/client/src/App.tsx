@@ -3,6 +3,7 @@ import './CssReset.css';
 import './App.css';
 import { NftLoader } from './components/nft-loader';
 import { NftProjectLoader } from './components/nft-project';
+import { NftProjectsLoader } from './components/nft-projects';
 
 function App() {
 
@@ -15,7 +16,9 @@ function App() {
   if(projectKey && tokenId){
     return (
       <div className="App">
-        <NftLoader projectKey={projectKey} tokenId={tokenId}/>
+        <div className='nft-list'>
+          <NftLoader projectKey={projectKey} tokenId={tokenId}/>
+        </div>
       </div>
     );
   }
@@ -30,7 +33,7 @@ function App() {
 
   return (
     <div className="App">
-          TODO: Projects List
+        <NftProjectsLoader/>
     </div>
   );
 }

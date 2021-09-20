@@ -9,7 +9,7 @@
         "build:rarities": "cd ./packages/common && npm run build:rarities",
         "test": "cd ./packages/common && npm run test",
         "start": "npm run build:common && concurrently \"npm run start:client\" \"npm run start:server\"",
-        "start:rarities": "npm run build:rarities && copyfiles -u 3 ./web/data/example/* ./packages/client/public/data/example",
+        "start:rarities": "npm run build:rarities && copyfiles -u 2 ./web/data/projects.json ./web/data/example/* ./packages/client/public/data",
         "start:client": "npm run start:rarities && cd ./packages/client && npm start",
         "start:server": "cd ./packages/server && npm start",
         "//": "https://stackoverflow.com/questions/30950032/how-can-i-run-multiple-npm-scripts-in-parallel"
