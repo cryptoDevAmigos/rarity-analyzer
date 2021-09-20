@@ -288,32 +288,5 @@
                 "value": "Big Beard"
             }
         ]
-    },
-    {
-        "id": 10,
-        "name": "One Day I'll Be A Punk #10",
-        "description": "[OneDayPunk #10](https://punkscape.xyz/onedaypunks/10), the shadow of [CryptoPunk #10](https://punkscape.xyz/cryptopunks/10) is one of 10k ***\"One Day I'll Be A Punk\"***-punks. \n\nShe sure would love to inhabit a [PunkScape](https://punkscape.xyz).",
-        "image": "ipfs://QmRKed7pNbDmQTf7VkDHX4KHFwvbNX2fyP33Ck6apgmEjr",
-        "external_url": "https://punkscape.xyz/onedaypunks/10",
-        "animation_url": "https://punkscape.xyz/onedaypunks/10/embed",
-        "background_color": "000000",
-        "attributes": [
-            {
-                "trait_type": "type",
-                "value": "Human"
-            },
-            {
-                "trait_type": "gender",
-                "value": "Female"
-            },
-            {
-                "trait_type": "Eyes",
-                "value": "Invisible Eye Shadow"
-            },
-            {
-                "trait_type": "Hair",
-                "value": "Mohawk"
-            }
-        ]
     }
 ]

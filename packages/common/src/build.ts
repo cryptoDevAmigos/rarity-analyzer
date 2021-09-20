@@ -26,7 +26,12 @@ export async function generateRarityFiles({
         
         // Skip if projectRarity output file is newer
         try{
-            if( (await fs.stat(fullProjectRarityFileName)).ctimeMs > (await fs.stat(fullProjectFileName)).ctimeMs){
+            const outputChangeTimeMs = (await fs.stat(fullProjectRarityFileName)).ctimeMs;
+            const projectInputChangeTimeMs = (await fs.stat(fullProjectFileName)).ctimeMs;
+            const tokensInputChangeTimeMs = (await fs.stat(fullNftListFileName)).ctimeMs;
+            if( outputChangeTimeMs > projectInputChangeTimeMs
+                && outputChangeTimeMs > tokensInputChangeTimeMs
+            ){
                 console.log(`# generateRarityFiles: skipped (already calculated) ${f.name}`);
                 continue;
             }
