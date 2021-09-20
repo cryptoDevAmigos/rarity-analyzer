@@ -24,10 +24,20 @@ function App() {
     );
   }
 
+  if(projectName){
+    return (
+      <div className="App">
+          <p>
+            TODO: Project Token List
+          </p>
+      </div>
+    );
+  }
+
   return (
     <div className="App">
         <p>
-          Empty 2
+          TODO: Projects List
         </p>
     </div>
   );

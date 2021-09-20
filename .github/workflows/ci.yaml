@@ -7,5 +7,18 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install modules
       run: npm install
+    - name: Install modules packages/common
+      run: cd packages/common && npm install
     - name: Build Rarities
-      run: npm build:rarities
+      run: npm run build:rarities
+    - name: setup git config
+      run: |
+        # setup the username and email. 'GitHub Actions Bot' with no email
+        git config user.name "GitHub Actions Bot"
+        git config user.email "<>"
+    - name: commit
+      run: |
+        # Stage the file, commit and push
+        git add -A
+        git commit -m "add build output"
+        git push
