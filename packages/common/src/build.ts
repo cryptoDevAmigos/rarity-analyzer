@@ -1,5 +1,5 @@
 import { calculateRarity } from "./calculate-rarity";
-import { INftMetadata } from "./types";
+import { INftMetadata, INftMetadataCollectionDocument, INftProjectMetadataDocument, INftProjectRarityDocument, INftProjectsDocument, MISSING_ATTRIBUTE_VALUE, NftAttributes } from "./types";
 import { promises as fs } from 'fs';
 import path from 'path';
 
@@ -10,37 +10,143 @@ export async function generateRarityFiles({
     dataDirName:string, 
     outDirName:string,
 }): Promise<void> {
+    console.log('# generateRarityFiles');
+
+
     const files = await fs.readdir(dataDirName, { withFileTypes: true });
     const projectFiles = files.filter(x => x.name.endsWith('.project.json'));
-    for(const f of projectFiles){
-        const projectName = f.name.replace('.project.json', '');
-        const fullProjectFileName = path.join(dataDirName, f.name);
+
+    const results = await Promise.all(projectFiles.map(async (f) => await buildProjectRarityFiles({
+        dataDirName,
+        outDirName,
+        projectFileName: f.name,
+    })));
+
+    const projectsDocumentContent: INftProjectsDocument = {
+        projects: results.filter(x=>x).map(x=>x!).map(x=>({
+            projectKey: x.projectKey,
+            projectMetadata: x.projectMetadata,
+        }))
+    };
+
+    // List all projects
+    const fullProjectFileName = path.join(outDirName, 'projects.json');
+    await fs.writeFile(fullProjectFileName, JSON.stringify(projectsDocumentContent));
+};
+
+const buildProjectRarityFiles = async ({
+    dataDirName,
+    outDirName,
+    projectFileName,
+}:{
+    dataDirName:string, 
+    outDirName:string,
+    projectFileName:string,
+}) => {
+    try{
+        console.log(`# generateRarityFiles: processing ${projectFileName}`);
+
+        const projectKey = projectFileName.replace('.project.json', '');
+        const fullProjectFileName = path.join(dataDirName, projectFileName);
         const fullNftListFileName = fullProjectFileName.replace('.project.json', '.json');
 
+        await fs.mkdir(path.join(outDirName, projectKey), { recursive: true });
+
+        const projectFileContent = await fs.readFile(fullProjectFileName, {encoding: 'utf-8' });
+        const projectMetadata = JSON.parse(projectFileContent) as INftProjectMetadataDocument;
+        
+        // Skip if not changed (use size instead of change time)
+        const projectInputFileSize = (await fs.stat(fullProjectFileName)).size;
+        const tokensInputFileSize = (await fs.stat(fullNftListFileName)).size;
+
+        const changehash = `${projectInputFileSize}:${tokensInputFileSize}`
+        const fullLastChangeHashFileName = path.join(outDirName, projectKey, '.lastchangehash');
+
+        try{
+            const lastChanged = await fs.readFile(fullLastChangeHashFileName, {encoding:'utf-8'});
+
+            if(lastChanged === changehash){
+                console.log(`# generateRarityFiles: skipped (already calculated) ${projectFileName}`);
+                return {
+                    projectKey,
+                    projectMetadata,
+                };
+            }
+        } catch {
+            // Ignore if missing
+        }
+
         const nftListFileContent = await fs.readFile(fullNftListFileName, {encoding: 'utf-8' });
-        const nftList = JSON.parse(nftListFileContent) as INftMetadata[];
+        const nftList = JSON.parse(nftListFileContent) as INftMetadataCollectionDocument;
         const rarityResult = calculateRarity(nftList);
 
-        console.log();
+        console.log(`# generateRarityFiles: saving rarities for ${projectFileName}`);
 
-        const fullRarityFileName = fullProjectFileName.replace('.project.json', '.rarities.json');
-        await fs.writeFile(fullRarityFileName, JSON.stringify(rarityResult, null, 2));
+        // Output project json with token index
+        const projectRarity : INftProjectRarityDocument = {
+            project: projectMetadata,
+            tokens: rarityResult.map(x => ({
+                tokenId: x.nft.id,
+                rank: x.rank,
+                attributes: x.attributeRarities
+                    .filter(x=>x.value !== MISSING_ATTRIBUTE_VALUE)
+                    .map(a=>({
+                        trait_type: a.trait_type,
+                        value: a.value,
+                        ratioScore: a.ratioScore
+                    }))
+                    .map(x=>NftAttributes.condense(x))
+            })),
+        };
 
-        // Break apart the output into individual json files
+        const fullProjectRarityFileName = path.join(outDirName, projectKey, 'project.json');
+        // await fs.mkdir(path.dirname(fullProjectRarityFileName), { recursive: true });
+        await fs.writeFile(fullProjectRarityFileName, JSON.stringify(projectRarity));
+
+        // Output collection-rarities
+        const fullRarityFileName = path.join(outDirName, projectKey, 'collection-rarities.json');
+        await fs.writeFile(fullRarityFileName, JSON.stringify(rarityResult));
+
+        // Output individual individual tokenId json files
+        let i = 0;
         for(const t of rarityResult){
-            const tokenRarityFileName = path.join(outDirName, projectName, `${t.nft.id}.json`);
-            await fs.mkdir(path.dirname(tokenRarityFileName), { recursive: true });
-            await fs.writeFile(tokenRarityFileName, JSON.stringify(t, null, 2));
+            if(i % 500 === 0){
+                console.log(`${(100 * i/rarityResult.length).toFixed()}%`);
+            }
+
+            const tokenRarityFileName = path.join(outDirName, projectKey, `${t.nft.id}.json`);
+            // await fs.mkdir(path.dirname(tokenRarityFileName), { recursive: true });
+            await fs.writeFile(tokenRarityFileName, JSON.stringify(t));
+
+            i++;
         }
+
+        console.log(`100%`);
+
+        await fs.writeFile(fullLastChangeHashFileName, changehash);
+        console.log(`# generateRarityFiles: Done - ${projectFileName}`);
+
+        return {
+            projectKey,
+            projectMetadata,
+        };
+    }catch (err){
+        console.error(`# generateRarityFiles: ERROR - ${projectFileName}`);
     }
+
+    
 };
 
 const run = async () => {
-    const data = await generateRarityFiles({
-        dataDirName:'../../data/',
-        // For debug output to react folder
-        // outDirName:'../../packages/client/build/data/',
-        outDirName:'../../web/data/',
-    });
+    try{
+        await generateRarityFiles({
+            dataDirName:'../../data/',
+            // For debug output to react folder
+            // outDirName:'../../packages/client/build/data/',
+            outDirName:'../../web/data/',
+        });
+    }catch(err){
+        console.error(err);
+    }
 };
 run();

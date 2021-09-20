@@ -4,11 +4,13 @@
     "scripts": {
         "build": "npm run build:common && npm run build:client",
         "build:common": "cd ./packages/common && npx tsc",
-        "build:client": "cd ./packages/client && npm run build && copyfiles -u 3 ./packages/client/build/**/* ./web",
+        "build:client": "(cd ./packages/client && npm run build) && (cd ../../ && npm run publish:client)",
+        "publish:client": "copyfiles -u 3 ./packages/client/build/**/* ./web",
         "build:rarities": "cd ./packages/common && npm run build:rarities",
         "test": "cd ./packages/common && npm run test",
         "start": "npm run build:common && concurrently \"npm run start:client\" \"npm run start:server\"",
-        "start:client": "cd ./packages/client && npm start",
+        "start:rarities": "npm run build:rarities && copyfiles -u 2 ./web/data/projects.json ./web/data/example/* ./packages/client/public/data",
+        "start:client": "npm run start:rarities && cd ./packages/client && npm start",
         "start:server": "cd ./packages/server && npm start",
         "//": "https://stackoverflow.com/questions/30950032/how-can-i-run-multiple-npm-scripts-in-parallel"
     },

@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { INftRarity } from '@crypto-dev-amigos/common';
-import { NftCard } from './nft-card';
+import { INftRarityDocument } from '@crypto-dev-amigos/common';
+import { NftCard, NftCardPlaceholder } from './nft-card';
+import { getNftJsonUrl } from '../helpers/urls';
 
-export const NftLoader = ({ nftUrl }:{ nftUrl:string })=>{
+export const NftLoader = ({ projectKey, tokenId }:{ projectKey:string, tokenId:string })=>{
 
-    const [nft, setNft] = useState(null as null | INftRarity);
+    const [nft, setNft] = useState(null as null | INftRarityDocument);
 
     useEffect(() => {
         (async () => {
-            console.log(nftUrl, {nftUrl});
+            const nftUrl = getNftJsonUrl(projectKey, tokenId);
+            console.log('NftLoader', {nftUrl});
             const result = await fetch(nftUrl);
-            const obj = await result.json() as INftRarity;
+            const obj = await result.json() as INftRarityDocument;
             setNft(obj);
         })();
-    }, [nftUrl]);
+    }, [projectKey, tokenId]);
 
     return (
         <>
+            {!nft && <NftCardPlaceholder />}
             {nft && <NftCard nft={nft}/>}
         </>
     );

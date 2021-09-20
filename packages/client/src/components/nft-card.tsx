@@ -1,5 +1,17 @@
 import React from 'react';
 import { INftRarity } from '@crypto-dev-amigos/common';
+import { LazyComponent } from './lazy-component';
+import { getIpfsUrl } from '../helpers/urls';
+
+export const NftCardPlaceholder = (props:{})=>{
+    return (
+        <>
+            <div className={'nft-card'}>
+                <div style={{height: 300}}>Loading...</div>
+            </div>
+        </>
+    );
+}
 
 export const NftCard = ({nft}:{ nft: INftRarity }) => {
 
@@ -10,19 +22,19 @@ export const NftCard = ({nft}:{ nft: INftRarity }) => {
                 <div><b>{nft.nft.name}</b></div>
                 <div><b>Rarity Score:</b> {nft.rarityScore.toFixed(2)}</div>
                 <div>
-                    <a href={nft.nft.external_url.replace('ipfs://', 'https://gateway.pinata.cloud/ipfs/')}>External Link</a>
+                    <a href={getIpfsUrl(nft.nft.external_url)}>External Link</a>
                 </div>
-                <div>
-                    <img 
-                        style={{width: 150, height: 150}}
-                        src={nft.nft.image.replace('ipfs://', 'https://gateway.pinata.cloud/ipfs/')}
-                    />
+
+                <div className={'nft-card-image'}>
+                    <LazyComponent>
+                        <img alt='nft' src={getIpfsUrl(nft.nft.image)}/>
+                    </LazyComponent>
                 </div>
                 <div>
                     <div style={{ display:'flex', flexDirection:'row', fontSize:`0.8em`, color: 'white' }}>
                                 <div style={{flex: 1}}>{'Content'}</div>
                                 <div style={{flex: 1}}>{'Attribute'}</div>
-                                <div style={{flex: 1}}>{'Percentile'}</div>
+                                <div style={{flex: 1}}>{'Commonality'}</div>
                                 <div style={{flex: 1}}>{'Rarity Score'}</div>
                     </div>
                     {nft.attributeRarities.map(x=>(
@@ -53,3 +65,4 @@ export const NftCard = ({nft}:{ nft: INftRarity }) => {
         </>
     );
 };
+

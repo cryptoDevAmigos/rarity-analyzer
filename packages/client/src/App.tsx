@@ -1,44 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
 import './CssReset.css';
 import './App.css';
-import { NftCard } from './components/nft-card';
-import { nftTestMetadata } from './components/nft-test-metadata';
 import { NftLoader } from './components/nft-loader';
+import { NftProjectLoader } from './components/nft-project';
+import { NftProjectsLoader } from './components/nft-projects';
 
 function App() {
 
   const route = window.location.pathname.split('/');
-  const projectName = route[1] ?? undefined;
+  const projectKey = route[1] ?? undefined;
   const tokenId = route[2] ?? undefined;
 
-  console.log('route', {route, projectName, tokenId});
+  console.log('route', {route, projectKey, tokenId});
 
-  if(projectName && tokenId){
+  if(projectKey && tokenId){
     return (
       <div className="App">
-          <p>
-            <NftLoader nftUrl={`/data/${projectName}/${tokenId}.json`}/>
-          </p>
+        <div className='nft-list'>
+          <NftLoader projectKey={projectKey} tokenId={tokenId}/>
+        </div>
       </div>
     );
   }
 
-  if(projectName){
+  if(projectKey){
     return (
       <div className="App">
-          <p>
-            TODO: Project Token List
-          </p>
+        <NftProjectLoader projectKey={projectKey}/>
       </div>
     );
   }
 
   return (
     <div className="App">
-        <p>
-          TODO: Projects List
-        </p>
+        <NftProjectsLoader/>
     </div>
   );
 }

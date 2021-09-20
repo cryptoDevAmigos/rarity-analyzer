@@ -1,5 +1,5 @@
 import { calculateRarity } from "./calculate-rarity";
-import { INftMetadata } from "./types";
+import { INftMetadataCollectionDocument } from "./types";
 import { promises as fs } from 'fs';
 
 const run = async () => {
@@ -8,10 +8,10 @@ const run = async () => {
 };
 
 // C:\gitplay\rarity-analyzer\packages\data\odp-collection.json
-export async function getTestData(): Promise<INftMetadata[]> {
+export async function getTestData(): Promise<INftMetadataCollectionDocument> {
     // Relative to project root
     const content = await fs.readFile("../../data/odp-collection.json", {encoding: 'utf-8' });
-    const data = JSON.parse(content) as INftMetadata[];
+    const data = JSON.parse(content) as INftMetadataCollectionDocument;
     console.log('data', {data});
     return data;
 };
