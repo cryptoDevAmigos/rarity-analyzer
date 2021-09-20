@@ -21,6 +21,19 @@ export async function generateRarityFiles({
         const fullProjectFileName = path.join(dataDirName, f.name);
         const fullNftListFileName = fullProjectFileName.replace('.project.json', '.json');
 
+        const fullProjectRarityFileName = path.join(outDirName, projectName, 'project.json');
+        await fs.mkdir(path.dirname(fullProjectRarityFileName), { recursive: true });
+        
+        // Skip if projectRarity output file is newer
+        try{
+            if( (await fs.stat(fullProjectRarityFileName)).ctimeMs > (await fs.stat(fullProjectFileName)).ctimeMs){
+                console.log(`# generateRarityFiles: skipped (already calculated) ${f.name}`);
+                continue;
+            }
+        } catch {
+            // Ignore if missing
+        }
+
         const projectFileContent = await fs.readFile(fullProjectFileName, {encoding: 'utf-8' });
         const projectMetadata = JSON.parse(projectFileContent) as INftProjectMetadataDocument;
 
@@ -46,13 +59,11 @@ export async function generateRarityFiles({
                     .map(x=>NftAttributes.condense(x))
             })),
         };
-        const fullProjectRarityFileName = path.join(outDirName, projectName, 'project.json');
-        await fs.mkdir(path.dirname(fullProjectRarityFileName), { recursive: true });
+        // await fs.mkdir(path.dirname(fullProjectRarityFileName), { recursive: true });
         await fs.writeFile(fullProjectRarityFileName, JSON.stringify(projectRarity, null, 2));
 
         // Output collection-rarities
         const fullRarityFileName = path.join(outDirName, projectName, 'collection-rarities.json');
-        await fs.mkdir(path.dirname(fullRarityFileName), { recursive: true });
         await fs.writeFile(fullRarityFileName, JSON.stringify(rarityResult, null, 2));
 
         // Output individual individual tokenId json files
@@ -63,12 +74,13 @@ export async function generateRarityFiles({
             }
 
             const tokenRarityFileName = path.join(outDirName, projectName, `${t.nft.id}.json`);
-            await fs.mkdir(path.dirname(tokenRarityFileName), { recursive: true });
+            // await fs.mkdir(path.dirname(tokenRarityFileName), { recursive: true });
             await fs.writeFile(tokenRarityFileName, JSON.stringify(t, null, 2));
 
             i++;
         }
 
+        console.log(`100%`);
         console.log(`# generateRarityFiles: Done - ${f.name}`);
     }
 };
