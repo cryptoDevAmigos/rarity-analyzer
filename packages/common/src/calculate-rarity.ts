@@ -32,7 +32,7 @@ import { promises as fs } from 'fs';
     }).ToList();
  ```
  */
-export async function calculateRarity(metadataRaw: INftMetadata[], options?: { includeTraitCount?: boolean }): Promise<INftRarity[]> {
+export function calculateRarity(metadataRaw: INftMetadata[], options?: { includeTraitCount?: boolean }): INftRarity[] {
     const { includeTraitCount = true } = options ?? {};
 
     const metadata = metadataRaw.map(x => ({
