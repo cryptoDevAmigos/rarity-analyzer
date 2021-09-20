@@ -21,4 +21,4 @@ jobs:
         # Stage the file, commit and push
         git add -A
         git commit -m "add build output"
-        git push origin master
+        git push
