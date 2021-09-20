@@ -76,6 +76,11 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
         - [ ] Add `web/data/one-day-punks/project.json` output
         - [ ] Create ProjectNftsComponent
     - [ ] Fix React favicons, title, etc.
+- [ ] Easy Button: Add contract address and hit submit on website
+    - Use web3 to get contract data
+- [ ] Generate `/web/projectName/collection-rarities.json`
+- [ ] Review Requirements
+
 
 
 - [ ] Add Instructions for adding project
