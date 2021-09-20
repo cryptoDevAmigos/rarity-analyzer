@@ -46,11 +46,11 @@ export const NftLoader = ({ projectKey, tokenId, contractAddress }:{ projectKey:
                     symbol: lastSellSymbol, 
                     priceUsd : lastSellPriceUsd,
                 } : undefined,
-                listing: {
+                listing: order ? {
                     price: listingPrice, 
                     symbol: listingSymbol, 
                     priceUsd : listingPriceUsd,
-                },
+                } : undefined,
                 openSeaLink: openSeaData.permalink,
             })
 
