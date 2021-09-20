@@ -34,6 +34,13 @@ export interface INftProjectMetadata {
 }
 export type INftProjectMetadataDocument = INftProjectMetadata;
 
+export type INftProjectsDocument = {
+    projects: {
+        projectKey: string;
+        projectMetadata: INftProjectMetadata;
+    }[];
+};
+
 /** The output json document with project information */
 export type INftProjectRarityDocument = {
     project: INftProjectMetadataDocument;
