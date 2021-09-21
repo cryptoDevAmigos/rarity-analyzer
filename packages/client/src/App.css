@@ -11,7 +11,7 @@
 }
 
 /* Lite & Modern */
-:root {
+/* :root {
   --back: #EEEEFF;
   --primary: #FF00AE;
   --secondary: #0062F9;
@@ -20,7 +20,7 @@
   --border-radius: 8px;
   --box-shadow-width: 8px;
   --box-shadow-blur: 2px;
-}
+} */
 
 body {
   background-color: var(--back);

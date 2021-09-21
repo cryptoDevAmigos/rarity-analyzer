@@ -4,5 +4,15 @@
     "description": "10k 'One Day I'll Be A Punk' punks – a homage to the one and only CryptoPunks.",
     "image": "ipfs://QmUZMuhGPFqAe1LiCxg9qZwNSXtLCYCi5D4aasYH5uiU9a",
     "external_link": "https://punkscape.xyz/onedaypunks/",
-    "contract": "0x5537d90A4A2DC9d9b37BAb49B490cF67D4C54E91"
+    "contract": "0x5537d90A4A2DC9d9b37BAb49B490cF67D4C54E91",
+    "theme": {
+        "back": "#EEEEFF",
+        "primary": "#FF00AE",
+        "secondary": "#0062F9",
+        "highlight": "#000000",
+        "borderWidth": "2px",
+        "borderRadius": "8px",
+        "boxShadowWidth": "8px",
+        "boxShadowBlur": "2px"
+    }
 }

@@ -31,8 +31,30 @@ export interface INftProjectMetadata {
     image: string,
     external_link: string,
     contract: string,
+    theme?: IProjectTheme;
 }
 export type INftProjectMetadataDocument = INftProjectMetadata;
+
+export type IProjectTheme = {
+    back?: string;
+    primary?: string;
+    secondary?: string;
+    highlight?: string;
+    borderWidth?: string;
+    borderRadius?: string;
+    boxShadowWidth?: string;
+    boxShadowBlur?: string;
+}
+const exampleTheme: IProjectTheme = {
+    back: '#EEEEFF',
+    primary: '#FF00AE',
+    secondary: '#0062F9',
+    highlight: '#000000',
+    borderWidth: '2px',
+    borderRadius: '8px',
+    boxShadowWidth: '8px',
+    boxShadowBlur: '2px',
+};
 
 export type INftProjectsDocument = {
     projects: {
@@ -52,6 +74,7 @@ export type INftProjectRarityDocument = {
         tokenIds: number[];
     }[];
 }
+
 /** Index data about nfts in order to support sorting, filtering while reducing file size */
 export type INftRaritySummary = {
     // Needed to sort by token id
