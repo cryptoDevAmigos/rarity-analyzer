@@ -81,6 +81,13 @@ a:hover {
   margin: 8px;
   border: 8px solid var(--blue);
 }
+.nft-trait-type {
+  margin: 8px;
+  border: 8px solid var(--blue);
+}
+.nft-trait-type-header {
+  padding: 4px;
+}
 
 .nft-trait-values {
   display: flex;
@@ -89,7 +96,13 @@ a:hover {
 
 .nft-trait-value {
   padding: 4px;
+  opacity: 0.5;
 }
 .nft-trait-value:hover {
   color: white;
+}
+.nft-trait-value-selected {
+  padding: 4px;
+  opacity: 1;
+  border: 1px solid var(--blue);
 }
