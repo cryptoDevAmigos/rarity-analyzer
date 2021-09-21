@@ -82,7 +82,7 @@ const loadProjectRarityData = (doc: INftProjectRarityDocument): INftProjectRarit
 type TraitFilters = { [traitType: string]: string };
 export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, projectRarity:INftProjectRarityData}) => {
 
-    const [tokenIds, setTokenIds] = useState(projectRarity.tokenIdsByRank);
+    const [tokenIds, setTokenIds] = useState(new Set(projectRarity.tokenIdsByRank));
     const nftListRef = useRef(null as null | HTMLDivElement)
     const traitFilters = useRef({} as TraitFilters);
 
@@ -95,18 +95,18 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
 
             tokenIdsSelected = new Set(tokenLookup.tokenIds.filter(t => tokenIdsSelected.has(t) ));
         });
-        setTokenIds([...tokenIdsSelected]);
+        setTokenIds(tokenIdsSelected);
         // nftListRef.current?.scrollIntoView({behavior:'smooth'});
     };
 
     return (
         <>
             <div>
-                <TraitTypesList projectRarity={projectRarity} selected={traitFilters.current} onSelect={onSelect}/>
+                <TraitTypesList projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect}/>
             </div>
             <div className='nft-list' ref={nftListRef}>
                 {projectRarity && (
-                    <LazyList items={tokenIds} getItemKey={x=>`${x}`} ItemComponent={({item})=>(
+                    <LazyList items={[...tokenIds]} getItemKey={x=>`${x}`} ItemComponent={({item})=>(
                         <div onClick={()=>window.location.href=`${projectKey}/${item}`}>
                             <NftLoader projectKey={projectKey} tokenId={`${item}`} contractAddress={projectRarity.contractAddress} />
                         </div>
@@ -117,23 +117,29 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
     );
 };
 
-export const TraitTypesList = ({ projectRarity, selected, onSelect }:{ projectRarity:INftProjectRarityData, selected:TraitFilters, onSelect: (args:{ traitType: string, value: string, tokens: number[] })=>void })=>{
+export const TraitTypesList = ({ projectRarity, tokenIds, selected, onSelect }:{ projectRarity:INftProjectRarityData, tokenIds: Set<number>, selected:TraitFilters, onSelect: (args:{ traitType: string, value: string, tokens: number[] })=>void })=>{
     return (
         <div className='nft-trait-types'>
             {projectRarity.traitTypes.map(x=>(
                 <React.Fragment key={x}>
-                    <TraitValuesList traitType={x} projectRarity={projectRarity} selected={selected} onSelect={onSelect} />
+                    <TraitValuesList traitType={x} projectRarity={projectRarity} tokenIds={tokenIds} selected={selected} onSelect={onSelect} />
                 </React.Fragment>
             ))}
         </div>
     );
 };
 
-export const TraitValuesList = ({ traitType, projectRarity, selected, onSelect }:{ traitType: string, projectRarity:INftProjectRarityData, selected:TraitFilters, onSelect: (args:{ traitType: string, value: string, tokens: number[] })=>void })=>{
+export const TraitValuesList = ({ traitType, projectRarity, tokenIds, selected, onSelect }:{ traitType: string, projectRarity:INftProjectRarityData, tokenIds: Set<number>, selected:TraitFilters, onSelect: (args:{ traitType: string, value: string, tokens: number[] })=>void })=>{
    
     const traitTypeTokenLookups = projectRarity.tokenLookups
         .filter(x=>x.trait_type === traitType);
+    // const tokenIdsOfAll = traitTypeTokenLookups
+    //     .find(x => x.trait_value===ALL_TRAIT_VALUE)
+    //     ?.tokenIds.filter(x => tokenIds.has(x)) ?? [];
    
+    const selectedTraitValue = selected[traitType] ?? ALL_TRAIT_VALUE;
+    const isAllSelected = selectedTraitValue === ALL_TRAIT_VALUE;
+
     return (
         <div className='nft-trait-type'>
             <div className='nft-trait-type-header'>
@@ -142,8 +148,8 @@ export const TraitValuesList = ({ traitType, projectRarity, selected, onSelect }
             <div className='nft-trait-values'>
                 {traitTypeTokenLookups.map(x=>(
                     <React.Fragment key={`${x.trait_type}:${x.trait_value}`}>
-                        <div className={`nft-trait-value ${(selected[x.trait_type]??ALL_TRAIT_VALUE)===x.trait_value ? 'nft-trait-value-selected':''}`} onClick={()=>onSelect({traitType: x.trait_type, value: x.trait_value, tokens: x.tokenIds})}>
-                            <BarGraphCell ratio={x.ratio} text={x.trait_value}/>
+                        <div className={`nft-trait-value ${selectedTraitValue === x.trait_value ? 'nft-trait-value-selected':''}`} onClick={()=>onSelect({traitType: x.trait_type, value: x.trait_value, tokens: x.tokenIds})}>
+                            <BarGraphCell ratio={x.ratio} text={x.trait_value} textRight={isAllSelected || selectedTraitValue === x.trait_value ? `${x.tokenIds.filter(t=>tokenIds.has(t)).length}`:``}/>
                         </div>
                     </React.Fragment>
                 ))}
