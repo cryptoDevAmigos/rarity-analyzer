@@ -58,11 +58,11 @@ export const NftCard = ({nft}:{ nft: INftRarityWithExtra }) => {
                     </LazyComponent>
                 </div>
                 <div className='nft-card-stats'>
-                    <div className='nft-card-stats-row' style={{ fontSize:`0.8em`, color: 'white' }}>
+                    <div className='nft-card-stats-row nft-card-stats-title' style={{ fontSize:`0.8em` }}>
                         <div className='nft-card-stats-cell' style={{textAlign:'left'}}>{'Trait'}</div>
                         <div className='nft-card-stats-cell' style={{textAlign:'right'}}>{'Rarity Score'}</div>
                     </div>
-                    <div className='nft-card-stats-row' style={{ fontSize:`0.8em`, color: 'white' }}>
+                    <div className='nft-card-stats-row nft-card-stats-title' style={{ fontSize:`0.8em` }}>
                         <div className='nft-card-stats-cell' style={{textAlign:'right'}}>{''}</div>
                         <div className='nft-card-stats-cell'>{'Commonality'}</div>
                     </div>

@@ -11,17 +11,16 @@ export const BarGraphCell = ({ ratio, text, textRight }:{ ratio: number, text?: 
                 }}>
             </div>
             {!!textRight && (
-                <div style={{
+                <div className='bar-text' style={{
                     position:'absolute',
                     right: 4,
                     zIndex: 9,
                     height: '100%',
-                    color:'#FFFFFF',
                     }}>
                     {textRight}
                 </div>
             )}
-            <div style={{color:'#FFFFFF', position:'relative', zIndex: 10}}>
+            <div className='bar-text' style={{ position:'relative', zIndex: 10}}>
                 {text ?? `${(100 * ratio).toFixed(2)}%`}
             </div>
         </div>

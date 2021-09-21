@@ -70,12 +70,16 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
 - [x] Fix build path for common web/build
 - [ ] Finish Web UI
     - List all projects
-        - [ ] Add `web/data/projects.json` output
-        - [ ] Create ProjectsComponent
+        - [x] Add `web/data/projects.json` output
+        - [x] Create ProjectsComponent
     - List nfts for a project
-        - [ ] Add `web/data/one-day-punks/project.json` output
-        - [ ] Create ProjectNftsComponent
+        - [x] Add `web/data/one-day-punks/project.json` output
+        - [x] Create ProjectNftsComponent
     - [ ] Fix React favicons, title, etc.
+    - [ ] Add Project Details
+        - [ ] Links (Discord, Twitter, Site, etc.)
+        - [ ] Theme (see css vars)
+
 - [ ] Easy Button: Add contract address and hit submit on website
     - Use web3 to get contract data
 - [ ] Generate `/web/projectName/collection-rarities.json`
