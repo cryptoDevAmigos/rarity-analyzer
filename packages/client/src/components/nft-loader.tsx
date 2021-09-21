@@ -14,6 +14,8 @@ export const NftLoader = ({ projectKey, tokenId, contractAddress }:{ projectKey:
             // console.log('NftLoader', {nftUrl});
             const result = await fetch(nftUrl);
             const obj = await result.json() as INftRarityDocument;
+
+            obj.attributeRarities.sort((a,b)=>a.trait_type.localeCompare(b.trait_type));
             setNft(obj);
 
             // Try to get contractAddress from project data

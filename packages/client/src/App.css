@@ -29,6 +29,45 @@ a:hover {
   text-align: center;
 }
 
+.panel-container {
+  
+}
+
+.panel-project-info {
+
+}
+
+.panel-nft-list {
+
+}
+
+.panel-trait-types {
+
+}
+
+@media (min-width: 600px) {
+  .panel-container {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: 1fr 6fr;
+  }
+
+  .panel-project-info {
+    grid-row: 1;
+    grid-column: 1 / span 2;
+  }
+
+  .panel-trait-types {
+    grid-row: 2;
+    grid-column: 1;
+  }
+  
+  .panel-nft-list {
+    grid-row: 2;
+    grid-column: 2;
+  }
+}
+
 .nft-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -67,8 +106,6 @@ a:hover {
   width: 150px;
   height: 150px;
 }
-
-
 
 .nft-trait-types {
   display: grid;

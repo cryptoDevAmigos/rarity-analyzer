@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import type { INftProjectRarityDocument, INftRarity, MISSING_ATTRIBUTE_VALUE as MISSING_ATTRIBUTE_VALUE_TYPE } from '@crypto-dev-amigos/common';
+import type { INftProjectMetadataDocument, INftProjectRarityDocument, INftRarity, MISSING_ATTRIBUTE_VALUE as MISSING_ATTRIBUTE_VALUE_TYPE } from '@crypto-dev-amigos/common';
 import { NftCard } from './nft-card';
 import { LazyList } from './lazy-list';
 import { NftLoader } from './nft-loader';
-import { getNftJsonUrl, getProjectJsonUrl } from '../helpers/urls';
+import { getIpfsUrl, getNftJsonUrl, getProjectJsonUrl } from '../helpers/urls';
 import { BarGraphCell } from './bar-graph';
 
 // Workaround for importing implementation
@@ -35,6 +35,7 @@ return (
 
 const ALL_TRAIT_VALUE ='[All]';
 type INftProjectRarityData = {
+    project: INftProjectMetadataDocument;
     tokenIdsByRank: INftProjectRarityDocument['tokenIdsByRank']
     tokenLookups: (INftProjectRarityDocument['tokenLookups'][number] & {
         ratio: number;
@@ -68,13 +69,19 @@ const loadProjectRarityData = (doc: INftProjectRarityDocument): INftProjectRarit
         });
     });
 
+    const tokenLookups = doc.tokenLookups.map(x=>({
+        ...x,
+        ratio: x.tokenIds.length / doc.tokenIdsByRank.length,
+    }));
+
+    // Sort tokenLookups
+    tokenLookups.sort();
+
     return {
+        project: doc.project,
         contractAddress: doc.project.contract,
         tokenIdsByRank: doc.tokenIdsByRank,
-        tokenLookups: doc.tokenLookups.map(x=>({
-            ...x,
-            ratio: x.tokenIds.length / doc.tokenIdsByRank.length,
-        })),
+        tokenLookups,
         traitTypes,
     };
 };
@@ -101,17 +108,47 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
 
     return (
         <>
-            <div>
-                <TraitTypesList projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect}/>
+            <div className='panel-container'>
+                <div className='panel-project-info'>
+                    <ProjectInfo projectRarity={projectRarity}/>
+                </div>
+                <div className='panel-trait-types'>
+                    <TraitTypesList projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect}/>
+                </div>
+                <div className='panel-nft-list'>
+                    <div className='nft-list' ref={nftListRef}>
+                        {projectRarity && (
+                            <LazyList items={[...tokenIds]} getItemKey={x=>`${x}`} ItemComponent={({item})=>(
+                                <div onClick={()=>window.location.href=`${projectKey}/${item}`}>
+                                    <NftLoader projectKey={projectKey} tokenId={`${item}`} contractAddress={projectRarity.contractAddress} />
+                                </div>
+                            )}/>
+                        )}
+                    </div>
+                </div>
             </div>
-            <div className='nft-list' ref={nftListRef}>
-                {projectRarity && (
-                    <LazyList items={[...tokenIds]} getItemKey={x=>`${x}`} ItemComponent={({item})=>(
-                        <div onClick={()=>window.location.href=`${projectKey}/${item}`}>
-                            <NftLoader projectKey={projectKey} tokenId={`${item}`} contractAddress={projectRarity.contractAddress} />
-                        </div>
-                    )}/>
-                )}
+        </>
+    );
+};
+
+export const ProjectInfo = ({projectRarity}:{ projectRarity:INftProjectRarityData})=>{
+    return (
+        <>
+          <div style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                <div style={{}}>
+                    <img 
+                        src={getIpfsUrl(projectRarity.project.image)} 
+                        alt='project'
+                        style={{objectFit:'contain', width: 150}}
+                    />
+                </div>
+                <div style={{}}>
+                    <div style={{fontSize: '1.6em'}}>{projectRarity.project.name}</div>
+                    <div style={{fontSize: '1.0em'}}>{projectRarity.project.description}</div>
+                    <div style={{fontSize: '1.0em'}}>
+                        <a href={getIpfsUrl(projectRarity.project.external_link)}>{projectRarity.project.external_link}</a>
+                    </div>
+                </div>
             </div>
         </>
     );
