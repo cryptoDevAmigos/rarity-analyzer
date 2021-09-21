@@ -83,20 +83,38 @@ const buildProjectRarityFiles = async ({
         console.log(`# generateRarityFiles: saving rarities for ${projectFileName}`);
 
         // Output project json with token index
+        const allTraitValueKeys = [...new Set(
+            rarityResult
+            .flatMap(x=>x.attributeRarities)
+            .filter(x=>x.value !== MISSING_ATTRIBUTE_VALUE)
+            .map(x=>`${x.trait_type}:::${x.value}`)
+        )].sort();
         const projectRarity : INftProjectRarityDocument = {
             project: projectMetadata,
-            tokens: rarityResult.map(x => ({
-                tokenId: x.nft.id,
-                rank: x.rank,
-                attributes: x.attributeRarities
-                    .filter(x=>x.value !== MISSING_ATTRIBUTE_VALUE)
-                    .map(a=>({
-                        trait_type: a.trait_type,
-                        value: a.value,
-                        ratioScore: a.ratioScore
-                    }))
-                    .map(x=>NftAttributes.condense(x))
-            })),
+            // tokens: rarityResult.map(x => ({
+            //     tokenId: x.nft.id,
+            //     rank: x.rank,
+            //     attributes: x.attributeRarities
+            //         .filter(x=>x.value !== MISSING_ATTRIBUTE_VALUE)
+            //         .map(a=>({
+            //             trait_type: a.trait_type,
+            //             value: a.value,
+            //             ratioScore: a.ratioScore
+            //         }))
+            //         .map(x=>NftAttributes.condense(x))
+            // })),
+            tokenIdsByRank: rarityResult.map(x=>x.nft.id),
+            tokenLookups: allTraitValueKeys.map(x=>{
+                const t = x.split(':::');
+                return {trait_type: t[0], value: t[1]};
+            }).map(x=>({
+                trait_type: x.trait_type,
+                trait_value: x.value,
+                tokenIds: rarityResult
+                    .filter(t=>t.attributeRarities.some(a=>a.trait_type===x.trait_type && a.value===x.value))
+                    .map(t=>t.nft.id)
+                    ,
+            }))
         };
 
         const fullProjectRarityFileName = path.join(outDirName, projectKey, 'project.json');

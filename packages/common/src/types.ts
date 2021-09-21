@@ -44,7 +44,13 @@ export type INftProjectsDocument = {
 /** The output json document with project information */
 export type INftProjectRarityDocument = {
     project: INftProjectMetadataDocument;
-    tokens: INftRaritySummary[];
+    // tokens: INftRaritySummary[];
+    tokenIdsByRank: number[];
+    tokenLookups: {
+        trait_type: string;
+        trait_value: string;
+        tokenIds: number[];
+    }[];
 }
 /** Index data about nfts in order to support sorting, filtering while reducing file size */
 export type INftRaritySummary = {
