@@ -107,6 +107,27 @@ a:hover {
   height: 150px;
 }
 
+
+.nft-trait-types-header {
+  margin: 8px;
+  border: 8px solid var(--blue);
+}
+.nft-trait-types-header-expandable {
+  display: block;
+}
+.nft-trait-types-header-simple {
+  display: none;
+}
+
+/* @media (min-width: 600px) {
+  .nft-trait-types-header-expandable {
+    display: none;
+  }
+  .nft-trait-types-header-simple {
+    display: block;
+  }
+} */
+
 .nft-trait-types {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
