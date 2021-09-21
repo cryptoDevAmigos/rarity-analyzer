@@ -5,6 +5,7 @@ import { LazyList } from './lazy-list';
 import { NftLoader } from './nft-loader';
 import { getIpfsUrl, getNftJsonUrl, getProjectJsonUrl } from '../helpers/urls';
 import { BarGraphCell } from './bar-graph';
+import { changeTheme } from '../helpers/theme';
 
 // Workaround for importing implementation
 const MISSING_ATTRIBUTE_VALUE: typeof MISSING_ATTRIBUTE_VALUE_TYPE = `[Missing]`;
@@ -19,6 +20,8 @@ export const NftProjectLoader = ({ projectKey }:{ projectKey:string })=>{
             // console.log('projectKey', { projectKey, nftProjectUrl });
             const result = await fetch(nftProjectUrl);
             const obj = await result.json() as INftProjectRarityDocument;
+
+            changeTheme(obj.project.theme);
 
             const loaded = loadProjectRarityData(obj);
 

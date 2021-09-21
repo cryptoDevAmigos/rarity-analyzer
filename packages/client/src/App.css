@@ -1,27 +1,52 @@
+/* Dark & Fat */
 :root {
-  --pink: #FF00AE;
-  --blue: #0062F9;
+  --back: #111111;
+  --primary: #FF00AE;
+  --secondary: #0062F9;
+  --highlight: #FFFFFF;
+  --border-width: 8px;
+  --border-radius: 0px;
+  --box-shadow-width: 5px;
+  --box-shadow-blur: 0px;
 }
 
+/* Lite & Modern */
+/* :root {
+  --back: #EEEEFF;
+  --primary: #FF00AE;
+  --secondary: #0062F9;
+  --highlight: #000000;
+  --border-width: 2px;
+  --border-radius: 8px;
+  --box-shadow-width: 8px;
+  --box-shadow-blur: 2px;
+} */
+
 body {
-  background-color: black;
-  color: var(--blue);
+  background-color: var(--back);
+  color: var(--secondary);
 }
 span, div {
   font-family: 'Space Mono', monospace;
 }
+div {
+  border-radius: var(--border-radius);
+}
 
 .bar-background {
-  background: var(--pink);
+  background: var(--primary);
   opacity: 0.5;
+}
+.bar-text {
+  color: var(--highlight);
 }
 
 a {
-  color: var(--pink);
+  color: var(--primary);
 }
 
 a:hover {
-  color: #FFFFFF;
+  color: var(--highlight);
 }
 
 
@@ -87,14 +112,14 @@ a:hover {
   min-height: 240px;
   width: calc(100% - 32px);
   height: calc(100% - 32px);
-  border: 8px solid var(--pink);
-  box-shadow: 5px 5px 0px var(--blue);
+  border: var(--border-width) solid var(--primary);
+  box-shadow: var(--box-shadow-width) var(--box-shadow-width) var(--box-shadow-blur) 0px var(--secondary);
   /* box-shadow: 10px 5px 5px red; */
 }
 
 .nft-card:hover {
-  border: 8px solid var(--blue);
-  box-shadow: 5px 5px 0px var(--blue);
+  border: var(--border-width) solid var(--secondary);
+  box-shadow: var(--box-shadow-width) var(--box-shadow-width) var(--box-shadow-blur) var(--secondary);
 }
 
 .nft-card-image {
@@ -123,13 +148,13 @@ a:hover {
 }
 
 .nft-card-stats-title {
-  color: white;
+  color: var(--highlight);
 }
 
 
 .nft-trait-types-header {
   margin: 8px;
-  border: 8px solid var(--blue);
+  border: var(--border-width) solid var(--secondary);
 }
 .nft-trait-types-header-expandable {
   display: block;
@@ -156,11 +181,11 @@ a:hover {
 
 .nft-trait-type {
   margin: 8px;
-  border: 8px solid var(--blue);
+  border: var(--border-width) solid var(--secondary);
 }
 .nft-trait-type {
   margin: 8px;
-  border: 8px solid var(--blue);
+  border: var(--border-width) solid var(--secondary);
 }
 .nft-trait-type-header {
   padding: 4px;
@@ -176,11 +201,11 @@ a:hover {
   opacity: 0.5;
 }
 .nft-trait-value:hover {
-  color: white;
+  color: var(--highlight);
 }
 .nft-trait-value-selected {
   padding: 4px;
   opacity: 1;
-  border: 1px solid var(--blue);
+  border: 1px solid var(--secondary);
 }
 
