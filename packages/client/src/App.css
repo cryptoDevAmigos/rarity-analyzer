@@ -66,12 +66,17 @@ a:hover {
     grid-row: 2;
     grid-column: 2;
   }
+
+  .nft-list {
+    /* Something is causing extra space on right - only in grid view */
+    margin-right: 2em;
+  }
 }
 
 .nft-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  grid-gap: 1em 1em;
+  grid-gap: 1em;
   grid-auto-flow: row dense;
 }
 
