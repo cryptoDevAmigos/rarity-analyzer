@@ -57,24 +57,28 @@ export const NftCard = ({nft}:{ nft: INftRarityWithExtra }) => {
                         <img alt='nft' src={getIpfsUrl(nft.nft.image)}/>
                     </LazyComponent>
                 </div>
-                <div>
-                    <div style={{ display:'flex', flexDirection:'row', fontSize:`0.8em`, color: 'white' }}>
-                                <div style={{flex: 1}}>{'Content'}</div>
-                                <div style={{flex: 1}}>{'Attribute'}</div>
-                                <div style={{flex: 1}}>{'Commonality'}</div>
-                                <div style={{flex: 1}}>{'Rarity Score'}</div>
+                <div className='nft-card-stats'>
+                    <div className='nft-card-stats-row' style={{ fontSize:`0.8em`, color: 'white' }}>
+                        <div className='nft-card-stats-cell' style={{textAlign:'left'}}>{'Trait'}</div>
+                        <div className='nft-card-stats-cell' style={{textAlign:'right'}}>{'Rarity Score'}</div>
+                    </div>
+                    <div className='nft-card-stats-row' style={{ fontSize:`0.8em`, color: 'white' }}>
+                        <div className='nft-card-stats-cell' style={{textAlign:'right'}}>{''}</div>
+                        <div className='nft-card-stats-cell'>{'Commonality'}</div>
                     </div>
                     {nft.attributeRarities.map(x=>(
                         <React.Fragment key={x.trait_type}>
-                            <div style={{ display:'flex', flexDirection:'row' }}>
-                                <div style={{flex: 1}}>{x.trait_type}</div>
-                                <div style={{flex: 1}}>
+                            <div className='nft-card-stats-row'>
+                                <div className='nft-card-stats-cell nft-card-stats-title' style={{textAlign:'left'}}>{x.trait_type}</div>
+                                <div className='nft-card-stats-cell' style={{textAlign:'right'}}>{`${x.ratioScore.toFixed(2)}`}</div>  
+                            </div>
+                            <div className='nft-card-stats-row'>
+                                <div className='nft-card-stats-cell' style={{textAlign:'right'}}>
                                     <span style={x.value !== "[Missing]"?{fontWeight:'bold'}:{}}>{x.value}</span>
                                 </div>
-                                <div style={{flex: 1}}>
+                                <div className='nft-card-stats-cell'>
                                     <BarGraphCell ratio={x.ratio} />
-                                </div>
-                                <div style={{flex: 1}}>{`${x.ratioScore.toFixed(2)}`}</div>                                
+                                </div>                              
                             </div>
                         </React.Fragment>
                     ))}
