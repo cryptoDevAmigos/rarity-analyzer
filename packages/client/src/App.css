@@ -70,7 +70,7 @@ a:hover {
 
 .nft-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 0;
   grid-auto-flow: row dense;
 }
@@ -83,7 +83,7 @@ a:hover {
 .nft-card {
   margin: 16px;
   padding: 16px;
-  min-width: 240px;
+  /* min-width: 240px; */
   min-height: 240px;
   width: calc(100% - 32px);
   height: calc(100% - 32px);
@@ -105,6 +105,25 @@ a:hover {
 .nft-card-image img {
   width: 150px;
   height: 150px;
+}
+
+.nft-card-stats {
+  padding: 4px;
+}
+
+.nft-card-stats-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.nft-card-stats-cell {
+  flex: 1;
+  word-break: break-all;
+  text-overflow: ellipsis;
+}
+
+.nft-card-stats-title {
+  color: white;
 }
 
 
@@ -164,3 +183,4 @@ a:hover {
   opacity: 1;
   border: 1px solid var(--blue);
 }
+
