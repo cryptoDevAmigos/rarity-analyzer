@@ -48,8 +48,8 @@ export const NftCard = ({nft}:{ nft: INftRarityWithExtra }) => {
                     <a href={getIpfsUrl(nft.nft.external_url)}>External Link</a>
                 </div>
                 <div>
-                    {!!nft.openSeaLink && <a href={nft.openSeaLink}>Open Sea</a>}
-                    {!nft.openSeaLink && <span>Open Sea - Not Found</span>}
+                    {!!nft.openSeaLink && <a href={nft.openSeaLink}>OpenSea</a>}
+                    {!nft.openSeaLink && <span>OpenSea - Not Found</span>}
                 </div>
 
                 <div className={'nft-card-image'}>
