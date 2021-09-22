@@ -11,14 +11,14 @@
         "discord": "https://discord.gg/aPS3Hre57D"
     },
     "theme": {
-        "isDark": false,
-        "back": "#EEEEFF",
-        "primary": "#005500",
-        "secondary": "#b27aef",
-        "highlight": "#000000",
+        "isDark": true,
+        "back": "#111111",
+        "primary": "#00FF00",
+        "secondary": "#0062F9",
+        "highlight": "#FFFFFF",
         "borderWidth": "2px",
-        "borderRadius": "8px",
+        "borderRadius": "4px",
         "boxShadowWidth": "8px",
-        "boxShadowBlur": "2px"
+        "boxShadowBlur": "16px"
     }
 }
