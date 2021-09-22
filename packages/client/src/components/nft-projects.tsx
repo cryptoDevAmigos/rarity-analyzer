@@ -48,15 +48,14 @@ export const NftProjectCard = ({projectKey, project}:{ projectKey:string, projec
             <div className={'nft-card'}>
                 {/* <div><b>Token ID:</b> {nft.nft.id}</div> */}
                 <div><b>{project.name}</b></div>
-                <div>
-                    <a href={getIpfsUrl(project.external_link)}>External Link</a>
-                </div>
 
                 <div className={'nft-card-image'} onClick={()=>window.location.href=`${projectKey}`}>
                     <LazyComponent>
                         <img alt='nft' src={getIpfsUrl(project.image)}/>
                     </LazyComponent>
                 </div>
+
+                <div><b>{project.description}</b></div>
             </div>
         </>
     );

@@ -1,7 +1,7 @@
 {
-    "name": "One Day Punks (Example 10)",
-    "symbol": "ODP",
-    "description": "10k 'One Day I'll Be A Punk' punks – a homage to the one and only CryptoPunks.",
+    "name": "Example ODP 10",
+    "symbol": "EXODP",
+    "description": "Example Project using 10 One Day Punks for testing",
     "image": "ipfs://QmUZMuhGPFqAe1LiCxg9qZwNSXtLCYCi5D4aasYH5uiU9a",
     "external_link": "https://punkscape.xyz/onedaypunks/",
     "contract": "0x5537d90A4A2DC9d9b37BAb49B490cF67D4C54E91",
