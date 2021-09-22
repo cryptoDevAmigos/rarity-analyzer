@@ -52,7 +52,7 @@ export const NftProjectCard = ({projectKey, project}:{ projectKey:string, projec
 
     return (
         <>
-            <div id={targetId} className={'nft-card'} onClick={()=>window.location.href=`${projectKey}`}>
+            <div id={targetId} className={'nft-card link'} onClick={()=>window.location.href=`${projectKey}`}>
                 <div><b>{project.name}</b></div>
 
                 <div className={'nft-card-image'}>

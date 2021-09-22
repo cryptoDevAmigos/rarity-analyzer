@@ -130,6 +130,7 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                         {projectRarity && (
                             <LazyList items={[...tokenIds]} getItemKey={x=>`${x}`} ItemComponent={({item})=>(
                                 <div
+                                    className='link'
                                     onClick={()=>window.location.href=`${projectKey}/${item}`}
                                 >
                                     <NftLoader projectKey={projectKey} tokenId={`${item}`} contractAddress={projectRarity.contractAddress} onSelect={onSelect} />
@@ -191,7 +192,7 @@ export const TraitTypesList = ({
     return (
         <>
             <div className='nft-trait-types-header'>
-                <div className='nft-trait-types-header-expandable' onClick={()=>setIsExpanded(s=>!s)}>
+                <div className='nft-trait-types-header-expandable link' onClick={()=>setIsExpanded(s=>!s)}>
                     <div style={{position:'relative'}}>
                         <div style={{
                             position:'absolute',
@@ -207,7 +208,7 @@ export const TraitTypesList = ({
                     <div>Trait Filters</div>
                 </div>
             </div>
-                <div className='nft-trait-type-header' onClick={onReset}>
+                <div className='nft-trait-type-header link' onClick={onReset}>
                     <div style={{position:'relative'}}>
                         {Object.values(selected).some(x=>x !==ALL_TRAIT_VALUE) && (
                             <>
@@ -256,7 +257,7 @@ export const TraitValuesList = ({
         }
 
         return (
-            <div className='nft-trait-type' onClick={()=>onSelect({traitType, value: ALL_TRAIT_VALUE})}>
+            <div className='nft-trait-type link' onClick={()=>onSelect({traitType, value: ALL_TRAIT_VALUE})}>
                 <div style={{position:'relative'}}>
                     <div style={{
                         position:'absolute',
@@ -272,7 +273,7 @@ export const TraitValuesList = ({
 
     return (
         <div className='nft-trait-type'>
-            <div className='nft-trait-type-header' onClick={()=>onSelect({traitType, value: ALL_TRAIT_VALUE})}>
+            <div className='nft-trait-type-header link' onClick={()=>onSelect({traitType, value: ALL_TRAIT_VALUE})}>
                 <div style={{position:'relative'}}>
                     <div style={{
                         position:'absolute',
@@ -286,7 +287,7 @@ export const TraitValuesList = ({
             <div className='nft-trait-values'>
                 {traitTypeTokenLookups.map(x=>(
                     <React.Fragment key={`${x.trait_type}:${x.trait_value}`}>
-                        <div className={`nft-trait-value ${selectedTraitValue === x.trait_value ? 'nft-trait-value-selected':''}`} onClick={()=>onSelect({traitType: x.trait_type, value: x.trait_value})}>
+                        <div className={`nft-trait-value link ${selectedTraitValue === x.trait_value ? 'nft-trait-value-selected':''}`} onClick={()=>onSelect({traitType: x.trait_type, value: x.trait_value})}>
                             <BarGraphCell ratio={x.ratio} text={x.trait_value} textRight={isAllSelected || selectedTraitValue === x.trait_value ? `${x.tokenIds.filter(t=>tokenIds.has(t)).length}`:``}/>
                         </div>
                     </React.Fragment>

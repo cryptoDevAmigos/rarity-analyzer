@@ -40,12 +40,17 @@ div {
   color: var(--highlight);
 }
 
-a, .link {
+a {
   color: var(--primary);
 }
 
-a:hover, .link:hover {
+a:hover {
   color: var(--highlight);
+  cursor: hand;
+}
+
+.link:hover{
+  cursor: hand;
 }
 
 
@@ -194,6 +199,10 @@ a:hover, .link:hover {
   padding: 1px;
 }
 
+.nft-card-stats-cell.link:hover {
+  color: var(--highlight);
+}
+
 .nft-card-stats-title {
   color: var(--highlight);
 }
@@ -251,12 +260,14 @@ a:hover, .link:hover {
   padding: 4px;
   opacity: 0.5;
 }
-.nft-trait-value:hover {
-  color: var(--highlight);
+.nft-trait-value.link:hover {
+  opacity: 1;
+  padding: 3px;
+  border: 1px solid var(--secondary);
 }
 .nft-trait-value-selected {
-  padding: 4px;
   opacity: 1;
+  padding: 3px;
   border: 1px solid var(--secondary);
 }
 
