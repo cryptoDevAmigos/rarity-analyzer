@@ -8,6 +8,7 @@
         "publish:client": "copyfiles -e data/**/* -u 3 ./packages/client/build/**/* ./web",
         "build:rarities": "cd ./packages/common && npm run build:rarities",
         "clean": "rimraf ./web/data/**/*",
+        "rebuild:trigger": "rimraf ./web/data/**/.lastchangehash",
         "rebuild": "npm run clean && npm run build:rarities",
         "test": "cd ./packages/common && npm run test",
         "// start": "npm run build:common && concurrently \"npm run start:client\" \"npm run start:server\"",
