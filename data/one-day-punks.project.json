@@ -12,7 +12,7 @@
     },
     "theme": {
         "isDark": true,
-        "back": "#111111",
+        "back": "#000000",
         "primary": "#FF00AE",
         "secondary": "#0062F9",
         "highlight": "#FFFFFF",

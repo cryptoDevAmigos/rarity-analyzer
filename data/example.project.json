@@ -13,8 +13,8 @@
     "theme": {
         "isDark": false,
         "back": "#EEEEFF",
-        "primary": "#FF00AE",
-        "secondary": "#0062F9",
+        "primary": "#005500",
+        "secondary": "#b27aef",
         "highlight": "#000000",
         "borderWidth": "2px",
         "borderRadius": "8px",
