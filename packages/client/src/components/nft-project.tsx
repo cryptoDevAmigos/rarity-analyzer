@@ -210,17 +210,22 @@ export const TraitTypesList = ({
                     <div>Trait Filters</div>
                 </div>
             </div>
-            <div className='nft-trait-value' onClick={onReset}>
-                <div style={{position:'relative'}}>
-                    <div style={{
-                        position:'absolute',
-                        right: 4,
-                        }}>
-                        {'❌'}
+                <div className='nft-trait-type-header' onClick={onReset}>
+                    <div style={{position:'relative'}}>
+                        {Object.values(selected).some(x=>x !==ALL_TRAIT_VALUE) && (
+                            <>
+                                <div style={{
+                                    position:'absolute',
+                                    right: 4,
+                                    }}>
+                                    {'❌'}
+                                </div>
+                                <span>Reset</span>
+                            </>
+                        )}
+                        <span>&nbsp;</span>
                     </div>
-                    Reset
                 </div>
-            </div>
             <div className='nft-trait-types'>
                 {projectRarity.traitTypes.map(x=>(
                     <React.Fragment key={x}>
