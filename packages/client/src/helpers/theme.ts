@@ -11,6 +11,8 @@ ${target} {
         .filter(key => t[key] && typeof t[key] === 'string')
         .map(key => `
     --${toCssName(key)}: ${t[key]};`).join('')}
+
+    --black-or-white: ${projectTheme?.isDark ? '#FFFFFF' : '#000000'}
 }
     `;
 

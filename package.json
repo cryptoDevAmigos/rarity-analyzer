@@ -7,6 +7,8 @@
         "build:client": "(cd ./packages/client && npm run build) && (cd ../../ && npm run publish:client)",
         "publish:client": "copyfiles -e data/**/* -u 3 ./packages/client/build/**/* ./web",
         "build:rarities": "cd ./packages/common && npm run build:rarities",
+        "clean": "rimraf ./web/data/**/*",
+        "rebuild": "npm run clean && npm run build:rarities",
         "test": "cd ./packages/common && npm run test",
         "// start": "npm run build:common && concurrently \"npm run start:client\" \"npm run start:server\"",
         "start": "npm run start:client",
@@ -20,6 +22,7 @@
     ],
     "devDependencies": {
         "concurrently": "^6.2.1",
-        "copyfiles": "^2.4.1"
+        "copyfiles": "^2.4.1",
+        "rimraf": "^3.0.2"
     }
 }
