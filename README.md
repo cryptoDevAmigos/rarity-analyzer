@@ -1,7 +1,8 @@
 # rarity-analyzer
 
 ## Development
-1. Install npm version 7.23.0 for use of workspaces.  Npm upgrade info for Windows `https://stackoverflow.com/questions/18412129/how-can-i-update-npm-on-windows`
+
+1. Requires npm version 7 (for npm workspaces).  Npm upgrade info for Windows `https://stackoverflow.com/questions/18412129/how-can-i-update-npm-on-windows`
 
 2. Run `npm install` at the root of rarity-analyzer to install server dependencies including scope packages and workspaces.  
 
@@ -10,26 +11,22 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
 
 3. Run `npm start` to start the development server.
 
-### Notes
-
-- When debugging react make sure to copy `web/data` to `packages/client/public/data`
 
 
-## Testing
+## Architecture
 
-## Requirements
+### Frontend
 
-- [x] Only OneDayPunk owners may participate in the hackathon
-- [x] The app has to calculate a rarity score for each item in the given collection
-- [] The app has to be deployed on a live server (Heroku free tier or similar is fine)
-    - Serverless: Precaculated static on Netlify    - 
-- [] The app has to be usable: Minimum requirement is that the rarity of each item in the collection can be queried / viewed
-- [] There must be easy to follow documentation for other developers on how to configure their own collection metadata and deploy it to a server.
-- [] "One quick note for all contestants - think about how to make the tool as widely usable as possible... Think of config options like "Project Logo / Name / Contract Address" etc." - jalil
-- [] "makes the data easily queried / viewed in a web interface or via a Discord bot (or both 😅) " -jalil
-- [] "As a good example of an easy to install and configure package check out this open source discord bot for OpenSea sales: https://github.com/0xEssential/opensea-discord-bot"
+- load /tokenId.json files from api
+- routing /projectKey/tokenId
+    - /project Pages - show list of tokens
+    - /token - show rarity details
+        - image: imageUrl.replace('ipfs://', 'https://gateway.pinata.cloud/ipfs/')
+        - external_url: [same as above]
+        - rarity data:
+            - trait: rarity value
 
-## Serverless (using GitHub actions to pre-calculate rarity)
+### Static Pregenerated Rarity Data (using GitHub actions to pre-calculate rarity)
 
 - Host website on Netlify (with continuous deploy from repo folder '/web/')
 - GitHub actions
@@ -48,22 +45,33 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
     - create a netlify
     - point netlify to repo/web
 
-## Tasks
+### Discord Integration
 
-- Frontend
-    - load /tokenId.json files from api
-    - routing /projectKey/tokenId
-        - /project Pages - show list of tokens
-        - /token - show rarity details
-            - image: imageUrl.replace('ipfs://', 'https://gateway.pinata.cloud/ipfs/')
-            - external_url: [same as above]
-            - rarity data:
-                - trait: rarity value
-- Api
-    - Handling metadata requests
-        - routing /projectKey/tokenId
-    - 
+- Use discord outgoing webhooks (serverless)
+- Requests handled by Netlify functions (or other serverless provider like AWS lambda) 
+
+## PRogress
+### Hackathon Requirements
+
+- [ ] https://github.com/punkscape/01-rarity-analyser-hackathon
+    - [x] Only OneDayPunk owners may participate in the hackathon
+        - [x] You have to hold a OneDayPunk to take part in the hackathon. 
+    - [x] The app has to calculate a rarity score for each item in the given collection
+    - [x] The app has to be deployed on a live server (Heroku free tier or similar is fine)
+    - [x] The app has to be usable: Minimum requirement is that the rarity of each item in the collection can be queried / viewed
+    - [ ] There must be easy to follow documentation for other developers on how to configure their own collection metadata and deploy it to a server.
+        - [] "As a good example of an easy to install and configure package check out this open source discord bot for OpenSea sales: https://github.com/0xEssential/opensea-discord-bot"
+
+- [x] Generate `/web/projectName/collection-rarities.json`
+- [x] Json data is accessible 
+- [ ] Discord integration
+- [ ] Instructions
+    - [ ] Add Project
+    - [ ] Deploy clone
+- [ ] Submission before 27.09.2021 00:00 UTC
+
     
+### Tasks
 
 - [x] Github action to build:rarities
 - [x] Copy files from react/build to web in build script
@@ -76,24 +84,33 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
         - [x] Add `web/data/one-day-punks/project.json` output
         - [x] Create ProjectNftsComponent
     - [x] Fix React favicons, title, etc.
-    - [ ] Add Project Details
+    - [x] Add Project Details
         - [x] Links (Discord, Twitter, Site, etc.)
         - [x] Theme (see css vars)
-        - [ ] Logo
+        - [x] Logo
     - [ ] OpenRarity Site
-        - [ ] Logo (Home Button)
-        - [ ] Feature List
-        - [ ] Creators List (Punks)
-            - [ ] Name, Bio, Links
-        - [ ] 
+        - [x] Logo (Home Button)
+        - [x] Creators List (Punks)
+            - [x] Name, Bio, Links
+        - [ ] Feature List (of site)
 
+- [ ] OpenRarity Discord Server + OutgoingWebhookBot
+    - [ ] Create Open Rarity Discord Server
+    - [ ] Handle commands
+        - [ ] /openrarity list
+            - List known projects
+        - [ ] /openrarity project-key token-id
+            - Get token rarity info for a known project-key
+        - [ ] /openrarity token-id
+            - Get token rarity info for a default project-key 
+            - configured during command integration of discord server
 
-- [ ] Easy Button: Add contract address and hit submit on website
-    - Use web3 to get contract data
-- [ ] Generate `/web/projectName/collection-rarities.json`
-- [ ] Review Requirements
-
-
+- [ ] ? Easy Button: Add contract address and hit submit on website
+    - [!STORAGE] 
+        - This probably can't be done purely by github actions
+        - Where will the data go?
+    - [ ] ? Use web3 to get contract data
+    - [ ] ? Use open sea api to get data
 
 
 - [ ] Add Instructions for adding project
@@ -105,11 +122,10 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
 
 - [ ] Instructions for Forking and deploy to site provider (Netlify)
 
+### Ideas
 
-## Ideas
-
-- [ ] Web3 - show owned
+- [ ] Show owned Nfts
+    - Contract Address
+        - Manually enter contract address
+        - Web3 to get contract address of user
     - https://docs.opensea.io/reference/getting-assets
-
-- [ ] Discord Bot 
-    - Create OpenRarity Discord Server to demo
