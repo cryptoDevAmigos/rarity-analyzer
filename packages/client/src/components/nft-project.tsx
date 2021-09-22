@@ -6,7 +6,7 @@ import { NftLoader } from './nft-loader';
 import { getIpfsUrl, getNftJsonUrl, getProjectJsonUrl } from '../helpers/urls';
 import { BarGraphCell } from './bar-graph';
 import { changeTheme } from '../helpers/theme';
-import { Icon, IconLink, IconName } from './icons';
+import { Icon, IconLink, IconName, LoadingIndicator } from './icons';
 import { SmartImage } from './smart-image';
 import { OnSelectTraitValue } from './types';
 
@@ -34,6 +34,7 @@ export const NftProjectLoader = ({ projectKey }:{ projectKey:string })=>{
 
 return (
     <>
+        {!projectRarity && <LoadingIndicator/>}
         {projectRarity && <NftProject projectKey={projectKey} projectRarity={projectRarity} />}
     </>
 );
