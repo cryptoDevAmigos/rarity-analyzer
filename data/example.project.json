@@ -11,6 +11,7 @@
         "discord": "https://discord.gg/aPS3Hre57D"
     },
     "theme": {
+        "isDark": false,
         "back": "#EEEEFF",
         "primary": "#FF00AE",
         "secondary": "#0062F9",

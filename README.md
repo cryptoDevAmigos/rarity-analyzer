@@ -77,13 +77,22 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
         - [x] Create ProjectNftsComponent
     - [x] Fix React favicons, title, etc.
     - [ ] Add Project Details
-        - [ ] Links (Discord, Twitter, Site, etc.)
+        - [x] Links (Discord, Twitter, Site, etc.)
         - [x] Theme (see css vars)
+        - [ ] Logo
+    - [ ] OpenRarity Site
+        - [ ] Logo (Home Button)
+        - [ ] Feature List
+        - [ ] Creators List (Punks)
+            - [ ] Name, Bio, Links
+        - [ ] 
+
 
 - [ ] Easy Button: Add contract address and hit submit on website
     - Use web3 to get contract data
 - [ ] Generate `/web/projectName/collection-rarities.json`
 - [ ] Review Requirements
+
 
 
 
@@ -95,3 +104,12 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
         - Website will be updated with results
 
 - [ ] Instructions for Forking and deploy to site provider (Netlify)
+
+
+## Ideas
+
+- [ ] Web3 - show owned
+    - https://docs.opensea.io/reference/getting-assets
+
+- [ ] Discord Bot 
+    - Create OpenRarity Discord Server to demo

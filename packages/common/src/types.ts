@@ -43,6 +43,7 @@ export type IProjectLinks = Record<string,string> & {
 };
 
 export type IProjectTheme = {
+    isDark?: boolean;
     back?: string;
     primary?: string;
     secondary?: string;
@@ -53,6 +54,7 @@ export type IProjectTheme = {
     boxShadowBlur?: string;
 }
 const exampleTheme: IProjectTheme = {
+    isDark: false,
     back: '#EEEEFF',
     primary: '#FF00AE',
     secondary: '#0062F9',
