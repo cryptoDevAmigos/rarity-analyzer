@@ -7,7 +7,7 @@ import { getIpfsUrl, getNftJsonUrl, getProjectJsonUrl } from '../helpers/urls';
 import { BarGraphCell } from './bar-graph';
 import { changeTheme } from '../helpers/theme';
 import { getOpenSeaData } from '../helpers/open-sea';
-import { Icon, IconName } from './icons';
+import { Icon, IconLink, IconName } from './icons';
 
 // Workaround for importing implementation
 const MISSING_ATTRIBUTE_VALUE: typeof MISSING_ATTRIBUTE_VALUE_TYPE = `[Missing]`;
@@ -152,15 +152,15 @@ export const ProjectInfo = ({projectRarity}:{ projectRarity:INftProjectRarityDat
                 </div>
                 <div style={{}}>
                     <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>
-                        <ProjectLink url={project.external_link} icon='link'/>
-                        <ProjectLink url={project.links?.opensea} iconUrl='/media/opensea.png'/>
-                        <ProjectLink url={project.links?.openSea} iconUrl='/media/opensea.png'/>
-                        <ProjectLink url={project.links?.twitter} icon='twitter'/>
-                        <ProjectLink url={project.links?.discord} icon='discord'/>
+                        <IconLink url={project.external_link} icon='link'/>
+                        <IconLink url={project.links?.opensea} iconUrl='/media/opensea.png'/>
+                        <IconLink url={project.links?.openSea} iconUrl='/media/opensea.png'/>
+                        <IconLink url={project.links?.twitter} icon='twitter'/>
+                        <IconLink url={project.links?.discord} icon='discord'/>
                         {Object.entries(project.links??{})
                             .filter(([k])=> !'opensea openSea discord twitter'.includes(k))
                             .map(([k,v])=>(
-                                <ProjectLink key={k} url={v} icon='link'/>
+                                <IconLink key={k} url={v} icon='link'/>
                             ))}
                     </div>
                     <div style={{fontSize: '1.6em'}}>{project.name}</div>
@@ -171,19 +171,6 @@ export const ProjectInfo = ({projectRarity}:{ projectRarity:INftProjectRarityDat
                 </div>
 
             </div>
-        </>
-    );
-};
-
-export const ProjectLink = ({url, icon, iconUrl}: {url?:string, icon?: IconName, iconUrl?:string})=>{
-    return (
-        <>
-            {!!url && <a className='project-link' href={url}
-                style={{display:'inline-block', width: 32, height: 32, fontSize: 20 }}
-            >
-                {!!icon && <Icon icon={icon}/>}
-                {!!iconUrl && <img style={{width:20, height: 20}} src={iconUrl} alt='link'/>}
-            </a>}
         </>
     );
 };

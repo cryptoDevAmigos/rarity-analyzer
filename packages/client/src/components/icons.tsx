@@ -24,3 +24,16 @@ export const Icon = ({icon}:{icon:IconName})=>{
 
     return <></>;
 };
+
+export const IconLink = ({url, icon, iconUrl}: {url?:string, icon?: IconName, iconUrl?:string})=>{
+    return (
+        <>
+            {!!url && <a href={url}
+                style={{display:'inline-block', width: 32, height: 32, fontSize: 20 }}
+            >
+                {!!icon && <Icon icon={icon}/>}
+                {!!iconUrl && <img style={{width:20, height: 20}} src={iconUrl} alt='link'/>}
+            </a>}
+        </>
+    );
+};
