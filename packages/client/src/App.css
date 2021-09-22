@@ -27,11 +27,16 @@ div {
   border-radius: var(--border-radius);
 }
 
-.bar-background {
+.bar-graph {
+  border: 1px solid var(--primary);
+  border-radius: 0;
+}
+.bar-graph-background {
   background: var(--primary);
   opacity: 0.5;
+  border-radius: 0;
 }
-.bar-text {
+.bar-graph-text {
   color: var(--highlight);
 }
 
@@ -120,7 +125,6 @@ a:hover {
 .nft-card-header {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(6, 1fr);
 
   background: var(--primary);
   color: var(--back);
@@ -139,10 +143,23 @@ a:hover {
   grid-column: span 2;
   grid-row: span 2;
   padding: 4px;
+
+  display: flex;
+  flex-direction: column;
 }
+.nft-card-header-item-2 {
+  grid-column: span 2;
+  grid-row: span 3;
+  padding: 4px;
+
+  display: flex;
+  flex-direction: column;
+}
+
 .nft-card-header-item-label {
 }
 .nft-card-header-item-value {
+  flex: 1;
   background: var(--back);
   color: var(--highlight);
   border-radius: 0;
@@ -208,6 +225,10 @@ a:hover {
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   grid-gap: 1em 1em;
   grid-auto-flow: row dense;
+}
+
+.nft-trait-types .bar-graph {
+  border: 0;
 }
 
 .nft-trait-type {

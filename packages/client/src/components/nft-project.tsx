@@ -6,7 +6,6 @@ import { NftLoader } from './nft-loader';
 import { getIpfsUrl, getNftJsonUrl, getProjectJsonUrl } from '../helpers/urls';
 import { BarGraphCell } from './bar-graph';
 import { changeTheme } from '../helpers/theme';
-import { getOpenSeaData } from '../helpers/open-sea';
 import { Icon, IconLink, IconName } from './icons';
 
 // Workaround for importing implementation

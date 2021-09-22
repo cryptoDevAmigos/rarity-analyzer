@@ -19,23 +19,27 @@ export type INftRarityWithExtra = INftRarity & {
     },
 };
 
-const Price = (x?: {
+const Price = ({price}:{price?: {
     price: number;
     symbol?: string;
     priceUsd?: number;
-}) => {
+}}) => {
     
-    if(!x){ return <span>{'-?-'}</span>}
+    if(!price){ return <span>{'-?-'}</span>}
 
     return (
         <>
-            <span>{x.price.toFixed(3)}</span>
-            {x.symbol && (
-                x.symbol.toLowerCase() === 'eth' ? <span className='black-or-white'><Icon icon='eth'/></span> 
-                : x.symbol.toLowerCase() === 'weth' ? <span style={{color: '#ca477b'}}><Icon icon='eth'/></span> 
-                : <span>{x.symbol}</span>
-            )}
-            <span>{x.priceUsd ? ` $${x.priceUsd.toFixed(2)}`:''}</span>
+            <div style={{display:'inline-block', minWidth: 100}}>
+                <span>{price.price.toFixed(3)}</span>
+                {price.symbol && (
+                    price.symbol.toLowerCase() === 'eth' ? <span className='black-or-white'><Icon icon='eth'/></span> 
+                    : price.symbol.toLowerCase() === 'weth' ? <span style={{color: '#ca477b'}}><Icon icon='eth'/></span> 
+                    : <span>{price.symbol}</span>
+                )}
+            </div>
+            <div style={{display:'inline-block', minWidth: 100}}>
+                <span>{price.priceUsd ? ` $${price.priceUsd.toFixed(2)}`:''}</span>
+            </div>
         </>
     );
 }
@@ -64,13 +68,13 @@ export const NftCard = ({nft}:{ nft: INftRarityWithExtra }) => {
                         <div className='nft-card-header-item-label'>Rank:</div>
                         <div className='nft-card-header-item-value'>{nft.rank}</div>
                     </div>
-                    <div className='nft-card-header-item'>
-                        <div className='nft-card-header-item-label'>Listing:</div>
-                        <div className='nft-card-header-item-value'>{Price(nft.listing)}</div>
-                    </div>
-                    <div className='nft-card-header-item'>
+                    <div className='nft-card-header-item-2'>
                         <div className='nft-card-header-item-label'>Last Sell:</div>
-                        <div className='nft-card-header-item-value'>{Price(nft.lastSell)}</div>
+                        <div className='nft-card-header-item-value'><Price price={nft.lastSell}/></div>
+                    </div>
+                    <div className='nft-card-header-item-2'>
+                        <div className='nft-card-header-item-label'>Listing:</div>
+                        <div className='nft-card-header-item-value'><Price price={nft.listing}/></div>
                     </div>
                     <div className='nft-card-header-title'>{nft.nft.name}</div>
                 </div>
