@@ -165,7 +165,7 @@ export function calculateRarity(metadataRaw: INftMetadata[], options?: { include
         .sort((a,b) => (-(a.rarityScore-b.rarityScore)))
         .map((x,i)=>({
             ...x,
-            rank: i 
+            rank: i + 1,
         }));
 
     // console.log('calcRarity', { 
