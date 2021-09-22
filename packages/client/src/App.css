@@ -93,6 +93,10 @@ a:hover {
   }
 }
 
+.project-link {
+  /* color: var(--primary); */
+}
+
 .nft-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

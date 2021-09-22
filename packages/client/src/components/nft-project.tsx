@@ -7,6 +7,7 @@ import { getIpfsUrl, getNftJsonUrl, getProjectJsonUrl } from '../helpers/urls';
 import { BarGraphCell } from './bar-graph';
 import { changeTheme } from '../helpers/theme';
 import { getOpenSeaData } from '../helpers/open-sea';
+import { Icon, IconName } from './icons';
 
 // Workaround for importing implementation
 const MISSING_ATTRIBUTE_VALUE: typeof MISSING_ATTRIBUTE_VALUE_TYPE = `[Missing]`;
@@ -141,7 +142,7 @@ export const ProjectInfo = ({projectRarity}:{ projectRarity:INftProjectRarityDat
     const {project} = projectRarity;
     return (
         <>
-          <div style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+            <div style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                 <div style={{}}>
                     <img 
                         src={getIpfsUrl(project.image)} 
@@ -150,33 +151,39 @@ export const ProjectInfo = ({projectRarity}:{ projectRarity:INftProjectRarityDat
                     />
                 </div>
                 <div style={{}}>
+                    <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>
+                        <ProjectLink url={project.external_link} icon='link'/>
+                        <ProjectLink url={project.links?.opensea} iconUrl='/media/opensea.png'/>
+                        <ProjectLink url={project.links?.openSea} iconUrl='/media/opensea.png'/>
+                        <ProjectLink url={project.links?.twitter} icon='twitter'/>
+                        <ProjectLink url={project.links?.discord} icon='discord'/>
+                        {Object.entries(project.links??{})
+                            .filter(([k])=> !'opensea openSea discord twitter'.includes(k))
+                            .map(([k,v])=>(
+                                <ProjectLink key={k} url={v} icon='link'/>
+                            ))}
+                    </div>
                     <div style={{fontSize: '1.6em'}}>{project.name}</div>
                     <div style={{fontSize: '1.0em'}}>{project.description}</div>
                     <div style={{fontSize: '1.0em'}}>
                         <a href={getIpfsUrl(project.external_link)}>{project.external_link}</a>
                     </div>
                 </div>
-                <div style={{display:'flex', flexDirection:'column', flexWrap:'wrap'}}>
-                    <ProjectLink url={project.external_link} icon='🔗'/>
-                    <ProjectLink url={project.links?.opensea} icon='🔗'/>
-                    <ProjectLink url={project.links?.openSea} icon='🔗'/>
-                    <ProjectLink url={project.links?.twitter} icon='🔗'/>
-                    <ProjectLink url={project.links?.discord} icon='🔗'/>
-                    {Object.entries(project.links??{})
-                        .filter(([k])=> !'opensea openSea discord twitter'.includes(k))
-                        .map(([k,v])=>(
-                            <ProjectLink key={k} url={v} icon='🔗'/>
-                        ))}
-                </div>
+
             </div>
         </>
     );
 };
 
-export const ProjectLink = ({url, icon}: {url?:string, icon:string})=>{
+export const ProjectLink = ({url, icon, iconUrl}: {url?:string, icon?: IconName, iconUrl?:string})=>{
     return (
         <>
-            {!!url && <a href={url}>{icon}</a>}
+            {!!url && <a className='project-link' href={url}
+                style={{display:'inline-block', width: 32, height: 32, fontSize: 20 }}
+            >
+                {!!icon && <Icon icon={icon}/>}
+                {!!iconUrl && <img style={{width:20, height: 20}} src={iconUrl} alt='link'/>}
+            </a>}
         </>
     );
 };
@@ -191,9 +198,10 @@ export const TraitTypesList = ({ projectRarity, tokenIds, selected, onSelect }:{
                     <div style={{position:'relative'}}>
                         <div style={{
                             position:'absolute',
-                            right: 4,
+                            left: 4,
+                            fontSize: 18
                             }}>
-                            {isExpanded ? '👀' : '👇' }
+                            {isExpanded ? <Icon icon='expanded'/> : <Icon icon='collapsed'/> }
                         </div>
                         Trait Filters 
                     </div>
