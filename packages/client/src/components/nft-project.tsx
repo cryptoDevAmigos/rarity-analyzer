@@ -109,6 +109,10 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
         setTokenIds(tokenIdsSelected);
         // nftListRef.current?.scrollIntoView({behavior:'smooth'});
     };
+    const onReset = () => {
+        traitFilters.current = {};
+        setTokenIds(new Set(projectRarity.tokenIdsByRank));
+    };
 
     return (
         <>
@@ -117,7 +121,7 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                     <ProjectInfo projectRarity={projectRarity}/>
                 </div>
                 <div className='panel-trait-types'>
-                    <TraitTypesList projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect}/>
+                    <TraitTypesList projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect} onReset={onReset}/>
                 </div>
                 <div className='panel-nft-list'>
                     <div className='nft-list' ref={nftListRef}>
@@ -178,7 +182,13 @@ export const ProjectInfo = ({projectRarity}:{ projectRarity:INftProjectRarityDat
     );
 };
 
-export const TraitTypesList = ({ projectRarity, tokenIds, selected, onSelect }:{ projectRarity:INftProjectRarityData, tokenIds: Set<number>, selected:TraitFilters, onSelect: (args:{ traitType: string, value: string, tokens: number[] })=>void })=>{
+export const TraitTypesList = ({ 
+    projectRarity, tokenIds, selected, onSelect, onReset
+}:{ 
+    projectRarity:INftProjectRarityData, tokenIds: Set<number>, 
+    selected:TraitFilters, onSelect: (args:{ traitType: string, value: string, tokens: number[] }) => void
+    onReset: () => void,
+})=>{
     const [isExpanded, setIsExpanded] = useState(true);
    
     return (
@@ -198,6 +208,17 @@ export const TraitTypesList = ({ projectRarity, tokenIds, selected, onSelect }:{
                 </div>
                 <div className='nft-trait-types-header-simple'>
                     <div>Trait Filters</div>
+                </div>
+            </div>
+            <div className='nft-trait-value' onClick={onReset}>
+                <div style={{position:'relative'}}>
+                    <div style={{
+                        position:'absolute',
+                        right: 4,
+                        }}>
+                        {'❌'}
+                    </div>
+                    Reset
                 </div>
             </div>
             <div className='nft-trait-types'>
