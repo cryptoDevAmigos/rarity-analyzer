@@ -76,8 +76,14 @@ const buildProjectRarityFiles = async ({
             // Ignore if missing
         }
 
+
+        console.log(`# generateRarityFiles: reading metadata for ${projectFileName}`);
         const nftListFileContent = await fs.readFile(fullNftListFileName, {encoding: 'utf-8' });
+        
+        console.log(`# generateRarityFiles: parsing metadata json for ${projectFileName}`);
         const nftList = JSON.parse(nftListFileContent) as INftMetadataCollectionDocument;
+
+        console.log(`# generateRarityFiles: calculating rarities for ${projectFileName}`);
         const rarityResult = calculateRarity(nftList);
 
         console.log(`# generateRarityFiles: saving rarities for ${projectFileName}`);

@@ -32,8 +32,12 @@ import { INftMetadata, INftRarity, MISSING_ATTRIBUTE_VALUE } from "./types";
  ```
  */
 export function calculateRarity(metadataRaw: INftMetadata[], options?: { includeTraitCount?: boolean }): INftRarity[] {
+    let runId = Math.floor(9999*Math.random());
+    // console.log(`# calculateRarity: START for ${runId}`);
+   
     const { includeTraitCount = true } = options ?? {};
 
+    // console.log(`# calculateRarity: Find all attributes for ${runId}`);
     const metadata = metadataRaw.map(x => ({
         ...x,
         attributes: [
