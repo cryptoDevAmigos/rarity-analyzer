@@ -6,6 +6,8 @@ import { NftLoader } from './nft-loader';
 import { getIpfsUrl, getNftJsonUrl, getProjectJsonUrl } from '../helpers/urls';
 import { BarGraphCell } from './bar-graph';
 import { changeTheme } from '../helpers/theme';
+import { getOpenSeaData } from '../helpers/open-sea';
+import { Icon, IconLink, IconName } from './icons';
 
 // Workaround for importing implementation
 const MISSING_ATTRIBUTE_VALUE: typeof MISSING_ATTRIBUTE_VALUE_TYPE = `[Missing]`;
@@ -137,23 +139,37 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
 };
 
 export const ProjectInfo = ({projectRarity}:{ projectRarity:INftProjectRarityData})=>{
+    const {project} = projectRarity;
     return (
         <>
-          <div style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+            <div style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                 <div style={{}}>
                     <img 
-                        src={getIpfsUrl(projectRarity.project.image)} 
+                        src={getIpfsUrl(project.image)} 
                         alt='project'
                         style={{objectFit:'contain', width: 150}}
                     />
                 </div>
                 <div style={{}}>
-                    <div style={{fontSize: '1.6em'}}>{projectRarity.project.name}</div>
-                    <div style={{fontSize: '1.0em'}}>{projectRarity.project.description}</div>
+                    <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>
+                        <IconLink url={project.external_link} icon='link'/>
+                        <IconLink url={project.links?.opensea} iconUrl='/media/opensea.png'/>
+                        <IconLink url={project.links?.openSea} iconUrl='/media/opensea.png'/>
+                        <IconLink url={project.links?.twitter} icon='twitter'/>
+                        <IconLink url={project.links?.discord} icon='discord'/>
+                        {Object.entries(project.links??{})
+                            .filter(([k])=> !'opensea openSea discord twitter'.includes(k))
+                            .map(([k,v])=>(
+                                <IconLink key={k} url={v} icon='link'/>
+                            ))}
+                    </div>
+                    <div style={{fontSize: '1.6em'}}>{project.name}</div>
+                    <div style={{fontSize: '1.0em'}}>{project.description}</div>
                     <div style={{fontSize: '1.0em'}}>
-                        <a href={getIpfsUrl(projectRarity.project.external_link)}>{projectRarity.project.external_link}</a>
+                        <a href={getIpfsUrl(project.external_link)}>{project.external_link}</a>
                     </div>
                 </div>
+
             </div>
         </>
     );
@@ -169,9 +185,10 @@ export const TraitTypesList = ({ projectRarity, tokenIds, selected, onSelect }:{
                     <div style={{position:'relative'}}>
                         <div style={{
                             position:'absolute',
-                            right: 4,
+                            left: 4,
+                            fontSize: 18
                             }}>
-                            {isExpanded ? '👀' : '👇' }
+                            {isExpanded ? <Icon icon='expanded'/> : <Icon icon='collapsed'/> }
                         </div>
                         Trait Filters 
                     </div>

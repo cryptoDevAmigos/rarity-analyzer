@@ -75,10 +75,10 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
     - List nfts for a project
         - [x] Add `web/data/one-day-punks/project.json` output
         - [x] Create ProjectNftsComponent
-    - [ ] Fix React favicons, title, etc.
+    - [x] Fix React favicons, title, etc.
     - [ ] Add Project Details
         - [ ] Links (Discord, Twitter, Site, etc.)
-        - [ ] Theme (see css vars)
+        - [x] Theme (see css vars)
 
 - [ ] Easy Button: Add contract address and hit submit on website
     - Use web3 to get contract data

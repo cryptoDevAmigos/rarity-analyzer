@@ -32,8 +32,15 @@ export interface INftProjectMetadata {
     external_link: string,
     contract: string,
     theme?: IProjectTheme;
+    links?: IProjectLinks;
 }
 export type INftProjectMetadataDocument = INftProjectMetadata;
+
+export type IProjectLinks = Record<string,string> & {
+    openSea?: string;
+    discord?: string;
+    twitter?: string;
+};
 
 export type IProjectTheme = {
     back?: string;

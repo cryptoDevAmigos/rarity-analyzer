@@ -3,6 +3,7 @@ import { INftRarity } from '@crypto-dev-amigos/common';
 import { LazyComponent } from './lazy-component';
 import { getIpfsUrl } from '../helpers/urls';
 import { BarGraphCell } from './bar-graph';
+import { IconLink } from './icons';
 
 export type INftRarityWithExtra = INftRarity & {
     openSeaLink?: string;
@@ -39,24 +40,21 @@ export const NftCard = ({nft}:{ nft: INftRarityWithExtra }) => {
     return (
         <>
             <div className={'nft-card'}>
-                {/* <div><b>Token ID:</b> {nft.nft.id}</div> */}
                 <div><b>{nft.nft.name}</b></div>
                 <div><b>Rarity Score:</b> {nft.rarityScore.toFixed(2)}</div>
                 <div><b>Listing:</b> {formatPrice(nft.listing)}</div>
                 <div><b>Last Sell:</b> {formatPrice(nft.lastSell)}</div>
-                <div>
-                    <a href={getIpfsUrl(nft.nft.external_url)}>External Link</a>
-                </div>
-                <div>
-                    {!!nft.openSeaLink && <a href={nft.openSeaLink}>Open Sea</a>}
-                    {!nft.openSeaLink && <span>Open Sea - Not Found</span>}
-                </div>
 
+                <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>
+                    <IconLink url={nft.nft.external_url} icon='link'/>
+                    <IconLink url={nft.openSeaLink} iconUrl='/media/opensea.png'/>
+                </div>
                 <div className={'nft-card-image'}>
                     <LazyComponent>
                         <img alt='nft' src={getIpfsUrl(nft.nft.image)}/>
                     </LazyComponent>
                 </div>
+
                 <div className='nft-card-stats'>
                     <div className='nft-card-stats-row nft-card-stats-title' style={{ fontSize:`0.8em` }}>
                         <div className='nft-card-stats-cell' style={{textAlign:'left'}}>{'Trait'}</div>
