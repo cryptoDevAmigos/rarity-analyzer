@@ -2,7 +2,7 @@ import { IProjectTheme } from "@crypto-dev-amigos/common";
 
 export const changeTheme = (projectTheme: undefined | null | IProjectTheme) => {
 
-    const toCssName = (key: string)=> key.replace(/[A-Z]/g,(x)=>'_' + x.toLowerCase());
+    const toCssName = (key: string)=> key.replace(/[A-Z]/g,(x)=>'-' + x.toLowerCase());
 
     const t = projectTheme ?? {} as Record<string,string | boolean>;
     const theme = `
