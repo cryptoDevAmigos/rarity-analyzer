@@ -3,6 +3,7 @@ import { INftProjectRarityDocument, INftRarityDocument } from '@crypto-dev-amigo
 import { INftRarityWithExtra, NftCard, NftCardPlaceholder } from './nft-card';
 import { getNftJsonUrl, getProjectJsonUrl } from '../helpers/urls';
 import { getOpenSeaData } from '../helpers/open-sea';
+import { changeTheme } from '../helpers/theme';
 
 export const NftLoader = ({ projectKey, tokenId, contractAddress }:{ projectKey: string, tokenId: string, contractAddress?: string })=>{
 
@@ -26,6 +27,8 @@ export const NftLoader = ({ projectKey, tokenId, contractAddress }:{ projectKey:
                 const result = await fetch(nftProjectUrl);
                 const obj = await result.json() as INftProjectRarityDocument;
                 contractAddress = obj.project.contract;
+
+                changeTheme(obj.project.theme);
 
                 if(!contractAddress){ return; }
             }
