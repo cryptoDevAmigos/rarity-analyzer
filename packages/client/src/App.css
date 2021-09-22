@@ -1,13 +1,13 @@
 /* Dark & Fat */
 :root {
   --back: #111111;
-  --primary: #FF00AE;
+  --primary: #00FF00;
   --secondary: #0062F9;
   --highlight: #FFFFFF;
-  --border-width: 8px;
-  --border-radius: 0px;
-  --box-shadow-width: 5px;
-  --box-shadow-blur: 0px;
+  --border-width: 2px;
+  --border-radius: 4px;
+  --box-shadow-width: 8px;
+  --box-shadow-blur: 16px;
 }
 
 /* Lite & Modern */
