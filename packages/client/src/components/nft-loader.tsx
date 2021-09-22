@@ -4,8 +4,13 @@ import { INftRarityWithExtra, NftCard, NftCardPlaceholder } from './nft-card';
 import { getNftJsonUrl, getProjectJsonUrl } from '../helpers/urls';
 import { getOpenSeaData } from '../helpers/open-sea';
 import { changeTheme } from '../helpers/theme';
+import { OnSelectTraitValue } from './types';
 
-export const NftLoader = ({ projectKey, tokenId, contractAddress }:{ projectKey: string, tokenId: string, contractAddress?: string })=>{
+export const NftLoader = ({ 
+    projectKey, tokenId, contractAddress, onSelect
+ }:{ 
+     projectKey: string, tokenId: string, contractAddress?: string, onSelect?: OnSelectTraitValue
+})=>{
 
     const [nft, setNft] = useState(null as null | INftRarityWithExtra);
 
@@ -39,7 +44,7 @@ export const NftLoader = ({ projectKey, tokenId, contractAddress }:{ projectKey:
             const lastSellSymbol = openSeaData.last_sale?.payment_token.symbol;
             const lastSellPriceUsd = lastSellPrice * parseFloat(openSeaData.last_sale?.payment_token.usd_price ?? '1');
 
-            const order = openSeaData.orders?.[0];
+            const order = openSeaData.orders?.filter(x=>x.side===1)?.[0];
             const listingPrice = parseFloat(order?.current_price ?? '0') / Math.pow(10, order?.payment_token_contract.decimals ?? 0);
             const listingSymbol =order?.payment_token_contract.symbol;
             const listingPriceUsd = listingPrice * parseFloat(order?.payment_token_contract.usd_price ?? '1');
@@ -66,7 +71,7 @@ export const NftLoader = ({ projectKey, tokenId, contractAddress }:{ projectKey:
     return (
         <>
             {!nft && <NftCardPlaceholder />}
-            {nft && <NftCard nft={nft}/>}
+            {nft && <NftCard nft={nft} onSelect={onSelect}/>}
         </>
     );
 };

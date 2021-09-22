@@ -5,6 +5,8 @@ import { NftLoader } from './nft-loader';
 import { getIpfsUrl, getProjectsJsonUrl } from '../helpers/urls';
 import { LazyComponent } from './lazy-component';
 import { changeTheme } from '../helpers/theme';
+import { SmartImage } from './smart-image';
+import { LoadingIndicator } from './icons';
 
 export const NftProjectsLoader = (props:{ })=>{
 
@@ -22,6 +24,7 @@ export const NftProjectsLoader = (props:{ })=>{
 
 return (
     <>
+        {!projects && <LoadingIndicator/>}
         {projects && <NftProjects projects={projects} />}
     </>
 );
@@ -51,15 +54,11 @@ export const NftProjectCard = ({projectKey, project}:{ projectKey:string, projec
 
     return (
         <>
-            <div id={targetId} className={'nft-card'}>
+            <div id={targetId} className={'nft-card link'} onClick={()=>window.location.href=`${projectKey}`}>
                 <div><b>{project.name}</b></div>
 
-                <div className={'nft-card-image'} onClick={()=>window.location.href=`${projectKey}`}>
-                    {!!project.image && (
-                        <LazyComponent>
-                            <img alt='nft' src={getIpfsUrl(project.image)}/>
-                        </LazyComponent>
-                    )}
+                <div className={'nft-card-image'}>
+                    <SmartImage alt='project' src={project.image}/>
                 </div>
 
                 <div><b>{project.description}</b></div>

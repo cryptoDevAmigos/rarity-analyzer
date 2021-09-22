@@ -2,7 +2,7 @@ import React from 'react';
 import { AiFillTwitterCircle } from "react-icons/ai";
 import { FaDiscord, FaEthereum } from "react-icons/fa";
 import { HiLink } from "react-icons/hi";
-import { VscChevronDown, VscChevronRight } from "react-icons/vsc";
+import { VscChevronDown, VscChevronRight, VscLoading } from "react-icons/vsc";
 
 export type IconName = 
 | 'twitter'
@@ -11,6 +11,7 @@ export type IconName =
 | 'eth'
 | 'collapsed'
 | 'expanded'
+| 'loading'
 ;
 export const Icon = ({icon}:{icon:IconName})=>{
     switch(icon){
@@ -20,9 +21,18 @@ export const Icon = ({icon}:{icon:IconName})=>{
         case 'eth': return <FaEthereum/>;
         case 'collapsed': return <VscChevronRight/>;
         case 'expanded': return <VscChevronDown/>;
+        case 'loading': return <VscLoading/>;
     }
 
     return <></>;
+};
+
+export const LoadingIndicator = ()=>{
+    return (
+        <div className='loading'>
+            <Icon icon='loading'/>
+        </div>
+    );
 };
 
 export const IconLink = ({url, icon, iconUrl}: {url?:string, icon?: IconName, iconUrl?:string})=>{

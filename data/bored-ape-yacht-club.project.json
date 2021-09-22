@@ -11,8 +11,9 @@
         "discord": "https://discord.gg/3P5K3dzgdB"
     },
     "theme": {
-        "back": "#FFFFFF",
-        "primary": "#000000",
+        "isDark": true,
+        "back": "#112233",
+        "primary": "#FFBB22",
         "secondary": "#BEC61A",
         "highlight": "#BEC61A",
         "borderWidth": "2px",

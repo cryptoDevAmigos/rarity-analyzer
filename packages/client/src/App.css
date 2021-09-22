@@ -1,4 +1,3 @@
-/* Dark & Fat */
 :root {
   --back: #111111;
   --primary: #00FF00;
@@ -8,19 +7,14 @@
   --border-radius: 4px;
   --box-shadow-width: 8px;
   --box-shadow-blur: 16px;
+
+  /* Calculated */
+  --black-or-white: #FFFFFF;
 }
 
-/* Lite & Modern */
-/* :root {
-  --back: #EEEEFF;
-  --primary: #FF00AE;
-  --secondary: #0062F9;
-  --highlight: #000000;
-  --border-width: 2px;
-  --border-radius: 8px;
-  --box-shadow-width: 8px;
-  --box-shadow-blur: 2px;
-} */
+.black-or-white {
+  color: var(--black-or-white);
+}
 
 body {
   background-color: var(--back);
@@ -33,11 +27,34 @@ div {
   border-radius: var(--border-radius);
 }
 
-.bar-background {
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.loading {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  font-size: 32px;
+  line-height: 32px;
+  animation: rotation 2s linear infinite;
+};
+
+.bar-graph {
+  border: 1px solid var(--primary);
+  border-radius: 0;
+}
+.bar-graph-background {
   background: var(--primary);
   opacity: 0.5;
+  border-radius: 0;
 }
-.bar-text {
+.bar-graph-text {
   color: var(--highlight);
 }
 
@@ -47,6 +64,11 @@ a {
 
 a:hover {
   color: var(--highlight);
+  cursor: hand;
+}
+
+.link:hover{
+  cursor: hand;
 }
 
 
@@ -107,7 +129,6 @@ a:hover {
 
 .nft-card {
   margin: 16px;
-  padding: 16px;
   /* min-width: 240px; */
   min-height: 240px;
   width: calc(100% - 32px);
@@ -122,6 +143,54 @@ a:hover {
 .nft-card:hover {
   border: var(--border-width) solid var(--secondary);
   box-shadow: var(--box-shadow-width) var(--box-shadow-width) var(--box-shadow-blur) var(--secondary);
+}
+
+.nft-card-header {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  background: var(--primary);
+  color: var(--back);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  
+  text-align: right;
+}
+
+.nft-card-header-title {
+  grid-column: span 4;
+  grid-row: span 2;
+}
+
+.nft-card-header-item {
+  grid-column: span 2;
+  grid-row: span 2;
+  padding: 4px;
+
+  display: flex;
+  flex-direction: column;
+}
+.nft-card-header-item-2 {
+  grid-column: span 2;
+  grid-row: span 3;
+  padding: 4px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.nft-card-header-item-label {
+}
+.nft-card-header-item-value {
+  flex: 1;
+  background: var(--back);
+  color: var(--highlight);
+  border-radius: 0;
+  padding: 4px;
+}
+
+.nft-card-content {
+  padding: 16px;
 }
 
 .nft-card-image {
@@ -145,8 +214,11 @@ a:hover {
 
 .nft-card-stats-cell {
   flex: 1;
-  word-break: break-all;
-  text-overflow: ellipsis;
+  padding: 1px;
+}
+
+.nft-card-stats-cell.link:hover {
+  color: var(--highlight);
 }
 
 .nft-card-stats-title {
@@ -181,6 +253,10 @@ a:hover {
   grid-auto-flow: row dense;
 }
 
+.nft-trait-types .bar-graph {
+  border: 0;
+}
+
 .nft-trait-type {
   margin: 8px;
   border: var(--border-width) solid var(--secondary);
@@ -202,12 +278,14 @@ a:hover {
   padding: 4px;
   opacity: 0.5;
 }
-.nft-trait-value:hover {
-  color: var(--highlight);
+.nft-trait-value.link:hover {
+  opacity: 1;
+  padding: 3px;
+  border: 1px solid var(--secondary);
 }
 .nft-trait-value-selected {
-  padding: 4px;
   opacity: 1;
+  padding: 3px;
   border: 1px solid var(--secondary);
 }
 

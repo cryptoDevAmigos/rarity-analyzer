@@ -2,8 +2,8 @@ import React, { useRef } from 'react';
 
 export const BarGraphCell = ({ ratio, text, textRight }:{ ratio: number, text?: string, textRight?: string })=>{
     return (
-        <div style={{position:'relative'}}>
-            <div className='bar-background' style={{
+        <div className='bar-graph' style={{position:'relative'}}>
+            <div className='bar-graph-background' style={{
                 position:'absolute',
                 zIndex: 0,
                 width: `${(100 * ratio).toFixed(0)}%`,
@@ -12,13 +12,13 @@ export const BarGraphCell = ({ ratio, text, textRight }:{ ratio: number, text?: 
             </div>
             <div style={{position:'relative', zIndex: 10, display:'flex', flexDirection:'row'}}>
                 {/* Used to center main text */}
-                <div className='bar-text' style={{opacity:0}}>
+                <div className='bar-graph-text' style={{opacity:0}}>
                     {textRight}
                 </div>
-                <div className='bar-text' style={{flex:1}}>
+                <div className='bar-graph-text' style={{flex:1}}>
                     {text ?? `${(100 * ratio).toFixed(2)}%`}
                 </div>
-                <div className='bar-text' style={{}}>
+                <div className='bar-graph-text' style={{}}>
                     {textRight}
                 </div>
             </div>
