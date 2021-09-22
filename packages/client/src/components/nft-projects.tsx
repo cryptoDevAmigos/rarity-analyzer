@@ -55,9 +55,11 @@ export const NftProjectCard = ({projectKey, project}:{ projectKey:string, projec
                 <div><b>{project.name}</b></div>
 
                 <div className={'nft-card-image'} onClick={()=>window.location.href=`${projectKey}`}>
-                    <LazyComponent>
-                        <img alt='nft' src={getIpfsUrl(project.image)}/>
-                    </LazyComponent>
+                    {!!project.image && (
+                        <LazyComponent>
+                            <img alt='nft' src={getIpfsUrl(project.image)}/>
+                        </LazyComponent>
+                    )}
                 </div>
 
                 <div><b>{project.description}</b></div>

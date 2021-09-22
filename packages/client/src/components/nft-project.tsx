@@ -144,11 +144,13 @@ export const ProjectInfo = ({projectRarity}:{ projectRarity:INftProjectRarityDat
         <>
             <div style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                 <div style={{}}>
-                    <img 
-                        src={getIpfsUrl(project.image)} 
-                        alt='project'
-                        style={{objectFit:'contain', width: 150}}
-                    />
+                    {!!project.image && (
+                        <img 
+                            src={getIpfsUrl(project.image)} 
+                            alt='project'
+                            style={{objectFit:'contain', width: 150}}
+                        />
+                    )}
                 </div>
                 <div style={{}}>
                     <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>
@@ -165,9 +167,11 @@ export const ProjectInfo = ({projectRarity}:{ projectRarity:INftProjectRarityDat
                     </div>
                     <div style={{fontSize: '1.6em'}}>{project.name}</div>
                     <div style={{fontSize: '1.0em'}}>{project.description}</div>
-                    <div style={{fontSize: '1.0em'}}>
-                        <a href={getIpfsUrl(project.external_link)}>{project.external_link}</a>
-                    </div>
+                    {!!project.external_link && (
+                        <div style={{fontSize: '1.0em'}}>
+                            <a href={getIpfsUrl(project.external_link)}>{project.external_link}</a>
+                        </div>
+                    )}
                 </div>
 
             </div>
