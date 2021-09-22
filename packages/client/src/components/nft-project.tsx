@@ -7,6 +7,7 @@ import { getIpfsUrl, getNftJsonUrl, getProjectJsonUrl } from '../helpers/urls';
 import { BarGraphCell } from './bar-graph';
 import { changeTheme } from '../helpers/theme';
 import { Icon, IconLink, IconName } from './icons';
+import { SmartImage } from './smart-image';
 
 // Workaround for importing implementation
 const MISSING_ATTRIBUTE_VALUE: typeof MISSING_ATTRIBUTE_VALUE_TYPE = `[Missing]`;
@@ -147,13 +148,7 @@ export const ProjectInfo = ({projectRarity}:{ projectRarity:INftProjectRarityDat
         <>
             <div style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                 <div style={{}}>
-                    {!!project.image && (
-                        <img 
-                            src={getIpfsUrl(project.image)} 
-                            alt='project'
-                            style={{objectFit:'contain', width: 150}}
-                        />
-                    )}
+                    <SmartImage alt='project' src={project.image} style={{objectFit:'contain', width: 150}}/>
                 </div>
                 <div style={{}}>
                     <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>

@@ -4,6 +4,7 @@ import { LazyComponent } from './lazy-component';
 import { getIpfsUrl } from '../helpers/urls';
 import { BarGraphCell } from './bar-graph';
 import { Icon, IconLink } from './icons';
+import { SmartImage } from './smart-image';
 
 export type INftRarityWithExtra = INftRarity & {
     openSeaLink?: string;
@@ -85,11 +86,7 @@ export const NftCard = ({nft}:{ nft: INftRarityWithExtra }) => {
                         <IconLink url={nft.openSeaLink} iconUrl='/media/opensea.png'/>
                     </div>
                     <div className={'nft-card-image'}>
-                        {!!nft.nft.image && (
-                            <LazyComponent>
-                                <img alt='nft' src={getIpfsUrl(nft.nft.image)}/>
-                            </LazyComponent>
-                        )}
+                        <SmartImage alt='nft' src={nft.nft.image}/>
                     </div>
 
                     <div className='nft-card-stats'>

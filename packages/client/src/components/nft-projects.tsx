@@ -5,6 +5,7 @@ import { NftLoader } from './nft-loader';
 import { getIpfsUrl, getProjectsJsonUrl } from '../helpers/urls';
 import { LazyComponent } from './lazy-component';
 import { changeTheme } from '../helpers/theme';
+import { SmartImage } from './smart-image';
 
 export const NftProjectsLoader = (props:{ })=>{
 
@@ -55,11 +56,7 @@ export const NftProjectCard = ({projectKey, project}:{ projectKey:string, projec
                 <div><b>{project.name}</b></div>
 
                 <div className={'nft-card-image'} onClick={()=>window.location.href=`${projectKey}`}>
-                    {!!project.image && (
-                        <LazyComponent>
-                            <img alt='nft' src={getIpfsUrl(project.image)}/>
-                        </LazyComponent>
-                    )}
+                    <SmartImage alt='project' src={project.image}/>
                 </div>
 
                 <div><b>{project.description}</b></div>
