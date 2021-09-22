@@ -1,18 +1,20 @@
 import { IProjectTheme } from "@crypto-dev-amigos/common";
 
-export const changeTheme = (projectTheme: undefined | null | IProjectTheme) => {
+export const changeTheme = (projectTheme: undefined | null | IProjectTheme, target = ':root') => {
 
-    const toCssName = (key: string)=> key.replace(/[A-Z]/g,(x)=>'_' + x.toLowerCase());
+    const toCssName = (key: string)=> key.replace(/[A-Z]/g,(x)=>'-' + x.toLowerCase());
 
-    const t = projectTheme ?? {} as Record<string,string>;
+    const t = projectTheme ?? {} as Record<string,string | boolean>;
     const theme = `
-:root {
-    ${Object.keys(t).map(key => `
+${target} {
+    ${Object.keys(t)
+        .filter(key => t[key] && typeof t[key] === 'string')
+        .map(key => `
     --${toCssName(key)}: ${t[key]};`).join('')}
 }
     `;
 
-    const themeTagId = '__themeStyleOverride';
+    const themeTagId = '__themeStyleOverride' + target;
 
     const existing = document.getElementById(themeTagId);
     existing?.remove();
@@ -21,4 +23,16 @@ export const changeTheme = (projectTheme: undefined | null | IProjectTheme) => {
     newElement.innerHTML = theme;
     newElement.id = themeTagId;
     document.head.appendChild(newElement);
+
+    ThemeSubscription.changeTheme(projectTheme?.isDark ?? true);
+};
+
+
+type Callback = (isDark:boolean) => void;
+const _callbacks = [] as Callback[];
+export const ThemeSubscription = {
+    subscribe: (callback: Callback) => {
+        _callbacks.push(callback);
+    },
+    changeTheme: (isDark:boolean)=>{_callbacks.forEach(x=>x(isDark))},
 };

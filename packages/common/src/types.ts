@@ -1,13 +1,13 @@
 export interface INftMetadata {
     // TODO: This should be a string because some tokenIds can be > int (the actual type is unit256)
-    id: number,
-    name: string,
-    description: string,
-    image: string,
-    external_url: string,
-    animation_url: string,
-    background_color: string,
-    attributes: {
+    id?: number,
+    name?: string,
+    description?: string,
+    image?: string,
+    external_url?: string,
+    animation_url?: string,
+    background_color?: string,
+    attributes?: {
         trait_type: string,
         value: string
     }[] 
@@ -25,12 +25,12 @@ export type INftMetadataCollectionDocument = INftMetadata[];
  * 
 */
 export interface INftProjectMetadata {
-    name: string,
-    symbol: string,
-    description: string,
-    image: string,
-    external_link: string,
-    contract: string,
+    name?: string,
+    symbol?: string,
+    description?: string,
+    image?: string,
+    external_link?: string,
+    contract?: string,
     theme?: IProjectTheme;
     links?: IProjectLinks;
 }
@@ -43,6 +43,7 @@ export type IProjectLinks = Record<string,string> & {
 };
 
 export type IProjectTheme = {
+    isDark?: boolean;
     back?: string;
     primary?: string;
     secondary?: string;
@@ -53,6 +54,7 @@ export type IProjectTheme = {
     boxShadowBlur?: string;
 }
 const exampleTheme: IProjectTheme = {
+    isDark: false,
     back: '#EEEEFF',
     primary: '#FF00AE',
     secondary: '#0062F9',
@@ -125,12 +127,12 @@ export interface INftRarity {
             value: string;
         }[];
         id: number;
-        name: string;
-        description: string;
-        image: string;
-        external_url: string;
-        animation_url: string;
-        background_color: string;
+        name?: string;
+        description?: string;
+        image?: string;
+        external_url?: string;
+        animation_url?: string;
+        background_color?: string;
     };
     attributeRarities: {
         trait_type: string,

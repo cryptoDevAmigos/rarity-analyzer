@@ -50,9 +50,11 @@ export const NftCard = ({nft}:{ nft: INftRarityWithExtra }) => {
                     <IconLink url={nft.openSeaLink} iconUrl='/media/opensea.png'/>
                 </div>
                 <div className={'nft-card-image'}>
-                    <LazyComponent>
-                        <img alt='nft' src={getIpfsUrl(nft.nft.image)}/>
-                    </LazyComponent>
+                    {!!nft.nft.image && (
+                        <LazyComponent>
+                            <img alt='nft' src={getIpfsUrl(nft.nft.image)}/>
+                        </LazyComponent>
+                    )}
                 </div>
 
                 <div className='nft-card-stats'>
