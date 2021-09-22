@@ -2,10 +2,10 @@
     "name": "@crypto-dev-amigos/workspace",
     "private": true,
     "scripts": {
-        "build": "npm run build:common && npm run build:client",
+        "build": "npm run build:common && npm run build:client && npm run build:rarities",
         "build:common": "cd ./packages/common && npx tsc",
         "build:client": "(cd ./packages/client && npm run build) && (cd ../../ && npm run publish:client)",
-        "publish:client": "copyfiles -u 3 ./packages/client/build/**/* ./web",
+        "publish:client": "copyfiles -e data/**/* -u 3 ./packages/client/build/**/* ./web",
         "build:rarities": "cd ./packages/common && npm run build:rarities",
         "test": "cd ./packages/common && npm run test",
         "// start": "npm run build:common && concurrently \"npm run start:client\" \"npm run start:server\"",
