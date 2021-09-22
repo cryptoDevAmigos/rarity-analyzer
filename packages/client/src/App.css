@@ -27,6 +27,24 @@ div {
   border-radius: var(--border-radius);
 }
 
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.loading {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  font-size: 32px;
+  line-height: 32px;
+  animation: rotation 2s linear infinite;
+};
+
 .bar-graph {
   border: 1px solid var(--primary);
   border-radius: 0;

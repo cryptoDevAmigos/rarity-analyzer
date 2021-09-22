@@ -6,6 +6,7 @@ import { getIpfsUrl, getProjectsJsonUrl } from '../helpers/urls';
 import { LazyComponent } from './lazy-component';
 import { changeTheme } from '../helpers/theme';
 import { SmartImage } from './smart-image';
+import { LoadingIndicator } from './icons';
 
 export const NftProjectsLoader = (props:{ })=>{
 
@@ -23,6 +24,7 @@ export const NftProjectsLoader = (props:{ })=>{
 
 return (
     <>
+        {!projects && <LoadingIndicator/>}
         {projects && <NftProjects projects={projects} />}
     </>
 );

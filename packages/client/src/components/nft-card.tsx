@@ -3,7 +3,7 @@ import { INftRarity } from '@crypto-dev-amigos/common';
 import { LazyComponent } from './lazy-component';
 import { getIpfsUrl } from '../helpers/urls';
 import { BarGraphCell } from './bar-graph';
-import { Icon, IconLink } from './icons';
+import { Icon, IconLink, LoadingIndicator } from './icons';
 import { SmartImage } from './smart-image';
 import { OnSelectTraitValue } from './types';
 
@@ -50,7 +50,8 @@ export const NftCardPlaceholder = (props:{})=>{
     return (
         <>
             <div className={'nft-card'}>
-                <div style={{height: 300}}>Loading...</div>
+                <LoadingIndicator/>
+                <div style={{height: 300}}></div>
             </div>
         </>
     );
