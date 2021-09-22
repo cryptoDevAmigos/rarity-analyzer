@@ -40,11 +40,11 @@ div {
   color: var(--highlight);
 }
 
-a {
+a, .link {
   color: var(--primary);
 }
 
-a:hover {
+a:hover, .link:hover {
   color: var(--highlight);
 }
 

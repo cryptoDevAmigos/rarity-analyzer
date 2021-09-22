@@ -5,6 +5,7 @@ import { getIpfsUrl } from '../helpers/urls';
 import { BarGraphCell } from './bar-graph';
 import { Icon, IconLink } from './icons';
 import { SmartImage } from './smart-image';
+import { OnSelectTraitValue } from './types';
 
 export type INftRarityWithExtra = INftRarity & {
     openSeaLink?: string;
@@ -55,7 +56,7 @@ export const NftCardPlaceholder = (props:{})=>{
     );
 }
 
-export const NftCard = ({nft}:{ nft: INftRarityWithExtra }) => {
+export const NftCard = ({nft, onSelect}:{ nft: INftRarityWithExtra, onSelect?: OnSelectTraitValue }) => {
 
     return (
         <>
@@ -105,8 +106,16 @@ export const NftCard = ({nft}:{ nft: INftRarityWithExtra }) => {
                                     <div className='nft-card-stats-cell' style={{textAlign:'right'}}>{`${x.ratioScore.toFixed(2)}`}</div>  
                                 </div>
                                 <div className='nft-card-stats-row'>
-                                    <div className='nft-card-stats-cell' style={{textAlign:'right'}}>
-                                        <span style={x.value !== "[Missing]"?{fontWeight:'bold'}:{}}>{x.value}</span>
+                                    <div className={`nft-card-stats-cell ${onSelect?'link':''}`} style={{textAlign:'right'}}>
+                                        <span 
+                                            onClick={(e) => {
+                                                if(!onSelect){return;}
+
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                onSelect({traitType: x.trait_type, value: x.value});
+                                            }}
+                                            style={x.value !== "[Missing]"?{fontWeight:'bold'}:{}}>{x.value}</span>
                                     </div>
                                     <div className='nft-card-stats-cell'>
                                         <BarGraphCell ratio={x.ratio} />

@@ -8,6 +8,7 @@ import { BarGraphCell } from './bar-graph';
 import { changeTheme } from '../helpers/theme';
 import { Icon, IconLink, IconName } from './icons';
 import { SmartImage } from './smart-image';
+import { OnSelectTraitValue } from './types';
 
 // Workaround for importing implementation
 const MISSING_ATTRIBUTE_VALUE: typeof MISSING_ATTRIBUTE_VALUE_TYPE = `[Missing]`;
@@ -131,7 +132,7 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                                 <div
                                     onClick={()=>window.location.href=`${projectKey}/${item}`}
                                 >
-                                    <NftLoader projectKey={projectKey} tokenId={`${item}`} contractAddress={projectRarity.contractAddress} />
+                                    <NftLoader projectKey={projectKey} tokenId={`${item}`} contractAddress={projectRarity.contractAddress} onSelect={onSelect} />
                                 </div>
                             )}/>
                         )}
@@ -181,7 +182,8 @@ export const TraitTypesList = ({
     projectRarity, tokenIds, selected, onSelect, onReset
 }:{ 
     projectRarity:INftProjectRarityData, tokenIds: Set<number>, 
-    selected:TraitFilters, onSelect: (args:{ traitType: string, value: string, tokens: number[] }) => void
+    selected:TraitFilters, 
+    onSelect: OnSelectTraitValue,
     onReset: () => void,
 })=>{
     const [isExpanded, setIsExpanded] = useState(true);
@@ -232,7 +234,11 @@ export const TraitTypesList = ({
     );
 };
 
-export const TraitValuesList = ({ traitType, projectRarity, isExpanded, tokenIds, selected, onSelect }:{ traitType: string, projectRarity:INftProjectRarityData, isExpanded: boolean, tokenIds: Set<number>, selected:TraitFilters, onSelect: (args:{ traitType: string, value: string, tokens: number[] })=>void })=>{
+export const TraitValuesList = ({ 
+    traitType, projectRarity, isExpanded, tokenIds, selected, onSelect
+}:{ 
+     traitType: string, projectRarity:INftProjectRarityData, isExpanded: boolean, tokenIds: Set<number>, selected:TraitFilters, onSelect: OnSelectTraitValue
+})=>{
    
     const traitTypeTokenLookups = projectRarity.tokenLookups
         .filter(x=>x.trait_type === traitType);
@@ -250,7 +256,7 @@ export const TraitValuesList = ({ traitType, projectRarity, isExpanded, tokenIds
         }
 
         return (
-            <div className='nft-trait-type' onClick={()=>onSelect({traitType, value: ALL_TRAIT_VALUE, tokens: tokenIdsOfAll})}>
+            <div className='nft-trait-type' onClick={()=>onSelect({traitType, value: ALL_TRAIT_VALUE})}>
                 <div style={{position:'relative'}}>
                     <div style={{
                         position:'absolute',
@@ -266,7 +272,7 @@ export const TraitValuesList = ({ traitType, projectRarity, isExpanded, tokenIds
 
     return (
         <div className='nft-trait-type'>
-            <div className='nft-trait-type-header' onClick={()=>onSelect({traitType, value: ALL_TRAIT_VALUE, tokens: tokenIdsOfAll})}>
+            <div className='nft-trait-type-header' onClick={()=>onSelect({traitType, value: ALL_TRAIT_VALUE})}>
                 <div style={{position:'relative'}}>
                     <div style={{
                         position:'absolute',
@@ -280,7 +286,7 @@ export const TraitValuesList = ({ traitType, projectRarity, isExpanded, tokenIds
             <div className='nft-trait-values'>
                 {traitTypeTokenLookups.map(x=>(
                     <React.Fragment key={`${x.trait_type}:${x.trait_value}`}>
-                        <div className={`nft-trait-value ${selectedTraitValue === x.trait_value ? 'nft-trait-value-selected':''}`} onClick={()=>onSelect({traitType: x.trait_type, value: x.trait_value, tokens: x.tokenIds})}>
+                        <div className={`nft-trait-value ${selectedTraitValue === x.trait_value ? 'nft-trait-value-selected':''}`} onClick={()=>onSelect({traitType: x.trait_type, value: x.trait_value})}>
                             <BarGraphCell ratio={x.ratio} text={x.trait_value} textRight={isAllSelected || selectedTraitValue === x.trait_value ? `${x.tokenIds.filter(t=>tokenIds.has(t)).length}`:``}/>
                         </div>
                     </React.Fragment>

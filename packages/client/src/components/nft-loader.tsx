@@ -4,8 +4,13 @@ import { INftRarityWithExtra, NftCard, NftCardPlaceholder } from './nft-card';
 import { getNftJsonUrl, getProjectJsonUrl } from '../helpers/urls';
 import { getOpenSeaData } from '../helpers/open-sea';
 import { changeTheme } from '../helpers/theme';
+import { OnSelectTraitValue } from './types';
 
-export const NftLoader = ({ projectKey, tokenId, contractAddress }:{ projectKey: string, tokenId: string, contractAddress?: string })=>{
+export const NftLoader = ({ 
+    projectKey, tokenId, contractAddress, onSelect
+ }:{ 
+     projectKey: string, tokenId: string, contractAddress?: string, onSelect?: OnSelectTraitValue
+})=>{
 
     const [nft, setNft] = useState(null as null | INftRarityWithExtra);
 
@@ -66,7 +71,7 @@ export const NftLoader = ({ projectKey, tokenId, contractAddress }:{ projectKey:
     return (
         <>
             {!nft && <NftCardPlaceholder />}
-            {nft && <NftCard nft={nft}/>}
+            {nft && <NftCard nft={nft} onSelect={onSelect}/>}
         </>
     );
 };
