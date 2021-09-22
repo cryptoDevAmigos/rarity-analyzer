@@ -37,11 +37,11 @@ export function calculateRarity(metadataRaw: INftMetadata[], options?: { include
    
     const { includeTraitCount = true } = options ?? {};
 
-    if(metadataRaw.some(x=>!x.id)){
+    if(metadataRaw.some(x => x.id == null)){
         console.log(`# calculateRarity: Every nft must have an 'id: string' ${runId}`);
         throw new Error(`Ain't nobody got time for nfts without an id`);
     }
-    if(metadataRaw.some(x=>!x.attributes)){
+    if(metadataRaw.some(x => !x.attributes)){
         console.log(`# calculateRarity: Every nft must have an 'attributes:{ trait_type:string, value:string }[]' ${runId}`);
         throw new Error(`Ain't nobody got time for nfts without no attributes`);
     }
