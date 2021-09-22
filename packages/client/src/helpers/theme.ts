@@ -1,12 +1,12 @@
 import { IProjectTheme } from "@crypto-dev-amigos/common";
 
-export const changeTheme = (projectTheme: undefined | null | IProjectTheme) => {
+export const changeTheme = (projectTheme: undefined | null | IProjectTheme, target = ':root') => {
 
     const toCssName = (key: string)=> key.replace(/[A-Z]/g,(x)=>'-' + x.toLowerCase());
 
     const t = projectTheme ?? {} as Record<string,string | boolean>;
     const theme = `
-:root {
+${target} {
     ${Object.keys(t)
         .filter(key => t[key] && typeof t[key] === 'string')
         .map(key => `
@@ -14,7 +14,7 @@ export const changeTheme = (projectTheme: undefined | null | IProjectTheme) => {
 }
     `;
 
-    const themeTagId = '__themeStyleOverride';
+    const themeTagId = '__themeStyleOverride' + target;
 
     const existing = document.getElementById(themeTagId);
     existing?.remove();

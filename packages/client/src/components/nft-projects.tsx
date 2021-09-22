@@ -4,6 +4,7 @@ import { LazyList } from './lazy-list';
 import { NftLoader } from './nft-loader';
 import { getIpfsUrl, getProjectsJsonUrl } from '../helpers/urls';
 import { LazyComponent } from './lazy-component';
+import { changeTheme } from '../helpers/theme';
 
 export const NftProjectsLoader = (props:{ })=>{
 
@@ -43,10 +44,14 @@ export const NftProjects = ({ projects }:{ projects: INftProjectsDocument }) => 
 
 export const NftProjectCard = ({projectKey, project}:{ projectKey:string, project: INftProjectMetadata }) => {
 
+    const targetId =  projectKey + '_theme';
+    useEffect(()=>{
+        changeTheme(project.theme, `#${targetId}`);
+    }, [targetId]);
+
     return (
         <>
-            <div className={'nft-card'}>
-                {/* <div><b>Token ID:</b> {nft.nft.id}</div> */}
+            <div id={targetId} className={'nft-card'}>
                 <div><b>{project.name}</b></div>
 
                 <div className={'nft-card-image'} onClick={()=>window.location.href=`${projectKey}`}>
