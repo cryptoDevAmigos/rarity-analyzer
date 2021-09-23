@@ -8,7 +8,7 @@ import { BarGraphCell } from './bar-graph';
 import { changeTheme } from '../helpers/theme';
 import { Icon, IconLink, IconName, LoadingIndicator } from './icons';
 import { SmartImage } from './smart-image';
-import { OnSelectTraitValue, TraitFilters } from './types';
+import { ALL_TRAIT_VALUE, OnSelectTraitValue, TraitFilters } from './types';
 import { TraitGraph } from './trait-graph';
 
 // Workaround for importing implementation
@@ -41,7 +41,6 @@ return (
 );
 };
 
-const ALL_TRAIT_VALUE ='[All]';
 type INftProjectRarityData = {
     project: INftProjectMetadataDocument;
     tokenIdsByRank: INftProjectRarityDocument['tokenIdsByRank']
@@ -144,7 +143,7 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                 </div>
                 <div className='panel-nft-list'>
                     <div>
-                        <TraitGraph projectKey={projectKey} projectRarity={projectRarity} selected={traitFilters.current}/>
+                        <TraitGraph projectKey={projectKey} projectRarity={projectRarity} selected={traitFilters.current} tokenIds={tokenIds}/>
                     </div>
                     <div className='nft-list' ref={nftListRef}>
                         {projectRarity && (
@@ -262,8 +261,12 @@ export const TraitValuesList = ({
     const traitTypeTokenLookups = projectRarity.tokenLookups
         .filter(x=>x.trait_type === traitType);
    
-    const selectedTraitValue = selected[traitType] ?? ALL_TRAIT_VALUE;
+    const selectedTraitValue = selected[traitType] ?? {
+        value: ALL_TRAIT_VALUE,
+        tokenIdsIfAll: tokenIds,
+    };
     const isAllSelected = selectedTraitValue.value === ALL_TRAIT_VALUE;
+    console.log('TraitValuesList', {isAllSelected, selectedTraitValue});
 
     if(!isExpanded){
 

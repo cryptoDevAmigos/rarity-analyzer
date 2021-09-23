@@ -1,11 +1,11 @@
 import { INftProjectRarityDocument } from '@crypto-dev-amigos/common';
 import React, { useEffect, useRef } from 'react';
-import { TraitFilters } from './types';
+import { ALL_TRAIT_VALUE, TraitFilters } from './types';
 import * as d3 from 'd3';
 import * as d3Sankey from 'd3-sankey';
 
 
-export const TraitGraph = ({ projectKey, projectRarity, selected }:{ projectKey: string, projectRarity: INftProjectRarityDocument, selected: TraitFilters }) => {
+export const TraitGraph = ({ projectKey, projectRarity, selected, tokenIds }:{ projectKey: string, projectRarity: INftProjectRarityDocument, selected: TraitFilters, tokenIds: Set<number> }) => {
 
     const svgRef = useRef(null as null | SVGSVGElement);
     const redrawKey = projectKey + JSON.stringify(selected);
@@ -13,7 +13,61 @@ export const TraitGraph = ({ projectKey, projectRarity, selected }:{ projectKey:
     useEffect(() => {
         const svg = svgRef.current;
         if(!svg){ return; }
-        const redraw = () => { drawChart(svg, exampleData) };
+
+        const tokenLookupsRaw2 = projectRarity.tokenLookups
+            .filter(x=>x.trait_value !== ALL_TRAIT_VALUE)
+            ;
+
+        const tokenLookupsRaw = Object.values(selected).some(x=>x.value !== ALL_TRAIT_VALUE) 
+            ? tokenLookupsRaw2
+                .filter(x => x.trait_value === (selected[x.trait_type]?.value ?? x.trait_value))
+                .filter(x => x.tokenIds.some(t => tokenIds.has(t)))
+            : tokenLookupsRaw2;
+
+        const traitTypesSet = new Set(tokenLookupsRaw.map(x=>x.trait_type));
+        const traitTypeValueCountsMap = new Map( [...traitTypesSet].map(x=> [x ,tokenLookupsRaw.filter(t=>t.trait_type===x).length]));
+        const traitTypesTop = [...traitTypesSet]
+            .sort((a,b) => ( 
+                (traitTypeValueCountsMap.get(a) ?? 0) 
+                - (traitTypeValueCountsMap.get(b) ?? 0)
+            ));
+        
+        // Only use n the top trait types
+        const traitTypes = traitTypesTop.slice(0,4);
+        const traitTypesUsedSet = new Set(traitTypes);
+
+        const tokenLookups = tokenLookupsRaw
+            .filter(x => traitTypesUsedSet.has(x.trait_type));
+
+        const nodeIdsMap = new Map(tokenLookups.map((x,i)=>[x,i]));
+        const getNodeId = (x: typeof tokenLookups[number]) => nodeIdsMap.get(x) ?? 0;
+
+        const traitTypePairs = traitTypes.map((x,i)=>[x, traitTypes[i+1]]).filter(x=>x[0]&&x[1]);
+
+        const data: DataInput = {
+            nodes: tokenLookups.map(x => ({
+                nodeId: getNodeId(x),
+                name: `${x.trait_type}:${x.trait_value}`,
+            })),
+            links: traitTypePairs.flatMap(([lTraitType,rTraitType]) => {
+                const left = tokenLookups.filter(x=>x.trait_type === lTraitType);
+                const right = tokenLookups.filter(x=>x.trait_type === rTraitType);
+
+                return left.flatMap(l=>{
+                    const lTokenIdsSet = new Set(l.tokenIds);
+                    return right.map(r=>{
+                        return {
+                            source: getNodeId(l),
+                            target: getNodeId(r),
+                            value: r.tokenIds.filter(x => lTokenIdsSet.has(x) && tokenIds.has(x)).length,
+                            uom: 'Widget(s)'    
+                        };
+                    })
+                });
+            }).filter(x => x.value > 0),
+        };
+
+        const redraw = () => { drawChart(svg, data) };
         redraw();
 
         window.addEventListener('resize', redraw);
@@ -22,9 +76,11 @@ export const TraitGraph = ({ projectKey, projectRarity, selected }:{ projectKey:
         };
     },[redrawKey]);
 
+    // const heightRatio = Math.max(0.25,Math.min(1,tokenIds.size * 0.1));
+    const heightRatio = 0.5;
     return (
         <div style={{ background: '#000000', borderRadius: 0 }}>
-            <svg ref={svgRef} style={{width: '100%', height: 300}}></svg>
+            <svg ref={svgRef} style={{width: '100%', height: `${(heightRatio*100).toFixed(0)}vh`}}></svg>
         </div>
     );
 }
@@ -43,7 +99,7 @@ const drawChart = (svgElement:SVGGElement, data: DataInput) => {
     svg.selectAll("*").remove();
 
     const formatNumber = d3.format(",.0f"),
-        format = function (d: any) { return formatNumber(d) + " TWh"; },
+        format = function (d: any) { return formatNumber(d) + " NFTs"; },
         color = d3.scaleOrdinal(d3.schemeCategory10);
 
     const sankey = d3Sankey.sankey()
