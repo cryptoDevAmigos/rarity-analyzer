@@ -18,7 +18,8 @@ export const TraitGraph = ({
         const svg = svgRef.current;
         if(!svg){ return; }
 
-        const selectedCount = Object.values(selected).filter(x=>x.value !== ALL_TRAIT_VALUE).length;
+        const selectedNotAll = new Map(Object.entries(selected).filter(([k,x])=>x.value !== ALL_TRAIT_VALUE));
+        const selectedCount = selectedNotAll.size;
 
         const tokenLookupsRaw2 = projectRarity.tokenLookups
             .filter(x=>x.trait_value !== ALL_TRAIT_VALUE)
@@ -26,7 +27,7 @@ export const TraitGraph = ({
 
         const tokenLookupsRaw = selectedCount > 0
             ? tokenLookupsRaw2
-                .filter(x => x.trait_value === (selected[x.trait_type]?.value ?? x.trait_value))
+                .filter(x => x.trait_value === (selectedNotAll.get(x.trait_type) ?? x.trait_value))
                 .filter(x => x.tokenIds.some(t => tokenIds.has(t)))
             : tokenLookupsRaw2;
 
@@ -39,8 +40,9 @@ export const TraitGraph = ({
             ));
         
         // Only use n the top trait types
-        // const traitTypes = traitTypesTop.slice(selectedCount, 5 + selectedCount);
-        const traitTypes = traitTypesTop.slice(0, 5 + selectedCount);
+        const traitTypes = traitTypesTop;
+        // const traitTypes = traitTypesTop.slice(selectedCount, 10 + selectedCount);
+        // const traitTypes = traitTypesTop.slice(0, 5 + selectedCount);
         const traitTypesUsedSet = new Set(traitTypes);
 
         const tokenLookups = tokenLookupsRaw
