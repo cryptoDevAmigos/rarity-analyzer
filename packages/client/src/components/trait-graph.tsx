@@ -4,7 +4,7 @@ import { ALL_TRAIT_VALUE, TraitFilters, OnSelectTraitValue } from './types';
 import * as d3 from 'd3';
 import * as d3Sankey from 'd3-sankey';
 import { delay } from '../helpers/delay';
-import { LoadingIndicator } from './icons';
+import { Icon, LoadingIndicator } from './icons';
 
 
 export const TraitGraph = ({ 
@@ -16,8 +16,12 @@ export const TraitGraph = ({
     const svgRef = useRef(null as null | SVGSVGElement);
     const redrawKey = projectKey + JSON.stringify(selected);
     const [loading, setLoading] = useState(true);
+    const [rareCount, setRareCount] = useState(64);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
+        if(!isExpanded){ return; }
+
         const svg = svgRef.current;
         if(!svg){ return; }
 
@@ -26,9 +30,9 @@ export const TraitGraph = ({
 
         (async () => {
             // Blank
-            drawChart(svg, {nodes:[], links:[]}, ()=>{});
+            drawSankeyDiagram(svg, {nodes:[], links:[]}, ()=>{});
 
-            const { data, nodeIdsMap } = await calculateData(projectRarity, tokenIds, selected);
+            const { data, nodeIdsMap } = await calculateData(projectRarity, tokenIds, selected, rareCount);
             if(!isMounted){ return; }
 
             const onSelectNodeIds = (nodeIds:number[]) => {
@@ -40,7 +44,7 @@ export const TraitGraph = ({
                 });
             };
     
-            redraw = () => { drawChart(svg, data, onSelectNodeIds); };
+            redraw = () => { drawSankeyDiagram(svg, data, onSelectNodeIds); };
             redraw();
             setLoading(false);
         })();
@@ -52,19 +56,46 @@ export const TraitGraph = ({
             isMounted = false;
             window.removeEventListener('resize', redrawOuter);
         };
-    },[redrawKey, tokenIds.size]);
+    },[redrawKey, tokenIds.size, rareCount, isExpanded]);
 
     const heightRatio = Math.max(0.25,Math.min(0.75,tokenIds.size * 0.1));
+
+    const NumberButton = ({value}:{value:number})=>{
+        return (
+            <div className='link' style={{paddingLeft: 8}} 
+                onClick={(e)=>{ 
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setRareCount(value);
+                }}
+            >{value}</div>
+        );
+    };
+
     return (
-        <div style={{ background: '#000000', borderRadius: 0 }}>
-            <div>Rarist Trait Combinations</div>
-            {loading && (<LoadingIndicator/>)}
-            <svg ref={svgRef} style={{width: '100%', minHeight: 600, height: `${(heightRatio*100).toFixed(0)}vh`}}></svg>
+        <div>
+            <div style={{display: 'flex',flexDirection:'row'}}
+                onClick={()=>setIsExpanded(s=>!s)}
+            >
+                <div style={{fontSize: 18}}>
+                    {isExpanded ? <Icon icon='expanded'/> : <Icon icon='collapsed'/> }
+                </div>
+                <div>Rarist Trait Combinations</div>
+                <div style={{flex:1}}>{tokenIds.size} NFTs</div>
+                {[16,64,256,1024].map((v)=><NumberButton key={v} value={v}/>)}
+            </div>
+            {isExpanded && (
+                <div style={{ background: '#000000', borderRadius: 0 }}>
+                    {loading && (<LoadingIndicator/>)}
+                    <svg ref={svgRef} style={{width: '100%', minHeight: 600, height: `${(heightRatio*100).toFixed(0)}vh`}}></svg>
+                </div>
+            )}
         </div>
     );
 }
 
-const calculateData = async (projectRarity: INftProjectRarityDocument, tokenIds: Set<number>, selected: TraitFilters) => {
+
+const calculateData = async (projectRarity: INftProjectRarityDocument, tokenIds: Set<number>, selected: TraitFilters, rareCount: number) => {
     await delay(10);
     // const selectedNotAll = new Map(Object.entries(selected).filter(([k,x])=>x.value !== ALL_TRAIT_VALUE));
 
@@ -108,6 +139,13 @@ const calculateData = async (projectRarity: INftProjectRarityDocument, tokenIds:
                     unionCount: xArray.filter(t => !y.tokensInSelectionSet.has(t)).length + y.tokensInSelectionSet.size,
                 };
 
+                // Order trait type
+                if(result.l.trait_type > result.r.trait_type){
+                    const temp = result.l;
+                    result.l = result.r;
+                    result.r = temp;
+                }
+
                 if(!result.intersectCount){ continue; }
                 allPairs.push(result);
             }    
@@ -150,28 +188,35 @@ const calculateData = async (projectRarity: INftProjectRarityDocument, tokenIds:
         return 0;
     });
 
-    const pairsUsed = allPairsSortedByRarist.slice(0,250);
+    const pairsUsed = allPairsSortedByRarist.slice(0,rareCount);
     const traitValuesUsed = [...new Set(pairsUsed.flatMap(x=>[x.l,x.r]))];
 
     const nodeIdsReverseMap = new Map(traitValuesUsed.map((x,i)=>[x,i]));
     const nodeIdsMap = new Map(traitValuesUsed.map((x,i)=>[i,x]));
     const getNodeId = (x: typeof traitValuesUsed[number]) => nodeIdsReverseMap.get(x) ?? 0;
 
+    const traitTypesMap = new Map(
+        [...new Set(traitValuesUsed.map(x=>x.trait_type))].map((x,i)=>[x,i])
+    );
+
     const data: DataInput = {
         nodes: traitValuesUsed.map(x => ({
             nodeId: getNodeId(x),
             key: `${x.trait_type}:${x.trait_value}`,
+            traitTypeIndex: traitTypesMap.get(x.trait_type) ?? 0,
+            traitTypeCount: traitTypesMap.size,
             traitType: x.trait_type,
             traitValue: x.trait_value,
             tokenCountInSelected: x.tokensInSelectionSet.size,
-            tokensCountTotal: x.tokenIds.length,
+            tokenCount: x.tokenIds.length,
+            tokenCountAll: projectRarity.tokenLookups.length,
+            tokenCountUsed: tokenIds.size,
         })),
         links: pairsUsed.map(x=>{
             return {
                 source: getNodeId(x.l),
                 target: getNodeId(x.r),
                 value: x.intersectCount,
-                uom: 'Widget(s)'    
             };
         }),
     };
@@ -182,7 +227,46 @@ const calculateData = async (projectRarity: INftProjectRarityDocument, tokenIds:
     };
 };
 
-const drawChart = (svgElement:SVGGElement, data: DataInput, onSelect:(nodeIds:number[])=>void) => {
+type DataNode = {
+    nodeId: number;
+    key: string;
+    traitTypeIndex: number;
+    traitTypeCount: number;
+    traitType: string;
+    traitValue: string;
+    tokenCountInSelected: number;
+    tokenCount: number;
+    tokenCountAll: number;
+    tokenCountUsed: number;
+}
+
+type DataLink = {
+    source: number;
+    target: number;
+    value: number;
+}
+
+type DataInput = {
+    nodes: DataNode[];
+    links: DataLink[];
+}
+
+const drawSankeyDiagram = (svgElement:SVGGElement, dataInput: DataInput, onSelect:(nodeIds:number[])=>void) => {
+
+    type SNode = d3Sankey.SankeyNode<DataNode, DataLink>;
+    type SLink = d3Sankey.SankeyLink<DataNode, DataLink>;
+
+    const data = {
+        nodes: dataInput.nodes as SNode[],
+        links: dataInput.links.map(x=>({
+            source: x.source,
+            target: x.target,
+            value: x.value,
+            uom: 'Widget(s)',
+        })) as SLink[],
+    };
+
+
     const width = svgElement.clientWidth;
     const height = svgElement.clientHeight;
     const colors = {
@@ -198,11 +282,41 @@ const drawChart = (svgElement:SVGGElement, data: DataInput, onSelect:(nodeIds:nu
 
     const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    const sankey = d3Sankey.sankey()
+    const sankey = d3Sankey.sankey<SNode,SLink>()
         .nodeWidth(15)
-        .nodePadding(10)
-        .extent([[1, 1], [width - 1, height - 6]]);
+        .nodePadding(2)
+        .extent([[4, 4], [width - 4, height - 4]]);
+    sankey(data);
 
+    // Override x position
+    data.nodes.forEach(n=>{
+        const xTarget = (width-8-20) *(n.traitTypeIndex / (n.traitTypeCount-1));
+        const xDiff = xTarget - (n.x0??0);
+        //console.log('override position', {xTarget, xDiff, x0:n.x0, x1:n.x1, width, traitTypeIndex: n.traitTypeIndex, traitTypeCount: n.traitTypeCount, n});
+        n.x0 = xDiff + (n.x0 ?? 0);
+        n.x1 = xDiff + (n.x1 ?? 0);
+    });
+
+    // // Override y height
+    // data.nodes.forEach(n=>{
+    //     const hTarget = (height-8-20) * (n.tokenCountInSelected / n.tokenCountUsed);
+    //     const hDiff = hTarget - ((n.y1??0) - (n.y0??0));
+    //     console.log('override height', {hTarget, hDiff, x0:n.x0, x1:n.x1, width, traitTypeIndex: n.traitTypeIndex, traitTypeCount: n.traitTypeCount, n});
+    //     n.y1 = (n.y1 ?? 0) + hDiff;
+    // });
+    // Override width
+    data.nodes.forEach(n=>{
+        const wTarget = Math.max(2,(width-8-20) * (n.tokenCountInSelected / n.tokenCountUsed) / (n.traitTypeCount-1));
+        const wDiff = wTarget - ((n.x1??0) - (n.x0??0));
+        console.log('override width', {wTarget, wDiff, x0:n.x0, x1:n.x1, width, traitTypeIndex: n.traitTypeIndex, traitTypeCount: n.traitTypeCount, n});
+        n.x1 = (n.x1 ?? 0) + wDiff;
+    });
+    
+    // Recalculate y pos
+    //sankey.update(data);
+    
+
+    // Draw
     const link = svg.append("g")
         .attr("class", "links")
         .attr("fill", "none")
@@ -217,7 +331,6 @@ const drawChart = (svgElement:SVGGElement, data: DataInput, onSelect:(nodeIds:nu
         .selectAll("g")
         ;
 
-    sankey(data);
 
     const link2 = link
         .data(data.links)
@@ -229,9 +342,9 @@ const drawChart = (svgElement:SVGGElement, data: DataInput, onSelect:(nodeIds:nu
 
     link2.append("title")
         .text((d) => { return `
-${(d.source as SNodeExtra)?.key}
+${(d.source as DataNode)?.key}
 & 
-${(d.target as SNodeExtra)?.key}
+${(d.target as DataNode)?.key}
 
 ${d.value} NFTs in common`.trim() })
         .attr("fill", colors.text)
@@ -258,7 +371,7 @@ ${d.value} NFTs in common`.trim() })
         .attr("y", (d) => { return ((d.y1??0) + (d.y0??0)) / 2; })
         .attr("dy", "0.35em")
         .attr("text-anchor", "end")
-        .text(d => `[${d.traitType}] ${d.traitValue}`)
+        .text(d => `${d.traitType}: ${d.traitValue}`)
         .attr("fill", colors.text)
         .filter((d) => { return (d.x0??0) < width / 2; })
         .attr("x", (d) => { return (d.x1??0) + 6; })
@@ -266,85 +379,7 @@ ${d.value} NFTs in common`.trim() })
         ;
 
     node2.append("title")
-        .text(d => `${d.traitType}\n${d.traitValue}\n${d.tokenCountInSelected} NFTs in Selection\n${d.tokensCountTotal} NFTs Total`)
+        .text(d => `${d.traitType}: ${d.traitValue}\n${d.tokenCountInSelected} NFTs in Selection\n${d.tokenCount} NFTs Total`)
         .attr("fill", colors.text)
         ;
-}
-
-// const exampleData: DataInput = {
-//     nodes: [{
-//         nodeId: 0,
-//         name: "node0"
-//     }, {
-//         nodeId: 1,
-//         name: "node1"
-//     }, {
-//         nodeId: 2,
-//         name: "node2"
-//     }, {
-//         nodeId: 3,
-//         name: "node3"
-//     }, {
-//         nodeId: 4,
-//         name: "node4"
-//     }],
-//     links: [{
-//         source: 0,
-//         target: 2,
-//         value: 2,
-//         uom: 'Widget(s)'
-//     }, {
-//         source: 1,
-//         target: 2,
-//         value: 2,
-//         uom: 'Widget(s)'
-//     }, {
-//         source: 1,
-//         target: 3,
-//         value: 2,
-//         uom: 'Widget(s)'
-//     }, {
-//         source: 0,
-//         target: 4,
-//         value: 2,
-//         uom: 'Widget(s)'
-//     }, {
-//         source: 2,
-//         target: 3,
-//         value: 2,
-//         uom: 'Widget(s)'
-//     }, {
-//         source: 2,
-//         target: 4,
-//         value: 2,
-//         uom: 'Widget(s)'
-//     }, {
-//         source: 3,
-//         target: 4,
-//         value: 4,
-//         uom: 'Widget(s)'
-//     }]
-// };
-
-interface SNodeExtra {
-    nodeId: number;
-    key: string;
-    traitType: string;
-    traitValue: string;
-    tokenCountInSelected: number;
-    tokensCountTotal: number;
-}
-
-interface SLinkExtra {
-    source: number;
-    target: number;
-    value: number;
-    uom: string;
-}
-type SNode = d3Sankey.SankeyNode<SNodeExtra, SLinkExtra>;
-type SLink = d3Sankey.SankeyLink<SNodeExtra, SLinkExtra>;
-
-interface DataInput {
-    nodes: SNode[];
-    links: SLink[];
 }

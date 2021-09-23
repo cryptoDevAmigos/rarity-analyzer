@@ -142,9 +142,11 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                     <TraitTypesList projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect} onReset={onReset}/>
                 </div>
                 <div className='panel-nft-list'>
+                    <div style={{marginTop: 8}}>Analysis</div>
                     <div>
                         <TraitGraph projectKey={projectKey} projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect}/>
                     </div>
+                    <div style={{marginTop: 32}}>Nfts</div>
                     <div className='nft-list' ref={nftListRef}>
                         {projectRarity && (
                             <LazyList items={[...tokenIds]} getItemKey={x=>`${x}`} ItemComponent={({item})=>(
