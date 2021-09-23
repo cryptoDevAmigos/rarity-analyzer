@@ -16,7 +16,7 @@
         "primary": "#FF00AE",
         "secondary": "#0062F9",
         "highlight": "#FFFFFF",
-        "borderWidth": "8px",
+        "borderWidth": "4px",
         "borderRadius": "0px",
         "boxShadowWidth": "5px",
         "boxShadowBlur": "0px"
