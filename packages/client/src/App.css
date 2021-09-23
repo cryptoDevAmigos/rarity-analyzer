@@ -121,16 +121,37 @@ a:hover {
   }
 }
 
-.project-info {}
+.project-info {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+}
 .project-info-title { font-family: orbitron; font-size: 1.6em; }
-.project-info-description { font-family: orbitron;}
-.project-info-link {}
+.project-info-description { font-family: orbitron; }
+.project-info-link { word-break: break-all;}
 
 .nft-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 0;
-  grid-auto-flow: row dense;
+
+}
+
+@media (min-width: 600px) {
+  .project-info {
+    flex-direction: row;
+  }
+  .nft-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    grid-gap: 0;
+    grid-auto-flow: row dense;
+  }
+}
+
+.nft-card .project-info {
+  min-height: 240px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nft-container-single {
@@ -140,7 +161,6 @@ a:hover {
 
 .nft-card {
   margin: 16px;
-  /* min-width: 240px; */
   min-height: 240px;
   width: calc(100% - 32px);
   height: calc(100% - 32px);

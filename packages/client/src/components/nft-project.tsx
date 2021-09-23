@@ -121,7 +121,7 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
         <>
             <div className='panel-container'>
                 <div className='panel-project-info'>
-                    <ProjectInfo projectRarity={projectRarity}/>
+                    <ProjectInfo project={projectRarity.project}/>
                 </div>
                 <div className='panel-trait-types'>
                     <TraitTypesList projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect} onReset={onReset}/>
@@ -145,37 +145,33 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
     );
 };
 
-export const ProjectInfo = ({projectRarity}:{ projectRarity:INftProjectRarityData})=>{
-    const {project} = projectRarity;
+export const ProjectInfo = ({project}:{ project:INftProjectMetadataDocument})=>{
     return (
         <>
             <div className='project-info'>
-                <div style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-                    <div style={{}}>
-                        <SmartImage alt='project' src={project.image} style={{objectFit:'contain', width: 150}}/>
+                <div style={{}}>
+                    <SmartImage alt='project' src={project.image} style={{objectFit:'contain', width: 150}}/>
+                </div>
+                <div style={{}}>
+                    <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>
+                        <IconLink url={project.external_link} icon='link'/>
+                        <IconLink url={project.links?.opensea} iconUrl='/media/opensea.png'/>
+                        <IconLink url={project.links?.openSea} iconUrl='/media/opensea.png'/>
+                        <IconLink url={project.links?.twitter} icon='twitter'/>
+                        <IconLink url={project.links?.discord} icon='discord'/>
+                        {Object.entries(project.links??{})
+                            .filter(([k])=> !'opensea openSea discord twitter'.includes(k))
+                            .map(([k,v])=>(
+                                <IconLink key={k} url={v} icon='link'/>
+                            ))}
                     </div>
-                    <div style={{}}>
-                        <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>
-                            <IconLink url={project.external_link} icon='link'/>
-                            <IconLink url={project.links?.opensea} iconUrl='/media/opensea.png'/>
-                            <IconLink url={project.links?.openSea} iconUrl='/media/opensea.png'/>
-                            <IconLink url={project.links?.twitter} icon='twitter'/>
-                            <IconLink url={project.links?.discord} icon='discord'/>
-                            {Object.entries(project.links??{})
-                                .filter(([k])=> !'opensea openSea discord twitter'.includes(k))
-                                .map(([k,v])=>(
-                                    <IconLink key={k} url={v} icon='link'/>
-                                ))}
+                    <div className='project-info-title'>{project.name}</div>
+                    <div className='project-info-description'>{project.description}</div>
+                    {!!project.external_link && (
+                        <div className='project-info-link'>
+                            <a href={getIpfsUrl(project.external_link)}>{project.external_link}</a>
                         </div>
-                        <div className='project-info-title'>{project.name}</div>
-                        <div className='project-info-description'>{project.description}</div>
-                        {!!project.external_link && (
-                            <div className='project-info-link'>
-                                <a href={getIpfsUrl(project.external_link)}>{project.external_link}</a>
-                            </div>
-                        )}
-                    </div>
-
+                    )}
                 </div>
             </div>
         </>
