@@ -14,11 +14,13 @@ export const TraitGraph = ({ projectKey, projectRarity, selected, tokenIds }:{ p
         const svg = svgRef.current;
         if(!svg){ return; }
 
+        const selectedCount = Object.values(selected).filter(x=>x.value !== ALL_TRAIT_VALUE).length;
+
         const tokenLookupsRaw2 = projectRarity.tokenLookups
             .filter(x=>x.trait_value !== ALL_TRAIT_VALUE)
             ;
 
-        const tokenLookupsRaw = Object.values(selected).some(x=>x.value !== ALL_TRAIT_VALUE) 
+        const tokenLookupsRaw = selectedCount > 0
             ? tokenLookupsRaw2
                 .filter(x => x.trait_value === (selected[x.trait_type]?.value ?? x.trait_value))
                 .filter(x => x.tokenIds.some(t => tokenIds.has(t)))
@@ -33,7 +35,7 @@ export const TraitGraph = ({ projectKey, projectRarity, selected, tokenIds }:{ p
             ));
         
         // Only use n the top trait types
-        const traitTypes = traitTypesTop.slice(0,4);
+        const traitTypes = traitTypesTop.slice(selectedCount, 5 + selectedCount);
         const traitTypesUsedSet = new Set(traitTypes);
 
         const tokenLookups = tokenLookupsRaw
@@ -42,7 +44,7 @@ export const TraitGraph = ({ projectKey, projectRarity, selected, tokenIds }:{ p
         const nodeIdsMap = new Map(tokenLookups.map((x,i)=>[x,i]));
         const getNodeId = (x: typeof tokenLookups[number]) => nodeIdsMap.get(x) ?? 0;
 
-        const traitTypePairs = traitTypes.map((x,i)=>[x, traitTypes[i+1]]).filter(x=>x[0]&&x[1]);
+        const traitTypePairs = traitTypes.map((x,i)=>[x, traitTypes[i+1]]).filter(x => x[0] && x[1]);
 
         const data: DataInput = {
             nodes: tokenLookups.map(x => ({
@@ -76,11 +78,10 @@ export const TraitGraph = ({ projectKey, projectRarity, selected, tokenIds }:{ p
         };
     },[redrawKey]);
 
-    // const heightRatio = Math.max(0.25,Math.min(1,tokenIds.size * 0.1));
-    const heightRatio = 0.5;
+    const heightRatio = Math.max(0.25,Math.min(0.75,tokenIds.size * 0.1));
     return (
         <div style={{ background: '#000000', borderRadius: 0 }}>
-            <svg ref={svgRef} style={{width: '100%', height: `${(heightRatio*100).toFixed(0)}vh`}}></svg>
+            <svg ref={svgRef} style={{width: '100%', minHeight: 600, height: `${(heightRatio*100).toFixed(0)}vh`}}></svg>
         </div>
     );
 }
@@ -97,6 +98,8 @@ const drawChart = (svgElement:SVGGElement, data: DataInput) => {
 
     const svg = d3.select(svgElement);
     svg.selectAll("*").remove();
+
+    if( !data.nodes.length ){ return; }
 
     const formatNumber = d3.format(",.0f"),
         format = function (d: any) { return formatNumber(d) + " NFTs"; },

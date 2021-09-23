@@ -261,16 +261,16 @@ export const TraitValuesList = ({
     const traitTypeTokenLookups = projectRarity.tokenLookups
         .filter(x=>x.trait_type === traitType);
    
-    const selectedTraitValue = selected[traitType] ?? {
+    const selectedTraitItem = selected[traitType] ?? {
         value: ALL_TRAIT_VALUE,
         tokenIdsIfAll: tokenIds,
     };
-    const isAllSelected = selectedTraitValue.value === ALL_TRAIT_VALUE;
-    console.log('TraitValuesList', {isAllSelected, selectedTraitValue});
+    const isAllSelected = selectedTraitItem.value === ALL_TRAIT_VALUE;
+    console.log('TraitValuesList', {isAllSelected, selectedTraitItem});
 
     if(!isExpanded){
 
-        if(!selectedTraitValue || isAllSelected){
+        if(isAllSelected){
             return <></>;
         }
 
@@ -283,7 +283,7 @@ export const TraitValuesList = ({
                         }}>
                         {'❌'}
                     </div>
-                    {traitType} = {selectedTraitValue}
+                    {traitType} = {selectedTraitItem.value}
                 </div>
             </div>
         );
@@ -305,8 +305,8 @@ export const TraitValuesList = ({
             <div className='nft-trait-values'>
                 {traitTypeTokenLookups.map(x=>(
                     <React.Fragment key={`${x.trait_type}:${x.trait_value}`}>
-                        <div className={`nft-trait-value link ${selectedTraitValue.value === x.trait_value ? 'nft-trait-value-selected':''}`} onClick={()=>onSelect({traitType: x.trait_type, value: x.trait_value})}>
-                            <BarGraphCell ratio={x.ratio} text={x.trait_value} textRight={`${x.tokenIds.filter(t => (selectedTraitValue.tokenIdsIfAll??tokenIds).has(t)).length}`}/>
+                        <div className={`nft-trait-value link ${selectedTraitItem.value === x.trait_value ? 'nft-trait-value-selected':''}`} onClick={()=>onSelect({traitType: x.trait_type, value: x.trait_value})}>
+                            <BarGraphCell ratio={x.ratio} text={x.trait_value} textRight={`${x.tokenIds.filter(t => (selectedTraitItem.tokenIdsIfAll??tokenIds).has(t)).length}`}/>
                         </div>
                     </React.Fragment>
                 ))}
