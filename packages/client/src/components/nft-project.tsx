@@ -9,6 +9,7 @@ import { changeTheme } from '../helpers/theme';
 import { Icon, IconLink, IconName, LoadingIndicator } from './icons';
 import { SmartImage } from './smart-image';
 import { OnSelectTraitValue, TraitFilters } from './types';
+import { TraitGraph } from './trait-graph';
 
 // Workaround for importing implementation
 const MISSING_ATTRIBUTE_VALUE: typeof MISSING_ATTRIBUTE_VALUE_TYPE = `[Missing]`;
@@ -142,6 +143,9 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                     <TraitTypesList projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect} onReset={onReset}/>
                 </div>
                 <div className='panel-nft-list'>
+                    <div>
+                        <TraitGraph projectKey={projectKey} projectRarity={projectRarity} selected={traitFilters.current}/>
+                    </div>
                     <div className='nft-list' ref={nftListRef}>
                         {projectRarity && (
                             <LazyList items={[...tokenIds]} getItemKey={x=>`${x}`} ItemComponent={({item})=>(
