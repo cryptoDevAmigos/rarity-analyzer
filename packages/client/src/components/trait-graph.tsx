@@ -1,8 +1,10 @@
 import { INftProjectRarityDocument } from '@crypto-dev-amigos/common';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ALL_TRAIT_VALUE, TraitFilters, OnSelectTraitValue } from './types';
 import * as d3 from 'd3';
 import * as d3Sankey from 'd3-sankey';
+import { delay } from '../helpers/delay';
+import { LoadingIndicator } from './icons';
 
 
 export const TraitGraph = ({ 
@@ -13,109 +15,172 @@ export const TraitGraph = ({
 
     const svgRef = useRef(null as null | SVGSVGElement);
     const redrawKey = projectKey + JSON.stringify(selected);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const svg = svgRef.current;
         if(!svg){ return; }
 
-        const selectedNotAll = new Map(Object.entries(selected).filter(([k,x])=>x.value !== ALL_TRAIT_VALUE));
-        const selectedCount = selectedNotAll.size;
+        let isMounted = true;
+        let redraw = () => {};
 
-        const tokenLookupsRaw2 = projectRarity.tokenLookups
-            .filter(x=>x.trait_value !== ALL_TRAIT_VALUE)
-            .map(x=>({
-                ...x,
-                // Remove token ids from counts
-                // tokenIds: x.tokenIds.filter(t=>tokenIds.has(t)),
-            }))
-            .filter(x => x.tokenIds.length)
-            ;
+        (async () => {
+            // Blank
+            drawChart(svg, {nodes:[], links:[]}, ()=>{});
 
-        // Sort by rarest trait value
-        tokenLookupsRaw2.sort((a,b) => (a.tokenIds.length - b.tokenIds.length));
+            const { data, nodeIdsMap } = await calculateData(projectRarity, tokenIds, selected);
+            if(!isMounted){ return; }
 
-        const tokenLookupsRaw = selectedCount > 0
-            ? tokenLookupsRaw2
-                .filter(x => x.trait_value === (selectedNotAll.get(x.trait_type) ?? x.trait_value))
-                .filter(x => x.tokenIds.some(t => tokenIds.has(t)))
-            : tokenLookupsRaw2;
-
-        const traitTypesSet = new Set(tokenLookupsRaw.map(x=>x.trait_type));
-        const traitTypeValueCountsMap = new Map( [...traitTypesSet].map(x=> [x ,tokenLookupsRaw.filter(t=>t.trait_type===x).length]));
-        const traitTypesTop = [...traitTypesSet]
-            // .sort((a,b) => ( 
-            //     (traitTypeValueCountsMap.get(a) ?? 0) 
-            //     - (traitTypeValueCountsMap.get(b) ?? 0)
-            // ))
-            ;
-        
-        // Only use n the top trait types
-        // const traitTypes = traitTypesTop;
-        const traitTypes = traitTypesTop.slice(selectedCount, 3 + selectedCount);
-        //const traitTypes = traitTypesTop.slice(selectedCount, 10 + selectedCount);
-        const traitTypesUsedSet = new Set(traitTypes);
-
-        const tokenLookups = tokenLookupsRaw
-            .filter(x => traitTypesUsedSet.has(x.trait_type));
-
-        const nodeIdsReverseMap = new Map(tokenLookups.map((x,i)=>[x,i]));
-        const nodeIdsMap = new Map(tokenLookups.map((x,i)=>[i,x]));
-        const getNodeId = (x: typeof tokenLookups[number]) => nodeIdsReverseMap.get(x) ?? 0;
-
-        //const traitTypePairs = traitTypes.map((x,i)=>[x, traitTypes[i+1]]).filter(x => x[0] && x[1]);
-        const traitTypePairs = traitTypes.flatMap((x,i) => 
-            traitTypes.filter((y,j)=>j>i).map((y,j)=>[x, y])
-        ).filter(x => x[0] !== x[1]);
-
-        const data: DataInput = {
-            nodes: tokenLookups.map(x => ({
-                nodeId: getNodeId(x),
-                name: `${x.trait_type}:${x.trait_value}`,
-            })),
-            links: traitTypePairs.flatMap(([lTraitType,rTraitType]) => {
-                const left = tokenLookups.filter(x=>x.trait_type === lTraitType);
-                const right = tokenLookups.filter(x=>x.trait_type === rTraitType);
-
-                return left.flatMap(l=>{
-                    const lTokenIdsSet = new Set(l.tokenIds);
-                    return right.map(r=>{
-                        return {
-                            source: getNodeId(l),
-                            target: getNodeId(r),
-                            value: r.tokenIds.filter(x => lTokenIdsSet.has(x) && tokenIds.has(x)).length,
-                            uom: 'Widget(s)'    
-                        };
-                    })
+            const onSelectNodeIds = (nodeIds:number[]) => {
+                const items = nodeIds.map(x=>nodeIdsMap.get(x));
+                console.log('onSelect', {nodeIds, items});
+                items.forEach(x=>{
+                    if(!x){ return; }
+                    onSelect({traitType: x.trait_type, value: x.trait_value});
                 });
-            }).filter(x => x.value > 0),
-        };
+            };
+    
+            redraw = () => { drawChart(svg, data, onSelectNodeIds); };
+            redraw();
+            setLoading(false);
+        })();
 
-        const onSelectNodeIds = (nodeIds:number[]) => {
-            const items = nodeIds.map(x=>nodeIdsMap.get(x));
-            console.log('onSelect', {nodeIds, items});
-            items.forEach(x=>{
-                if(!x){ return; }
-                onSelect({traitType: x.trait_type, value: x.trait_value});
-            });
-        };
-
-        const redraw = () => { drawChart(svg, data, onSelectNodeIds) };
-        redraw();
-
-        window.addEventListener('resize', redraw);
+        setLoading(true);
+        const redrawOuter = () => {redraw()};
+        window.addEventListener('resize', redrawOuter);
         return () => {
-            window.removeEventListener('resize', redraw);
+            isMounted = false;
+            window.removeEventListener('resize', redrawOuter);
         };
-    },[redrawKey]);
+    },[redrawKey, tokenIds.size]);
 
     const heightRatio = Math.max(0.25,Math.min(0.75,tokenIds.size * 0.1));
     return (
         <div style={{ background: '#000000', borderRadius: 0 }}>
+            <div>Rarist Trait Combinations</div>
+            {loading && (<LoadingIndicator/>)}
             <svg ref={svgRef} style={{width: '100%', minHeight: 600, height: `${(heightRatio*100).toFixed(0)}vh`}}></svg>
         </div>
     );
 }
 
+const calculateData = async (projectRarity: INftProjectRarityDocument, tokenIds: Set<number>, selected: TraitFilters) => {
+    await delay(10);
+    // const selectedNotAll = new Map(Object.entries(selected).filter(([k,x])=>x.value !== ALL_TRAIT_VALUE));
+
+    const traitValuesRaw = projectRarity.tokenLookups;
+    const traitValuesNotAll = traitValuesRaw
+        .filter(x => x.trait_value !== ALL_TRAIT_VALUE)
+        .map(x=>({
+            ...x,
+            tokensInSelectionSet: new Set(x.tokenIds.filter(t => tokenIds.has(t))),
+        }))
+        ;
+
+    const getAllPairs = async () => {
+        const allPairs = [] as {
+            l: typeof traitValuesNotAll[number];
+            r: typeof traitValuesNotAll[number];
+            intersectCount: number;
+            unionCount: number;
+        }[];
+
+        let lastDelay = Date.now();
+        for(let i = 0; i < traitValuesNotAll.length; i++){
+            const x = traitValuesNotAll[i];
+            const xArray = [...x.tokensInSelectionSet];
+
+            for(let j = i + 1; j < traitValuesNotAll.length; j++){
+                const y = traitValuesNotAll[j];
+                if(x.trait_type === y.trait_type){ continue; }
+
+                if( Date.now() > lastDelay + 10){
+                    console.log('getAllPairs delay');
+
+                    await delay(0);
+                    lastDelay = Date.now();
+                }
+ 
+                const result = {
+                    l:x,
+                    r:y,
+                    intersectCount: xArray.filter(t => y.tokensInSelectionSet.has(t)).length,
+                    unionCount: xArray.filter(t => !y.tokensInSelectionSet.has(t)).length + y.tokensInSelectionSet.size,
+                };
+
+                if(!result.intersectCount){ continue; }
+                allPairs.push(result);
+            }    
+        }
+
+        return allPairs;
+    };
+
+    const allPairs = await getAllPairs();
+
+    console.log('allPairs', {allPairs});
+
+    const allPairsSortedByRarist = allPairs.sort((a,b)=>{
+
+        if( a.intersectCount !== b.intersectCount){
+            return a.intersectCount - b.intersectCount;
+        }
+
+        if( a.unionCount !== b.unionCount ){
+            return a.unionCount - b.unionCount;
+        }
+
+        if( a.l.tokenIds.length !== b.l.tokenIds.length ){
+            return a.l.tokenIds.length - b.l.tokenIds.length;
+        }
+
+        if( a.l.trait_type !== b.l.trait_type ){
+            return a.l.trait_type.localeCompare(b.l.trait_type);
+        }
+        if( a.l.trait_value !== b.l.trait_value ){
+            return a.l.trait_value.localeCompare(b.l.trait_value);
+        }
+        if( a.r.trait_type !== b.r.trait_type ){
+            return a.r.trait_type.localeCompare(b.r.trait_type);
+        }
+        if( a.r.trait_value !== b.r.trait_value ){
+            return a.r.trait_value.localeCompare(b.r.trait_value);
+        }
+
+        return 0;
+    });
+
+    const pairsUsed = allPairsSortedByRarist.slice(0,250);
+    const traitValuesUsed = [...new Set(pairsUsed.flatMap(x=>[x.l,x.r]))];
+
+    const nodeIdsReverseMap = new Map(traitValuesUsed.map((x,i)=>[x,i]));
+    const nodeIdsMap = new Map(traitValuesUsed.map((x,i)=>[i,x]));
+    const getNodeId = (x: typeof traitValuesUsed[number]) => nodeIdsReverseMap.get(x) ?? 0;
+
+    const data: DataInput = {
+        nodes: traitValuesUsed.map(x => ({
+            nodeId: getNodeId(x),
+            key: `${x.trait_type}:${x.trait_value}`,
+            traitType: x.trait_type,
+            traitValue: x.trait_value,
+            tokenCountInSelected: x.tokensInSelectionSet.size,
+            tokensCountTotal: x.tokenIds.length,
+        })),
+        links: pairsUsed.map(x=>{
+            return {
+                source: getNodeId(x.l),
+                target: getNodeId(x.r),
+                value: x.intersectCount,
+                uom: 'Widget(s)'    
+            };
+        }),
+    };
+
+    return {
+        data,
+        nodeIdsMap
+    };
+};
 
 const drawChart = (svgElement:SVGGElement, data: DataInput, onSelect:(nodeIds:number[])=>void) => {
     const width = svgElement.clientWidth;
@@ -131,9 +196,7 @@ const drawChart = (svgElement:SVGGElement, data: DataInput, onSelect:(nodeIds:nu
 
     if( !data.nodes.length ){ return; }
 
-    const formatNumber = d3.format(",.0f"),
-        format = function (d: any) { return formatNumber(d) + " NFTs"; },
-        color = d3.scaleOrdinal(d3.schemeCategory10);
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
 
     const sankey = d3Sankey.sankey()
         .nodeWidth(15)
@@ -159,13 +222,18 @@ const drawChart = (svgElement:SVGGElement, data: DataInput, onSelect:(nodeIds:nu
     const link2 = link
         .data(data.links)
         .enter().append("path")
-        .on('click' , (e,d)=>{ console.log('click', {d}); onSelect([(d.source as SNode).nodeId, (d.target as SNode).nodeId]); })
+        .on('click', (e,d)=>{ console.log('click', {d}); onSelect([(d.source as SNode).nodeId, (d.target as SNode).nodeId]); })
         .attr("d", d3Sankey.sankeyLinkHorizontal())
-        .attr("stroke-width", function (d: any) { return Math.max(1, d.width); })
+        .attr("stroke-width", (d) => { return Math.max(1, d.width ?? 1); })
         ;
 
     link2.append("title")
-        .text(function (d: any) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); })
+        .text((d) => { return `
+${(d.source as SNodeExtra)?.key}
+& 
+${(d.target as SNodeExtra)?.key}
+
+${d.value} NFTs in common`.trim() })
         .attr("fill", colors.text)
         ;
 
@@ -176,91 +244,95 @@ const drawChart = (svgElement:SVGGElement, data: DataInput, onSelect:(nodeIds:nu
         ;
 
     node2.append("rect")
-        .attr("x", function (d: any) { return d.x0; })
-        .attr("y", function (d: any) { return d.y0; })
-        .attr("height", function (d: any) { return d.y1 - d.y0; })
-        .attr("width", function (d: any) { return d.x1 - d.x0; })
-        .attr("fill", function (d: any) { return color(d.name.replace(/ .*/, "")); })
+        .attr("x", (d) => { return d.x0??0; })
+        .attr("y", (d) => { return d.y0??0; })
+        .attr("height", (d) => { return (d.y1??0) - (d.y0??0); })
+        .attr("width", (d) => { return (d.x1??0) -  (d.x0??0); })
+        .attr("fill", (d) => { return color(d.key.replace(/ .*/, "")); })
         .attr("stroke", colors.nodeOutline)
         ;
 
     node2.append("text")
         .attr("fill", colors.text)
-        .attr("x", function (d: any) { return d.x0 - 6; })
-        .attr("y", function (d: any) { return (d.y1 + d.y0) / 2; })
+        .attr("x", (d) => { return (d.x0??0) - 6; })
+        .attr("y", (d) => { return ((d.y1??0) + (d.y0??0)) / 2; })
         .attr("dy", "0.35em")
         .attr("text-anchor", "end")
-        .text(function (d: any) { return d.name; })
+        .text(d => `[${d.traitType}] ${d.traitValue}`)
         .attr("fill", colors.text)
-        .filter(function (d: any) { return d.x0 < width / 2; })
-        .attr("x", function (d: any) { return d.x1 + 6; })
+        .filter((d) => { return (d.x0??0) < width / 2; })
+        .attr("x", (d) => { return (d.x1??0) + 6; })
         .attr("text-anchor", "start")
         ;
 
     node2.append("title")
-        .text(function (d: any) { return d.name + "\n" + format(d.value); })
+        .text(d => `${d.traitType}\n${d.traitValue}\n${d.tokenCountInSelected} NFTs in Selection\n${d.tokensCountTotal} NFTs Total`)
         .attr("fill", colors.text)
         ;
 }
 
-const exampleData: DataInput = {
-    nodes: [{
-        nodeId: 0,
-        name: "node0"
-    }, {
-        nodeId: 1,
-        name: "node1"
-    }, {
-        nodeId: 2,
-        name: "node2"
-    }, {
-        nodeId: 3,
-        name: "node3"
-    }, {
-        nodeId: 4,
-        name: "node4"
-    }],
-    links: [{
-        source: 0,
-        target: 2,
-        value: 2,
-        uom: 'Widget(s)'
-    }, {
-        source: 1,
-        target: 2,
-        value: 2,
-        uom: 'Widget(s)'
-    }, {
-        source: 1,
-        target: 3,
-        value: 2,
-        uom: 'Widget(s)'
-    }, {
-        source: 0,
-        target: 4,
-        value: 2,
-        uom: 'Widget(s)'
-    }, {
-        source: 2,
-        target: 3,
-        value: 2,
-        uom: 'Widget(s)'
-    }, {
-        source: 2,
-        target: 4,
-        value: 2,
-        uom: 'Widget(s)'
-    }, {
-        source: 3,
-        target: 4,
-        value: 4,
-        uom: 'Widget(s)'
-    }]
-};
+// const exampleData: DataInput = {
+//     nodes: [{
+//         nodeId: 0,
+//         name: "node0"
+//     }, {
+//         nodeId: 1,
+//         name: "node1"
+//     }, {
+//         nodeId: 2,
+//         name: "node2"
+//     }, {
+//         nodeId: 3,
+//         name: "node3"
+//     }, {
+//         nodeId: 4,
+//         name: "node4"
+//     }],
+//     links: [{
+//         source: 0,
+//         target: 2,
+//         value: 2,
+//         uom: 'Widget(s)'
+//     }, {
+//         source: 1,
+//         target: 2,
+//         value: 2,
+//         uom: 'Widget(s)'
+//     }, {
+//         source: 1,
+//         target: 3,
+//         value: 2,
+//         uom: 'Widget(s)'
+//     }, {
+//         source: 0,
+//         target: 4,
+//         value: 2,
+//         uom: 'Widget(s)'
+//     }, {
+//         source: 2,
+//         target: 3,
+//         value: 2,
+//         uom: 'Widget(s)'
+//     }, {
+//         source: 2,
+//         target: 4,
+//         value: 2,
+//         uom: 'Widget(s)'
+//     }, {
+//         source: 3,
+//         target: 4,
+//         value: 4,
+//         uom: 'Widget(s)'
+//     }]
+// };
 
 interface SNodeExtra {
     nodeId: number;
-    name: string;
+    key: string;
+    traitType: string;
+    traitValue: string;
+    tokenCountInSelected: number;
+    tokensCountTotal: number;
 }
 
 interface SLinkExtra {
