@@ -280,6 +280,12 @@ export const TraitValuesList = ({
     const isAllSelected = selectedTraitItem.value === ALL_TRAIT_VALUE;
     console.log('TraitValuesList', {isAllSelected, selectedTraitItem});
 
+    const traitTypeTokenLookupsWithCount = traitTypeTokenLookups.map(x=>({
+        x, 
+        isSelected: selectedTraitItem.value === x.trait_value,
+        count: x.tokenIds.filter(t => (selectedTraitItem.tokenIdsIfAll??tokenIds).has(t)).length
+    }));
+
     return (
         <div className='nft-trait-type'>
             <div className='nft-trait-type-header link' onClick={()=>toggleIsExpanded()}>
@@ -315,10 +321,12 @@ export const TraitValuesList = ({
             </div>
             {isExpanded && (
                 <div className='nft-trait-values'>
-                    {traitTypeTokenLookups.map(x=>(
+                    {traitTypeTokenLookupsWithCount
+                    .filter(({count,isSelected})=>count||isSelected)
+                    .map(({x,count,isSelected})=>(
                         <React.Fragment key={`${x.trait_type}:${x.trait_value}`}>
-                            <div className={`nft-trait-value link ${selectedTraitItem.value === x.trait_value ? 'nft-trait-value-selected':''}`} onClick={()=>onSelect({traitType: x.trait_type, value: x.trait_value})}>
-                                <BarGraphCell ratio={x.ratio} text={x.trait_value} textRight={`${x.tokenIds.filter(t => (selectedTraitItem.tokenIdsIfAll??tokenIds).has(t)).length}`}/>
+                            <div className={`nft-trait-value link ${isSelected ? 'nft-trait-value-selected':''}`} onClick={()=>onSelect({traitType: x.trait_type, value: x.trait_value})}>
+                                <BarGraphCell ratio={x.ratio} text={x.trait_value} textRight={`${count}`}/>
                             </div>
                         </React.Fragment>
                     ))}
