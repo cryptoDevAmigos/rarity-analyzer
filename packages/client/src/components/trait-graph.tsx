@@ -23,7 +23,16 @@ export const TraitGraph = ({
 
         const tokenLookupsRaw2 = projectRarity.tokenLookups
             .filter(x=>x.trait_value !== ALL_TRAIT_VALUE)
+            .map(x=>({
+                ...x,
+                // Remove token ids from counts
+                // tokenIds: x.tokenIds.filter(t=>tokenIds.has(t)),
+            }))
+            .filter(x => x.tokenIds.length)
             ;
+
+        // Sort by rarest trait value
+        tokenLookupsRaw2.sort((a,b) => (a.tokenIds.length - b.tokenIds.length));
 
         const tokenLookupsRaw = selectedCount > 0
             ? tokenLookupsRaw2
@@ -34,15 +43,16 @@ export const TraitGraph = ({
         const traitTypesSet = new Set(tokenLookupsRaw.map(x=>x.trait_type));
         const traitTypeValueCountsMap = new Map( [...traitTypesSet].map(x=> [x ,tokenLookupsRaw.filter(t=>t.trait_type===x).length]));
         const traitTypesTop = [...traitTypesSet]
-            .sort((a,b) => ( 
-                (traitTypeValueCountsMap.get(a) ?? 0) 
-                - (traitTypeValueCountsMap.get(b) ?? 0)
-            ));
+            // .sort((a,b) => ( 
+            //     (traitTypeValueCountsMap.get(a) ?? 0) 
+            //     - (traitTypeValueCountsMap.get(b) ?? 0)
+            // ))
+            ;
         
         // Only use n the top trait types
-        const traitTypes = traitTypesTop;
-        // const traitTypes = traitTypesTop.slice(selectedCount, 10 + selectedCount);
-        // const traitTypes = traitTypesTop.slice(0, 5 + selectedCount);
+        // const traitTypes = traitTypesTop;
+        const traitTypes = traitTypesTop.slice(selectedCount, 3 + selectedCount);
+        //const traitTypes = traitTypesTop.slice(selectedCount, 10 + selectedCount);
         const traitTypesUsedSet = new Set(traitTypes);
 
         const tokenLookups = tokenLookupsRaw
@@ -52,7 +62,10 @@ export const TraitGraph = ({
         const nodeIdsMap = new Map(tokenLookups.map((x,i)=>[i,x]));
         const getNodeId = (x: typeof tokenLookups[number]) => nodeIdsReverseMap.get(x) ?? 0;
 
-        const traitTypePairs = traitTypes.map((x,i)=>[x, traitTypes[i+1]]).filter(x => x[0] && x[1]);
+        //const traitTypePairs = traitTypes.map((x,i)=>[x, traitTypes[i+1]]).filter(x => x[0] && x[1]);
+        const traitTypePairs = traitTypes.flatMap((x,i) => 
+            traitTypes.filter((y,j)=>j>i).map((y,j)=>[x, y])
+        ).filter(x => x[0] !== x[1]);
 
         const data: DataInput = {
             nodes: tokenLookups.map(x => ({
