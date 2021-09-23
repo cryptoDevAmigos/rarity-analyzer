@@ -244,7 +244,9 @@ export const TraitTypesList = ({
             <div className='nft-trait-types'>
                 {projectRarity.traitTypes.map(x=>(
                     <React.Fragment key={x}>
-                        <TraitValuesList traitType={x} projectRarity={projectRarity} isExpanded={isExpanded} tokenIds={tokenIds} selected={selected} onSelect={onSelect} />
+                        <TraitValuesList traitType={x} projectRarity={projectRarity} 
+                            isExpandedAll={isExpanded}
+                            tokenIds={tokenIds} selected={selected} onSelect={onSelect} />
                     </React.Fragment>
                 ))}
             </div>
@@ -253,11 +255,21 @@ export const TraitTypesList = ({
 };
 
 export const TraitValuesList = ({ 
-    traitType, projectRarity, isExpanded, tokenIds, selected, onSelect
+    traitType, projectRarity, 
+    isExpandedAll,
+    tokenIds, selected, onSelect
 }:{ 
-     traitType: string, projectRarity:INftProjectRarityData, isExpanded: boolean, tokenIds: Set<number>, selected:TraitFilters, onSelect: OnSelectTraitValue
+     traitType: string, projectRarity:INftProjectRarityData, 
+     isExpandedAll: boolean,
+     tokenIds: Set<number>, selected:TraitFilters, onSelect: OnSelectTraitValue
 })=>{
    
+    const [isExpanded, setIsExpanded] = useState(isExpandedAll);
+    const toggleIsExpanded = ()=>{setIsExpanded(s=>!s)};
+    useEffect(()=>{
+        setIsExpanded(isExpandedAll);
+    },[isExpandedAll]);
+
     const traitTypeTokenLookups = projectRarity.tokenLookups
         .filter(x=>x.trait_type === traitType);
    
@@ -268,49 +280,50 @@ export const TraitValuesList = ({
     const isAllSelected = selectedTraitItem.value === ALL_TRAIT_VALUE;
     console.log('TraitValuesList', {isAllSelected, selectedTraitItem});
 
-    if(!isExpanded){
-
-        if(isAllSelected){
-            return <></>;
-        }
-
-        return (
-            <div className='nft-trait-type link' onClick={()=>onSelect({traitType, value: ALL_TRAIT_VALUE})}>
-                <div style={{position:'relative'}}>
-                    <div style={{
-                        position:'absolute',
-                        right: 4,
-                        }}>
-                        {'❌'}
-                    </div>
-                    {traitType} = {selectedTraitItem.value}
-                </div>
-            </div>
-        );
-    }
-
     return (
         <div className='nft-trait-type'>
-            <div className='nft-trait-type-header link' onClick={()=>onSelect({traitType, value: ALL_TRAIT_VALUE})}>
+            <div className='nft-trait-type-header link' onClick={()=>toggleIsExpanded()}>
                 <div style={{position:'relative'}}>
                     <div style={{
-                        position:'absolute',
-                        right: 4,
-                        }}>
-                        {isAllSelected ? '':'❌'}
+                            position:'absolute',
+                            left: 4,
+                            fontSize: 18
+                            }}>
+                            {isExpanded ? <Icon icon='expanded'/> : <Icon icon='collapsed'/> }
                     </div>
+                    {!isAllSelected && (
+                        <div style={{
+                            position:'absolute',
+                            right: 4,
+                            }}
+                            onClick={(e)=>{ 
+                                e.preventDefault();
+                                e.stopPropagation();
+                                onSelect({traitType, value: ALL_TRAIT_VALUE});
+                            }}
+                        >
+                            {'❌'}
+                        </div>
+                    )}
                     {traitType}
                 </div>
+                {!isExpanded && (
+                    <div className='nft-trait-value'>
+                        {selectedTraitItem.value}
+                    </div>
+                )}
             </div>
-            <div className='nft-trait-values'>
-                {traitTypeTokenLookups.map(x=>(
-                    <React.Fragment key={`${x.trait_type}:${x.trait_value}`}>
-                        <div className={`nft-trait-value link ${selectedTraitItem.value === x.trait_value ? 'nft-trait-value-selected':''}`} onClick={()=>onSelect({traitType: x.trait_type, value: x.trait_value})}>
-                            <BarGraphCell ratio={x.ratio} text={x.trait_value} textRight={`${x.tokenIds.filter(t => (selectedTraitItem.tokenIdsIfAll??tokenIds).has(t)).length}`}/>
-                        </div>
-                    </React.Fragment>
-                ))}
-            </div>
+            {isExpanded && (
+                <div className='nft-trait-values'>
+                    {traitTypeTokenLookups.map(x=>(
+                        <React.Fragment key={`${x.trait_type}:${x.trait_value}`}>
+                            <div className={`nft-trait-value link ${selectedTraitItem.value === x.trait_value ? 'nft-trait-value-selected':''}`} onClick={()=>onSelect({traitType: x.trait_type, value: x.trait_value})}>
+                                <BarGraphCell ratio={x.ratio} text={x.trait_value} textRight={`${x.tokenIds.filter(t => (selectedTraitItem.tokenIdsIfAll??tokenIds).has(t)).length}`}/>
+                            </div>
+                        </React.Fragment>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
