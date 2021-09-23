@@ -12,6 +12,7 @@
   --black-or-white: #FFFFFF;
 }
 
+
 .black-or-white {
   color: var(--black-or-white);
 }
@@ -20,9 +21,15 @@ body {
   background-color: var(--back);
   color: var(--secondary);
 }
-span, div {
-  font-family: 'Space Mono', monospace;
+
+body {
+  /* font-family: 'Space Mono', monospace; */
+  /* font-family: orbitron, 'Space Mono', monospace;
+  font-weight: 200; */
+  /* font-family: VT323, 'Space Mono', monospace; */
+  font-family: orbitron, 'Space Mono', monospace;
 }
+
 div {
   border-radius: var(--border-radius);
 }
@@ -81,7 +88,6 @@ a:hover {
 }
 
 .panel-project-info {
-
 }
 
 .panel-nft-list {
@@ -114,6 +120,11 @@ a:hover {
     grid-column: 2;
   }
 }
+
+.project-info {}
+.project-info-title { font-family: orbitron; font-size: 1.6em; }
+.project-info-description { font-family: orbitron;}
+.project-info-link {}
 
 .nft-list {
   display: grid;
@@ -261,10 +272,7 @@ a:hover {
   margin: 8px;
   border: var(--border-width) solid var(--secondary);
 }
-.nft-trait-type {
-  margin: 8px;
-  border: var(--border-width) solid var(--secondary);
-}
+
 .nft-trait-type-header {
   padding: 4px;
 }

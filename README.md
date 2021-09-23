@@ -122,6 +122,10 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
 
 - [ ] Instructions for Forking and deploy to site provider (Netlify)
 
+- [ ] Improve Git Performance
+    - Remove web folder from all branches except `deploy` branch
+    - Run build github action only on `deploy` branch
+
 ### Ideas
 
 - [ ] Show owned Nfts
@@ -129,3 +133,10 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
         - Manually enter contract address
         - Web3 to get contract address of user
     - https://docs.opensea.io/reference/getting-assets
+
+
+
+### Other Rarity Tools
+
+- https://rarity.tools/
+- https://rarity.guide/

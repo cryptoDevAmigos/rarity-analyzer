@@ -149,32 +149,34 @@ export const ProjectInfo = ({projectRarity}:{ projectRarity:INftProjectRarityDat
     const {project} = projectRarity;
     return (
         <>
-            <div style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-                <div style={{}}>
-                    <SmartImage alt='project' src={project.image} style={{objectFit:'contain', width: 150}}/>
-                </div>
-                <div style={{}}>
-                    <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>
-                        <IconLink url={project.external_link} icon='link'/>
-                        <IconLink url={project.links?.opensea} iconUrl='/media/opensea.png'/>
-                        <IconLink url={project.links?.openSea} iconUrl='/media/opensea.png'/>
-                        <IconLink url={project.links?.twitter} icon='twitter'/>
-                        <IconLink url={project.links?.discord} icon='discord'/>
-                        {Object.entries(project.links??{})
-                            .filter(([k])=> !'opensea openSea discord twitter'.includes(k))
-                            .map(([k,v])=>(
-                                <IconLink key={k} url={v} icon='link'/>
-                            ))}
+            <div className='project-info'>
+                <div style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                    <div style={{}}>
+                        <SmartImage alt='project' src={project.image} style={{objectFit:'contain', width: 150}}/>
                     </div>
-                    <div style={{fontSize: '1.6em'}}>{project.name}</div>
-                    <div style={{fontSize: '1.0em'}}>{project.description}</div>
-                    {!!project.external_link && (
-                        <div style={{fontSize: '1.0em'}}>
-                            <a href={getIpfsUrl(project.external_link)}>{project.external_link}</a>
+                    <div style={{}}>
+                        <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>
+                            <IconLink url={project.external_link} icon='link'/>
+                            <IconLink url={project.links?.opensea} iconUrl='/media/opensea.png'/>
+                            <IconLink url={project.links?.openSea} iconUrl='/media/opensea.png'/>
+                            <IconLink url={project.links?.twitter} icon='twitter'/>
+                            <IconLink url={project.links?.discord} icon='discord'/>
+                            {Object.entries(project.links??{})
+                                .filter(([k])=> !'opensea openSea discord twitter'.includes(k))
+                                .map(([k,v])=>(
+                                    <IconLink key={k} url={v} icon='link'/>
+                                ))}
                         </div>
-                    )}
-                </div>
+                        <div className='project-info-title'>{project.name}</div>
+                        <div className='project-info-description'>{project.description}</div>
+                        {!!project.external_link && (
+                            <div className='project-info-link'>
+                                <a href={getIpfsUrl(project.external_link)}>{project.external_link}</a>
+                            </div>
+                        )}
+                    </div>
 
+                </div>
             </div>
         </>
     );
