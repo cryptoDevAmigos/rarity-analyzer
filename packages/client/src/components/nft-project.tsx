@@ -143,7 +143,7 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                 </div>
                 <div className='panel-nft-list'>
                     <div>
-                        <TraitGraph projectKey={projectKey} projectRarity={projectRarity} selected={traitFilters.current} tokenIds={tokenIds}/>
+                        <TraitGraph projectKey={projectKey} projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect}/>
                     </div>
                     <div className='nft-list' ref={nftListRef}>
                         {projectRarity && (

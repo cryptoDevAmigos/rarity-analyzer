@@ -1,11 +1,15 @@
 import { INftProjectRarityDocument } from '@crypto-dev-amigos/common';
 import React, { useEffect, useRef } from 'react';
-import { ALL_TRAIT_VALUE, TraitFilters } from './types';
+import { ALL_TRAIT_VALUE, TraitFilters, OnSelectTraitValue } from './types';
 import * as d3 from 'd3';
 import * as d3Sankey from 'd3-sankey';
 
 
-export const TraitGraph = ({ projectKey, projectRarity, selected, tokenIds }:{ projectKey: string, projectRarity: INftProjectRarityDocument, selected: TraitFilters, tokenIds: Set<number> }) => {
+export const TraitGraph = ({ 
+    projectKey, projectRarity, tokenIds, selected, onSelect, 
+ }:{ 
+     projectKey: string, projectRarity: INftProjectRarityDocument, tokenIds: Set<number>, selected: TraitFilters, onSelect:OnSelectTraitValue
+}) => {
 
     const svgRef = useRef(null as null | SVGSVGElement);
     const redrawKey = projectKey + JSON.stringify(selected);
@@ -35,14 +39,16 @@ export const TraitGraph = ({ projectKey, projectRarity, selected, tokenIds }:{ p
             ));
         
         // Only use n the top trait types
-        const traitTypes = traitTypesTop.slice(selectedCount, 5 + selectedCount);
+        // const traitTypes = traitTypesTop.slice(selectedCount, 5 + selectedCount);
+        const traitTypes = traitTypesTop.slice(0, 5 + selectedCount);
         const traitTypesUsedSet = new Set(traitTypes);
 
         const tokenLookups = tokenLookupsRaw
             .filter(x => traitTypesUsedSet.has(x.trait_type));
 
-        const nodeIdsMap = new Map(tokenLookups.map((x,i)=>[x,i]));
-        const getNodeId = (x: typeof tokenLookups[number]) => nodeIdsMap.get(x) ?? 0;
+        const nodeIdsReverseMap = new Map(tokenLookups.map((x,i)=>[x,i]));
+        const nodeIdsMap = new Map(tokenLookups.map((x,i)=>[i,x]));
+        const getNodeId = (x: typeof tokenLookups[number]) => nodeIdsReverseMap.get(x) ?? 0;
 
         const traitTypePairs = traitTypes.map((x,i)=>[x, traitTypes[i+1]]).filter(x => x[0] && x[1]);
 
@@ -69,7 +75,16 @@ export const TraitGraph = ({ projectKey, projectRarity, selected, tokenIds }:{ p
             }).filter(x => x.value > 0),
         };
 
-        const redraw = () => { drawChart(svg, data) };
+        const onSelectNodeIds = (nodeIds:number[]) => {
+            const items = nodeIds.map(x=>nodeIdsMap.get(x));
+            console.log('onSelect', {nodeIds, items});
+            items.forEach(x=>{
+                if(!x){ return; }
+                onSelect({traitType: x.trait_type, value: x.trait_value});
+            });
+        };
+
+        const redraw = () => { drawChart(svg, data, onSelectNodeIds) };
         redraw();
 
         window.addEventListener('resize', redraw);
@@ -87,7 +102,7 @@ export const TraitGraph = ({ projectKey, projectRarity, selected, tokenIds }:{ p
 }
 
 
-const drawChart = (svgElement:SVGGElement, data: DataInput) => {
+const drawChart = (svgElement:SVGGElement, data: DataInput, onSelect:(nodeIds:number[])=>void) => {
     const width = svgElement.clientWidth;
     const height = svgElement.clientHeight;
     const colors = {
@@ -121,13 +136,15 @@ const drawChart = (svgElement:SVGGElement, data: DataInput) => {
         .attr("class", "nodes")
         .attr("font-family", "sans-serif")
         .attr("font-size", 10)
-        .selectAll("g");
+        .selectAll("g")
+        ;
 
     sankey(data);
 
     const link2 = link
         .data(data.links)
         .enter().append("path")
+        .on('click' , (e,d)=>{ console.log('click', {d}); onSelect([(d.source as SNode).nodeId, (d.target as SNode).nodeId]); })
         .attr("d", d3Sankey.sankeyLinkHorizontal())
         .attr("stroke-width", function (d: any) { return Math.max(1, d.width); })
         ;
@@ -140,6 +157,7 @@ const drawChart = (svgElement:SVGGElement, data: DataInput) => {
     const node2 = node
         .data(data.nodes)
         .enter().append("g")
+        .on('click' , (e,d)=> { console.log('click', {d}); onSelect([d.nodeId]); })
         ;
 
     node2.append("rect")
@@ -148,7 +166,8 @@ const drawChart = (svgElement:SVGGElement, data: DataInput) => {
         .attr("height", function (d: any) { return d.y1 - d.y0; })
         .attr("width", function (d: any) { return d.x1 - d.x0; })
         .attr("fill", function (d: any) { return color(d.name.replace(/ .*/, "")); })
-        .attr("stroke", colors.nodeOutline);
+        .attr("stroke", colors.nodeOutline)
+        ;
 
     node2.append("text")
         .attr("fill", colors.text)
