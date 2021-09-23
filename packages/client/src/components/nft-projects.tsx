@@ -34,7 +34,7 @@ return (
 export const NftProjects = ({ projects }:{ projects: INftProjectsDocument }) => {
     return (
         <>
-            <div className='nft-list'>
+            <div className='project-list'>
                 {projects && (
                     <LazyList items={projects.projects} getItemKey={x=>`${x.projectKey}`} ItemComponent={({item})=>(
                         <NftProjectCard projectKey={item.projectKey} project={item.projectMetadata} />

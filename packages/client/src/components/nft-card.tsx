@@ -104,7 +104,7 @@ export const NftCard = ({nft, onSelect}:{ nft: INftRarityWithExtra, onSelect?: O
                             <React.Fragment key={x.trait_type}>
                                 <div className='nft-card-stats-row'>
                                     <div className='nft-card-stats-cell nft-card-stats-title' style={{textAlign:'left'}}>{x.trait_type}</div>
-                                    <div className='nft-card-stats-cell' style={{textAlign:'right'}}>{`${x.ratioScore.toFixed(2)}`}</div>  
+                                    <div className='nft-card-stats-cell numeric-value' style={{textAlign:'right'}}>{`${x.ratioScore.toFixed(2)}`}</div>  
                                 </div>
                                 <div className='nft-card-stats-row'>
                                     <div className={`nft-card-stats-cell ${onSelect?'link':''}`} style={{textAlign:'right'}}>
@@ -118,7 +118,7 @@ export const NftCard = ({nft, onSelect}:{ nft: INftRarityWithExtra, onSelect?: O
                                             }}
                                             style={x.value !== "[Missing]"?{fontWeight:'bold'}:{}}>{x.value}</span>
                                     </div>
-                                    <div className='nft-card-stats-cell'>
+                                    <div className='nft-card-stats-cell numeric-value'>
                                         <BarGraphCell ratio={x.ratio} />
                                     </div>                              
                                 </div>

@@ -28,6 +28,11 @@ body {
   font-weight: 200; */
   /* font-family: VT323, 'Space Mono', monospace; */
   font-family: orbitron, 'Space Mono', monospace;
+  font-weight: 600;
+}
+
+.numeric-value, .nft-card-header-item-value, .bar-graph-text-right {
+  font-family: 'Fira Code';
 }
 
 div {
@@ -61,7 +66,7 @@ div {
   opacity: 0.5;
   border-radius: 0;
 }
-.bar-graph-text {
+.bar-graph-text, .bar-graph-text-right {
   color: var(--highlight);
 }
 
@@ -121,6 +126,8 @@ a:hover {
   }
 }
 
+.project-list {
+}
 .project-info {
   display: flex;
   flex-direction: column-reverse;
@@ -131,20 +138,23 @@ a:hover {
 .project-info-description { font-family: orbitron; }
 .project-info-link { word-break: break-all;}
 
-.nft-list {
-
-}
-
 @media (min-width: 600px) {
-  .project-info {
-    flex-direction: row;
-  }
-  .nft-list {
+  .project-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
     grid-gap: 0;
     grid-auto-flow: row dense;
   }
+  .project-info {
+    flex-direction: row;
+  }
+}
+
+.nft-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 0;
+  grid-auto-flow: row dense;
 }
 
 .nft-card .project-info {
