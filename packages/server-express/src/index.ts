@@ -12,11 +12,20 @@ const config: DiscordCommandConfig = {
 app.get('/', (req, res) => res.send('Express + TypeScript Server'));
 
 app.get('/test/discord', async (req, res) => {
-    const result = await handleDiscordCommand({config, command: (req.query['command'] ?? '') as DiscordCommandKind});
-    res.json(result);
+    try{
+        const result = await handleDiscordCommand({config, command: {
+            kind: (req.query['command'] ?? '') as DiscordCommandKind,
+            projectKey: req.query['projectKey'] as string,
+        }});
+        res.json(result);
+    } catch {
+        res.status(500).json({
+            message: 'Oops! Something broke!'
+        });
+    }
 });
 app.post('/api/v1/discord', async (req, res) => {
-    const result = await handleDiscordCommand({config, command: 'help'});
+    const result = await handleDiscordCommand({config, command: {kind:'help'}});
     res.json(result);
 });
 
