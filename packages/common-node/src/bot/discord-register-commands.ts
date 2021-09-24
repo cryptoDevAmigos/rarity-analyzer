@@ -1,6 +1,5 @@
 import fetch, { Headers } from 'node-fetch';
-import { discordCommands } from '..';
-import { DiscordApplicationCommandOptionType, DiscordApplicationCommandType } from './discord-types';
+import { DiscordApplicationCommandOptionType, DiscordApplicationCommandType, discordCommands, discordRootCommand } from './discord-types';
 
 export type DiscordRegisterCommandsConfig = {
     applicationId: string,
@@ -19,17 +18,14 @@ export const registerDiscordSlashCommands = async ({ config, guild }:{ config: D
 
     const registrationUrl = guild ? guildDiscordUrl : globalDiscordUrl;
 
-    const mainCommandOptions = discordCommands.map(c => ({
-        type: DiscordApplicationCommandOptionType.Subcommand,
-        name: c.command,
-        description: c.description,
-        options: c.options,
-    }));
-
     const data = {
-        name: 'openrarity',
-        description: `Explorer NFT attribute rarity`,
-        options: mainCommandOptions,
+        ...discordRootCommand,
+        options: discordCommands.map(c => ({
+            type: DiscordApplicationCommandOptionType.Subcommand,
+            name: c.command,
+            description: c.description,
+            options: c.options,
+        })),
     };
 
     const body = JSON.stringify(data);

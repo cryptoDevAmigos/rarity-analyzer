@@ -1,12 +1,9 @@
-import { DiscordCommandConfig } from "./discord-bot";
+import { DiscordCommandConfig, handleDiscordCommand } from "./discord-bot";
 import nacl from 'tweetnacl';
+import { DiscordRequestBody } from "./discord-types";
 
 export type DiscordRequestConfig = DiscordCommandConfig & {
     discordPublicKey: string
-};
-
-export type DiscordRequestBody = {
-    type: number,
 };
 
 export class DiscordRequestError extends Error {
@@ -66,6 +63,31 @@ export const handleDiscordRequest = async ({ config, body, rawBody, getHeader }:
         return {
             type: 1,
         };
+    }
+
+    const command = body.data?.options[0];
+    if(command){
+
+        const kind = command.name;
+        const projectKey = command.options?.find(x => x.name === 'project-key')?.value;
+        const tokenId = command.options?.find(x => x.name === 'token-id')?.value;
+
+        console.log('command', {kind, projectKey, tokenId, command});
+        const result = await handleDiscordCommand({config, command:{kind, projectKey, tokenId}});
+        const response = {
+            type: 4,
+            data: {
+                tts: false,
+                content: result.message,
+                //content: result.message + (result.link ? `\n\n${result.link}`:''),
+                // embeds: result.link ? [{
+                //     url: result.link,
+                // }]:[],
+                // allowed_mentions: { parse: [] },
+            }
+        };
+        console.log('command response', {data:response.data});
+        return response;
     }
 
 
