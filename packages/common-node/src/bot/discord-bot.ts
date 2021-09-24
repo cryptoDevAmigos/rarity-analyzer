@@ -1,30 +1,88 @@
 import { INftProjectsDocument } from '@crypto-dev-amigos/common';
 import fetch from 'node-fetch';
+import { DiscordApplicationCommandOptionType, DiscordApplicationCommand } from './discord-types';
 
-const discordCommands = [
+
+
+
+//     {
+//         "name": "animal",
+//         "description": "The type of animal",
+//         "type": 3,
+//         "required": true,
+//         "choices": [
+//             {
+//                 "name": "Dog",
+//                 "value": "animal_dog"
+//             },
+//             {
+//                 "name": "Cat",
+//                 "value": "animal_cat"
+//             },
+//             {
+//                 "name": "Penguin",
+//                 "value": "animal_penguin"
+//             }
+//         ]
+//     },
+//     {
+//         "name": "only_smol",
+//         "description": "Whether to show only baby animals",
+//         "type": 5,
+//         "required": false
+//     }
+// ]
+export const discordCommands = [
+    // {
+    //     command: 'help' as const,
+    //     description: 'List these commands',
+    //     example: '/openrarity help',
+    // },
     {
-        command: 'help',
-        description: 'List these commands',
-    },
-    {
-        command: 'list',
+        command: 'projects' as const,
         description: 'List the NFT projects',
+        example: '/openrarity projects',
     },
     {
-        command: 'project',
+        command: 'project' as const,
         description: 'Get a project by projectKey',
+        example: '/openrarity project example',
+        options: [
+            {
+                name: 'project-key',
+                type: DiscordApplicationCommandOptionType.String,
+                description: 'The projectKey of a project (listed by the list command)',
+                required: true,
+            },
+        ],
     },
     {
-        command: 'nft',
-        description: 'Get an nft by projectKey & tokenId',
+        command: 'nft' as const,
+        description: 'Get an nft by tokenId (will use the default projectKey if not previded)',
+        example: `/openrarity nft 42\n/openrarity nft example 42`,
+        options: [
+            {
+                name: 'token-id',
+                type: DiscordApplicationCommandOptionType.Number,
+                description: 'The tokenId of the nft',
+                required: true,
+            },
+            {
+                name: 'project-key',
+                type: DiscordApplicationCommandOptionType.String,
+                description: 'The projectKey of a project (listed by the list command)',
+                required: false,
+            },
+        ],
     }
-] as const;
+];
+const _check : DiscordApplicationCommand[] = discordCommands;
+export type DiscordCommandKind = typeof discordCommands[number]['command'];
 
 export type DiscordCommandConfig = {
     /** https://www.openrarity.xyz/data/ */
     baseDataUrl: string,
 };
-export type DiscordCommandKind = typeof discordCommands[number]['command'];
 export type DiscordCommand = {
     kind: DiscordCommandKind;
     projectKey?: string;
@@ -38,7 +96,7 @@ export const handleDiscordCommand = async ({ config, command }:{ config: Discord
 
     const {kind, projectKey, tokenId} = command;
 
-    if( kind === 'list' ){
+    if( kind === 'projects' ){
         const result = await fetch(`${baseDataUrl}/projects.json`)
         const json = await result.json() as INftProjectsDocument;
         return {

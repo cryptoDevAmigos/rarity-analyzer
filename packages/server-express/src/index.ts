@@ -1,12 +1,12 @@
 import express, {Request} from 'express';
-import { handleDiscordCommand, DiscordCommandKind, DiscordCommandConfig, handleDiscordRequest, DiscordRequestError, DiscordRequestConfig } from '@crypto-dev-amigos/common-node';
+import { handleDiscordCommand, DiscordCommandKind, DiscordCommandConfig, DiscordRegisterCommandsConfig, handleDiscordRequest, DiscordRequestError, DiscordRequestConfig, registerDiscordSlashCommands } from '@crypto-dev-amigos/common-node';
 import process from 'process';
 import dotenv from 'dotenv';
 
 // Load .env file
 dotenv.config();
 
-const config: DiscordRequestConfig = {
+const config: DiscordRequestConfig & DiscordCommandConfig & DiscordRegisterCommandsConfig = {
     baseDataUrl: 'http://localhost:3000/data/',
 
     /** 
@@ -14,16 +14,20 @@ const config: DiscordRequestConfig = {
      * 
      * https://discord.com/developers/applications/890947995426771015/information
      * */
+    applicationId: process.env.DISCORD_APPLICATION_ID as string,
     discordPublicKey: process.env.DISCORD_PUBLIC_KEY as string,
+    botToken: process.env.DISCORD_BOT_TOKEN as string,
 };
 
-if(!config.discordPublicKey){
+['DISCORD_APPLICATION_ID', 'DISCORD_PUBLIC_KEY', 'DISCORD_BOT_TOKEN'].forEach(x=>{
+    if(!!process.env[x]){ return; }
+
     console.error(`
 ❗❗❗
-~~~ You need to setup .env: DISCORD_PUBLIC_KEY=___ ~~~
+~~~ You need to setup .env file with: ${x}=___ ~~~
 ❗❗❗
 `);
-}
+});
 
 
 type ReqWithRawBody = Request & {rawBody:Buffer};
@@ -61,6 +65,23 @@ app.get('/', (req, res) => {
     logRequest('/', req);
 
     return res.send('Express + TypeScript Server');
+});
+
+app.get('/test/register-discord-commands', async (req, res) => {
+    logRequest('/test/discord', req);
+
+    try{
+        const result = await registerDiscordSlashCommands({config, guild: {
+            guildId: '890940593340047371',
+            defaultProjectKey: 'one-day-punks',
+        }});
+        return res.json(result);
+    } catch(err) {
+        logError('/test/discord',req, err);
+        return res.status(500).json({
+            message: 'Oops! Something broke!'
+        });
+    }
 });
 
 app.get('/test/discord', async (req, res) => {
