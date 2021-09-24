@@ -7,6 +7,7 @@ import { LazyComponent } from './lazy-component';
 import { changeTheme } from '../helpers/theme';
 import { SmartImage } from './smart-image';
 import { LoadingIndicator } from './icons';
+import { ProjectInfo } from './nft-project';
 
 export const NftProjectsLoader = (props:{ })=>{
 
@@ -33,7 +34,7 @@ return (
 export const NftProjects = ({ projects }:{ projects: INftProjectsDocument }) => {
     return (
         <>
-            <div className='nft-list'>
+            <div className='project-list'>
                 {projects && (
                     <LazyList items={projects.projects} getItemKey={x=>`${x.projectKey}`} ItemComponent={({item})=>(
                         <NftProjectCard projectKey={item.projectKey} project={item.projectMetadata} />
@@ -54,14 +55,13 @@ export const NftProjectCard = ({projectKey, project}:{ projectKey:string, projec
 
     return (
         <>
-            <div id={targetId} className={'nft-card link'} onClick={()=>window.location.href=`${projectKey}`}>
-                <div><b>{project.name}</b></div>
-
-                <div className={'nft-card-image'}>
-                    <SmartImage alt='project' src={project.image}/>
-                </div>
-
-                <div><b>{project.description}</b></div>
+            <div id={targetId} className={'nft-card link'} 
+                style={{position:'relative'}} 
+                onClick={()=>window.location.href=`${projectKey}`}
+            >
+                {/* Disable Links */}
+                <div style={{position:'absolute', top:0, bottom:0, left:0, right: 0, opacity: 0}}></div>
+                <ProjectInfo project={project}/>
             </div>
         </>
     );

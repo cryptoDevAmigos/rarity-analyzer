@@ -27,12 +27,14 @@ const CharacterArea = (props:{})=>{
 const Character = ({punkId, name, link}:{punkId:number, name:string, link?:string})=>{
     return (
         <>
-            <div className={link ? 'link':''} onClick={(e)=>{
-                if(!link){ return; } 
-                e.preventDefault();
-                e.stopPropagation();
-                window.open(link);
-             }}>
+            <div className={link ? 'link':''}
+                style={{padding: 8}}
+                onClick={(e)=>{
+                    if(!link){ return; } 
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.open(link);
+                }}>
                 <div>
                     <img style={{width: 150, height:150, objectFit:'contain'}} 
                         src={`/media/punk${punkId}.png`} alt="punk"/>

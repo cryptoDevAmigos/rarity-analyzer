@@ -15,7 +15,7 @@
         "back": "#112233",
         "primary": "#FFBB22",
         "secondary": "#BEC61A",
-        "highlight": "#BEC61A",
+        "highlight": "#FFC61A",
         "borderWidth": "2px",
         "borderRadius": "8px",
         "boxShadowWidth": "8px"
