@@ -1,4 +1,4 @@
-import { Handler } from "@netlify/functions";
+import type { Handler } from "@netlify/functions";
 import { handleDiscordRoute } from "./handler";
 
 const handler: Handler = async (event, context) => {

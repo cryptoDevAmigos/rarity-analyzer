@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES5",
+    "target": "ES2017",
     "downlevelIteration": true,
     "sourceMap": true,
     "declarationMap": true,

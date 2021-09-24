@@ -1,4 +1,4 @@
-import { HandlerEvent, HandlerContext } from "@netlify/functions";
+import type { HandlerEvent, HandlerContext } from "@netlify/functions";
 import { DiscordCommandConfig, DiscordRegisterCommandsConfig, DiscordRequestConfig, DiscordRequestError, handleDiscordCommand, handleDiscordRequest } from '@crypto-dev-amigos/common-node';
 
 const config: DiscordRequestConfig & DiscordCommandConfig & DiscordRegisterCommandsConfig = {
