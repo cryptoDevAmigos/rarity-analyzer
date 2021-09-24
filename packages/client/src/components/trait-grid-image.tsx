@@ -27,6 +27,7 @@ export const TraitGridImage = ({
 
         let isMounted = true;
         let redraw = () => {};
+        let unsubscribe = () => {};
         setLoading(true);
 
         (async () => {
@@ -45,7 +46,11 @@ export const TraitGridImage = ({
             //     });
             // };
     
-            redraw = () => { drawNftTraitGridImage({canvas, projectRarity, selectedTokenIds: tokenIds, traitSort}); };
+            redraw = () => { 
+                unsubscribe();
+                const result = drawNftTraitGridImage({canvas, projectRarity, selectedTokenIds: tokenIds, traitSort}); 
+                unsubscribe = result?.unsubscribe ?? (()=>{});
+            };
             redraw();
             setLoading(false);
         })();
@@ -55,6 +60,7 @@ export const TraitGridImage = ({
         return () => {
             isMounted = false;
             window.removeEventListener('resize', redrawOuter);
+            unsubscribe();
         };
     },[redrawKey, tokenIds.size, traitSort, isExpanded]);
 
@@ -191,4 +197,31 @@ const drawNftTraitGridImage = ({
     }
 
     ctx.putImageData(imageData,0,0);
+
+    // Events
+
+    const handleInput = (position: {clientX:number, clientY:number}) => {
+        const rect = canvas.getClientRects()[0];
+        const canvasXRatio = (position.clientX - rect.top) / (rect.bottom-rect.top);
+        const canvasYRatio = (position.clientY - rect.right) / (rect.bottom-rect.left);
+        
+        const traitIndex = Math.floor(canvasXRatio * traitsToUse.length);
+        const trait = traitsToUse[traitIndex];
+
+        // TODO: Finish handling inputs
+    };
+
+    const handleMouse = (ev: MouseEvent) => handleInput(ev);
+    const handleTouch = (ev: TouchEvent) => handleInput(ev.touches[0]);
+    window.addEventListener('mousemove', handleMouse);
+    window.addEventListener('touchstart', handleTouch);
+    window.addEventListener('touchmove', handleTouch);
+
+    return {
+        unsubscribe: ()=>{
+            window.removeEventListener('mousemove', handleMouse);
+            window.removeEventListener('touchstart', handleTouch);  
+            window.removeEventListener('touchmove', handleTouch);
+        }
+    };
 };
