@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "main": "lib/index.js",
-  "dependencies": {},
+  "dependencies": {
+    "@netlify/functions": "^0.7.2"
+  },
   "devDependencies": {
     "@types/node": "^16.9.1",
     "ts-node": "^10.2.1",
