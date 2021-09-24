@@ -14,7 +14,7 @@
         "clean:client-data": "rimraf ./packages/client/public/data/**/*",
         "rebuild:trigger": "rimraf ./web/data/**/.lastchangehash",
         "rebuild": "npm run clean && npm run build",
-        "test": "cd ./packages/common-node && npm run test",
+        "// test": "cd ./packages/common-node && npm run test",
         "// start": "npm run build:common && npm run build:common-node && concurrently \"npm run start:client\" \"npm run start:server\"",
         "start": "npm run start:client",
         "start:rarities": "npm run build:common-node && npm run build:rarities && copyfiles -u 2 ./web/data/**/* ./packages/client/public/data",
