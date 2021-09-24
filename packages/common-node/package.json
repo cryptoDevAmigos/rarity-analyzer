@@ -4,7 +4,9 @@
   "private": true,
   "main": "lib/index.js",
   "dependencies": {
-    "node-fetch": "^2.6.5"
+    "dotenv": "^10.0.0",
+    "node-fetch": "^2.6.5",
+    "tweetnacl": "^1.0.3"
   },
   "devDependencies": {
     "@types/node": "^16.9.1",

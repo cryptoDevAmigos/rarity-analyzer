@@ -27,6 +27,7 @@
         "start:rarities": "npm run build:common-node && npm run build:rarities && copyfiles -u 2 ./web/data/**/* ./packages/client/public/data",
         "start:client": "npm run start:rarities && cd ./packages/client && npm start",
         "start:server": "cd ./packages/server-express && npm start",
+        "start:server:ngrok": "cd ./packages/server-express && npm start:ngrok",
         "--- test": "// Run tests",
         "// test": "cd ./packages/common-node && npm run test"
     },

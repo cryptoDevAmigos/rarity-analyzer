@@ -1,19 +1,58 @@
 import express, {Request} from 'express';
-import { handleDiscordCommand, DiscordCommandKind, DiscordCommandConfig } from '@crypto-dev-amigos/common-node';
+import { handleDiscordCommand, DiscordCommandKind, DiscordCommandConfig, handleDiscordRequest, DiscordRequestError, DiscordRequestConfig } from '@crypto-dev-amigos/common-node';
+import process from 'process';
+import dotenv from 'dotenv';
 
-const app = express();
-const PORT = 8080;
+// Load .env file
+dotenv.config();
 
-const config: DiscordCommandConfig = {
+const config: DiscordRequestConfig = {
     baseDataUrl: 'http://localhost:3000/data/',
+
+    /** 
+     * Set this in .env file 
+     * 
+     * https://discord.com/developers/applications/890947995426771015/information
+     * */
+    discordPublicKey: process.env.DISCORD_PUBLIC_KEY as string,
 };
 
+if(!config.discordPublicKey){
+    console.error(`
+❗❗❗
+~~~ You need to setup .env: DISCORD_PUBLIC_KEY=___ ~~~
+❗❗❗
+`);
+}
+
+
+type ReqWithRawBody = Request & {rawBody:Buffer};
+
+const PORT = 8080;
+
+const app = express();
+app.use(express.json({
+    verify: (req, res, buf) => {
+      (req as ReqWithRawBody).rawBody = buf;
+    }
+  }));
+
+
+
 const logRequest = (endpoint: string, req: Request) => {
-    console.log(`REQUEST '${endpoint}''`, {
+    console.log(`\n\n\n# REQUEST '${endpoint}''`, {
         path: req.path,
         params: req.params,
         query: req.query,
         body: req.body,
+        cookies: req.cookies,
+        headers: req.headers,
+    });
+};
+const logError = (message: string, req: Request, error: unknown) => {
+    console.error(`\n\n\n # ERROR '${message}''`, {
+        path: req.path,
+        error,
     });
 };
 
@@ -21,7 +60,7 @@ const logRequest = (endpoint: string, req: Request) => {
 app.get('/', (req, res) => {
     logRequest('/', req);
 
-    res.send('Express + TypeScript Server');
+    return res.send('Express + TypeScript Server');
 });
 
 app.get('/test/discord', async (req, res) => {
@@ -33,26 +72,44 @@ app.get('/test/discord', async (req, res) => {
             projectKey: req.query['projectKey'] as string,
             tokenId: req.query['tokenId'] as string,
         }});
-        res.json(result);
-    } catch {
-        res.status(500).json({
+        return res.json(result);
+    } catch(err) {
+        logError('/test/discord',req, err);
+        return res.status(500).json({
             message: 'Oops! Something broke!'
         });
     }
 });
+
 app.post('/api/v1/discord', async (req, res) => {
     logRequest('/api/v1/discord', req);
 
     try{
-        const result = await handleDiscordCommand({config, command: {
-            kind: (req.query['command'] ?? '') as DiscordCommandKind,
-            projectKey: req.query['projectKey'] as string,
-            tokenId: req.query['tokenId'] as string,
-        }});
-        res.json(result);
-    } catch {
-        res.status(500).json({
-            message: 'Oops! Something broke!'
+        const result = await handleDiscordRequest({config, body: req.body, rawBody: (req as ReqWithRawBody).rawBody.toString('utf-8'), getHeader: (name) => req.header(name)});
+        return res.json(result);
+    } catch(err) {
+        try{
+            const error = err as DiscordRequestError;
+            if(error.data){
+                if(error.data.textResponse){
+                    logError('DiscordRequestError: textResponse',req, err);
+                    return res.status(error.data.statusCode).end(error.data.textResponse);
+                }
+                if(error.data.jsonResponse){
+                    logError('DiscordRequestError: jsonResponse',req, err);
+                    return res.status(error.data.statusCode).json(error.data.jsonResponse);
+                }
+
+                logError('DiscordRequestError: unknownResponse',req, err);
+                return res.status(error.data.statusCode).end();
+            }
+        } catch {
+            // Ignore
+        }
+
+        logError('/api/v1/discord',req, err);
+        return res.status(500).json({
+            message: 'Oops! Something broke!',
         });
     }
 });
