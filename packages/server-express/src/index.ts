@@ -16,6 +16,7 @@ app.get('/test/discord', async (req, res) => {
         const result = await handleDiscordCommand({config, command: {
             kind: (req.query['command'] ?? '') as DiscordCommandKind,
             projectKey: req.query['projectKey'] as string,
+            tokenId: req.query['tokenId'] as string,
         }});
         res.json(result);
     } catch {
