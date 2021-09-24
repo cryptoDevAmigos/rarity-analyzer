@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {Request} from 'express';
 import { handleDiscordCommand, DiscordCommandKind, DiscordCommandConfig } from '@crypto-dev-amigos/common-node';
 
 const app = express();
@@ -8,10 +8,25 @@ const config: DiscordCommandConfig = {
     baseDataUrl: 'http://localhost:3000/data/',
 };
 
-//TODO: formalize api url like /api/v1/
-app.get('/', (req, res) => res.send('Express + TypeScript Server'));
+const logRequest = (endpoint: string, req: Request) => {
+    console.log(`REQUEST '${endpoint}''`, {
+        path: req.path,
+        params: req.params,
+        query: req.query,
+        body: req.body,
+    });
+};
+
+
+app.get('/', (req, res) => {
+    logRequest('/', req);
+
+    res.send('Express + TypeScript Server');
+});
 
 app.get('/test/discord', async (req, res) => {
+    logRequest('/test/discord', req);
+
     try{
         const result = await handleDiscordCommand({config, command: {
             kind: (req.query['command'] ?? '') as DiscordCommandKind,
@@ -26,8 +41,20 @@ app.get('/test/discord', async (req, res) => {
     }
 });
 app.post('/api/v1/discord', async (req, res) => {
-    const result = await handleDiscordCommand({config, command: {kind:'help'}});
-    res.json(result);
+    logRequest('/api/v1/discord', req);
+
+    try{
+        const result = await handleDiscordCommand({config, command: {
+            kind: (req.query['command'] ?? '') as DiscordCommandKind,
+            projectKey: req.query['projectKey'] as string,
+            tokenId: req.query['tokenId'] as string,
+        }});
+        res.json(result);
+    } catch {
+        res.status(500).json({
+            message: 'Oops! Something broke!'
+        });
+    }
 });
 
 

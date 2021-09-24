@@ -99,7 +99,7 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
     - [ ] Create Open Rarity Discord Application
         - [ ] Instructions https://discord.com/developers/applications/890947995426771015/oauth2
             - Note: using Netlify functions instead of Lambda
-        - [ ] POST Url: https://www.openrarity.com/api/discord
+        - [ ] POST Url: https://www.openrarity.com/api/v1/discord
         - [ ]
     - [ ] Handle commands
         - [ ] /openrarity list
