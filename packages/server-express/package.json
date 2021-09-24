@@ -1,5 +1,5 @@
 {
-  "name": "@crypto-dev-amigos/server",
+  "name": "@crypto-dev-amigos/server-express",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,8 +14,7 @@
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "start": "nodemon ./src/index.ts",
-    "start-test": "ts-node ./src/run.ts",
+    "start": "nodemon --watch src --watch ../common-node/lib ./src/index.ts",
     "// start:esmodules": "node --experimental-specifier-resolution=node --loader ts-node/esm ./src/run.ts"
   }
 }
