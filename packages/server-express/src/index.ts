@@ -1,18 +1,22 @@
 import express from 'express';
-import { handleDiscordCommand, DiscordCommandKind } from '@crypto-dev-amigos/common-node';
+import { handleDiscordCommand, DiscordCommandKind, DiscordCommandConfig } from '@crypto-dev-amigos/common-node';
 
 const app = express();
 const PORT = 8080;
+
+const config: DiscordCommandConfig = {
+    baseDataUrl: 'http://localhost:3000/data/',
+};
 
 //TODO: formalize api url like /api/v1/
 app.get('/', (req, res) => res.send('Express + TypeScript Server'));
 
 app.get('/test/discord', async (req, res) => {
-    const result = await handleDiscordCommand({command: ((req.params as Record<string,string>)['command'] ?? '') as DiscordCommandKind});
+    const result = await handleDiscordCommand({config, command: (req.query['command'] ?? '') as DiscordCommandKind});
     res.json(result);
 });
 app.post('/api/v1/discord', async (req, res) => {
-    const result = await handleDiscordCommand({command: 'help'});
+    const result = await handleDiscordCommand({config, command: 'help'});
     res.json(result);
 });
 
