@@ -9,6 +9,8 @@ jobs:
       run: npm install
     - name: Install modules packages/common
       run: cd packages/common && npm install
+    - name: Install modules packages/common-node
+      run: cd packages/common-node && npm install
     - name: Build Rarities
       run: npm run build:rarities
     - name: Commit if changes
