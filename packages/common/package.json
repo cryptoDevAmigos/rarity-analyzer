@@ -3,17 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "lib/index.js",
-  "dependencies": {
-    "react": "^17.0.2"
-  },
   "devDependencies": {
-    "@types/node": "^16.9.1",
-    "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
-  },
-  "scripts": {
-    "test": "ts-node ./src/test.ts",
-    "build": "tsc",
-    "build:rarities": "ts-node ./src/build.ts"
   }
 }
