@@ -1,5 +1,5 @@
 import express from 'express';
-import { handleDiscordCommand } from '@crypto-dev-amigos/common-node';
+import { handleDiscordCommand, DiscordCommandKind } from '@crypto-dev-amigos/common-node';
 
 const app = express();
 const PORT = 8080;
@@ -8,11 +8,11 @@ const PORT = 8080;
 app.get('/', (req, res) => res.send('Express + TypeScript Server'));
 
 app.get('/test/discord', async (req, res) => {
-    const result = await handleDiscordCommand({command: 'hello 2'});
+    const result = await handleDiscordCommand({command: ((req.params as Record<string,string>)['command'] ?? '') as DiscordCommandKind});
     res.json(result);
 });
 app.post('/api/v1/discord', async (req, res) => {
-    const result = await handleDiscordCommand({command: 'hello 2'});
+    const result = await handleDiscordCommand({command: 'help'});
     res.json(result);
 });
 
