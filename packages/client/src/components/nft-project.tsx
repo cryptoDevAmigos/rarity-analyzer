@@ -10,6 +10,8 @@ import { Icon, IconLink, IconName, LoadingIndicator } from './icons';
 import { SmartImage } from './smart-image';
 import { ALL_TRAIT_VALUE, OnSelectTraitValue, TraitFilters } from './types';
 import { TraitGraph } from './trait-graph';
+import { TraitGridImage } from './trait-grid-image';
+import { sortTraits } from '../helpers/trait-sort';
 
 // Workaround for importing implementation
 const MISSING_ATTRIBUTE_VALUE: typeof MISSING_ATTRIBUTE_VALUE_TYPE = `[Missing]`;
@@ -51,17 +53,20 @@ type INftProjectRarityData = {
     contractAddress?: string;
 };
 const loadProjectRarityData = (doc: INftProjectRarityDocument): INftProjectRarityData => {
-    const traitTypes = [...new Set(doc.tokenLookups.map(x=>x.trait_type))];
+    const tokenLookupsSource = sortTraits(doc.tokenLookups,'default');
+
+    const traitTypes = [...new Set(tokenLookupsSource.map(x=>x.trait_type))];
 
     // Add [Missing] and [All]
     traitTypes.forEach(traitType => {
-        const traitTypeTokenLookups = doc.tokenLookups
+        const traitTypeTokenLookups = tokenLookupsSource
             .filter(x=>x.trait_type === traitType);
+
         const includedTokenIds = new Set(traitTypeTokenLookups.flatMap(x=>x.tokenIds));
         const missingTokenIds = doc.tokenIdsByRank.filter(t => !includedTokenIds.has(t));
         // Missing
         if(missingTokenIds.length){
-            doc.tokenLookups.unshift({
+            tokenLookupsSource.unshift({
                 trait_type: traitType,
                 trait_value: MISSING_ATTRIBUTE_VALUE,
                 tokenIds: missingTokenIds
@@ -69,14 +74,14 @@ const loadProjectRarityData = (doc: INftProjectRarityDocument): INftProjectRarit
         }
 
         // All
-        doc.tokenLookups.unshift({
+        tokenLookupsSource.unshift({
             trait_type: traitType,
             trait_value: ALL_TRAIT_VALUE,
             tokenIds: doc.tokenIdsByRank,
         });
     });
 
-    const tokenLookups = doc.tokenLookups.map(x=>({
+    const tokenLookups = tokenLookupsSource.map(x=>({
         ...x,
         ratio: x.tokenIds.length / doc.tokenIdsByRank.length,
     }));
@@ -145,6 +150,9 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                     <div style={{marginTop: 8}}>Analysis</div>
                     <div>
                         <TraitGraph projectKey={projectKey} projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect}/>
+                    </div>
+                    <div>
+                        <TraitGridImage projectKey={projectKey} projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect}/>
                     </div>
                     <div style={{marginTop: 32}}>Nfts</div>
                     <div className='nft-list' ref={nftListRef}>
