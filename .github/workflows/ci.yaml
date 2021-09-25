@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Use npm 7
+      run: npm install npm@latest -g
     - name: Install modules in './packages/common'
       run: cd packages/common && npm install
     - name: Install modules in './packages/common-node'
