@@ -553,34 +553,34 @@ var require_discord_request = __commonJS({
       var config2 = _a.config, body = _a.body, rawBody = _a.rawBody, getHeader = _a.getHeader;
       return __awaiter(void 0, void 0, void 0, function() {
         var command, kind, projectKey, tokenId, result, response;
-        var _b, _c, _d, _e, _f;
-        return __generator(this, function(_g) {
-          switch (_g.label) {
+        var _b, _c, _d, _e, _f, _g;
+        return __generator(this, function(_h) {
+          switch (_h.label) {
             case 0:
               console.log("\n\n\n# handleDiscordRequest: Start", { body, rawBody });
               return [4, (0, exports.authenticateDiscordRequest)({ config: config2, rawBody, getHeader })];
             case 1:
-              _g.sent();
+              _h.sent();
               if (body.type === 1) {
                 console.log("handleDiscordRequest: PING-PONG");
                 return [2, {
                   type: 1
                 }];
               }
-              command = (_b = body.data) === null || _b === void 0 ? void 0 : _b.options[0];
+              command = (_c = (_b = body.data) === null || _b === void 0 ? void 0 : _b.options) === null || _c === void 0 ? void 0 : _c[0];
               if (!command)
                 return [3, 3];
               kind = command.name;
-              projectKey = (_d = (_c = command.options) === null || _c === void 0 ? void 0 : _c.find(function(x) {
+              projectKey = (_e = (_d = command.options) === null || _d === void 0 ? void 0 : _d.find(function(x) {
                 return x.name === "project-key";
-              })) === null || _d === void 0 ? void 0 : _d.value;
-              tokenId = (_f = (_e = command.options) === null || _e === void 0 ? void 0 : _e.find(function(x) {
+              })) === null || _e === void 0 ? void 0 : _e.value;
+              tokenId = (_g = (_f = command.options) === null || _f === void 0 ? void 0 : _f.find(function(x) {
                 return x.name === "token-id";
-              })) === null || _f === void 0 ? void 0 : _f.value;
+              })) === null || _g === void 0 ? void 0 : _g.value;
               console.log("command", { kind, projectKey, tokenId, command });
               return [4, (0, discord_bot_1.handleDiscordCommand)({ config: config2, command: { kind, projectKey, tokenId } })];
             case 2:
-              result = _g.sent();
+              result = _h.sent();
               response = {
                 type: 4,
                 data: {
@@ -591,6 +591,7 @@ var require_discord_request = __commonJS({
               console.log("command response", { data: response.data });
               return [2, response];
             case 3:
+              console.error("handleDiscordRequest: UNKNOWN", { data: body.data });
               return [2, {}];
           }
         });
