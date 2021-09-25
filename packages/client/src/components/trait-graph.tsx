@@ -188,7 +188,7 @@ const calculateData = async (projectRarity: INftProjectRarityDocument, tokenIds:
         return 0;
     });
 
-    const pairsUsed = allPairsSortedByRarist.slice(0,rareCount);
+    const pairsUsed = allPairsSortedByRarest.slice(0,rareCount);
     const traitValuesUsed = [...new Set(pairsUsed.flatMap(x=>[x.l,x.r]))];
 
     const nodeIdsReverseMap = new Map(traitValuesUsed.map((x,i)=>[x,i]));
