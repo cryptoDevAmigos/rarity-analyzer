@@ -1,4 +1,4 @@
-import { INftMetadataCollectionDocument } from "../types";
+import { INftMetadataCollectionDocument } from "@crypto-dev-amigos/common";
 import { promises as fs } from 'fs';
 
 export async function getProjectMetadata(location : string): Promise<INftMetadataCollectionDocument> {

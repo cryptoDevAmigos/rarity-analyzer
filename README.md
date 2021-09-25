@@ -95,7 +95,17 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
         - [ ] Feature List (of site)
 
 - [ ] OpenRarity Discord Server + OutgoingWebhookBot
-    - [ ] Create Open Rarity Discord Server
+    - [x] Create Open Rarity Discord Server
+    - [ ] Create Open Rarity Discord Application
+        - [ ] Instructions https://discord.com/developers/applications/890947995426771015/oauth2
+            - Note: using Netlify functions instead of Lambda
+        - [ ] Discord Docs:
+            - Received Outgoing Webhooks
+                - https://discord.com/developers/docs/interactions/receiving-and-responding#receiving-an-interaction
+            - Register Slash Commands
+                - https://discord.com/developers/docs/interactions/application-commands#registering-a-command
+        - [ ] POST Url: https://www.openrarity.com/api/v1/discord
+        - [ ]
     - [ ] Handle commands
         - [ ] /openrarity list
             - List known projects

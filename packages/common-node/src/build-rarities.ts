@@ -1,5 +1,4 @@
-import { calculateRarity } from "./calculate-rarity";
-import { INftMetadata, INftMetadataCollectionDocument, INftProjectMetadataDocument, INftProjectRarityDocument, INftProjectsDocument, MISSING_ATTRIBUTE_VALUE, NftAttributes } from "./types";
+import { calculateRarity, INftMetadata, INftMetadataCollectionDocument, INftProjectMetadataDocument, INftProjectRarityDocument, INftProjectsDocument, MISSING_ATTRIBUTE_VALUE, NftAttributes } from "@crypto-dev-amigos/common";
 import { promises as fs } from 'fs';
 import path from 'path';
 

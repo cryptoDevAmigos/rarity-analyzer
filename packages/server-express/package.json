@@ -1,5 +1,5 @@
 {
-  "name": "@crypto-dev-amigos/server",
+  "name": "@crypto-dev-amigos/server-express",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,13 +9,17 @@
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/node": "^16.9.1",
+    "concurrently": "^6.2.1",
+    "ngrok": "^4.2.2",
     "nodemon": "^2.0.12",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "start": "nodemon ./src/index.ts",
-    "start-test": "ts-node ./src/run.ts",
+    "start": "concurrently \"npm run start:tsc\" \"npm run start:nodemon\"",
+    "start:tsc": "npx tsc -w",
+    "start:nodemon": "nodemon --watch lib --watch ../common-node/lib ./lib/index.js",
+    "start:ngrok": "npx ngrok http 8080",
     "// start:esmodules": "node --experimental-specifier-resolution=node --loader ts-node/esm ./src/run.ts"
   }
 }
