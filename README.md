@@ -1,6 +1,4 @@
-# rarity-analyzer
-
-OpenRarity.xyz - Open Source NFT Rarity Analysis
+# OpenRarity.xyz - NFT Rarities Analyzer
 
 https://openrarity.xyz
 
@@ -126,19 +124,59 @@ https://openrarity.xyz
 
 ---
 
-## Development
+## Introduction
 
-1. Requires npm version 7 (for npm workspaces).  Npm upgrade info for Windows `https://stackoverflow.com/questions/18412129/how-can-i-update-npm-on-windows`
+This project is a submission for the PunkScape Hackathon #1.  
+The main purpose of this project is to provide an open source alternative to other paid closed source NFT rarity sites.  Developers should be able to submit a project by either: 
+
+1. PR request to the main branch to include their project or 
+2. Fork this project and configure for their own deployment.
+
+## Technologies
+
+Project is created with:
+
+* Language - "typescript": "^4.4.3"
+* Client - "react": "^17.0.2"
+* Server - "ts-node": "^10.2.1" and "express": "^4.17.1"
+
+## Installation
+
+### DEVELOPMENT
+
+1. Requires npm version 7+ (for npm workspaces).  Npm upgrade info for Windows `https://stackoverflow.com/questions/18412129/how-can-i-update-npm-on-windows`
 
 2. Run `npm install` at the root of rarity-analyzer to install server dependencies including scope packages and workspaces.  
 
-NOTE: you can run npm install at root to build scoped packages. 
-e.g (While running packages/server/, you can make changes to packages/common/ and run npm install at root to rebuild the @crypto-dev-common package)
+    * NOTE: you can run npm install at root to build scoped packages. 
+    * e.g (While running packages/server/, you can make changes to packages/common/ and run npm install at root to rebuild the @crypto-dev-common package)
 
-3. Run `npm start` to start the development server.
+3. Run `npm start` to start the development server.    
+
+### FORKING AND DEPLOYMENT
+
+##### Instructions for Forking and deploy to site provider (Netlify)
+
+1. Go to https://github.com/cryptoDevAmigos/rarity-analyzer and fork the project to your github account
+2. Go to https://app.netlify.com/start/deploy?repository=https://github.com/{INSERT_FORKED_PROJECT_URL_HERE}
+3. On Netlify, please follow instructions to Connect forked GitHub repo.
+
+### NEW NFT PROJECTS
+
+##### Instructions for submitting new nft project for rarities
+
+You may submit new NFT Projects to https://github.com/cryptoDevAmigos/rarity-analyzer or your forked repository
+
+1. Copy and rename the following file to create a new project `/data/example.project.json` to `/data/project-name.project.json`
+    - Modify project file with the project specific information
+2. Copy new metadata json file to `/data/` like `/data/project-name.json`
+    - Make sure data follows OpenSea metadata structure https://docs.opensea.io/docs/metadata-standards
+3. Submit a pull request
+    - Rarities will be calculated
+    - Website will be updated with results 
 
 
-
+---
 ## Architecture
 
 ### Frontend
@@ -191,9 +229,9 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
 - [x] Generate `/web/projectName/collection-rarities.json`
 - [x] Json data is accessible 
 - [ ] Discord integration
-- [ ] Instructions
-    - [ ] Add Project
-    - [ ] Deploy clone
+- [x] Instructions
+    - [x] Add Project
+    - [x] Deploy clone
 - [ ] Submission before 27.09.2021 00:00 UTC
 
     
@@ -249,14 +287,14 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
     - [ ] ? Use open sea api to get data
 
 
-- [ ] Add Instructions for adding project
+- [x] Add Instructions for adding project
     1. Create `/data/project-name.project.json` file with ContractUri json data
     2. Create `/data/project-name.json` file with nft metadata (TokenUri json array) data
     3. Submit a pull request
         - Rarities will be calculated
         - Website will be updated with results
 
-- [ ] Instructions for Forking and deploy to site provider (Netlify)
+- [x] Instructions for Forking and deploy to site provider (Netlify)
 
 - [ ] Improve Git Performance
     - Remove web folder from all branches except `deploy` branch
@@ -276,3 +314,4 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
 
 - https://rarity.tools/
 - https://rarity.guide/
+- https://intermezzo.tools/
