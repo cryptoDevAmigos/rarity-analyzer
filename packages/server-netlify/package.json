@@ -14,6 +14,6 @@
   },
   "scripts": {
     "build": "npm run esbuild",
-    "esbuild": "esbuild ./src/index.ts --bundle --outfile=../../web/netlify/functions/discord.js --format=cjs --platform=node"
+    "esbuild": "esbuild ./src/index.ts --bundle --outfile=../../web/netlify/functions/discord.js --format=cjs --external:@netlify --external:@netlify/functions --external:tweetnacl --external:node-fetch --external:dotenv --platform=node"
   }
 }
