@@ -65,7 +65,7 @@ export const handleDiscordRequest = async ({ config, body, rawBody, getHeader }:
         };
     }
 
-    const command = body.data?.options[0];
+    const command = body.data?.options?.[0];
     if(command){
 
         const kind = command.name;
@@ -89,7 +89,7 @@ export const handleDiscordRequest = async ({ config, body, rawBody, getHeader }:
         console.log('command response', {data:response.data});
         return response;
     }
-
+    console.error('handleDiscordRequest: UNKNOWN', {data: body.data});
 
     return {
         

@@ -993,6 +993,9 @@ var handleDiscordRoute = async (event, context) => {
     });
     return {
       statusCode: 200,
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(result)
     };
   } catch (err) {
@@ -1009,6 +1012,9 @@ var handleDiscordRoute = async (event, context) => {
         if (error.data.jsonResponse) {
           return {
             statusCode: error.data.statusCode,
+            headers: {
+              "Content-Type": "application/json"
+            },
             body: JSON.stringify(error.data.jsonResponse)
           };
         }
@@ -1029,11 +1035,15 @@ var handleDiscordRoute = async (event, context) => {
 
 // src/index.ts
 var handler = async (event, context) => {
-  if (event.path.endsWith("/discord")) {
+  if (event.body && event.path.endsWith("/discord")) {
     return await handleDiscordRoute(event, context);
   }
   return {
     statusCode: 200,
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
     body: JSON.stringify({ message: "What's up?" })
   };
 };
@@ -1041,3 +1051,4 @@ var handler = async (event, context) => {
 0 && (module.exports = {
   handler
 });
+//# sourceMappingURL=discord.js.map

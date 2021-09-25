@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "npm run esbuild",
-    "esbuild": "esbuild ./src/index.ts --bundle --outfile=../../web/netlify/functions/discord.js --format=cjs --external:@netlify --external:@netlify/functions --external:tweetnacl --external:node-fetch --external:dotenv --platform=node",
+    "esbuild": "esbuild ./src/index.ts --bundle --outfile=../../web/netlify/functions/discord.js --format=cjs --external:@netlify --external:@netlify/functions --external:tweetnacl --external:node-fetch --external:dotenv --platform=node --sourcemap",
     "watch": "npm run esbuild -- --watch",
     "start:ngrok": "npx ngrok http 8888"
   }

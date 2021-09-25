@@ -1,4 +1,4 @@
-import type { HandlerEvent, HandlerContext } from "@netlify/functions";
+import type { HandlerEvent, HandlerContext } from '@netlify/functions';
 import { DiscordCommandConfig, DiscordRegisterCommandsConfig, DiscordRequestConfig, DiscordRequestError, handleDiscordCommand, handleDiscordRequest } from '@crypto-dev-amigos/common-node';
 
 const config: DiscordRequestConfig & DiscordCommandConfig & DiscordRegisterCommandsConfig = {
@@ -27,6 +27,9 @@ export const handleDiscordRoute = async (event:HandlerEvent, context:HandlerCont
         });
         return {
             statusCode: 200,
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify(result),
         };
     } catch(err) {
@@ -44,6 +47,9 @@ export const handleDiscordRoute = async (event:HandlerEvent, context:HandlerCont
                 if(error.data.jsonResponse){
                     return {
                         statusCode: error.data.statusCode,
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
                         body: JSON.stringify(error.data.jsonResponse),
                     };
                 }
