@@ -1,0 +1,4 @@
+[build]
+  functions = "web/netlify/functions"
+  publish = "web"
+

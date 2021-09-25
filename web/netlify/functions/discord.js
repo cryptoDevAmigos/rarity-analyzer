@@ -973,6 +973,15 @@ var config = {
   discordPublicKey: process.env.DISCORD_PUBLIC_KEY,
   botToken: process.env.DISCORD_BOT_TOKEN
 };
+var logError = (message, event, error) => {
+  console.error(`
+
+
+ # ERROR '${message}''`, {
+    path: event.path,
+    error
+  });
+};
 var handleDiscordRoute = async (event, context) => {
   var _a, _b;
   try {
@@ -987,6 +996,7 @@ var handleDiscordRoute = async (event, context) => {
       body: JSON.stringify(result)
     };
   } catch (err) {
+    logError("handleDiscordRoute", event, err);
     try {
       const error = err;
       if (error.data) {
@@ -1009,6 +1019,7 @@ var handleDiscordRoute = async (event, context) => {
       }
     } catch (e) {
     }
+    logError("\u2757\u2757\u2757 handleDiscordRoute UNHANDLED", event, err);
     return {
       statusCode: 500,
       body: "Oops! Something broke!"

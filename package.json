@@ -23,12 +23,19 @@
         "--- start": "// Run development environment",
         "// start": "npm run start:client",
         "start": "concurrently \"npm run start:common\" \"npm run start:common-node\" \"npm run start:client\" \"npm run start:server\"",
-        "start:common": "cd ./packages/common && npx tsc -w",
-        "start:common-node": "cd ./packages/common-node && npx tsc -w",
+        "start:common": "npm run watch:common",
+        "start:common-node": "npm run watch:common-node",
         "start:rarities": "npm run build:common-node && npm run build:rarities && copyfiles -u 2 ./web/data/**/* ./packages/client/public/data",
         "start:client": "npm run start:rarities && cd ./packages/client && npm start",
         "start:server": "cd ./packages/server-express && npm start",
-        "start:server:ngrok": "cd ./packages/server-express && npm start:ngrok",
+        "start:server:ngrok": "cd ./packages/server-express && npm run start:ngrok",
+        "start:netlify:deps": "concurrently \"npm run watch:common\" \"npm run watch:common-node\" \"npm run watch:server-netlify\"",
+        "start:netlify": "npx netlify dev",
+        "start:netlify:ngrok": "cd ./packages/server-netlify && npm run start:ngrok",
+        "--- watch": "// Compile code changes",
+        "watch:common": "cd ./packages/common && npx tsc -w",
+        "watch:common-node": "cd ./packages/common && npx tsc -w",
+        "watch:server-netlify": "cd ./packages/server-netlify && npm run watch",
         "--- test": "// Run tests",
         "// test": "cd ./packages/common-node && npm run test"
     },
@@ -44,6 +51,7 @@
     "devDependencies": {
         "concurrently": "^6.2.1",
         "copyfiles": "^2.4.1",
+        "netlify-cli": "^6.9.17",
         "rimraf": "^3.0.2"
     }
 }

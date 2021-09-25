@@ -9,6 +9,13 @@ const config: DiscordRequestConfig & DiscordCommandConfig & DiscordRegisterComma
     botToken: process.env.DISCORD_BOT_TOKEN as string,
 };
 
+const logError = (message: string, event:HandlerEvent, error: unknown) => {
+    console.error(`\n\n\n # ERROR '${message}''`, {
+        path: event.path,
+        error,
+    });
+};
+
 export const handleDiscordRoute = async (event:HandlerEvent, context:HandlerContext) => {
 
     try{
@@ -23,6 +30,8 @@ export const handleDiscordRoute = async (event:HandlerEvent, context:HandlerCont
             body: JSON.stringify(result),
         };
     } catch(err) {
+        logError('handleDiscordRoute',event, err);
+
         try{
             const error = err as DiscordRequestError;
             if(error.data){
@@ -48,6 +57,7 @@ export const handleDiscordRoute = async (event:HandlerEvent, context:HandlerCont
             // Ignore
         }
 
+        logError('❗❗❗ handleDiscordRoute UNHANDLED',event, err);
         return {
             statusCode: 500,
             body: 'Oops! Something broke!',

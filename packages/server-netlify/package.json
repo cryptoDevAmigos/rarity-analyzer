@@ -9,11 +9,14 @@
   "devDependencies": {
     "@types/node": "^16.9.1",
     "esbuild": "~0.12.25",
+    "ngrok": "^4.2.2",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   },
   "scripts": {
     "build": "npm run esbuild",
-    "esbuild": "esbuild ./src/index.ts --bundle --outfile=../../web/netlify/functions/discord.js --format=cjs --external:@netlify --external:@netlify/functions --external:tweetnacl --external:node-fetch --external:dotenv --platform=node"
+    "esbuild": "esbuild ./src/index.ts --bundle --outfile=../../web/netlify/functions/discord.js --format=cjs --external:@netlify --external:@netlify/functions --external:tweetnacl --external:node-fetch --external:dotenv --platform=node",
+    "watch": "npm run esbuild -- --watch",
+    "start:ngrok": "npx ngrok http 8888"
   }
 }
