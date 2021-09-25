@@ -35,6 +35,9 @@
     "workspaces": [
         "./packages/*"
     ],
+    "dependencies": {
+        "@netlify/functions": "^0.7.2"
+    },
     "devDependencies": {
         "concurrently": "^6.2.1",
         "copyfiles": "^2.4.1",
