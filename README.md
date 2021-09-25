@@ -64,14 +64,14 @@ https://openrarity.xyz
 - Filter applies to all views
     - NFT Cards
     - Trait Waterfall
-    - Rarist Trait Combinations
+    - Rarest Trait Combinations
 
 ![](docs/2021-09-24-23-42-43.png)
 
 #### Trait Waterfall
 
 - See everything in one beautiful view
-- Rarist NFTs are the top rows
+- Rarest NFTs are the top rows
 - Common NFTs are the bottom rows
 - Traits are columns
 
@@ -83,9 +83,9 @@ https://openrarity.xyz
 
 ![](docs/2021-09-24-23-35-10.png)
 
-#### Rarist Trait Combinations (Sankey Diagram)
+#### Rarest Trait Combinations (Sankey Diagram)
 
-- Explore the rarist combinations of traits
+- Explore the Rarest combinations of traits
 
 ![](docs/2021-09-24-23-30-52.png)
 
