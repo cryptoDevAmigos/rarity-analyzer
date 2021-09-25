@@ -80,7 +80,7 @@ export const TraitGraph = ({
                 <div style={{fontSize: 18}}>
                     {isExpanded ? <Icon icon='expanded'/> : <Icon icon='collapsed'/> }
                 </div>
-                <div>Rarist Trait Combinations</div>
+                <div>Rarest Trait Combinations</div>
                 <div style={{flex:1}}>{tokenIds.size} NFTs</div>
                 {[16,64,256,1024].map((v)=><NumberButton key={v} value={v}/>)}
             </div>
@@ -158,7 +158,7 @@ const calculateData = async (projectRarity: INftProjectRarityDocument, tokenIds:
 
     console.log('allPairs', {allPairs});
 
-    const allPairsSortedByRarist = allPairs.sort((a,b)=>{
+    const allPairsSortedByRarest = allPairs.sort((a,b)=>{
 
         if( a.intersectCount !== b.intersectCount){
             return a.intersectCount - b.intersectCount;
