@@ -36,7 +36,10 @@
         "./packages/*"
     ],
     "dependencies": {
-        "@netlify/functions": "^0.7.2"
+        "@netlify/functions": "^0.7.2",
+        "dotenv": "^10.0.0",
+        "node-fetch": "^2.6.5",
+        "tweetnacl": "^1.0.3"
     },
     "devDependencies": {
         "concurrently": "^6.2.1",
