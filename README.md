@@ -1,5 +1,131 @@
 # rarity-analyzer
 
+OpenRarity.xyz - Open Source NFT Rarity Analysis
+
+https://openrarity.xyz
+
+## Features
+
+- Website
+- Discord Bot
+- Serverless (Netlify)
+
+### Website
+
+https://openrarity.xyz
+
+- Create React App
+- Netlify Continuous Deployment from Github
+- Project Themes
+- Lazy Loading for Great Performance
+
+![](docs/website-01.png)
+
+- Small Screen Support
+
+![](docs/website-small-screen.png)
+
+- Large Screen Support
+
+![](docs/website-large-screen.png)
+
+### Nft Metadata
+
+- Analyzed with node scripts using GitHub Actions (or locally)
+- Easy 1,2,3 to add a project
+    - Fork GitHub Repo
+    - Add 2 metadata files:
+        - ./data/[project].json
+        - ./data/[project].project.json
+    - Submit a PR
+        - Github actions will automatically build the rarity files
+        - Netlify Continous Deployment will automatically generate a preview
+
+![](docs/github-actions-build.png)
+
+### Rarity Analysis
+
+#### NFT Rarity Card
+
+- Easily see Rank and Score
+- OpenSea Last Sell, List Price, and Link
+- NFT Preview
+- Attribute Values with Integrated Bar Graph
+- Quickly visualize and compare NFTs
+
+![](docs/nft-cards.png)
+
+#### Trait Filters
+
+- Visualize Trait Rarity with integrated bar graphs
+- Preview the number of NFTs remaining after selecting each trait
+- Drill down to specific traits
+
+![](docs/trait-filters.png)
+
+- Filter applies to all views
+    - NFT Cards
+    - Trait Waterfall
+    - Rarist Trait Combinations
+
+![](docs/2021-09-24-23-42-43.png)
+
+#### Trait Waterfall
+
+- See everything in one beautiful view
+- Rarist NFTs are the top rows
+- Common NFTs are the bottom rows
+- Traits are columns
+
+![](docs/2021-09-24-23-35-34.png)
+
+- Sort Traits by Rarity
+    - Left is rare traits
+    - Right is common traits
+
+![](docs/2021-09-24-23-35-10.png)
+
+#### Rarist Trait Combinations (Sankey Diagram)
+
+- Explore the rarist combinations of traits
+
+![](docs/2021-09-24-23-30-52.png)
+
+### Discord Bot
+
+- /openrarity projects
+
+![](docs/2021-09-24-23-17-38.png)
+
+- /openrarity project project-key:one-day-punks
+
+![](docs/2021-09-24-23-18-48.png)
+
+- /openrarity nft project-key:one-day-punks token-id:42 
+    - Even has a ascii bar graph!
+
+![](docs/2021-09-24-23-12-37.png)
+
+### Discord Application Commands Api
+
+- Discord Outgoing Webhooks
+
+    - No running server costs
+    - Using Netlify Functions 
+    - Continous Deployment from GitHub Repo
+    
+- tl;dr - free (unless you get a ton of traffic somehow)
+
+### Clonable
+
+- Cloning is easy
+- Setup your own website with just your projects
+- But also submit those to be included in OpenRarity.xyz
+- GitHub PR allows you to easily submit metadata that you've added to your own fork
+
+
+---
+
 ## Development
 
 1. Requires npm version 7 (for npm workspaces).  Npm upgrade info for Windows `https://stackoverflow.com/questions/18412129/how-can-i-update-npm-on-windows`
