@@ -17,6 +17,6 @@
   "scripts": {
     "// test": "ts-node ./src/test.ts",
     "build": "tsc",
-    "build:rarities": "ts-node ./src/build-rarities.ts"
+    "build:rarities": "npm run build && node ./lib/build-rarities.js"
   }
 }
