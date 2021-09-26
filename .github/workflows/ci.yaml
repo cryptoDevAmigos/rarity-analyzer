@@ -5,12 +5,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install modules
-      run: npm install
-    - name: Install modules packages/common
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+    - name: Install modules in './packages/common'
       run: cd packages/common && npm install
+    - name: Install modules in './packages/common-node'
+      run: cd packages/common-node && npm install
+    - name: Install modules in './'
+      run: npm install
     - name: Build Rarities
-      run: npm run build:rarities
+      run: npm run build:common && npm run build:common-node && npm run build:rarities
     - name: Commit if changes
       run: |
         if [[ `git status --porcelain` ]]; then

@@ -1,18 +1,182 @@
-# rarity-analyzer
+# OpenRarity.xyz - NFT Rarities Analyzer
 
-## Development
+https://openrarity.xyz
 
-1. Requires npm version 7 (for npm workspaces).  Npm upgrade info for Windows `https://stackoverflow.com/questions/18412129/how-can-i-update-npm-on-windows`
+## Features
+
+- Website
+- Discord Bot
+- Serverless (Netlify)
+
+### Website
+
+https://openrarity.xyz
+
+- Create React App
+- Netlify Continuous Deployment from Github
+- Project Themes
+- Lazy Loading for Great Performance
+
+![](docs/website-01.png)
+
+- Small Screen Support
+
+![](docs/website-small-screen.png)
+
+- Large Screen Support
+
+![](docs/website-large-screen.png)
+
+### Nft Metadata
+
+- Analyzed with node scripts using GitHub Actions (or locally)
+- Easy 1,2,3 to add a project
+    - Fork GitHub Repo
+    - Add 2 metadata files:
+        - ./data/[project].json
+        - ./data/[project].project.json
+    - Submit a PR
+        - Github actions will automatically build the rarity files
+        - Netlify Continous Deployment will automatically generate a preview
+
+![](docs/github-actions-build.png)
+
+### Rarity Analysis
+
+#### NFT Rarity Card
+
+- Easily see Rank and Score
+- OpenSea Last Sell, List Price, and Link
+- NFT Preview
+- Attribute Values with Integrated Bar Graph
+- Quickly visualize and compare NFTs
+
+![](docs/nft-cards.png)
+
+#### Trait Filters
+
+- Visualize Trait Rarity with integrated bar graphs
+- Preview the number of NFTs remaining after selecting each trait
+- Drill down to specific traits
+
+![](docs/trait-filters.png)
+
+- Filter applies to all views
+    - NFT Cards
+    - Trait Waterfall
+    - Rarest Trait Combinations
+
+![](docs/2021-09-24-23-42-43.png)
+
+#### Trait Waterfall
+
+- See everything in one beautiful view
+- Rarest NFTs are the top rows
+- Common NFTs are the bottom rows
+- Traits are columns
+
+![](docs/2021-09-24-23-35-34.png)
+
+- Sort Traits by Rarity
+    - Left is rare traits
+    - Right is common traits
+
+![](docs/2021-09-24-23-35-10.png)
+
+#### Rarest Trait Combinations (Sankey Diagram)
+
+- Explore the Rarest combinations of traits
+
+![](docs/2021-09-24-23-30-52.png)
+
+### Discord Bot
+
+- /openrarity projects
+
+![](docs/2021-09-24-23-17-38.png)
+
+- /openrarity project project-key:one-day-punks
+
+![](docs/2021-09-24-23-18-48.png)
+
+- /openrarity nft project-key:one-day-punks token-id:42 
+    - Even has a ascii bar graph!
+
+![](docs/2021-09-24-23-12-37.png)
+
+### Discord Application Commands Api
+
+- Discord Outgoing Webhooks
+
+    - No running server costs
+    - Using Netlify Functions 
+    - Continous Deployment from GitHub Repo
+    
+- tl;dr - free (unless you get a ton of traffic somehow)
+
+### Clonable
+
+- Cloning is easy
+- Setup your own website with just your projects
+- But also submit those to be included in OpenRarity.xyz
+- GitHub PR allows you to easily submit metadata that you've added to your own fork
+
+
+---
+
+## Introduction
+
+This project is a submission for the PunkScape Hackathon #1.  
+The main purpose of this project is to provide an open source alternative to other paid closed source NFT rarity sites.  Developers should be able to submit a project by either: 
+
+1. PR request to the main branch to include their project or 
+2. Fork this project and configure for their own deployment.
+
+## Technologies
+
+Project is created with:
+
+* Language - "typescript": "^4.4.3"
+* Client - "react": "^17.0.2"
+* Server - "ts-node": "^10.2.1" and "express": "^4.17.1"
+
+## Installation
+
+### DEVELOPMENT
+
+1. Requires npm version 7+ (for npm workspaces).  Npm upgrade info for Windows `https://stackoverflow.com/questions/18412129/how-can-i-update-npm-on-windows`
 
 2. Run `npm install` at the root of rarity-analyzer to install server dependencies including scope packages and workspaces.  
 
-NOTE: you can run npm install at root to build scoped packages. 
-e.g (While running packages/server/, you can make changes to packages/common/ and run npm install at root to rebuild the @crypto-dev-common package)
+    * NOTE: you can run npm install at root to build scoped packages. 
+    * e.g (While running packages/server/, you can make changes to packages/common/ and run npm install at root to rebuild the @crypto-dev-common package)
 
-3. Run `npm start` to start the development server.
+3. Run `npm start` to start the development server.    
+
+### FORKING AND DEPLOYMENT
+
+##### Instructions for Forking and deploy to site provider (Netlify)
+
+1. Go to https://github.com/cryptoDevAmigos/rarity-analyzer and fork the project to your github account
+2. Go to https://app.netlify.com/start/deploy?repository=https://github.com/{INSERT_FORKED_PROJECT_URL_HERE}
+3. On Netlify, please follow instructions to Connect forked GitHub repo.
+
+### NEW NFT PROJECTS
+
+##### Instructions for submitting new nft project for rarities
+
+You may submit new NFT Projects to https://github.com/cryptoDevAmigos/rarity-analyzer or your forked repository
+
+1. Copy and rename the following file to create a new project `/data/example.project.json` to `/data/project-name.project.json`
+    - Modify project file with the project specific information
+2. Copy new metadata json file to `/data/` like `/data/project-name.json`
+    - Make sure data follows OpenSea metadata structure https://docs.opensea.io/docs/metadata-standards
+3. Submit a pull request
+    - Rarities will be calculated
+    - Website will be updated with results 
 
 
-
+---
 ## Architecture
 
 ### Frontend
@@ -65,9 +229,9 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
 - [x] Generate `/web/projectName/collection-rarities.json`
 - [x] Json data is accessible 
 - [ ] Discord integration
-- [ ] Instructions
-    - [ ] Add Project
-    - [ ] Deploy clone
+- [x] Instructions
+    - [x] Add Project
+    - [x] Deploy clone
 - [ ] Submission before 27.09.2021 00:00 UTC
 
     
@@ -95,7 +259,17 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
         - [ ] Feature List (of site)
 
 - [ ] OpenRarity Discord Server + OutgoingWebhookBot
-    - [ ] Create Open Rarity Discord Server
+    - [x] Create Open Rarity Discord Server
+    - [ ] Create Open Rarity Discord Application
+        - [ ] Instructions https://discord.com/developers/applications/890947995426771015/oauth2
+            - Note: using Netlify functions instead of Lambda
+        - [ ] Discord Docs:
+            - Received Outgoing Webhooks
+                - https://discord.com/developers/docs/interactions/receiving-and-responding#receiving-an-interaction
+            - Register Slash Commands
+                - https://discord.com/developers/docs/interactions/application-commands#registering-a-command
+        - [ ] POST Url: https://www.openrarity.com/api/v1/discord
+        - [ ]
     - [ ] Handle commands
         - [ ] /openrarity list
             - List known projects
@@ -113,14 +287,14 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
     - [ ] ? Use open sea api to get data
 
 
-- [ ] Add Instructions for adding project
+- [x] Add Instructions for adding project
     1. Create `/data/project-name.project.json` file with ContractUri json data
     2. Create `/data/project-name.json` file with nft metadata (TokenUri json array) data
     3. Submit a pull request
         - Rarities will be calculated
         - Website will be updated with results
 
-- [ ] Instructions for Forking and deploy to site provider (Netlify)
+- [x] Instructions for Forking and deploy to site provider (Netlify)
 
 - [ ] Improve Git Performance
     - Remove web folder from all branches except `deploy` branch
@@ -140,3 +314,4 @@ e.g (While running packages/server/, you can make changes to packages/common/ an
 
 - https://rarity.tools/
 - https://rarity.guide/
+- https://intermezzo.tools/
