@@ -72,10 +72,11 @@ app.get('/test/register-discord-commands', async (req, res) => {
     logRequest('/test/discord', req);
 
     try{
-        const result = await registerDiscordSlashCommands({config, guild: {
-            guildId: '890940593340047371',
-            defaultProjectKey: 'one-day-punks',
-        }});
+        const result = await registerDiscordSlashCommands({config});
+        // const result = await registerDiscordSlashCommands({config, guild: {
+        //     guildId: '890940593340047371',
+        //     defaultProjectKey: 'one-day-punks',
+        // }});
         return res.json(result);
     } catch(err) {
         logError('/test/discord',req, err);

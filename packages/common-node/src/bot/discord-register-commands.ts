@@ -11,10 +11,10 @@ type DiscordRegisterGuildOptions = {
     defaultProjectKey: string;
 };
 
-export const registerDiscordSlashCommands = async ({ config, guild }:{ config: DiscordRegisterCommandsConfig, guild: DiscordRegisterGuildOptions }) => {
+export const registerDiscordSlashCommands = async ({ config, guild }:{ config: DiscordRegisterCommandsConfig, guild?: DiscordRegisterGuildOptions }) => {
 
     const globalDiscordUrl = `https://discord.com/api/v8/applications/${config.applicationId}/commands`;
-    const guildDiscordUrl = `https://discord.com/api/v8/applications/${config.applicationId}/guilds/${guild.guildId}/commands`;
+    const guildDiscordUrl = `https://discord.com/api/v8/applications/${config.applicationId}/guilds/${guild?.guildId}/commands`;
 
     const registrationUrl = guild ? guildDiscordUrl : globalDiscordUrl;
 
@@ -52,7 +52,9 @@ export const registerDiscordSlashCommands = async ({ config, guild }:{ config: D
 
 
     return {
-        message: `Registered in ${guild.guildId} with ${guild.defaultProjectKey}`
+        message: guild ? `Registered in ${guild.guildId} with ${guild.defaultProjectKey}`
+            : 'Registered Globally'
+        //message: `Registered in ${guild.guildId} with ${guild.defaultProjectKey}`
     };
 };
 
