@@ -8,6 +8,7 @@
         "build:common-node": "cd ./packages/common-node && npx tsc",
         "build:client": "(cd ./packages/client && npm run build) && (cd ../../ && npm run publish:client)",
         "publish:client": "copyfiles -e data/**/* -u 3 ./packages/client/build/**/* ./web",
+        "build:download": "cd ./packages/common-node && npm run build:download",
         "build:rarities": "cd ./packages/common-node && npm run build:rarities",
         "build:server": "cd ./packages/server-netlify && npm run build",
         "--- clean": "// Remove build files",

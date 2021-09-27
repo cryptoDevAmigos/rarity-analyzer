@@ -33,15 +33,18 @@ const run = async () => {
             maxTokenId: '173001000', 
             maxOffset: 1250,
             transformAttribute: ({trait_type, value}) => {
-                if(trait_type === 'shape_name'){
-                    return null;
-                }
 
                 const valuePairs = value.split(':');
-                return {
+                const a = {
                     trait_type: valuePairs[0],
                     value: valuePairs[1],
                 };
+
+                if(a.trait_type === 'shape_name'){
+                    return null;
+                }
+
+                return a;
             },
         });
     }catch(err){
