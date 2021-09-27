@@ -186,6 +186,14 @@ a:hover {
   box-shadow: var(--box-shadow-width) var(--box-shadow-width) var(--box-shadow-blur) var(--secondary);
 }
 
+.hover-popup {
+  border: var(--border-width) solid var(--primary);
+  box-shadow: var(--box-shadow-width) var(--box-shadow-width) var(--box-shadow-blur) 0px var(--secondary);
+  /* box-shadow: 10px 5px 5px red; */
+
+  background: var(--back);
+}
+
 .nft-card-header {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
