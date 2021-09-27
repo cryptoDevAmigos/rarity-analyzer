@@ -37,14 +37,18 @@ export const downloadContractMetadata = async ({
     contractAddress,
     destDir,
     projectKey,
+    collection,
     minTokenId,
     maxTokenId,
+    maxOffset,
 }:{
     contractAddress: string,
     destDir: string,
     projectKey: string,
+    collection?: string,
     minTokenId?: string,
     maxTokenId?: string,
+    maxOffset?: number,
 }) => {
 
     console.log(`# downloadContractMetadata`, { contractAddress, destDir });
@@ -59,14 +63,15 @@ export const downloadContractMetadata = async ({
         return;
     }
 
-    const collectionSlug = contractResult.collection.slug;
-    const collectionMetadata : INftProjectMetadataDocument = {
+    const collectionSlug = collection ?? contractResult.collection.slug;
+    const collectionMetadata : INftProjectMetadataDocument & {raw:unknown} = {
         contract: contractAddress,
         name: contractResult.collection.name,
         description: contractResult.collection.description,
         image: contractResult.collection.image_url,
         external_link: contractResult.collection.external_url,
         symbol: contractResult.symbol,
+        raw: contractResult,
     };
 
     console.log(`saving ${collectionSlug}/${collectionSlug}.collection.json`);
@@ -74,11 +79,12 @@ export const downloadContractMetadata = async ({
     await fs.mkdir(path.join(destDir, collectionSlug), {recursive: true});
     await fs.writeFile(path.join(destDir, collectionSlug, `${collectionSlug}.collection.json`), JSON.stringify(collectionMetadata));
 
-    const totalSupply = contractResult.total_supply ?? 0;
+    // const totalSupply = contractResult.total_supply ?? 0;
+    // const totalSupply = 1000000;
     await downloadNewNfts({
         destDir,
         collectionSlug,
-        totalSupply,
+        maxOffset: maxOffset ?? contractResult.total_supply ?? 1000,
     });
 
     // Combine and copy files
@@ -115,11 +121,11 @@ export const downloadContractMetadata = async ({
 const downloadNewNfts = async ({
     collectionSlug,
     destDir,
-    totalSupply,
+    maxOffset,
 }:{
     collectionSlug: string,
     destDir: string,
-    totalSupply: number,
+    maxOffset: number,
 })=>{
 
     let delayTime = 5000;
@@ -133,9 +139,11 @@ const downloadNewNfts = async ({
     }catch{}
 
     // Reset (this is now desc)
-    processData.nextOffset = 0;
+    // processData.nextOffset = 0;
 
-    for(let offset = processData.nextOffset??0; offset < totalSupply; offset += 50){
+    console.log(`#downloadNewNfts: ${delayTime}ms at offset:${processData.nextOffset} maxOffset:${maxOffset}`);
+
+    for(let offset = processData.nextOffset??0; offset < maxOffset; offset += 50){
         // Update process data
         processData.nextOffset = offset;
         await fs.writeFile(processDataFilePath, JSON.stringify(processData));
@@ -195,21 +203,11 @@ const downloadNewNfts = async ({
             continue;
         }
 
-        if( !nftsData.assets.length){
-            // // Backup to last page (for next time assets might be added)
-            // processData.nextOffset -= 50;
-            // await fs.writeFile(processDataFilePath, JSON.stringify(processData));
 
-            // Done
-            console.log(`No more assets found`, { 
-                collectionSlug, 
-                offset,
-            });
-            return;
-        }
+        let foundExisting = false;
 
         for( const nftData of nftsData.assets){
-            const nft: INftMetadata = {
+            const nft: INftMetadata & {raw:unknown}= {
                 id: Number(nftData.token_id),
                 name: nftData.name ?? undefined,
                 description: nftData.description ?? undefined,
@@ -219,6 +217,7 @@ const downloadNewNfts = async ({
                     trait_type: x.trait_type,
                     value: `${x.value}`,
                 })) ?? undefined,
+                raw: nftData,
             };
     
             const nftFilePath = path.join(destDir, collectionSlug, `${nft.id}.nft.json`);
@@ -227,13 +226,29 @@ const downloadNewNfts = async ({
             try{
                 const exists = await fs.stat(nftFilePath);
                 const nftData = JSON.parse(await fs.readFile(nftFilePath, {encoding:'utf-8'})) as INftMetadata;
-                // Check if file is valid
+
                 if(nftData.id === nft.id){
-                    console.log(`DONE - found existing nft: ${nftFilePath}`);
-                    return;
+                    foundExisting = true;
                 }
             }catch{}
 
+            console.log(`saving ${nftFilePath}`);
+            await fs.writeFile(nftFilePath, JSON.stringify(nft));
+        }
+
+        
+        if( foundExisting || !nftsData.assets.length){
+            // Backup to last page (for next time assets might be added)
+            processData.nextOffset -= 50;
+            await fs.writeFile(processDataFilePath, JSON.stringify(processData));
+
+            // Done
+            console.log(`No more new assets found`, { 
+                foundExisting,
+                collectionSlug, 
+                offset,
+            });
+            return;
         }
     }
 };
