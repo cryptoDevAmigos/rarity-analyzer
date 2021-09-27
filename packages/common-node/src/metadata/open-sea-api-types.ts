@@ -347,7 +347,7 @@ export const openSeaRequest_getNft = {
 }
 
 export const openSeaRequest_getCollectionNfts = {
-  url: `https://api.opensea.io/api/v1/assets?order_direction=asc&offset={offset}&limit=50&collection={collectionSlug}`,
+  url: `https://api.opensea.io/api/v1/assets?order_direction=desc&offset={offset}&limit=50&collection={collectionSlug}`,
   params: {
     collectionSlug: `{collectionSlug}`,
     offset: `{offset}`,
