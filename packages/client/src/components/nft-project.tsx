@@ -105,6 +105,8 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
     const nftListRef = useRef(null as null | HTMLDivElement)
     const traitFilters = useRef({} as TraitFilters);
 
+    const [sort, setSort] = useState('rarity' as 'rarity' | 'tokenId');
+
     const onSelect = (args: { traitType: string, value: string }) => {
         const selections = traitFilters.current;
         selections[args.traitType] = {value: args.value, tokenIdsIfAll: new Set([]) };
@@ -138,6 +140,11 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
         setTokenIds(new Set(projectRarity.tokenIdsByRank));
     };
 
+    const tokenIdsToSort = [...tokenIds];
+    if( sort === 'tokenId'){
+        tokenIdsToSort.sort((a,b)=>a - b);
+    }
+    const tokenIdsToDisplay = [pinnedTokenId,...tokenIdsToSort].filter(x=>x);
     return (
         <>
             <div className='panel-container'>
@@ -158,12 +165,19 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                         />
                     </div>
                     <div style={{marginTop: 32}}>NFTs</div>
-                    <div style={{textAlign:'left'}}>
-                        Search: <input type='text' style={{maxWidth: 100}} value={pinnedTokenId} onChange={(e)=>setPinnedTokenId(e.target.value)}/>
+                    <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
+                        <div style={{textAlign:'left'}}>
+                            Search: <input type='text' style={{maxWidth: 100}} value={pinnedTokenId} onChange={(e)=>setPinnedTokenId(e.target.value)}/>
+                        </div>
+                        <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>
+                            Sort: 
+                            <div className='hover link' style={{marginLeft:4}} onClick={()=>{setSort('rarity')}}>Rarity</div>
+                            <div className='hover link' style={{marginLeft:4}} onClick={()=>{setSort('tokenId')}}>TokenId</div>
+                        </div>
                     </div>
                     <div className='nft-list' ref={nftListRef}>
                         {projectRarity && (
-                            <LazyList key={pinnedTokenId} items={[pinnedTokenId,...tokenIds].filter(x=>x)} getItemKey={x=>`${x}`} ItemComponent={({item})=>(
+                            <LazyList key={pinnedTokenId + sort} items={tokenIdsToDisplay} getItemKey={x=>`${x}`} ItemComponent={({item})=>(
                                 // <div
                                 //     className='link'
                                 //     onClick={()=>window.location.href=`${projectKey}/${item}`}
