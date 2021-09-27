@@ -11,6 +11,12 @@ export async function generateRarityFiles({
 }): Promise<void> {
     console.log('# generateRarityFiles');
 
+    const ordered = [
+        'punkscapes',
+        'one-day-punks',
+        'artblocks-catblocks',
+    ];
+
 
     const files = await fs.readdir(dataDirName, { withFileTypes: true });
     const projectFiles = files.filter(x => x.name.endsWith('.project.json'));
@@ -26,7 +32,13 @@ export async function generateRarityFiles({
             projectKey: x.projectKey,
             projectMetadata: x.projectMetadata,
         }))
+        .map(x=>({ order: ordered.indexOf(x.projectKey), x}))
+        .map(x=>({ order: `${x.order>= 0 ? x.order : ''}`.padStart(10, 'Z'), x:x.x}))
+        .sort((a,b)=>a.order.localeCompare(b.order))
+        .map(x=>x.x)
     };
+
+    console.log('saving projects.json', {projects: projectsDocumentContent.projects.map(x=>x.projectKey)});
 
     // List all projects
     const fullProjectFileName = path.join(outDirName, 'projects.json');
