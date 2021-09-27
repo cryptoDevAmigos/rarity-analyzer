@@ -10,7 +10,7 @@ import { Icon, IconLink, IconName, LoadingIndicator } from './icons';
 import { SmartImage } from './smart-image';
 import { ALL_TRAIT_VALUE, OnSelectTraitValue, TraitFilters } from './types';
 import { TraitGraph } from './trait-graph';
-import { TraitGridImage } from './trait-grid-image';
+import { HoverArgs, TraitGrid } from './trait-grid';
 import { sortTraits } from '../helpers/trait-sort';
 
 // Workaround for importing implementation
@@ -152,7 +152,9 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                         <TraitGraph projectKey={projectKey} projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect}/>
                     </div>
                     <div>
-                        <TraitGridImage projectKey={projectKey} projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect}/>
+                        <TraitGrid projectKey={projectKey} projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect}
+                            HoverComponent={({args})=><HoverComponent hoverArgs={args} projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect}/>}
+                        />
                     </div>
                     <div style={{marginTop: 32}}>Nfts</div>
                     <div className='nft-list' ref={nftListRef}>
@@ -170,6 +172,36 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                 </div>
             </div>
         </>
+    );
+};
+
+const HoverComponent = ({ 
+    projectRarity, 
+    tokenIds, selected, onSelect,
+    hoverArgs,
+}:{ 
+     projectRarity:INftProjectRarityData, 
+     tokenIds: Set<number>, selected:TraitFilters, onSelect: OnSelectTraitValue,
+     hoverArgs: HoverArgs,
+})=>{
+    // const traitInfo = traitFilters.current.
+
+    const {trait,tokenId} = hoverArgs;
+    const traitInfo = selected?.[trait.trait_type];
+    const isSelected = traitInfo?.value === trait.trait_value;
+    const nftCount = trait.tokenIds.length;
+    const ratio = trait.tokenIds.length / projectRarity.tokenIdsByRank.length;
+
+    return (
+        <div className='hover-popup'>
+            <div style={{textAlign:'left'}}>{trait.trait_type}</div>
+            <div className={`nft-trait-value link ${isSelected ? 'nft-trait-value-selected':''}`} 
+                onClick={()=>onSelect({traitType: trait.trait_type, value: trait.trait_value})}>
+                <BarGraphCell ratio={ratio} text={trait.trait_value} textRight={`${nftCount}`}/>
+            </div>
+            <div style={{textAlign:'left'}}>#{tokenId}</div>
+            <div style={{textAlign:'right'}}>Rank {projectRarity.tokenIdsByRank.findIndex(x=>x === tokenId) + 1}</div>
+        </div>
     );
 };
 
