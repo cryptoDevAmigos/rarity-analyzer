@@ -209,7 +209,7 @@ export const ProjectInfo = ({project}:{ project:INftProjectMetadataDocument})=>{
     return (
         <>
             <div className='project-info'>
-                <div style={{}}>
+                <div className='project-info-image'>
                     <SmartImage alt='project' src={project.image} style={{objectFit:'contain', width: 150}}/>
                 </div>
                 <div style={{}}>
