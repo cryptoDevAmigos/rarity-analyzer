@@ -113,7 +113,7 @@ export const downloadContractMetadata = async ({
 
         try{
             const nftData = JSON.parse(await fs.readFile(path.join(destDir, collectionSlug, f), {encoding:'utf-8'})) as INftMetadata;
-            if( !nftData.id || !nftData.attributes){
+            if( !nftData.id || !nftData.attributes?.length){
                 continue;
             }
 
@@ -161,7 +161,7 @@ const downloadNewNfts = async ({
     }catch{}
 
     // Reset (this is now desc)
-    // processData.nextOffset = 0;
+     processData.nextOffset = Math.max(0,processData.nextOffset);
 
     console.log(`#downloadNewNfts: ${delayTime}ms at offset:${processData.nextOffset} maxOffset:${maxOffset}`);
 
