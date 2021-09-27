@@ -42,6 +42,7 @@ export const downloadContractMetadata = async ({
     maxTokenId,
     maxOffset,
     transformAttribute,
+    metadata,
 }:{
     destDir: string,
     projectKey: string,
@@ -51,6 +52,12 @@ export const downloadContractMetadata = async ({
     maxTokenId?: string,
     maxOffset?: number,
     transformAttribute?: (attribute: {trait_type:string, value:string}) => null | {trait_type:string, value:string},
+    metadata?:{
+        name?:string,
+        description?:string,
+        image?:string,
+        external_link?:string,
+    },
 }) => {
 
     console.log(`# downloadContractMetadata`, { collection, destDir });
@@ -82,10 +89,10 @@ export const downloadContractMetadata = async ({
     const collectionResult = contractNftsResult.assets[0].collection;
     const collectionMetadata : INftProjectMetadataDocument & {raw:unknown} = {
         contract: contractAddress,
-        name: collectionResult.name,
-        description: collectionResult.description,
-        image: collectionResult.image_url,
-        external_link: collectionResult.external_url,
+        name: metadata?.name ?? collectionResult.name,
+        description: metadata?.description ?? collectionResult.description,
+        image: metadata?.image ?? collectionResult.image_url,
+        external_link: metadata?.external_link ?? collectionResult.external_url,
         symbol: contractResult.symbol,
         raw: contractResult,
     };
