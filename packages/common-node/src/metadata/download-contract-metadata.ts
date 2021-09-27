@@ -34,42 +34,56 @@ const fetchTyped = async <T extends {url:string, params: Record<string,string>, 
 
 /** This will likely only partially succeed, so this is made to be called multiple times over a period */
 export const downloadContractMetadata = async ({
-    contractAddress,
     destDir,
     projectKey,
+    contractAddress,
     collection,
     minTokenId,
     maxTokenId,
     maxOffset,
 }:{
-    contractAddress: string,
     destDir: string,
     projectKey: string,
-    collection?: string,
+    contractAddress: string,
+    collection: string,
     minTokenId?: string,
     maxTokenId?: string,
     maxOffset?: number,
 }) => {
 
-    console.log(`# downloadContractMetadata`, { contractAddress, destDir });
+    console.log(`# downloadContractMetadata`, { collection, destDir });
     
-    const contractResult = await fetchTyped(openSeaRequest_getContract, {contractAddress});
-    if( 'notFound' in contractResult ){ 
-        console.log(`contract not found`, { contractAddress, destDir });
+    const collectionSlug = collection;
+    const contractNftsResult = await fetchTyped(openSeaRequest_getCollectionNfts, {
+        collectionSlug, 
+        offset: `${0}`
+    });
+    if( 'notFound' in contractNftsResult ){ 
+        console.log(`contract not found`, { collection, destDir });
         return;
     }
-    if( 'tooManyRequests' in contractResult ){ 
-        console.log(`contract already too many requests`, { contractAddress, destDir });
+    if( 'tooManyRequests' in contractNftsResult ){ 
+        console.log(`contract already too many requests`, { collection, destDir });
         return;
     }
 
-    const collectionSlug = collection ?? contractResult.collection.slug;
+    const contractResult = await fetchTyped(openSeaRequest_getContract, {contractAddress});
+    if( 'notFound' in contractResult ){ 
+        console.log(`contract not found`, { collection, destDir });
+        return;
+    }
+    if( 'tooManyRequests' in contractResult ){ 
+        console.log(`contract already too many requests`, { collection, destDir });
+        return;
+    }
+
+    const collectionResult = contractNftsResult.assets[0].collection;
     const collectionMetadata : INftProjectMetadataDocument & {raw:unknown} = {
         contract: contractAddress,
-        name: contractResult.collection.name,
-        description: contractResult.collection.description,
-        image: contractResult.collection.image_url,
-        external_link: contractResult.collection.external_url,
+        name: collectionResult.name,
+        description: collectionResult.description,
+        image: collectionResult.image_url,
+        external_link: collectionResult.external_url,
         symbol: contractResult.symbol,
         raw: contractResult,
     };
