@@ -41,6 +41,7 @@ export const downloadContractMetadata = async ({
     minTokenId,
     maxTokenId,
     maxOffset,
+    transformAttribute,
 }:{
     destDir: string,
     projectKey: string,
@@ -49,6 +50,7 @@ export const downloadContractMetadata = async ({
     minTokenId?: string,
     maxTokenId?: string,
     maxOffset?: number,
+    transformAttribute?: (attribute: {trait_type:string, value:string}) => null | {trait_type:string, value:string},
 }) => {
 
     console.log(`# downloadContractMetadata`, { collection, destDir });
@@ -122,7 +124,13 @@ export const downloadContractMetadata = async ({
                 continue;
             }
 
-            nftsMetadata.push(nftData);
+            nftsMetadata.push({
+                ...nftData,
+                attributes: nftData.attributes
+                    .map(x => transformAttribute ? transformAttribute?.(x) : x)
+                    .filter(x => x)
+                    .map(x => x!)
+            });
         }catch{
             continue;
         }

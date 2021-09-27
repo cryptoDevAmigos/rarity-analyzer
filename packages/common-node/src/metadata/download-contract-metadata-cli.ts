@@ -18,6 +18,13 @@ const run = async () => {
             maxTokenId: '173001000', 
             maxOffset: 1250,
             destDir:'../../data/',
+            transformAttribute: ({trait_type, value}) => {
+                const valuePairs = value.split(':');
+                return {
+                    trait_type: valuePairs[0],
+                    value: valuePairs[1],
+                };
+            },
         });
     }catch(err){
         console.error(err);
