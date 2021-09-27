@@ -100,6 +100,7 @@ const loadProjectRarityData = (doc: INftProjectRarityDocument): INftProjectRarit
 
 export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, projectRarity:INftProjectRarityData}) => {
 
+    const [pinnedTokenId, setPinnedTokenId] = useState('');
     const [tokenIds, setTokenIds] = useState(new Set(projectRarity.tokenIdsByRank));
     const nftListRef = useRef(null as null | HTMLDivElement)
     const traitFilters = useRef({} as TraitFilters);
@@ -156,16 +157,19 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                             HoverComponent={({args})=><HoverComponent hoverArgs={args} projectRarity={projectRarity} tokenIds={tokenIds} selected={traitFilters.current} onSelect={onSelect}/>}
                         />
                     </div>
-                    <div style={{marginTop: 32}}>Nfts</div>
+                    <div style={{marginTop: 32}}>NFTs</div>
+                    <div style={{textAlign:'left'}}>
+                        Search: <input type='text' style={{maxWidth: 100}} value={pinnedTokenId} onChange={(e)=>setPinnedTokenId(e.target.value)}/>
+                    </div>
                     <div className='nft-list' ref={nftListRef}>
                         {projectRarity && (
-                            <LazyList items={[...tokenIds]} getItemKey={x=>`${x}`} ItemComponent={({item})=>(
-                                <div
-                                    className='link'
-                                    onClick={()=>window.location.href=`${projectKey}/${item}`}
-                                >
+                            <LazyList key={pinnedTokenId} items={[pinnedTokenId,...tokenIds].filter(x=>x)} getItemKey={x=>`${x}`} ItemComponent={({item})=>(
+                                // <div
+                                //     className='link'
+                                //     onClick={()=>window.location.href=`${projectKey}/${item}`}
+                                // >
                                     <NftLoader projectKey={projectKey} tokenId={`${item}`} contractAddress={projectRarity.contractAddress} onSelect={onSelect} />
-                                </div>
+                                // </div>
                             )}/>
                         )}
                     </div>

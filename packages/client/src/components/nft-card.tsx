@@ -79,6 +79,7 @@ export const NftCard = ({nft, onSelect}:{ nft: INftRarityWithExtra, onSelect?: O
                         <div className='nft-card-header-item-label'>Listing:</div>
                         <div className='nft-card-header-item-value'><Price price={nft.listing}/></div>
                     </div>
+                    <div className='nft-card-header-token-id'>TokenId: {nft.nft.id}</div>
                     <div className='nft-card-header-title'>{nft.nft.name}</div>
                 </div>
 
