@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import {promises as fs} from 'fs';
 import path from 'path';
 import { delay } from '../utils/delay';
-import { openSeaRequest_getContractNfts, openSeaRequest_getContract, openSeaRequest_getNft } from './open-sea-api-types';
+import { openSeaRequest_getContractNfts, openSeaRequest_getContract, openSeaRequest_getNft, openSeaRequest_getCollectionNfts } from './open-sea-api-types';
 
 const fetchTyped = async <T extends {url:string, params: Record<string,string>, __exampleResponse:unknown}>(
     request: T,
@@ -70,41 +70,52 @@ export const downloadContractMetadata = async ({
 
     const totalSupply = contractResult.total_supply ?? 0;
 
-    let delayTime = 1000;
+    let delayTime = 5000;
 
-    // !!! Note: this assumes sequential tokenIds
+    const processDataFilePath = path.join(destDir, projectKey, `_downloadProcess.json`);
+    let processData = {
+        nextOffset: 0,
+    };
+    try{
+        processData = JSON.parse(await fs.readFile(processDataFilePath, {encoding: 'utf-8'})) as typeof processData;
+    }catch{}
 
-    for(let tokenId = 0; tokenId < totalSupply; tokenId++){
-        // Skip if file already exists
-        const nftFilePath = path.join(destDir, projectKey, `${tokenId}.nft.json`);
-        try{
-            const exists = await fs.stat(nftFilePath);
-            if(exists){ continue; }
-        }catch{}
+    for(let offset = processData.nextOffset??0; offset < totalSupply; offset += 50){
+        // Update process data
+        processData.nextOffset = offset;
+        await fs.writeFile(processDataFilePath, JSON.stringify(processData));
 
-        const getNftData = async () => {
+        const getNftsData = async () => {
             let attempt = 0;
             while(attempt < 3){
+                console.log(`download nfts after delay: ${delayTime}ms at offset:${offset}`);
                 await delay(delayTime);
     
-                console.log(`downloadNft`,{delayTime});
                 try{
-                    const nftResult = await fetchTyped(openSeaRequest_getNft, {contractAddress, tokenId: `${tokenId}`});
-                    if( 'notFound' in nftResult ){ 
-                        console.log(`nft not found`, { tokenId });
+                    const nftsResult = await fetchTyped(openSeaRequest_getCollectionNfts, {
+                        collectionSlug: contractResult.collection.slug, 
+                        offset: `${offset}`
+                    });
+                    if( 'notFound' in nftsResult ){ 
+                        console.log(`collection not found`, {
+                            collectionSlug: contractResult.collection.slug, 
+                            offset: `${offset}`
+                        });
                         return {notFound: true};
                     }
-                    if( 'tooManyRequests' in nftResult ){ 
-                        console.log(`nft - too many requests`, { tokenId, delayTime });
+                    if( 'tooManyRequests' in nftsResult ){ 
+                        console.log(`nft - too many requests`, {
+                            collectionSlug: contractResult.collection.slug, 
+                            offset: `${offset}`
+                        });
                         delayTime *= 2;
-                        attempt++;
                         continue;
                     }
 
                     // Decrease delay time on success
                     delayTime = Math.max(1, delayTime-1);
 
-                    return nftResult;
+                    return nftsResult;
                 }catch{}
 
                 // Increase delay time on failure
@@ -113,31 +124,55 @@ export const downloadContractMetadata = async ({
             }
         };
 
-        const nftData = await getNftData();
-        if(!nftData){ 
-            console.error('Failed to get nft - ABORT', { tokenId });
+        const nftsData = await getNftsData();
+        if(!nftsData){ 
+            console.error('Failed to get nfts - ABORT', { 
+                collectionSlug: contractResult.collection.slug, 
+                offset,
+            });
             return;
         }
-        
-        if( 'notFound' in nftData ){ 
-            console.log(`nft not found tokenId=${tokenId}`);
+        if( 'notFound' in nftsData ){ 
+            console.log(`collection not found`, { 
+                collectionSlug: contractResult.collection.slug, 
+                offset,
+            });
             continue;
         }
 
-        
-        const nft: INftMetadata = {
-            id: Number(nftData.token_id),
-            name: nftData.name ?? undefined,
-            description: nftData.description ?? undefined,
-            image: nftData.image_url ?? undefined,
-            external_url: nftData.external_link ?? undefined,
-            attributes: nftData.traits?.map(x=>({
-                trait_type: x.trait_type,
-                value: `${x.value}`,
-            })) ?? undefined,
-        };
+        for( const nftData of nftsData.assets){
+            const nft: INftMetadata = {
+                id: Number(nftData.token_id),
+                name: nftData.name ?? undefined,
+                description: nftData.description ?? undefined,
+                image: nftData.image_url ?? undefined,
+                external_url: nftData.external_link ?? undefined,
+                attributes: nftData.traits?.map(x=>({
+                    trait_type: x.trait_type,
+                    value: `${x.value}`,
+                })) ?? undefined,
+            };
+    
+            const nftFilePath = path.join(destDir, projectKey, `${nft.id}.nft.json`);
+            console.log(`saving ${nftFilePath}`);
+            await fs.writeFile(nftFilePath, JSON.stringify(nft));
+        }
 
-        console.log(`saving ${projectKey}/${tokenId}.nft.json`);
-        await fs.writeFile(nftFilePath, JSON.stringify(nft));
+
+
+        // // Skip if file already exists
+        // const nftFilePath = path.join(destDir, projectKey, `${tokenId}.nft.json`);
+        // try{
+        //     const exists = await fs.stat(nftFilePath);
+        //     const nftData = JSON.parse(await fs.readFile(nftFilePath, {encoding:'utf-8'})) as INftMetadata;
+        //     // Check if file is valid
+        //     if(!nftData.id){
+        //         await fs.unlink(nftFilePath);
+        //         throw new Error('Nft not found');
+        //     }
+
+        //     if(exists){ continue; }
+        // }catch{}
+
     }
 };

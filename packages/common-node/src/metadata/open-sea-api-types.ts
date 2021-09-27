@@ -346,6 +346,482 @@ export const openSeaRequest_getNft = {
   },
 }
 
+export const openSeaRequest_getCollectionNfts = {
+  url: `https://api.opensea.io/api/v1/assets?order_direction=asc&offset={offset}&limit=50&collection={collectionSlug}`,
+  params: {
+    collectionSlug: `{collectionSlug}`,
+    offset: `{offset}`,
+  },
+  __exampleResponse: {
+    "assets": [
+      {
+        "id": 59108599,
+        "token_id": "5074",
+        "num_sales": 0,
+        "background_color": null,
+        "image_url": "https://lh3.googleusercontent.com/u7Ah4HS74eUIUukiFMXAszyYfCXZkmNhevouIYmXpzOZ9rcviNsl_RfmtDJ7fVl28qRhWp0lXu7_sS5OMfn_jmtT6jfUYjL30zzWbC8",
+        "image_preview_url": "https://lh3.googleusercontent.com/u7Ah4HS74eUIUukiFMXAszyYfCXZkmNhevouIYmXpzOZ9rcviNsl_RfmtDJ7fVl28qRhWp0lXu7_sS5OMfn_jmtT6jfUYjL30zzWbC8=s250",
+        "image_thumbnail_url": "https://lh3.googleusercontent.com/u7Ah4HS74eUIUukiFMXAszyYfCXZkmNhevouIYmXpzOZ9rcviNsl_RfmtDJ7fVl28qRhWp0lXu7_sS5OMfn_jmtT6jfUYjL30zzWbC8=s128",
+        "image_original_url": "https://ipfs.io/ipfs/QmRZ9teDjzi52drarnSYcG4N3bGZgPMiMQZzids7iR182w",
+        "animation_url": null,
+        "animation_original_url": null,
+        "name": "PunkScape #5074",
+        "description": "One of 10k tiny worlds that punks can inhabit – stored on the Ethereum Blockchain.",
+        "external_link": null,
+        "asset_contract": {
+          "address": "0x51ae5e2533854495f6c587865af64119db8f59b4",
+          "asset_contract_type": "non-fungible",
+          "created_date": "2021-09-24T19:19:16.457454",
+          "name": "PunkScape",
+          "nft_version": "3.0",
+          "opensea_version": null,
+          "owner": 72862837,
+          "schema_name": "ERC721",
+          "symbol": "PS",
+          "total_supply": "10000",
+          "description": "10k little landscapes that punks can inhabit – on the Ethereum Blockchain.\n\nMinting is still ongoing (Website or Etherscan).",
+          "external_link": "https://punkscape.xyz",
+          "image_url": "https://lh3.googleusercontent.com/zfQ0Ejqq61FjbrjwS0HmctOEv_cmIRWWiqyhDzYMQdgdHJnZlIUEkdnoQRk0YrjbazhfKDBOcD3dPQ4tXYWlwC1mXDVq0xxjDNh0BA=s120",
+          "default_to_fiat": false,
+          "dev_buyer_fee_basis_points": 0,
+          "dev_seller_fee_basis_points": 500,
+          "only_proxied_transfers": false,
+          "opensea_buyer_fee_basis_points": 0,
+          "opensea_seller_fee_basis_points": 250,
+          "buyer_fee_basis_points": 0,
+          "seller_fee_basis_points": 750,
+          "payout_address": "0xed9198181bbd4e09ff320fa11ae062e140be0c4e"
+        },
+        "permalink": "https://opensea.io/assets/0x51ae5e2533854495f6c587865af64119db8f59b4/5074",
+        "collection": {
+          "banner_image_url": "https://lh3.googleusercontent.com/xr496-YtH8jE9qrS5371IMpNoyq9FUA-lk1-ep91iOxeHhDa_JvG1sgdtC0g2dqdmshJLJpvyyNfiUVYeiTVn9m1QuSXJ0En8A66=s2500",
+          "chat_url": null,
+          "created_date": "2021-09-25T06:57:34.621000",
+          "default_to_fiat": false,
+          "description": "10k little landscapes that punks can inhabit – on the Ethereum Blockchain.\n\nMinting is still ongoing (Website or Etherscan).",
+          "dev_buyer_fee_basis_points": "0",
+          "dev_seller_fee_basis_points": "500",
+          "discord_url": "https://discord.gg/aPS3Hre57D",
+          "display_data": {
+            "card_display_style": "contain"
+          },
+          "external_url": "https://punkscape.xyz",
+          "featured": false,
+          "featured_image_url": "https://lh3.googleusercontent.com/HmSNK5AOGb0VnOSR_TmXiZAP5PdoQqbApAowc1ved4JgJXkifR2LheU2gFAKuS76qG5LG4ULun4zaEWsj1D0YsmKlB8Zgm6F4PIY=s300",
+          "hidden": false,
+          "safelist_request_status": "not_requested",
+          "image_url": "https://lh3.googleusercontent.com/zfQ0Ejqq61FjbrjwS0HmctOEv_cmIRWWiqyhDzYMQdgdHJnZlIUEkdnoQRk0YrjbazhfKDBOcD3dPQ4tXYWlwC1mXDVq0xxjDNh0BA=s120",
+          "is_subject_to_whitelist": false,
+          "large_image_url": "https://lh3.googleusercontent.com/HmSNK5AOGb0VnOSR_TmXiZAP5PdoQqbApAowc1ved4JgJXkifR2LheU2gFAKuS76qG5LG4ULun4zaEWsj1D0YsmKlB8Zgm6F4PIY=s300",
+          "medium_username": null,
+          "name": "PunkScapes",
+          "only_proxied_transfers": false,
+          "opensea_buyer_fee_basis_points": "0",
+          "opensea_seller_fee_basis_points": "250",
+          "payout_address": "0xed9198181bbd4e09ff320fa11ae062e140be0c4e",
+          "require_email": false,
+          "short_description": null,
+          "slug": "punkscapes",
+          "telegram_url": null,
+          "twitter_username": "PunkScape_ETH",
+          "instagram_username": null,
+          "wiki_url": null
+        },
+        "decimals": 0,
+        "token_metadata": "https://ipfs.io/ipfs/QmbXGesx3mwPQpoXcWmNAbbvL3hvAyXQc7PMGxPMHeb8xG/5074/metadata.json",
+        "owner": {
+          "user": {
+            "username": "akxakxll"
+          },
+          "profile_img_url": "https://storage.googleapis.com/opensea-static/opensea-profile/29.png",
+          "address": "0xb2f456886367c8e50566377ec6d9293d4da5bb81",
+          "config": ""
+        },
+        "sell_orders": [
+          {
+            "created_date": "2021-09-27T02:06:27.317370",
+            "closing_date": null,
+            "closing_extendable": false,
+            "expiration_time": 0,
+            "listing_time": 1632708215,
+            "order_hash": "0x8603aae9d30bdfde4cc4b05e6b32edf8c16fe65238fbfb751fbccc81d941145a",
+            "metadata": {
+              "asset": {
+                "id": "5074",
+                "address": "0x51ae5e2533854495f6c587865af64119db8f59b4"
+              },
+              "schema": "ERC721"
+            },
+            "exchange": "0x7be8076f4ea4a4ad08075c2508e481d6c946d12b",
+            "maker": {
+              "user": 871330,
+              "profile_img_url": "https://storage.googleapis.com/opensea-static/opensea-profile/29.png",
+              "address": "0xb2f456886367c8e50566377ec6d9293d4da5bb81",
+              "config": ""
+            },
+            "taker": {
+              "user": 1766,
+              "profile_img_url": "https://storage.googleapis.com/opensea-static/opensea-profile/1.png",
+              "address": "0x0000000000000000000000000000000000000000",
+              "config": ""
+            },
+            "current_price": "50000000000000000",
+            "current_bounty": "500000000000000",
+            "bounty_multiple": "0.01",
+            "maker_relayer_fee": "750",
+            "taker_relayer_fee": "0",
+            "maker_protocol_fee": "0",
+            "taker_protocol_fee": "0",
+            "maker_referrer_fee": "0",
+            "fee_recipient": {
+              "user": 3585,
+              "profile_img_url": "https://storage.googleapis.com/opensea-static/opensea-profile/28.png",
+              "address": "0x5b3256965e7c3cf26e11fcaf296dfc8807c01073",
+              "config": "verified"
+            },
+            "fee_method": 1,
+            "side": 1,
+            "sale_kind": 0,
+            "target": "0x51ae5e2533854495f6c587865af64119db8f59b4",
+            "how_to_call": 0,
+            "calldata": "0x23b872dd000000000000000000000000b2f456886367c8e50566377ec6d9293d4da5bb81000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000013d2",
+            "replacement_pattern": "0x000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000",
+            "static_target": "0x0000000000000000000000000000000000000000",
+            "static_extradata": "0x",
+            "payment_token": "0x0000000000000000000000000000000000000000",
+            "payment_token_contract": {
+              "id": 1,
+              "symbol": "ETH",
+              "address": "0x0000000000000000000000000000000000000000",
+              "image_url": "https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg",
+              "name": "Ether",
+              "decimals": 18,
+              "eth_price": "1.000000000000000",
+              "usd_price": "3077.449999999999818000"
+            },
+            "base_price": "50000000000000000",
+            "extra": "0",
+            "quantity": "1",
+            "salt": "59075045404994908181752095641556892513204613600628514296415044401556006577470",
+            "v": 27,
+            "r": "0xc5108d7dbdfadb95370631ed28b04e6482805cb4a3e2860cda9d92e9049e5d48",
+            "s": "0x465752c2ba774c00ba53c4c6168c1a303997758edfa388422e3eaf2f03a0f79d",
+            "approved_on_chain": false,
+            "cancelled": false,
+            "finalized": false,
+            "marked_invalid": false,
+            "prefixed_hash": "0xfc6f728fcbf7dc944535d1b2ed16a8fb6b061f91b8c0ad46fda233ccc0473e8e"
+          }
+        ],
+        "creator": {
+          "user": {
+            "username": "PunkScape_ETH"
+          },
+          "profile_img_url": "https://storage.googleapis.com/opensea-static/opensea-profile/31.png",
+          "address": "0xed9198181bbd4e09ff320fa11ae062e140be0c4e",
+          "config": ""
+        },
+        "traits": [
+          {
+            "trait_type": "Atmosphere",
+            "value": "Dusk",
+            "display_type": null,
+            "max_value": null,
+            "trait_count": 556,
+            "order": null
+          },
+          {
+            "trait_type": "Building",
+            "value": "Mansion Lvl 2",
+            "display_type": null,
+            "max_value": null,
+            "trait_count": 90,
+            "order": null
+          },
+          {
+            "trait_type": "date",
+            "value": 2232378278,
+            "display_type": "date",
+            "max_value": null,
+            "trait_count": 0,
+            "order": null
+          },
+          {
+            "trait_type": "Planet",
+            "value": "Moon",
+            "display_type": null,
+            "max_value": null,
+            "trait_count": 399,
+            "order": null
+          },
+          {
+            "trait_type": "Topology",
+            "value": "Mountain",
+            "display_type": null,
+            "max_value": null,
+            "trait_count": 600,
+            "order": null
+          },
+          {
+            "trait_type": "Trees",
+            "value": "Broadleaf",
+            "display_type": null,
+            "max_value": null,
+            "trait_count": 132,
+            "order": null
+          },
+          {
+            "trait_type": "Sky",
+            "value": "Orange Trails",
+            "display_type": null,
+            "max_value": null,
+            "trait_count": 422,
+            "order": null
+          }
+        ],
+        "last_sale": null,
+        "top_bid": null,
+        "listing_date": null,
+        "is_presale": false,
+        "transfer_fee_payment_token": null,
+        "transfer_fee": null
+      },
+      {
+        "id": 59108601,
+        "token_id": "764",
+        "num_sales": 0,
+        "background_color": null,
+        "image_url": "https://lh3.googleusercontent.com/-9FiIrrFwi-A7ydLUDDuAK9nSYyMmSHg0PDzT05Ja9cUiZ4HinuluzGI0NrL6hLVb1zqplg-u5RhfoQvmdKbi8mcGZQ1N3EkqiXe",
+        "image_preview_url": "https://lh3.googleusercontent.com/-9FiIrrFwi-A7ydLUDDuAK9nSYyMmSHg0PDzT05Ja9cUiZ4HinuluzGI0NrL6hLVb1zqplg-u5RhfoQvmdKbi8mcGZQ1N3EkqiXe=s250",
+        "image_thumbnail_url": "https://lh3.googleusercontent.com/-9FiIrrFwi-A7ydLUDDuAK9nSYyMmSHg0PDzT05Ja9cUiZ4HinuluzGI0NrL6hLVb1zqplg-u5RhfoQvmdKbi8mcGZQ1N3EkqiXe=s128",
+        "image_original_url": "https://ipfs.io/ipfs/QmRuhY753Cnc9fraCekwYTwFbZvx6a66LB1rqGFs3Kz3yb",
+        "animation_url": null,
+        "animation_original_url": null,
+        "name": "PunkScape #764",
+        "description": "One of 10k tiny worlds that punks can inhabit – stored on the Ethereum Blockchain.",
+        "external_link": null,
+        "asset_contract": {
+          "address": "0x51ae5e2533854495f6c587865af64119db8f59b4",
+          "asset_contract_type": "non-fungible",
+          "created_date": "2021-09-24T19:19:16.457454",
+          "name": "PunkScape",
+          "nft_version": "3.0",
+          "opensea_version": null,
+          "owner": 72862837,
+          "schema_name": "ERC721",
+          "symbol": "PS",
+          "total_supply": "10000",
+          "description": "10k little landscapes that punks can inhabit – on the Ethereum Blockchain.\n\nMinting is still ongoing (Website or Etherscan).",
+          "external_link": "https://punkscape.xyz",
+          "image_url": "https://lh3.googleusercontent.com/zfQ0Ejqq61FjbrjwS0HmctOEv_cmIRWWiqyhDzYMQdgdHJnZlIUEkdnoQRk0YrjbazhfKDBOcD3dPQ4tXYWlwC1mXDVq0xxjDNh0BA=s120",
+          "default_to_fiat": false,
+          "dev_buyer_fee_basis_points": 0,
+          "dev_seller_fee_basis_points": 500,
+          "only_proxied_transfers": false,
+          "opensea_buyer_fee_basis_points": 0,
+          "opensea_seller_fee_basis_points": 250,
+          "buyer_fee_basis_points": 0,
+          "seller_fee_basis_points": 750,
+          "payout_address": "0xed9198181bbd4e09ff320fa11ae062e140be0c4e"
+        },
+        "permalink": "https://opensea.io/assets/0x51ae5e2533854495f6c587865af64119db8f59b4/764",
+        "collection": {
+          "banner_image_url": "https://lh3.googleusercontent.com/xr496-YtH8jE9qrS5371IMpNoyq9FUA-lk1-ep91iOxeHhDa_JvG1sgdtC0g2dqdmshJLJpvyyNfiUVYeiTVn9m1QuSXJ0En8A66=s2500",
+          "chat_url": null,
+          "created_date": "2021-09-25T06:57:34.621000",
+          "default_to_fiat": false,
+          "description": "10k little landscapes that punks can inhabit – on the Ethereum Blockchain.\n\nMinting is still ongoing (Website or Etherscan).",
+          "dev_buyer_fee_basis_points": "0",
+          "dev_seller_fee_basis_points": "500",
+          "discord_url": "https://discord.gg/aPS3Hre57D",
+          "display_data": {
+            "card_display_style": "contain"
+          },
+          "external_url": "https://punkscape.xyz",
+          "featured": false,
+          "featured_image_url": "https://lh3.googleusercontent.com/HmSNK5AOGb0VnOSR_TmXiZAP5PdoQqbApAowc1ved4JgJXkifR2LheU2gFAKuS76qG5LG4ULun4zaEWsj1D0YsmKlB8Zgm6F4PIY=s300",
+          "hidden": false,
+          "safelist_request_status": "not_requested",
+          "image_url": "https://lh3.googleusercontent.com/zfQ0Ejqq61FjbrjwS0HmctOEv_cmIRWWiqyhDzYMQdgdHJnZlIUEkdnoQRk0YrjbazhfKDBOcD3dPQ4tXYWlwC1mXDVq0xxjDNh0BA=s120",
+          "is_subject_to_whitelist": false,
+          "large_image_url": "https://lh3.googleusercontent.com/HmSNK5AOGb0VnOSR_TmXiZAP5PdoQqbApAowc1ved4JgJXkifR2LheU2gFAKuS76qG5LG4ULun4zaEWsj1D0YsmKlB8Zgm6F4PIY=s300",
+          "medium_username": null,
+          "name": "PunkScapes",
+          "only_proxied_transfers": false,
+          "opensea_buyer_fee_basis_points": "0",
+          "opensea_seller_fee_basis_points": "250",
+          "payout_address": "0xed9198181bbd4e09ff320fa11ae062e140be0c4e",
+          "require_email": false,
+          "short_description": null,
+          "slug": "punkscapes",
+          "telegram_url": null,
+          "twitter_username": "PunkScape_ETH",
+          "instagram_username": null,
+          "wiki_url": null
+        },
+        "decimals": 0,
+        "token_metadata": "https://ipfs.io/ipfs/QmbXGesx3mwPQpoXcWmNAbbvL3hvAyXQc7PMGxPMHeb8xG/764/metadata.json",
+        "owner": {
+          "user": {
+            "username": "LeonNgo_"
+          },
+          "profile_img_url": "https://storage.googleapis.com/opensea-static/opensea-profile/5.png",
+          "address": "0x56a8adf3ded273659c8b8811606ba265f74cb1a7",
+          "config": ""
+        },
+        "sell_orders": [
+          {
+            "created_date": "2021-09-25T07:06:04.054016",
+            "closing_date": null,
+            "closing_extendable": false,
+            "expiration_time": 0,
+            "listing_time": 1632553413,
+            "order_hash": "0x741ba0e7d4d132c9a27a51b289a431d582d3fc257261aa96407a9cbae2913ffb",
+            "metadata": {
+              "asset": {
+                "id": "764",
+                "address": "0x51ae5e2533854495f6c587865af64119db8f59b4"
+              },
+              "schema": "ERC721"
+            },
+            "exchange": "0x7be8076f4ea4a4ad08075c2508e481d6c946d12b",
+            "maker": {
+              "user": 1053508,
+              "profile_img_url": "https://storage.googleapis.com/opensea-static/opensea-profile/5.png",
+              "address": "0x56a8adf3ded273659c8b8811606ba265f74cb1a7",
+              "config": ""
+            },
+            "taker": {
+              "user": 1766,
+              "profile_img_url": "https://storage.googleapis.com/opensea-static/opensea-profile/1.png",
+              "address": "0x0000000000000000000000000000000000000000",
+              "config": ""
+            },
+            "current_price": "1000000000000000000",
+            "current_bounty": "10000000000000000",
+            "bounty_multiple": "0.01",
+            "maker_relayer_fee": "750",
+            "taker_relayer_fee": "0",
+            "maker_protocol_fee": "0",
+            "taker_protocol_fee": "0",
+            "maker_referrer_fee": "0",
+            "fee_recipient": {
+              "user": 3585,
+              "profile_img_url": "https://storage.googleapis.com/opensea-static/opensea-profile/28.png",
+              "address": "0x5b3256965e7c3cf26e11fcaf296dfc8807c01073",
+              "config": "verified"
+            },
+            "fee_method": 1,
+            "side": 1,
+            "sale_kind": 0,
+            "target": "0x51ae5e2533854495f6c587865af64119db8f59b4",
+            "how_to_call": 0,
+            "calldata": "0x23b872dd00000000000000000000000056a8adf3ded273659c8b8811606ba265f74cb1a7000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002fc",
+            "replacement_pattern": "0x000000000000000000000000000000000000000000000000000000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000",
+            "static_target": "0x0000000000000000000000000000000000000000",
+            "static_extradata": "0x",
+            "payment_token": "0x0000000000000000000000000000000000000000",
+            "payment_token_contract": {
+              "id": 1,
+              "symbol": "ETH",
+              "address": "0x0000000000000000000000000000000000000000",
+              "image_url": "https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg",
+              "name": "Ether",
+              "decimals": 18,
+              "eth_price": "1.000000000000000",
+              "usd_price": "3077.449999999999818000"
+            },
+            "base_price": "1000000000000000000",
+            "extra": "0",
+            "quantity": "1",
+            "salt": "12360534355946355111766416823190564496777071288760591384144400716468504370100",
+            "v": 27,
+            "r": "0x66ba8de5342fca844f54c8c9ddc5414fc059b4213e62ef9948e2b0b6a5ff7a53",
+            "s": "0x128eeb656bd7050e846c55215e755b8b31261166f98d39bae3b8be69c2567583",
+            "approved_on_chain": false,
+            "cancelled": false,
+            "finalized": false,
+            "marked_invalid": false,
+            "prefixed_hash": "0x9cde8147c98fbe73631196ca09e80e0f6d6fae1ac6ac0f36f7db9d34cc85d7d3"
+          }
+        ],
+        "creator": {
+          "user": {
+            "username": "PunkScape_ETH"
+          },
+          "profile_img_url": "https://storage.googleapis.com/opensea-static/opensea-profile/31.png",
+          "address": "0xed9198181bbd4e09ff320fa11ae062e140be0c4e",
+          "config": ""
+        },
+        "traits": [
+          {
+            "trait_type": "Celestial",
+            "value": "Happy Clouds",
+            "display_type": null,
+            "max_value": null,
+            "trait_count": 313,
+            "order": null
+          },
+          {
+            "trait_type": "Atmosphere",
+            "value": "Dusk",
+            "display_type": null,
+            "max_value": null,
+            "trait_count": 556,
+            "order": null
+          },
+          {
+            "trait_type": "Building",
+            "value": "Mini House",
+            "display_type": null,
+            "max_value": null,
+            "trait_count": 58,
+            "order": null
+          },
+          {
+            "trait_type": "date",
+            "value": 2427994115,
+            "display_type": "date",
+            "max_value": null,
+            "trait_count": 0,
+            "order": null
+          },
+          {
+            "trait_type": "Sky",
+            "value": "Red Stripes",
+            "display_type": null,
+            "max_value": null,
+            "trait_count": 567,
+            "order": null
+          },
+          {
+            "trait_type": "Planet",
+            "value": "Mars",
+            "display_type": null,
+            "max_value": null,
+            "trait_count": 320,
+            "order": null
+          },
+          {
+            "trait_type": "Topology",
+            "value": "Crater",
+            "display_type": null,
+            "max_value": null,
+            "trait_count": 274,
+            "order": null
+          }
+        ],
+        "last_sale": null,
+        "top_bid": null,
+        "listing_date": null,
+        "is_presale": false,
+        "transfer_fee_payment_token": null,
+        "transfer_fee": null
+      }
+    ]
+  },
+};
+
 export const openSeaRequest_getContractNfts = {
   url: `https://api.opensea.io/api/v1/assets?asset_contract_address={contractAddress}&order_direction=desc&offset={offset}&limit=50`,
   params: {
