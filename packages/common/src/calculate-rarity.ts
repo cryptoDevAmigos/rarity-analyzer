@@ -48,9 +48,13 @@ export function calculateRarity(metadataRaw: INftMetadata[], options?: { include
 
     console.log(`# calculateRarity: Find all attributes for ${runId}`);
     const metadata = metadataRaw.map(x => ({
-        ...x,
-        // Checked for this already
-        id: x.id ?? 0,
+        id: x.id!,
+        name: x.name,
+        description: x.description,
+        image: x.image,
+        external_url: x.external_url,
+        animation_url: x.animation_url,
+        background_color: x.background_color,
         attributes: [
             ...x.attributes ?? [], 
             ...includeTraitCount ? [{ trait_type: 'Trait Count', value: `${x.attributes?.length??0}` }] : [] 

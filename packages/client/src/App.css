@@ -83,6 +83,11 @@ a:hover {
   cursor: hand;
 }
 
+.hover.link:hover{
+  color: var(--highlight);
+  cursor: hand;
+}
+
 
 .App {
   text-align: center;
