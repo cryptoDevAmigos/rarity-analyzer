@@ -17,6 +17,7 @@
   "scripts": {
     "// test": "ts-node ./src/test.ts",
     "build": "tsc",
-    "build:rarities": "npm run build && node ./lib/build-rarities.js"
+    "build:rarities": "npm run build && node ./lib/build-rarities.js",
+    "build:download": "npm run build && node ./lib/metadata/download-contract-metadata-cli.js"
   }
 }

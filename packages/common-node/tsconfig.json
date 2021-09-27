@@ -26,6 +26,7 @@
     "outDir": "lib"
   },
   "include": [
-    "src"
+    "src",
+    "../common/src/download-rarity-data.ts"
   ]
 }
