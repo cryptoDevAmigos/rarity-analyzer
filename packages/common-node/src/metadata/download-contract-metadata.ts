@@ -63,12 +63,51 @@ export const downloadContractMetadata = async ({
         symbol: contractResult.symbol,
     };
 
-    console.log(`saving ${projectKey}/project.json`);
+    console.log(`saving ${projectKey}/${projectKey}.project.json`);
     
     await fs.mkdir(path.join(destDir, projectKey), {recursive: true});
     await fs.writeFile(path.join(destDir, projectKey, `${projectKey}.project.json`), JSON.stringify(projectMetadata));
 
     const totalSupply = contractResult.total_supply ?? 0;
+    await downloadNfts({
+        destDir,
+        projectKey,
+        totalSupply,
+    });
+
+    // Combine and copy files
+    console.log(`creating project files ${projectKey}`);
+
+    await fs.copyFile(path.join(destDir, projectKey, `${projectKey}.project.json`), path.join(destDir, `${projectKey}.project.json`));
+    const nftsMetadata = [] as INftMetadata[];
+    for( const f of await fs.readdir(path.join(destDir, projectKey))){
+        if( !f.endsWith('.nft.json')){continue;}
+
+        try{
+            const nftData = JSON.parse(await fs.readFile(path.join(destDir, projectKey, f), {encoding:'utf-8'})) as INftMetadata;
+            if( !nftData.id || !nftData.attributes){
+                continue;
+            }
+
+            nftsMetadata.push(nftData);
+        }catch{
+            continue;
+        }
+    }
+    await fs.writeFile(path.join(destDir, `${projectKey}.json`), JSON.stringify(nftsMetadata));
+
+    console.log(`DONE: ${projectKey}`);
+};
+
+const downloadNfts = async ({
+    projectKey,
+    destDir,
+    totalSupply,
+}:{
+    projectKey: string,
+    destDir: string,
+    totalSupply: number,
+})=>{
 
     let delayTime = 5000;
 
@@ -93,19 +132,19 @@ export const downloadContractMetadata = async ({
     
                 try{
                     const nftsResult = await fetchTyped(openSeaRequest_getCollectionNfts, {
-                        collectionSlug: contractResult.collection.slug, 
+                        collectionSlug: projectKey, 
                         offset: `${offset}`
                     });
                     if( 'notFound' in nftsResult ){ 
                         console.log(`collection not found`, {
-                            collectionSlug: contractResult.collection.slug, 
+                            collectionSlug: projectKey, 
                             offset: `${offset}`
                         });
                         return {notFound: true};
                     }
                     if( 'tooManyRequests' in nftsResult ){ 
                         console.log(`nft - too many requests`, {
-                            collectionSlug: contractResult.collection.slug, 
+                            collectionSlug: projectKey, 
                             offset: `${offset}`
                         });
                         delayTime *= 2;
@@ -127,17 +166,30 @@ export const downloadContractMetadata = async ({
         const nftsData = await getNftsData();
         if(!nftsData){ 
             console.error('Failed to get nfts - ABORT', { 
-                collectionSlug: contractResult.collection.slug, 
+                collectionSlug: projectKey, 
                 offset,
             });
             return;
         }
         if( 'notFound' in nftsData ){ 
             console.log(`collection not found`, { 
-                collectionSlug: contractResult.collection.slug, 
+                collectionSlug: projectKey, 
                 offset,
             });
             continue;
+        }
+
+        if( !nftsData.assets.length){
+            // Backup to last page (for next time assets might be added)
+            processData.nextOffset -= 50;
+            await fs.writeFile(processDataFilePath, JSON.stringify(processData));
+
+            // Done
+            console.log(`No more assets found`, { 
+                collectionSlug: projectKey, 
+                offset,
+            });
+            return;
         }
 
         for( const nftData of nftsData.assets){
@@ -173,6 +225,5 @@ export const downloadContractMetadata = async ({
 
         //     if(exists){ continue; }
         // }catch{}
-
     }
 };
