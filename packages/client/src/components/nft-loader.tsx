@@ -13,13 +13,21 @@ export const NftLoader = ({
 })=>{
 
     const [nft, setNft] = useState(null as null | INftRarityWithExtra);
+    const [error,setError] = useState('');
 
     useEffect(() => {
         (async () => {
-            const nftUrl = getNftJsonUrl(projectKey, tokenId);
-            // console.log('NftLoader', {nftUrl});
-            const result = await fetch(nftUrl);
-            const obj = await result.json() as INftRarityDocument;
+
+            let obj = null as null | INftRarityDocument;
+            try{
+                const nftUrl = getNftJsonUrl(projectKey, tokenId);
+                // console.log('NftLoader', {nftUrl});
+                const result = await fetch(nftUrl);
+                obj = await result.json() as INftRarityDocument;
+            }catch{
+                setError('Not Found');
+                return;
+            }
 
             obj.attributeRarities.sort((a,b)=>a.trait_type.localeCompare(b.trait_type));
             setNft(obj);
@@ -70,7 +78,8 @@ export const NftLoader = ({
     // console.log('NftLoader RENDER', {projectKey, tokenId});
     return (
         <>
-            {!nft && <NftCardPlaceholder />}
+            {error && <div>{error}</div>}
+            {!nft && !error && <NftCardPlaceholder />}
             {nft && <NftCard nft={nft} onSelect={onSelect}/>}
         </>
     );

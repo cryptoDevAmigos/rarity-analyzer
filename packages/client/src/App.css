@@ -211,6 +211,12 @@ a:hover {
   text-align: right;
 }
 
+.nft-card-header-token-id {
+  text-align: left;
+  grid-column: span 4;
+  grid-row: span 2;
+}
+
 .nft-card-header-title {
   grid-column: span 4;
   grid-row: span 2;
@@ -248,13 +254,14 @@ a:hover {
 }
 
 .nft-card-image {
-  width: 150px;
+  /* width: 150px; */
   height: 150px;
   margin: auto;
 }
 .nft-card-image img {
-  width: 150px;
+  /* width: 150px; */
   height: 150px;
+  object-fit: contain;
 }
 
 .nft-card-stats {
