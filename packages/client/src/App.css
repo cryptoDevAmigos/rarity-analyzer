@@ -134,8 +134,13 @@ a:hover {
   justify-content: center;
   align-items: center;
 }
+.project-info-image { min-width: 100px; }
 .project-info-title { font-family: orbitron; font-size: 1.6em; }
-.project-info-description { font-family: orbitron; }
+.project-info-description { 
+  font-family: orbitron;     
+  overflow: hidden;
+  max-height: 150px;
+}
 .project-info-link { word-break: break-all;}
 
 @media (min-width: 600px) {
