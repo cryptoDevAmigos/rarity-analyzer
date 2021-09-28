@@ -131,6 +131,8 @@ export const downloadContractMetadata = async ({
                 continue;
             }
 
+            (nftData as {raw:unknown}).raw = undefined;
+
             nftsMetadata.push({
                 ...nftData,
                 attributes: nftData.attributes
@@ -168,7 +170,7 @@ const downloadNewNfts = async ({
     }catch{}
 
     // Reset (this is now desc)
-     processData.nextOffset = Math.max(0,processData.nextOffset);
+    processData.nextOffset = Math.max(0,processData.nextOffset);
 
     console.log(`#downloadNewNfts: ${delayTime}ms at offset:${processData.nextOffset} maxOffset:${maxOffset}`);
 
