@@ -1,12 +1,13 @@
 import React from 'react';
 import { AiFillTwitterCircle } from "react-icons/ai";
-import { FaDiscord, FaEthereum } from "react-icons/fa";
+import { FaDiscord, FaEthereum, FaGithub } from "react-icons/fa";
 import { HiLink } from "react-icons/hi";
 import { VscChevronDown, VscChevronRight, VscLoading } from "react-icons/vsc";
 
 export type IconName = 
 | 'twitter'
 | 'discord'
+| 'github'
 | 'link'
 | 'eth'
 | 'collapsed'
@@ -17,6 +18,7 @@ export const Icon = ({icon}:{icon:IconName})=>{
     switch(icon){
         case 'twitter': return <AiFillTwitterCircle/>;
         case 'discord': return <FaDiscord/>;
+        case 'github': return <FaGithub/>;
         case 'link': return <HiLink/>;
         case 'eth': return <FaEthereum/>;
         case 'collapsed': return <VscChevronRight/>;

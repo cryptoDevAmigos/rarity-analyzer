@@ -1,7 +1,7 @@
 :root {
   --back: #111111;
   --primary: #00FF00;
-  --secondary: #0062F9;
+  --secondary: #32a3ff;
   --highlight: #FFFFFF;
   --border-width: 2px;
   --border-radius: 4px;
@@ -28,7 +28,15 @@ body {
   font-weight: 200; */
   /* font-family: VT323, 'Space Mono', monospace; */
   font-family: orbitron, 'Space Mono', monospace;
+  font-weight: 400;
+}
+
+.header, .header a {
   font-weight: 600;
+  color: var(--black-or-white);
+}
+.header a:hover {
+  color: var(--primary);
 }
 
 .numeric-value, .nft-card-header-item-value, .bar-graph-text-right {
