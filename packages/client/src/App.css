@@ -27,7 +27,7 @@ body {
   /* font-family: orbitron, 'Space Mono', monospace;
   font-weight: 200; */
   /* font-family: VT323, 'Space Mono', monospace; */
-  font-family: orbitron, 'Space Mono', monospace;
+  font-family: 'Orbitron', 'Space Mono', monospace;
   font-weight: 400;
 }
 
@@ -153,6 +153,7 @@ a:hover {
   font-family: orbitron;     
   overflow: hidden;
   max-height: 150px;
+  padding: 4px;
 }
 .project-info-link { word-break: break-all;}
 
