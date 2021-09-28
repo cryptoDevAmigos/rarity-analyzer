@@ -1,13 +1,17 @@
 import { NftProjectsLoader } from "./nft-projects";
+import { OtherRarityTools } from "./other-rarity-tools";
 
 export const HomePage = ()=>{
 
     return (
-        <div style={{display:'flex', flexDirection:'column', justifyContent:'space-between', alignItems:'center', minHeight:'calc(100vh - 100px)'}}>
+        <div
+            style={{display:'flex', flexDirection:'column', justifyContent:'space-between', alignItems:'center', minHeight:'calc(100vh - 100px)'}}>
             <div style={{width: '100%'}}>
             <NftProjectsLoader/>
             </div>
             <CharacterArea/>
+
+            <OtherRarityTools/>
         </div>
     );
 };

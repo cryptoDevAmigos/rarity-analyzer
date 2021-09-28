@@ -4,6 +4,8 @@ export const changeTheme = (projectTheme: undefined | null | IProjectTheme, targ
 
     const toCssName = (key: string)=> key.replace(/[A-Z]/g,(x)=>'-' + x.toLowerCase());
 
+    const isDark = projectTheme?.isDark ?? true;
+
     const t = projectTheme ?? {} as Record<string,string | boolean>;
     const theme = `
 ${target} {
@@ -12,7 +14,7 @@ ${target} {
         .map(key => `
     --${toCssName(key)}: ${t[key]};`).join('')}
 
-    --black-or-white: ${projectTheme?.isDark ? '#FFFFFF' : '#000000'}
+    --black-or-white: ${isDark ? '#FFFFFF' : '#000000'}
 }
     `;
 
@@ -26,7 +28,7 @@ ${target} {
     newElement.id = themeTagId;
     document.head.appendChild(newElement);
 
-    ThemeSubscription.changeTheme(projectTheme?.isDark ?? true);
+    ThemeSubscription.changeTheme(isDark);
 };
 
 
