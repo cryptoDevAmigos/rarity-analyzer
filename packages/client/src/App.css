@@ -26,6 +26,7 @@ body {
   font-family: 'Orbitron', 'Space Mono', monospace;
   font-weight: 600;
   letter-spacing: 0.1em;
+  font-size: 13px;
 }
 
 .header, .header a {
