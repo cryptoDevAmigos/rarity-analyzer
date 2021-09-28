@@ -13,9 +13,9 @@ export const Layout = ({ children }:{ children:JSX.Element }) => {
     return (
         <>
             <div className='header' style={{display: 'flex', flexDirection:'row', padding: 8, alignItems:'flex-start'}}>
-                <div style={{fontSize: 40, marginRight: 16}}>
+                <div style={{fontSize: 36, marginRight: 16}}>
                     <a href="/">
-                        Open Rarity
+                        OpenRarity
                     {/* <img style={{width: 256}}
                         src={isDark ? '/media/logo_white.png' : '/media/logo_black.png'} alt='site-logo'/> */}
                     </a>
