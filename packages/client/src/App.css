@@ -23,15 +23,13 @@ body {
 }
 
 body {
-  /* font-family: 'Space Mono', monospace; */
-  /* font-family: orbitron, 'Space Mono', monospace;
-  font-weight: 200; */
-  /* font-family: VT323, 'Space Mono', monospace; */
   font-family: 'Orbitron', 'Space Mono', monospace;
-  font-weight: 400;
+  font-weight: 600;
+  letter-spacing: 0.1em;
 }
 
 .header, .header a {
+  font-family: 'Orbitron', 'Space Mono', monospace;
   font-weight: 600;
   color: var(--black-or-white);
 }
@@ -148,9 +146,8 @@ a:hover {
   align-items: center;
 }
 .project-info-image { min-width: 100px; }
-.project-info-title { font-family: orbitron; font-size: 1.6em; }
+.project-info-title { font-size: 1.6em; }
 .project-info-description { 
-  font-family: orbitron;     
   overflow: hidden;
   max-height: 150px;
   padding: 4px;
