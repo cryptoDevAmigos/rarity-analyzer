@@ -166,7 +166,7 @@ const buildProjectRarityFiles = async ({
             projectMetadata,
         };
     }catch (err){
-        console.error(`# generateRarityFiles: ERROR - ${projectFileName}`);
+        console.error(`# generateRarityFiles: ERROR - ${projectFileName}`, {err});
     }
 
     
