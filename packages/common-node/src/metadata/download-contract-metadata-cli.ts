@@ -33,7 +33,7 @@ const run = async () => {
             collection: 'foxxiesofficial',
             projectKey: 'foxxies',
             minTokenId: '0', 
-            maxTokenId: '1000000', 
+            maxTokenId: '4500', 
             maxOffset: 10000,
             transformAttribute: (attribute)=>{
                 // if(attribute.trait_type === 'date'){
