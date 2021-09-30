@@ -33,6 +33,8 @@ export interface INftProjectMetadata {
     contract?: string,
     theme?: IProjectTheme;
     links?: IProjectLinks;
+
+    includeTraitCount?: boolean;
 }
 export type INftProjectMetadataDocument = INftProjectMetadata;
 
