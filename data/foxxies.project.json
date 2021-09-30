@@ -1,10 +1,10 @@
 {
     "contract": "0xC7E76248bd47DDA22Db50A1743032082821F6172",
-	"name": "Foxxies",
-	"description": "Each Foxxie holder gets access to Elite Club and owns equal share of DAO Curated Art Platform.",
-	"image": "https://lh3.googleusercontent.com/T3nPAo3ZB459DUvZ_sZpKU3qzZNyQfTFYH_iwJSB1LXGW6pQujofdz-te8mE4X9Js4Jk6amVvnLwpacgtGhd2fUDdrruYvJIFOh4YA=s130",
-	"external_link": "https://foxxies.io",
-	"symbol": "FOXXIES",
+    "name": "Foxxies",
+    "description": "Each Foxxie holder gets access to Elite Club and owns equal share of DAO Curated Art Platform.",
+    "image": "https://lh3.googleusercontent.com/T3nPAo3ZB459DUvZ_sZpKU3qzZNyQfTFYH_iwJSB1LXGW6pQujofdz-te8mE4X9Js4Jk6amVvnLwpacgtGhd2fUDdrruYvJIFOh4YA=s130",
+    "external_link": "https://foxxies.io",
+    "symbol": "FOXXIES",
     "links": {
         "openSea": "https://opensea.io/collection/foxxiesofficial",
         "twitter": "https://twitter.com/FoxxiesNFT",
