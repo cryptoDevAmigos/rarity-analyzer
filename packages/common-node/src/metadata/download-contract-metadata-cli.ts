@@ -42,24 +42,24 @@ const run = async () => {
 
                 return attribute;
             },
-            // NOTE: Add manually afterwords for now
-            // metadata:{
-            //     links: {
-            //         "openSea": "https://opensea.io/collection/foxxiesofficial",
-            //         "twitter": "https://twitter.com/FoxxiesNFT",
-            //         "discord": "https://discord.gg/cGe5y92xra"
-            //     },
-            //     theme: {
-            //         "isDark": true,
-            //         "back": "#112233",
-            //         "primary": "#EB5D27",
-            //         "secondary": "#EF865F",
-            //         "highlight": "#FFFFFF",
-            //         "borderWidth": "2px",
-            //         "borderRadius": "8px",
-            //         "boxShadowWidth": "8px"
-            //     }
-            // }
+            metadata:{
+                includeTraitCount: false,
+                links: {
+                    "openSea": "https://opensea.io/collection/foxxiesofficial",
+                    "twitter": "https://twitter.com/FoxxiesNFT",
+                    "discord": "https://discord.gg/cGe5y92xra"
+                },
+                theme: {
+                    "isDark": true,
+                    "back": "#353434",
+                    "primary": "#EB5D27",
+                    "secondary": "#EF865F",
+                    "highlight": "#FFFFFF",
+                    "borderWidth": "2px",
+                    "borderRadius": "8px",
+                    "boxShadowWidth": "8px"
+                }
+            }
         });
 
         // // Punkscape

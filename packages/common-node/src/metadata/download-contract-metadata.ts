@@ -1,4 +1,4 @@
-import { INftMetadata, INftProjectMetadataDocument } from '@crypto-dev-amigos/common';
+import { INftMetadata, INftProjectMetadata, INftProjectMetadataDocument } from '@crypto-dev-amigos/common';
 import fetch from 'node-fetch';
 import {promises as fs} from 'fs';
 import path from 'path';
@@ -52,12 +52,7 @@ export const downloadContractMetadata = async ({
     maxTokenId?: string,
     maxOffset?: number,
     transformAttribute?: (attribute: {trait_type:string, value:string}) => null | {trait_type:string, value:string},
-    metadata?:{
-        name?:string,
-        description?:string,
-        image?:string,
-        external_link?:string,
-    },
+    metadata?: INftProjectMetadata,
 }) => {
 
     console.log(`# downloadContractMetadata`, { collection, destDir });
@@ -89,18 +84,20 @@ export const downloadContractMetadata = async ({
     const collectionResult = contractNftsResult.assets[0].collection;
     const collectionMetadata : INftProjectMetadataDocument & {raw:unknown} = {
         contract: contractAddress,
-        name: metadata?.name ?? collectionResult.name,
-        description: metadata?.description ?? collectionResult.description,
-        image: metadata?.image ?? collectionResult.image_url,
-        external_link: metadata?.external_link ?? collectionResult.external_url,
+        name: collectionResult.name,
+        description: collectionResult.description,
+        image: collectionResult.image_url,
+        external_link: collectionResult.external_url,
         symbol: contractResult.symbol,
+
+        ...metadata ?? {},
         raw: contractResult,
     };
 
     console.log(`saving ${collectionSlug}/${collectionSlug}.collection.json`);
     
     await fs.mkdir(path.join(destDir, collectionSlug), {recursive: true});
-    await fs.writeFile(path.join(destDir, collectionSlug, `${collectionSlug}.collection.json`), JSON.stringify(collectionMetadata));
+    await fs.writeFile(path.join(destDir, collectionSlug, `${collectionSlug}.collection.json`), JSON.stringify(collectionMetadata, null, 2));
 
     // const totalSupply = contractResult.total_supply ?? 0;
     // const totalSupply = 1000000;
@@ -113,7 +110,8 @@ export const downloadContractMetadata = async ({
     // Combine and copy files
     console.log(`creating project files ${projectKey}`);
 
-    await fs.copyFile(path.join(destDir, collectionSlug, `${collectionSlug}.collection.json`), path.join(destDir, `${projectKey}.project.json`));
+    const projectMetadata = {...collectionMetadata, raw: undefined};
+    await fs.writeFile(path.join(destDir, `${projectKey}.project.json`), JSON.stringify(projectMetadata, null, 2));
     const nftsMetadata = [] as INftMetadata[];
     for( const f of await fs.readdir(path.join(destDir, collectionSlug))){
         if( !f.endsWith('.nft.json')){continue;}
@@ -144,7 +142,7 @@ export const downloadContractMetadata = async ({
             continue;
         }
     }
-    await fs.writeFile(path.join(destDir, `${projectKey}.json`), JSON.stringify(nftsMetadata));
+    await fs.writeFile(path.join(destDir, `${projectKey}.json`), JSON.stringify(nftsMetadata, null, 2));
 
     console.log(`DONE: ${projectKey}`);
 };
