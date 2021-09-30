@@ -84,7 +84,7 @@ const buildProjectRarityFiles = async ({
                 };
             }
         } catch {
-            // Ignore if missing
+            // Ignore if missing.
         }
 
 
