@@ -144,7 +144,7 @@ export const downloadContractMetadata = async ({
     }
     await fs.writeFile(path.join(destDir, `${projectKey}.json`), JSON.stringify(nftsMetadata, null, 2));
 
-    console.log(`DONE: ${projectKey}`);
+    console.log(`DONE: ${projectKey} has ${nftsMetadata.length} NFTs`);
 };
 
 const downloadNewNfts = async ({
