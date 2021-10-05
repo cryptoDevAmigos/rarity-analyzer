@@ -95,7 +95,9 @@ const buildProjectRarityFiles = async ({
         const nftList = JSON.parse(nftListFileContent) as INftMetadataCollectionDocument;
 
         console.log(`# generateRarityFiles: calculating rarities for ${projectFileName}`);
-        const rarityResult = calculateRarity(nftList);
+        const rarityResult = calculateRarity(nftList, {
+            includeTraitCount: projectMetadata.includeTraitCount,
+        });
 
         console.log(`# generateRarityFiles: saving rarities for ${projectFileName}`);
 
