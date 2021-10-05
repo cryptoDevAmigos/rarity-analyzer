@@ -15,6 +15,14 @@ const run = async () => {
 
                 return attribute;
             },
+            metadata:{
+                links: {
+                    site: 'https://punkscape.xyz/',
+                    openSea: "https://opensea.io/collection/punkscapes",
+                    twitter: "https://twitter.com/PunkScape_ETH",
+                    discord: "https://discord.gg/aPS3Hre57D"
+                }
+            }
         });
 
         // // Art Blocks - Skulptuur
