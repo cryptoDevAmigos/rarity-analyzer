@@ -234,6 +234,7 @@ const downloadNewNfts = async ({
 
 
         let foundExisting = false;
+        let foundNewCount = 0;
 
         for( const nftData of nftsData.assets){
             const nft: INftMetadata & {raw:unknown}= {
@@ -258,17 +259,25 @@ const downloadNewNfts = async ({
 
                 if(nftData.id === nft.id){
                     foundExisting = true;
+                } else {
+                    foundNewCount++;
                 }
-            }catch{}
+            }catch{
+                foundNewCount++;
+            }
 
             console.log(`saving ${nftFilePath}`);
             await fs.writeFile(nftFilePath, JSON.stringify(nft));
         }
 
+        console.log(`found ${foundNewCount} new assets`);
         
-        if( foundExisting || !nftsData.assets.length){
+        if(!nftsData.assets.length){
             // Backup to last page (for next time assets might be added)
-            processData.nextOffset -= 50;
+            if( nftsData.assets.length < 50){
+                processData.nextOffset -= 50;
+            }
+
             await fs.writeFile(processDataFilePath, JSON.stringify(processData));
 
             // Done
