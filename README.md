@@ -99,7 +99,7 @@ https://openrarity.xyz
 
 ![](docs/2021-09-24-23-18-48.png)
 
-- /openrarity nft project-key:one-day-punks token-id:42 
+- /openrarity nft project-key:one-day-punks token-id:42
     - Even has a ascii bar graph!
 
 ![](docs/2021-09-24-23-12-37.png)
@@ -109,9 +109,9 @@ https://openrarity.xyz
 - Discord Outgoing Webhooks
 
     - No running server costs
-    - Using Netlify Functions 
+    - Using Netlify Functions
     - Continous Deployment from GitHub Repo
-    
+
 - tl;dr - free (unless you get a ton of traffic somehow)
 
 ### Clonable
@@ -127,9 +127,9 @@ https://openrarity.xyz
 ## Introduction
 
 This project is a submission for the PunkScape Hackathon #1.  
-The main purpose of this project is to provide an open source alternative to other paid closed source NFT rarity sites.  Developers should be able to submit a project by either: 
+The main purpose of this project is to provide an open source alternative to other paid closed source NFT rarity sites.  Developers should be able to submit a project by either:
 
-1. PR request to the main branch to include their project or 
+1. PR request to the main branch to include their project or
 2. Fork this project and configure for their own deployment.
 
 ## Technologies
@@ -148,7 +148,7 @@ Project is created with:
 
 2. Run `npm install` at the root of rarity-analyzer to install server dependencies including scope packages and workspaces.  
 
-    * NOTE: you can run npm install at root to build scoped packages. 
+    * NOTE: you can run npm install at root to build scoped packages.
     * e.g (While running packages/server/, you can make changes to packages/common/ and run npm install at root to rebuild the @crypto-dev-common package)
 
 3. Run `npm start` to start the development server.    
@@ -173,7 +173,7 @@ You may submit new NFT Projects to https://github.com/cryptoDevAmigos/rarity-ana
     - Make sure data follows OpenSea metadata structure https://docs.opensea.io/docs/metadata-standards
 3. Submit a pull request
     - Rarities will be calculated
-    - Website will be updated with results 
+    - Website will be updated with results
 
 
 ---
@@ -205,21 +205,21 @@ You may submit new NFT Projects to https://github.com/cryptoDevAmigos/rarity-ana
      - /web/data/results/projectId/1.json
 - Website would access the .json files as static content of the same domain:
     - `site.com/projectName/0` would load `site.com/data/projectName/0.json`
-- Anybody can setup their own website 
+- Anybody can setup their own website
     - create a netlify
     - point netlify to repo/web
 
 ### Discord Integration
 
 - Use discord outgoing webhooks (serverless)
-- Requests handled by Netlify functions (or other serverless provider like AWS lambda) 
+- Requests handled by Netlify functions (or other serverless provider like AWS lambda)
 
 ## PRogress
 ### Hackathon Requirements
 
 - [ ] https://github.com/punkscape/01-rarity-analyser-hackathon
     - [x] Only OneDayPunk owners may participate in the hackathon
-        - [x] You have to hold a OneDayPunk to take part in the hackathon. 
+        - [x] You have to hold a OneDayPunk to take part in the hackathon.
     - [x] The app has to calculate a rarity score for each item in the given collection
     - [x] The app has to be deployed on a live server (Heroku free tier or similar is fine)
     - [x] The app has to be usable: Minimum requirement is that the rarity of each item in the collection can be queried / viewed
@@ -227,14 +227,14 @@ You may submit new NFT Projects to https://github.com/cryptoDevAmigos/rarity-ana
         - [] "As a good example of an easy to install and configure package check out this open source discord bot for OpenSea sales: https://github.com/0xEssential/opensea-discord-bot"
 
 - [x] Generate `/web/projectName/collection-rarities.json`
-- [x] Json data is accessible 
+- [x] Json data is accessible
 - [ ] Discord integration
 - [x] Instructions
     - [x] Add Project
     - [x] Deploy clone
 - [ ] Submission before 27.09.2021 00:00 UTC
 
-    
+
 ### Tasks
 
 - [x] Github action to build:rarities
@@ -276,11 +276,11 @@ You may submit new NFT Projects to https://github.com/cryptoDevAmigos/rarity-ana
         - [ ] /openrarity project-key token-id
             - Get token rarity info for a known project-key
         - [ ] /openrarity token-id
-            - Get token rarity info for a default project-key 
+            - Get token rarity info for a default project-key
             - configured during command integration of discord server
 
 - [ ] ? Easy Button: Add contract address and hit submit on website
-    - [!STORAGE] 
+    - [!STORAGE]
         - This probably can't be done purely by github actions
         - Where will the data go?
     - [ ] ? Use web3 to get contract data
