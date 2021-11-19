@@ -29,9 +29,15 @@ const Price = ({price}:{price?: {
     
     if(!price){ return <span>{'-?-'}</span>}
 
+    const priceColor = price.price < 0.1 ? '#FF0000' 
+        : price.price < 0.25 ? '#FF3300' 
+        : price.price < 0.5 ? '#FF7700' 
+        : price.price < 1 ? '#FFBB00' 
+        : 'unset';
+
     return (
         <>
-            <div style={{display:'inline-block', minWidth: 100}}>
+            <div style={{display:'inline-block', minWidth: 100, color: priceColor}}>
                 <span>{price.price.toFixed(3)}</span>
                 {price.symbol && (
                     price.symbol.toLowerCase() === 'eth' ? <span className='black-or-white'><Icon icon='eth'/></span> 
@@ -39,7 +45,7 @@ const Price = ({price}:{price?: {
                     : <span>{price.symbol}</span>
                 )}
             </div>
-            <div style={{display:'inline-block', minWidth: 100}}>
+            <div style={{display:'inline-block', minWidth: 100, color: priceColor}}>
                 <span>{price.priceUsd ? ` $${price.priceUsd.toFixed(2)}`:''}</span>
             </div>
         </>
