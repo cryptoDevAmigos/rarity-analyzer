@@ -106,6 +106,7 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
     const traitFilters = useRef({} as TraitFilters);
 
     const [sort, setSort] = useState('rarity' as 'rarity' | 'tokenId');
+    const [forSell, setForSell] = useState(false);
 
     const onSelect = (args: { traitType: string, value: string }) => {
         const selections = traitFilters.current;
@@ -169,6 +170,10 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                         <div style={{textAlign:'left'}}>
                             Search: <input type='text' style={{maxWidth: 100}} value={pinnedTokenId} onChange={(e)=>setPinnedTokenId(e.target.value)}/>
                         </div>
+                        <div style={{flex:1}}/>
+                        <div style={{textAlign:'left', marginRight: 32}}>
+                            <div className='hover link' style={{marginLeft:4}} onClick={()=>{setForSell(s=>!s)}}>Show Only For Sell</div>
+                        </div>
                         <div style={{display:'flex', flexDirection:'row', justifyContent:'flex-end'}}>
                             Sort: 
                             <div className='hover link' style={{marginLeft:4}} onClick={()=>{setSort('rarity')}}>Rarity</div>
@@ -182,7 +187,7 @@ export const NftProject = ({ projectKey, projectRarity }:{ projectKey:string, pr
                                 //     className='link'
                                 //     onClick={()=>window.location.href=`${projectKey}/${item}`}
                                 // >
-                                    <NftLoader projectKey={projectKey} tokenId={`${item}`} contractAddress={projectRarity.contractAddress} onSelect={onSelect} />
+                                    <NftLoader projectKey={projectKey} tokenId={`${item}`} contractAddress={projectRarity.contractAddress} onSelect={onSelect} hideIfNoListing={forSell} />
                                 // </div>
                             )}/>
                         )}

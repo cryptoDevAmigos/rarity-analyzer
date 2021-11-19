@@ -7,9 +7,11 @@ import { changeTheme } from '../helpers/theme';
 import { OnSelectTraitValue } from './types';
 
 export const NftLoader = ({ 
-    projectKey, tokenId, contractAddress, onSelect
+    projectKey, tokenId, contractAddress, onSelect, 
+    hideIfNoListing
  }:{ 
-     projectKey: string, tokenId: string, contractAddress?: string, onSelect?: OnSelectTraitValue
+    projectKey: string, tokenId: string, contractAddress?: string, onSelect?: OnSelectTraitValue, 
+    hideIfNoListing?: boolean
 })=>{
 
     const [nft, setNft] = useState(null as null | INftRarityWithExtra);
@@ -76,6 +78,11 @@ export const NftLoader = ({
     }, [projectKey, tokenId]);
 
     // console.log('NftLoader RENDER', {projectKey, tokenId});
+
+    if(hideIfNoListing && !nft?.listing){
+        return <></>;
+    }
+
     return (
         <>
             {error && <div>{error}</div>}

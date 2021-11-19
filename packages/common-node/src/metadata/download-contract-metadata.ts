@@ -108,7 +108,7 @@ export const downloadContractMetadata = async ({
     });
 
     // Combine and copy files
-    console.log(`creating project files ${projectKey}`);
+    console.log(`creating project files ${projectKey} ${minTokenId}-${maxTokenId}`);
 
     const projectMetadata = {...collectionMetadata, raw: undefined};
     await fs.writeFile(path.join(destDir, `${projectKey}.project.json`), JSON.stringify(projectMetadata, null, 2));
@@ -118,7 +118,10 @@ export const downloadContractMetadata = async ({
 
         try{
             const nftData = JSON.parse(await fs.readFile(path.join(destDir, collectionSlug, f), {encoding:'utf-8'})) as INftMetadata;
-            if( !nftData.id || !nftData.attributes?.length){
+            // if( !nftData.id || !nftData.attributes?.length){
+            //     continue;
+            // }
+            if( !nftData.id ){
                 continue;
             }
 
@@ -133,7 +136,7 @@ export const downloadContractMetadata = async ({
 
             nftsMetadata.push({
                 ...nftData,
-                attributes: nftData.attributes
+                attributes: (nftData.attributes??[])
                     .map(x => transformAttribute ? transformAttribute?.(x) : x)
                     .filter(x => x)
                     .map(x => x!)
@@ -145,6 +148,18 @@ export const downloadContractMetadata = async ({
     await fs.writeFile(path.join(destDir, `${projectKey}.json`), JSON.stringify(nftsMetadata, null, 2));
 
     console.log(`DONE: ${projectKey} has ${nftsMetadata.length} NFTs`);
+    // console.log(nftsMetadata.map(x=>x.id).join(' '));
+
+    // // TEMP:
+
+    // let ownersArray = [] as {address:string, }[];
+    // const ownerCounts = {} as {[address:string]:number};
+    // ownersArray.forEach(owner => { ownerCounts[owner.address] = ownerCounts[owner.address] + 1; });
+    // const ownersWithCount = ownersArray.map(owner => ({...owner, count: ownerCounts[owner.address] || 0}) );
+    // const ownersDistinct = [...new Map(ownersWithCount.map(x=>[x.address,x])).values()];
+    // ownersDistinct.sort((a,b) => -(a.count - b.count));
+    // const ownersTop = ownersDistinct.slice(0,10);
+    // console.log(ownersTop);
 };
 
 const downloadNewNfts = async ({
