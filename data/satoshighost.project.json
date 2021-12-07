@@ -1,0 +1,14 @@
+{
+  "contract": "0xce67D822Bd453a300Fd01c4457a476EA4F1ee313",
+  "name": "SatoshiGhost",
+  "description": "1000 unique Satoshi ghosts \n\nThese funny ghosts will be minted generationally with the goal of starting game like and interactive project. And will be collected randomly.\n\n[SatoshiGhost](https://opensea.io/collection/satoshi-ghosts).",
+  "image": "https://gateway.pinata.cloud/ipfs/QmerCqRyb4KWFRK4qSpCv5GcKx8J4iKKEbxLY5r1PZetFb/333.png",
+  "external_link": "https://satoshighost.com",
+  "symbol": "SG",
+  "links": {
+    "site": "https://satoshighost.com/",
+    "openSea": "https://opensea.io/collection/satoshi-ghosts",
+    "twitter": "https://twitter.com/satoshighostnft",
+    "discord": "https://discord.gg/cCYFnMWq"
+  }
+}
