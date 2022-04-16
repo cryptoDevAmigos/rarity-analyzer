@@ -1,0 +1,21 @@
+{
+    "name": "Chibi NFT",
+    "description": "Chibi Characters from Chibi World",
+    "image": "ipfs://QmQphBFtMHpJaDfz2ZvFEYoZ4gqPqhQqFQ5KoDntVKfvSS",
+    "links": {
+        "openSea": "https://opensea.io/collection/onedaypunks",
+        "twitter": "https://twitter.com/PunkScape_ETH",
+        "discord": "https://discord.gg/aPS3Hre57D"
+    },
+    "theme": {
+        "isDark": true,
+        "back": "#000000",
+        "primary": "#FF00AE",
+        "secondary": "#0062F9",
+        "highlight": "#FFFFFF",
+        "borderWidth": "4px",
+        "borderRadius": "0px",
+        "boxShadowWidth": "5px",
+        "boxShadowBlur": "0px"
+    }
+}
