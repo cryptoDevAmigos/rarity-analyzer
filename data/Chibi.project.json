@@ -1,7 +1,10 @@
 {
     "name": "Chibi NFT",
-    "description": "Chibi Characters from Chibi World",
+    "symbol": "ODP",
+    "description": "Chibi Characters from Chibi World.",
     "image": "ipfs://QmQphBFtMHpJaDfz2ZvFEYoZ4gqPqhQqFQ5KoDntVKfvSS",
+    "external_link": "https://punkscape.xyz/onedaypunks/",
+    "contract": "0x5537d90A4A2DC9d9b37BAb49B490cF67D4C54E91",
     "links": {
         "openSea": "https://opensea.io/collection/onedaypunks",
         "twitter": "https://twitter.com/PunkScape_ETH",
