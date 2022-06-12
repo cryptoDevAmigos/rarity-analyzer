@@ -1,0 +1,502 @@
+[
+  {
+    "name": "Chibi NFT #1",
+    "description": "Chibi Characters from Chibi World",
+    "image": "ipfs://NewUriToReplace/1.png",
+    "dna": "a49a2b90af06a668968c78b6f7f0fdc2d0bb20fd",
+    "id": 1,
+    "date": 1650098355154,
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Galaxy "
+      },
+      {
+        "trait_type": "Wing",
+        "value": "White Tailed Fox "
+      },
+      {
+        "trait_type": "Body",
+        "value": "Light Brown 2 "
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Amused"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Blue Eyes "
+      },
+      {
+        "trait_type": "Hair",
+        "value": "Blue Ponytail "
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Blue Angel "
+      },
+      {
+        "trait_type": "Face",
+        "value": "Bead Ring "
+      },
+      {
+        "trait_type": "Cloth",
+        "value": "Brown Farmer "
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Violet Smoke"
+      }
+    ]
+  },
+  {
+    "name": "Chibi NFT #2",
+    "description": "Chibi Characters from Chibi World",
+    "image": "ipfs://NewUriToReplace/2.png",
+    "dna": "0ab9d837b2295829821756215ff5652072e9610f",
+    "id": 2,
+    "date": 1650098358325,
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Chibi "
+      },
+      {
+        "trait_type": "Wing",
+        "value": "Small Red Butterfly Wings "
+      },
+      {
+        "trait_type": "Body",
+        "value": "Mauve "
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Ashamed"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Pink Sunken "
+      },
+      {
+        "trait_type": "Hair",
+        "value": "Pink Braid "
+      },
+      {
+        "trait_type": "Hat",
+        "value": "White Clasp "
+      },
+      {
+        "trait_type": "Face",
+        "value": "Blue Flower "
+      },
+      {
+        "trait_type": "Cloth",
+        "value": "Grey Combatant "
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Flame"
+      }
+    ]
+  },
+  {
+    "name": "Chibi NFT #3",
+    "description": "Chibi Characters from Chibi World",
+    "image": "ipfs://NewUriToReplace/3.png",
+    "dna": "b063e4ecad35868360e1782b1dc140c0f043ec22",
+    "id": 3,
+    "date": 1650098361582,
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Light Pink "
+      },
+      {
+        "trait_type": "Wing",
+        "value": "Blue Mouse "
+      },
+      {
+        "trait_type": "Body",
+        "value": "Gray Blue "
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Hurt"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Pink Blink "
+      },
+      {
+        "trait_type": "Hair",
+        "value": "Long Purle Hair "
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Gray Pin "
+      },
+      {
+        "trait_type": "Face",
+        "value": "Faceless "
+      },
+      {
+        "trait_type": "Cloth",
+        "value": "Blue Mummy Dress "
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Green Scepter"
+      }
+    ]
+  },
+  {
+    "name": "Chibi NFT #4",
+    "description": "Chibi Characters from Chibi World",
+    "image": "ipfs://NewUriToReplace/4.png",
+    "dna": "6bcb4b9bc63fec23719e9d0b53b56cb4b1e1b248",
+    "id": 4,
+    "date": 1650098364917,
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Green Rainbow "
+      },
+      {
+        "trait_type": "Wing",
+        "value": "Big Mint Bat Wings "
+      },
+      {
+        "trait_type": "Body",
+        "value": "Lime "
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Ashamed"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Pink Beady Eyes "
+      },
+      {
+        "trait_type": "Hair",
+        "value": "Red Perm "
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Pink Pearl "
+      },
+      {
+        "trait_type": "Face",
+        "value": "Light Gray Glasses "
+      },
+      {
+        "trait_type": "Cloth",
+        "value": "Violet Farmer "
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Blue Umbrella"
+      }
+    ]
+  },
+  {
+    "name": "Chibi NFT #5",
+    "description": "Chibi Characters from Chibi World",
+    "image": "ipfs://NewUriToReplace/5.png",
+    "dna": "652e0348790a835595d2cbd0f9ade544999728f8",
+    "id": 5,
+    "date": 1650098368183,
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Violet Fade "
+      },
+      {
+        "trait_type": "Wing",
+        "value": "Pink Bat Wings "
+      },
+      {
+        "trait_type": "Body",
+        "value": "Gray "
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Hurt"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Light Blue Sunken "
+      },
+      {
+        "trait_type": "Hair",
+        "value": "Bunny Blonde Hair "
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Pink Pirate "
+      },
+      {
+        "trait_type": "Face",
+        "value": "Streaks 2 "
+      },
+      {
+        "trait_type": "Cloth",
+        "value": "Yellow Dress "
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Violet Dolly"
+      }
+    ]
+  },
+  {
+    "name": "Chibi NFT #6",
+    "description": "Chibi Characters from Chibi World",
+    "image": "ipfs://NewUriToReplace/6.png",
+    "dna": "1a32905ebcf59c328ff959df510a519b8e9f263a",
+    "id": 6,
+    "date": 1650098371244,
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Pink Dragon "
+      },
+      {
+        "trait_type": "Wing",
+        "value": "Mint Cloak "
+      },
+      {
+        "trait_type": "Body",
+        "value": "Peacook blue "
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Nonplussed"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Blue Beady Eyes "
+      },
+      {
+        "trait_type": "Hair",
+        "value": "Dfinity Hair "
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Black Clasp "
+      },
+      {
+        "trait_type": "Face",
+        "value": "Gerbera "
+      },
+      {
+        "trait_type": "Cloth",
+        "value": "Grey Combatant "
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Flame"
+      }
+    ]
+  },
+  {
+    "name": "Chibi NFT #7",
+    "description": "Chibi Characters from Chibi World",
+    "image": "ipfs://NewUriToReplace/7.png",
+    "dna": "c5f6c129d205be772dcfad04f8493ba672287e1b",
+    "id": 7,
+    "date": 1650098374420,
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Violet Fade "
+      },
+      {
+        "trait_type": "Wing",
+        "value": "Small Rainbow Wings "
+      },
+      {
+        "trait_type": "Body",
+        "value": "Pale Blue "
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Excited"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Blue Eyes "
+      },
+      {
+        "trait_type": "Hair",
+        "value": "Purple Pigtails "
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Black Glasses "
+      },
+      {
+        "trait_type": "Face",
+        "value": "Blue Flower "
+      },
+      {
+        "trait_type": "Cloth",
+        "value": "Dark Wonder Girl "
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Dfinity Bird"
+      }
+    ]
+  },
+  {
+    "name": "Chibi NFT #8",
+    "description": "Chibi Characters from Chibi World",
+    "image": "ipfs://NewUriToReplace/8.png",
+    "dna": "839683cc01bcdfffe6fcd0b7ed25a7c8c58db2ae",
+    "id": 8,
+    "date": 1650098377503,
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Purple "
+      },
+      {
+        "trait_type": "Wing",
+        "value": "Blonde Cloak "
+      },
+      {
+        "trait_type": "Body",
+        "value": "Silvery "
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Tense"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Highlight Eyes "
+      },
+      {
+        "trait_type": "Hair",
+        "value": "Short Black Hair "
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Red Wing "
+      },
+      {
+        "trait_type": "Face",
+        "value": "Pink Glasses "
+      },
+      {
+        "trait_type": "Cloth",
+        "value": "Grey Farmer "
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Blue ring"
+      }
+    ]
+  },
+  {
+    "name": "Chibi NFT #9",
+    "description": "Chibi Characters from Chibi World",
+    "image": "ipfs://NewUriToReplace/9.png",
+    "dna": "d3cae5d4b11490104c964d39e02bd984eeed71f3",
+    "id": 9,
+    "date": 1650098380656,
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Light Green "
+      },
+      {
+        "trait_type": "Wing",
+        "value": "Blue Cloak "
+      },
+      {
+        "trait_type": "Body",
+        "value": "Brown "
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Cute Lip"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Blue Eyes "
+      },
+      {
+        "trait_type": "Hair",
+        "value": "Green Braid 2 "
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Yellow Hat "
+      },
+      {
+        "trait_type": "Face",
+        "value": "Blob "
+      },
+      {
+        "trait_type": "Cloth",
+        "value": "Grey Soldier "
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Blue Scythe"
+      }
+    ]
+  },
+  {
+    "name": "Chibi NFT #10",
+    "description": "Chibi Characters from Chibi World",
+    "image": "ipfs://NewUriToReplace/10.png",
+    "dna": "a0e6f27cf559aa9728f448bf13b67afde7649134",
+    "id": 10,
+    "date": 1650098383984,
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "Patern "
+      },
+      {
+        "trait_type": "Wing",
+        "value": "Pink Fish Dragon "
+      },
+      {
+        "trait_type": "Body",
+        "value": "Brown "
+      },
+      {
+        "trait_type": "Mouth",
+        "value": "Jealous"
+      },
+      {
+        "trait_type": "Eyes",
+        "value": "Red Liquid Eyes "
+      },
+      {
+        "trait_type": "Hair",
+        "value": "Purple Shoulder length "
+      },
+      {
+        "trait_type": "Hat",
+        "value": "Blue Sailor "
+      },
+      {
+        "trait_type": "Face",
+        "value": "Forehead Scarf "
+      },
+      {
+        "trait_type": "Cloth",
+        "value": "Brown Princess Dress "
+      },
+      {
+        "trait_type": "Weapon",
+        "value": "Yellow Sword"
+      }
+    ]
+  }
+]
