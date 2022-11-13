@@ -1,0 +1,24 @@
+{
+    "name": "Planets of Cosmos Part III, Overlords",
+    "symbol": "POCIII",
+    "description": "Governance token of the Planets of Cosmos DAO, made from a mix     	of illustration, AI Models, and Generative Art. Join us in exploring a vast 	universe of possibilities. linktr.ee/planetsofcosmos",
+    "image": "ipfs://QmUzJodkjE8XKUMZV4exYLdXVkrWa2HpRz4YsGT3R35QBy",
+    "external_link": "https://punkscape.xyz/onedaypunks/",
+    "contract": "stars1w738r0pg772mxyg24tnnr56lv64y0vamacwv9enm7z2f22zjy8aqsmzh0c",
+    "links": {
+        "stargaze": "https://app.stargaze.zone/launchpad/stars1w738r0pg772mxyg24tnnr56lv64y0vamacwv9enm7z2f22zjy8aqsmzh0c",
+        "twitter": "https://twitter.com/planetsofcosmos",
+        "discord": "https://discord.gg/NfTaQJ9JrQ"
+    },
+    "theme": {
+        "isDark": true,
+        "back": "#000000",
+        "primary": "#FF00AE",
+        "secondary": "#0062F9",
+        "highlight": "#FFFFFF",
+        "borderWidth": "4px",
+        "borderRadius": "0px",
+        "boxShadowWidth": "5px",
+        "boxShadowBlur": "0px"
+    }
+}
