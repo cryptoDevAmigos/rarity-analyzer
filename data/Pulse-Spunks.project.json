@@ -1,0 +1,25 @@
+
+{
+  "name": "Spunk",
+  "symbol": "ODP",
+  "description": "10k 'One Day I'll Be A Punk' punks – a homage to the one and only CryptoPunks.",
+  "image": "ipfs://QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd",
+  "external_link": "https://pspunk.co.uk",
+  "contract": "0x83fc7f94867B495E092A7538c1eb44dF8b4b937B",
+  "links": {
+      "openSea": "https://opensea.io/collection/onedaypunks",
+      "twitter": "https://twitter.com/PunkScape_ETH",
+      "discord": "https://discord.gg/aPS3Hre57D"
+  },
+  "theme": {
+      "isDark": true,
+      "back": "#000000",
+      "primary": "#FF00AE",
+      "secondary": "#0062F9",
+      "highlight": "#FFFFFF",
+      "borderWidth": "4px",
+      "borderRadius": "0px",
+      "boxShadowWidth": "5px",
+      "boxShadowBlur": "0px"
+  }
+}
