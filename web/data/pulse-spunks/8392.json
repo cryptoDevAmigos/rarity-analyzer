@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #8392",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmTV98r2VdQPbN9h2wLUsHSfwuJ7Jp8r3DGGqMQ5jQ5g9v/8392.png",
+  "edition": 8392,
+  "date": 1690190961992,
+  "Rank": 33,
+  "attributes": [
+    {
+      "trait_type": "Mythic Spunk",
+      "value": "Alien"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Gotee"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Bandana"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Mythic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

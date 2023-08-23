@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #2266",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/2266.png",
+  "edition": 2266,
+  "date": 1690190963625,
+  "Rank": 59,
+  "attributes": [
+    {
+      "trait_type": "Legendary Spunk",
+      "value": "Ape"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Clown Eyes"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Light Hair"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Mythic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}
