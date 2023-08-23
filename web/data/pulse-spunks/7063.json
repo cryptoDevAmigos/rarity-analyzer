@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #7063",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmUQMJAi7ZaYTEHzLDyBZ9w5d9y32Uo5cme8CkTEkcaRRn/7063.png",
+  "edition": 7063,
+  "date": 1690191340772,
+  "Rank": 2243,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Albino"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Gotee"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Crazy Purple Hair"
+    },
+    {
+      "trait_type": "Neck",
+      "value": "Silver Chain"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Rare"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

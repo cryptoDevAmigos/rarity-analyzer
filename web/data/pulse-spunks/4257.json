@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #4257",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/4257.png",
+  "edition": 4257,
+  "date": 1690191162826,
+  "Rank": 7682,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Light"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "Earring"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Big Shades"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Wool Hat"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

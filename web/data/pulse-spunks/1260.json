@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #1260",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/1260.png",
+  "edition": 1260,
+  "date": 1690191383910,
+  "Rank": 4281,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Gotee"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Clown Eyes"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Crazy Purple Hair"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Uncommon"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

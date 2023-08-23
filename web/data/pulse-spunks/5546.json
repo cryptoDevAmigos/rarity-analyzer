@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #5546",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmUQMJAi7ZaYTEHzLDyBZ9w5d9y32Uo5cme8CkTEkcaRRn/5546.png",
+  "edition": 5546,
+  "date": 1690191640906,
+  "Rank": 499,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Albino"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Clown Eyes"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Mohawk"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

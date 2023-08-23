@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #604",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/604.png",
+  "edition": 604,
+  "date": 1690191521429,
+  "Rank": 187,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Albino"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Gotee"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Thin Mohawk"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

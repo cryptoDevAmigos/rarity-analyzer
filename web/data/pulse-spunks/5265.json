@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #5265",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmUQMJAi7ZaYTEHzLDyBZ9w5d9y32Uo5cme8CkTEkcaRRn/5265.png",
+  "edition": 5265,
+  "date": 1690191569297,
+  "Rank": 2564,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Light"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Nerd Glasses"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Bandana"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Rare"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

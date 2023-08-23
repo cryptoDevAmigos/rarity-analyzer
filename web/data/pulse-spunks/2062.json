@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #2062",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/2062.png",
+  "edition": 2062,
+  "date": 1690191180041,
+  "Rank": 7003,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "Earring"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Mohawk"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

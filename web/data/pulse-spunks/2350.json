@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #2350",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/2350.png",
+  "edition": 2350,
+  "date": 1690191228410,
+  "Rank": 6317,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Tash"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Nerd Glasses"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Frown"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

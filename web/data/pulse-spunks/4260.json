@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #4260",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/4260.png",
+  "edition": 4260,
+  "date": 1690191146138,
+  "Rank": 1716,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Tash"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Crazy Red Hair"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Rare"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

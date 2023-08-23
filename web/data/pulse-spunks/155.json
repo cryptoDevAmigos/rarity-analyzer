@@ -1,0 +1,35 @@
+{
+  "name": "Pulse Spunk #155",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/155.png",
+  "edition": 155,
+  "date": 1690191210496,
+  "Rank": 6220,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Old Shades"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Fedora"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Buck Teeth"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Mask"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

@@ -1,0 +1,39 @@
+{
+  "name": "Pulse Spunk #625",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/625.png",
+  "edition": 625,
+  "date": 1690191317568,
+  "Rank": 8390,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Light Gotee"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Monical"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Crazy Red Hair"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Smile"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Cigarette"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

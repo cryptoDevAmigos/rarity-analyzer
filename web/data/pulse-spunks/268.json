@@ -1,0 +1,35 @@
+{
+  "name": "Pulse Spunk #268",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/268.png",
+  "edition": 268,
+  "date": 1690191400092,
+  "Rank": 6640,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Tash"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Big Shades"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Cap"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Buck Teeth"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

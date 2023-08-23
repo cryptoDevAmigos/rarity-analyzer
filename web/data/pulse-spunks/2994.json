@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #2994",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/2994.png",
+  "edition": 2994,
+  "date": 1690190973504,
+  "Rank": 204,
+  "attributes": [
+    {
+      "trait_type": "Rare Spunk",
+      "value": "Jaundice"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Old Shades"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Light Hair"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Cigarette"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

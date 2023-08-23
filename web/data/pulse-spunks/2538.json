@@ -1,0 +1,39 @@
+{
+  "name": "Pulse Spunk #2538",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/2538.png",
+  "edition": 2538,
+  "date": 1690191649322,
+  "Rank": 9167,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "Earring"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Gotee"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "3D Glasses"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Crazy Red Hair"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Vape"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

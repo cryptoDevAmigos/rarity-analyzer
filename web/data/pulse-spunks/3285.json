@@ -1,0 +1,35 @@
+{
+  "name": "Pulse Spunk #3285",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/3285.png",
+  "edition": 3285,
+  "date": 1690191492659,
+  "Rank": 1838,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Albino"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Chops"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Eye Patch"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Black Hair"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Mask"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Rare"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

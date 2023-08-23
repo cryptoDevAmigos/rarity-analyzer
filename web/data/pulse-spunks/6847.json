@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #6847",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmUQMJAi7ZaYTEHzLDyBZ9w5d9y32Uo5cme8CkTEkcaRRn/6847.png",
+  "edition": 6847,
+  "date": 1690191298099,
+  "Rank": 4676,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Light"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Horned Rimmed Glasses"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Bowler Hat"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Smile"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Uncommon"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

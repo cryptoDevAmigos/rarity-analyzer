@@ -1,0 +1,39 @@
+{
+  "name": "Pulse Spunk #1006",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/1006.png",
+  "edition": 1006,
+  "date": 1690191714350,
+  "Rank": 7421,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "Clown Nose"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Chops"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Terminator"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Mohawk"
+    },
+    {
+      "trait_type": "Neck",
+      "value": "Silver Chain"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

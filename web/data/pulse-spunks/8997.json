@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #8997",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmTV98r2VdQPbN9h2wLUsHSfwuJ7Jp8r3DGGqMQ5jQ5g9v/8997.png",
+  "edition": 8997,
+  "date": 1690191236032,
+  "Rank": 8200,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "Earring"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Crazy Red Hair"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Vape"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

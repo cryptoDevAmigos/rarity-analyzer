@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #1726",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/1726.png",
+  "edition": 1726,
+  "date": 1690191426547,
+  "Rank": 305,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Albino"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "VR"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Fedora"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

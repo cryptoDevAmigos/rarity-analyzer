@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #4378",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/4378.png",
+  "edition": 4378,
+  "date": 1690191016887,
+  "Rank": 2872,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Cop"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Frown"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Rare"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

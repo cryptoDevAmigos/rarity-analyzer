@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #1651",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/1651.png",
+  "edition": 1651,
+  "date": 1690191197854,
+  "Rank": 996,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Light"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Dark Beard"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Reefa"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Epic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

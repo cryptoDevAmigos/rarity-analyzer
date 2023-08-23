@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #4521",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/4521.png",
+  "edition": 4521,
+  "date": 1690191442915,
+  "Rank": 4512,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Light Beard"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Bandana"
+    },
+    {
+      "trait_type": "Neck",
+      "value": "Silver Chain"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Uncommon"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

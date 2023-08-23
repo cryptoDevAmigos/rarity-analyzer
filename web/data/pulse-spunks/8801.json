@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #8801",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmTV98r2VdQPbN9h2wLUsHSfwuJ7Jp8r3DGGqMQ5jQ5g9v/8801.png",
+  "edition": 8801,
+  "date": 1690190982176,
+  "Rank": 3193,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Light Hair"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Smile"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Uncommon"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #7845",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmTV98r2VdQPbN9h2wLUsHSfwuJ7Jp8r3DGGqMQ5jQ5g9v/7845.png",
+  "edition": 7845,
+  "date": 1690191160386,
+  "Rank": 199,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Albino"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Black Hair"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Mask"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

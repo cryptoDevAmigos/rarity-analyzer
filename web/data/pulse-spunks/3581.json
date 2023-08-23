@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #3581",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/3581.png",
+  "edition": 3581,
+  "date": 1690191392342,
+  "Rank": 1149,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Gotee"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Terminator"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Epic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

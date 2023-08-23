@@ -1,0 +1,35 @@
+{
+  "name": "Pulse Spunk #4568",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/4568.png",
+  "edition": 4568,
+  "date": 1690191593168,
+  "Rank": 6453,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "3D Glasses"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Mohawk"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Buck Teeth"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Vape"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #4557",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/4557.png",
+  "edition": 4557,
+  "date": 1690191215281,
+  "Rank": 4452,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Eye Patch"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Cap"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Smile"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Uncommon"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #41",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/41.png",
+  "edition": 41,
+  "date": 1690191571834,
+  "Rank": 2373,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Nerd Glasses"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Cop"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Rare"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

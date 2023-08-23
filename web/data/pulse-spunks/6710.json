@@ -1,0 +1,35 @@
+{
+  "name": "Pulse Spunk #6710",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmUQMJAi7ZaYTEHzLDyBZ9w5d9y32Uo5cme8CkTEkcaRRn/6710.png",
+  "edition": 6710,
+  "date": 1690191304629,
+  "Rank": 5921,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Phantom"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Cop"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Smile"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Vape"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

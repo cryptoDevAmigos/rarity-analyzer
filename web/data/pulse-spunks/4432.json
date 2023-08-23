@@ -1,0 +1,39 @@
+{
+  "name": "Pulse Spunk #4432",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/4432.png",
+  "edition": 4432,
+  "date": 1690191490059,
+  "Rank": 7727,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Light"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Handle bar"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Clown Eyes"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Clown Hair"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Buck Teeth"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Cigarette"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

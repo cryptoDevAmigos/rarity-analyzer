@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #4688",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/4688.png",
+  "edition": 4688,
+  "date": 1690191539173,
+  "Rank": 1088,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Terminator"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Do Rag"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Epic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

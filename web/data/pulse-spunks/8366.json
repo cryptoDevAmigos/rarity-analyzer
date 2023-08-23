@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #8366",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmTV98r2VdQPbN9h2wLUsHSfwuJ7Jp8r3DGGqMQ5jQ5g9v/8366.png",
+  "edition": 8366,
+  "date": 1690190974933,
+  "Rank": 611,
+  "attributes": [
+    {
+      "trait_type": "Rare Spunk",
+      "value": "Jaundice"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "Earring"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Blonde Hair"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Epic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

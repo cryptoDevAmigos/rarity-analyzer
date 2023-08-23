@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #779",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/779.png",
+  "edition": 779,
+  "date": 1690191480446,
+  "Rank": 2868,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Albino"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Nerd Glasses"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Fedora"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Frown"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Rare"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

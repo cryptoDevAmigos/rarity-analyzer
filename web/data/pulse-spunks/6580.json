@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #6580",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmUQMJAi7ZaYTEHzLDyBZ9w5d9y32Uo5cme8CkTEkcaRRn/6580.png",
+  "edition": 6580,
+  "date": 1690191037883,
+  "Rank": 3268,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Monical"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Black Hair"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Vape"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Uncommon"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

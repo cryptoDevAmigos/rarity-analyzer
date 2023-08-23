@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #8531",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmTV98r2VdQPbN9h2wLUsHSfwuJ7Jp8r3DGGqMQ5jQ5g9v/8531.png",
+  "edition": 8531,
+  "date": 1690191491592,
+  "Rank": 877,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Albino"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Chin Strap"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "VR"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Fedora"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Epic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

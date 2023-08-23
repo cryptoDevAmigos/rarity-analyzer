@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #6764",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmUQMJAi7ZaYTEHzLDyBZ9w5d9y32Uo5cme8CkTEkcaRRn/6764.png",
+  "edition": 6764,
+  "date": 1690191001380,
+  "Rank": 3771,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Tash"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Shades"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Crazy Purple Hair"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Uncommon"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

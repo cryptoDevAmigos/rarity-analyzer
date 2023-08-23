@@ -1,0 +1,39 @@
+{
+  "name": "Pulse Spunk #4940",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/4940.png",
+  "edition": 4940,
+  "date": 1690191079135,
+  "Rank": 7531,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "Clown Nose"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Tash"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Big Shades"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Cowboy"
+    },
+    {
+      "trait_type": "Neck",
+      "value": "Silver Chain"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

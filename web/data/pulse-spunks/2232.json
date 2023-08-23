@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #2232",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/2232.png",
+  "edition": 2232,
+  "date": 1690191006856,
+  "Rank": 4673,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Light"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Horned Rimmed Glasses"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Thin Mohawk"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Frown"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Uncommon"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #6434",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmUQMJAi7ZaYTEHzLDyBZ9w5d9y32Uo5cme8CkTEkcaRRn/6434.png",
+  "edition": 6434,
+  "date": 1690191355434,
+  "Rank": 2144,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Light"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "Clown Nose"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "3D Glasses"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Blonde Hair"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Rare"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

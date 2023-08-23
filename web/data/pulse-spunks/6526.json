@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #6526",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmUQMJAi7ZaYTEHzLDyBZ9w5d9y32Uo5cme8CkTEkcaRRn/6526.png",
+  "edition": 6526,
+  "date": 1690190964186,
+  "Rank": 883,
+  "attributes": [
+    {
+      "trait_type": "Epic Spunk",
+      "value": "Zombie"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "Clown Nose"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "Earring"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Clown Hair"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Epic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

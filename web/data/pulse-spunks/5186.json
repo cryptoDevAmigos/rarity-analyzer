@@ -1,0 +1,35 @@
+{
+  "name": "Pulse Spunk #5186",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmUQMJAi7ZaYTEHzLDyBZ9w5d9y32Uo5cme8CkTEkcaRRn/5186.png",
+  "edition": 5186,
+  "date": 1690191627440,
+  "Rank": 6692,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Dark Beard"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Old Shades"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Cop"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Buck Teeth"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

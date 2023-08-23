@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #1292",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/1292.png",
+  "edition": 1292,
+  "date": 1690191533988,
+  "Rank": 576,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "3D Glasses"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Bandage"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

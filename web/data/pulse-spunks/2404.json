@@ -1,0 +1,35 @@
+{
+  "name": "Pulse Spunk #2404",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/2404.png",
+  "edition": 2404,
+  "date": 1690191703197,
+  "Rank": 4691,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Light"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Light Gotee"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Eye Mask"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Light Hair"
+    },
+    {
+      "trait_type": "Neck",
+      "value": "Medallion"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Uncommon"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

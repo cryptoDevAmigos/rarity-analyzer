@@ -1,0 +1,35 @@
+{
+  "name": "Pulse Spunk #1417",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/1417.png",
+  "edition": 1417,
+  "date": 1690191005661,
+  "Rank": 5238,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Tash"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "VR"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Fedora"
+    },
+    {
+      "trait_type": "Neck",
+      "value": "Gold Chain"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Uncommon"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

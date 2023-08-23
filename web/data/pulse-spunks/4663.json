@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #4663",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/4663.png",
+  "edition": 4663,
+  "date": 1690191463508,
+  "Rank": 898,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Phantom"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Head band"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Epic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

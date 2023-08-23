@@ -1,0 +1,35 @@
+{
+  "name": "Pulse Spunk #7902",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmTV98r2VdQPbN9h2wLUsHSfwuJ7Jp8r3DGGqMQ5jQ5g9v/7902.png",
+  "edition": 7902,
+  "date": 1690190965446,
+  "Rank": 4567,
+  "attributes": [
+    {
+      "trait_type": "Epic Spunk",
+      "value": "Zombie"
+    },
+    {
+      "trait_type": "Ears",
+      "value": "Earring"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Monical"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Do Rag"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Buck Teeth"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Uncommon"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

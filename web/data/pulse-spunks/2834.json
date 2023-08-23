@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #2834",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/2834.png",
+  "edition": 2834,
+  "date": 1690191275196,
+  "Rank": 5702,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Light"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Old Shades"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Head band"
+    },
+    {
+      "trait_type": "Neck",
+      "value": "Silver Chain"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

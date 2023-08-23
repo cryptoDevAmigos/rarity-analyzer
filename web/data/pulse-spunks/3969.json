@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #3969",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/3969.png",
+  "edition": 3969,
+  "date": 1690191260889,
+  "Rank": 2509,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Handle bar"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Big Shades"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Light Hair"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Rare"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

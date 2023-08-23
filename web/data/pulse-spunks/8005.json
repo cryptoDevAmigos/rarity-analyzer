@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #8005",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmTV98r2VdQPbN9h2wLUsHSfwuJ7Jp8r3DGGqMQ5jQ5g9v/8005.png",
+  "edition": 8005,
+  "date": 1690191121233,
+  "Rank": 1807,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Tanned"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Shades"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Do Rag"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Rare"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

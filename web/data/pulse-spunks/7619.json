@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #7619",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmTV98r2VdQPbN9h2wLUsHSfwuJ7Jp8r3DGGqMQ5jQ5g9v/7619.png",
+  "edition": 7619,
+  "date": 1690190963762,
+  "Rank": 103,
+  "attributes": [
+    {
+      "trait_type": "Legendary Spunk",
+      "value": "Ape"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Anonymous"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Cop"
+    },
+    {
+      "trait_type": "Neck",
+      "value": "Silver Chain"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

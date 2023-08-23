@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #1363",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/1363.png",
+  "edition": 1363,
+  "date": 1690191395217,
+  "Rank": 1300,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Albino"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Horned Rimmed Glasses"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Head band"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Vape"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Epic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

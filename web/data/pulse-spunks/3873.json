@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #3873",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/3873.png",
+  "edition": 3873,
+  "date": 1690191306678,
+  "Rank": 906,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Light"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Monical"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Viking"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Epic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

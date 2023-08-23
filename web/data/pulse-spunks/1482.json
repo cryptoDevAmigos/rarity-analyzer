@@ -1,0 +1,35 @@
+{
+  "name": "Pulse Spunk #1482",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/1482.png",
+  "edition": 1482,
+  "date": 1690191208051,
+  "Rank": 6135,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Light"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Viking"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Buck Teeth"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Cigarette"
+    },
+    {
+      "trait_type": "Neck",
+      "value": "Medallion"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

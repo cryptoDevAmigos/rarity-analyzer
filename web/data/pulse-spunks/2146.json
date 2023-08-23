@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #2146",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/2146.png",
+  "edition": 2146,
+  "date": 1690190967417,
+  "Rank": 27,
+  "attributes": [
+    {
+      "trait_type": "Epic Spunk",
+      "value": "Zombie"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Shades"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Beanie"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Mythic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

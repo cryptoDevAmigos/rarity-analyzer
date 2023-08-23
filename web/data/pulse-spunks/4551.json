@@ -1,0 +1,35 @@
+{
+  "name": "Pulse Spunk #4551",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/4551.png",
+  "edition": 4551,
+  "date": 1690191600968,
+  "Rank": 5071,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Light"
+    },
+    {
+      "trait_type": "Nose",
+      "value": "Clown Nose"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Light Gotee"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Crazy Purple Hair"
+    },
+    {
+      "trait_type": "Neck",
+      "value": "Gold Chain"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Uncommon"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

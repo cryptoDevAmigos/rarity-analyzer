@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #947",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/947.png",
+  "edition": 947,
+  "date": 1690191001553,
+  "Rank": 1128,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Horned Rimmed Glasses"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Viking"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Epic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

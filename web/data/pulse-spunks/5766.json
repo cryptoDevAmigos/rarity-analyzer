@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #5766",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmUQMJAi7ZaYTEHzLDyBZ9w5d9y32Uo5cme8CkTEkcaRRn/5766.png",
+  "edition": 5766,
+  "date": 1690191344078,
+  "Rank": 789,
+  "attributes": [
+    {
+      "trait_type": "Common Spunk",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Hockey Mask"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Do Rag"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Epic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #3818",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/3818.png",
+  "edition": 3818,
+  "date": 1690190974641,
+  "Rank": 106,
+  "attributes": [
+    {
+      "trait_type": "Rare Spunk",
+      "value": "Jaundice"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Black Hair"
+    },
+    {
+      "trait_type": "Neck",
+      "value": "Silver Chain"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

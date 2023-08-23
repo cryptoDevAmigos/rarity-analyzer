@@ -1,0 +1,35 @@
+{
+  "name": "Pulse Spunk #2724",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/2724.png",
+  "edition": 2724,
+  "date": 1690190976211,
+  "Rank": 198,
+  "attributes": [
+    {
+      "trait_type": "Rare Spunk",
+      "value": "Jaundice"
+    },
+    {
+      "trait_type": "Blemishes",
+      "value": "Scar"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Chops"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Mohawk"
+    },
+    {
+      "trait_type": "Mouth Accessories",
+      "value": "Vape"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

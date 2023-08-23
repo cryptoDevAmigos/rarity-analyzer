@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #7439",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmUQMJAi7ZaYTEHzLDyBZ9w5d9y32Uo5cme8CkTEkcaRRn/7439.png",
+  "edition": 7439,
+  "date": 1690190964116,
+  "Rank": 98,
+  "attributes": [
+    {
+      "trait_type": "Epic Spunk",
+      "value": "Zombie"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Nerd Glasses"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Crazy Purple Hair"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Mythic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

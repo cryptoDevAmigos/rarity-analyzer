@@ -1,0 +1,31 @@
+{
+  "name": "Pulse Spunk #4319",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmepoHcNhBMwZucbzG7ngp2QWnJiPoSuRfZboPh4QXUdVE/4319.png",
+  "edition": 4319,
+  "date": 1690190977122,
+  "Rank": 66,
+  "attributes": [
+    {
+      "trait_type": "Rare Spunk",
+      "value": "Jaundice"
+    },
+    {
+      "trait_type": "Blemishes",
+      "value": "Spots"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Bowler Hat"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Buck Teeth"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Mythic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

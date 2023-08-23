@@ -1,0 +1,19 @@
+{
+  "name": "Pulse Spunk #1648",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/1648.png",
+  "edition": 1648,
+  "date": 1690190961609,
+  "Rank": 1,
+  "attributes": [
+    {
+      "trait_type": "Mythic Spunk",
+      "value": "Alien"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Mythic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

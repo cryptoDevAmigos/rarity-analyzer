@@ -1,0 +1,27 @@
+{
+  "name": "Pulse Spunk #9401",
+  "description": "",
+  "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmTV98r2VdQPbN9h2wLUsHSfwuJ7Jp8r3DGGqMQ5jQ5g9v/9401.png",
+  "edition": 9401,
+  "date": 1690190962136,
+  "Rank": 69,
+  "attributes": [
+    {
+      "trait_type": "Mythic Spunk",
+      "value": "Alien"
+    },
+    {
+      "trait_type": "Facial Hair",
+      "value": "Light Gotee"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Big Shades"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Mythic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}

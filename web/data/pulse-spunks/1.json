@@ -1,0 +1,55 @@
+{
+  "name": "Pulse Spunk #1",
+  "description": "",
+  "image": ""https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmaKVsthsqZoFYhGLKXP7ASHrHwYNXvwvKMVYiKbNvwLjd/1.png",
+  "edition": 1,
+  "date": 1690192986405,
+  "Rank": 2,
+  "attributes": [
+    {
+      "trait_type": "common Spunk",
+      "value": "Albino"
+    },
+    {
+      "trait_type": "Clown Nose",
+      "value": "Nose"
+    },
+    {
+      "trait_type": "Mole",
+      "value": "Blemishes"
+    },
+    {
+      "trait_type": "Earring",
+      "value": "Ears"
+    },
+    {
+      "trait_type": "Gotee",
+      "value": "Facial Hair"
+    },
+    {
+      "trait_type": "Terminator",
+      "value": "Old Shades"
+    },
+    {
+      "trait_type": "Thin Mohawk",
+      "value": "Cowboy"
+    },
+    {
+      "trait_type": "Smile",
+      "value": "Mouth"
+    },
+    {
+      "trait_type": "Reefa",
+      "value": "Mouth Accessories"
+    },
+    {
+      "trait_type": "Medallion#",
+      "value": "Neck"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Mythic"
+    }
+  ],
+  "compiler": "HashLips Art Engine - NFTChef fork"
+}
