@@ -4,15 +4,25 @@
             "projectKey": "pulse-spunks",
             "projectMetadata": {
                 "contract": "0x83fc7f94867B495E092A7538c1eb44dF8b4b937B",
-                "name": "Punkspunks",
+                "name": "Pulse Spunks",
                 "description": "10k Pulse Spunks collection on the Pulsechain Blockchain.",
                 "image": "https://9b448bfa385e673d01c4c4cb95621d4b.ipfscdn.io/ipfs/QmUQMJAi7ZaYTEHzLDyBZ9w5d9y32Uo5cme8CkTEkcaRRn/7162.png",
-                "external_link": "https://pspunk.co.",
-                "symbol": "PS",
+                "external_link": "https://pspunk.co.uk",
+                "symbol": "PSPK",
                 "links": {
-                    "site": "https://punkscape.xyz/",
-                    "twitter": "https://twitter.com/PunkScape_ETH",
-                    "Telegram": ""
+                    "site": "https://PSpunk.co.uk",
+                    "twitter": "https://twitter.com/PulseSpunks",
+                    "Telegram": "https://t.me/PulseSpunk"
+                },
+                "theme": {
+                    "isDark": true,
+                    "back": "#112233",
+                    "primary": "#FFBB22",
+                    "secondary": "#BEC61A",
+                    "highlight": "#FFC61A",
+                    "borderWidth": "3px",
+                    "borderRadius": "8px",
+                    "boxShadowWidth": "8px"
                 }
             }
         },     
